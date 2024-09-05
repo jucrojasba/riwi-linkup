@@ -8,4 +8,25 @@
   --pink-color:#EAA2FC;
   --red-color:#FE654F;
   --border-radius-min: 10px;
+  --padding-min: 10px;
+  --padding-medium: 20px;
+  --padding-big: 30px;
+  --padding-extra-big: 40px;
+}
+
+html{
+  box-sizing: border-box;
+}
+
+*, *::before, *::after{
+  box-sizing: inherit;
+}
+
+h1,h2,h3,h4,h5,h6{
+  margin: 0;
+}
+
+body{
+  max-width: 1350px;
+  margin: 0 auto;
 }

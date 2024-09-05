@@ -9,6 +9,7 @@ div.content-layout > header.header{
     background-color: var(--main-color);
     flex-basis: 20%;
     border-radius: var(--border-radius-min);
+    padding: var(--padding-big);
 }
 
 div.content-layout > main.main{
