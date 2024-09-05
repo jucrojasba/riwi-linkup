@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
 :root {
   --main-color: #6B5CFF;
   --secondary-color: #181E4B;
@@ -20,6 +22,7 @@ html{
 
 *, *::before, *::after{
   box-sizing: inherit;
+  /* border: 1px solid red; */
 }
 
 h1,h2,h3,h4,h5,h6{
@@ -28,5 +31,6 @@ h1,h2,h3,h4,h5,h6{
 
 body{
   max-width: 1350px;
-  margin: 0 auto;
+  margin: 10px auto;
+  height: 96vh;
 }
