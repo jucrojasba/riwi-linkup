@@ -1,0 +1,17 @@
+div.filter{
+    display: flex;
+    gap: var(--padding-big);
+}
+
+div.filter >div.filter-languages,
+div.filter >div.filter-skills{
+    display: flex;
+    flex-direction: column;
+    gap: var(--padding-medium);
+}
+
+div.filter >div.filter-languages > div.languages-options,
+div.filter >div.filter-skills > div.skills-options{
+    display: flex;
+    gap: var(--padding-min);
+}

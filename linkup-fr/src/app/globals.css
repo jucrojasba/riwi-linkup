@@ -2,14 +2,18 @@
 
 :root {
   --main-color: #6B5CFF;
+  --paragraph-color: #1d1d1d;
+  --paragraph-color-gray: #707070;
   --secondary-color: #181E4B;
   --white-color: #FFFFFF;
   --gray-color: #F9FAFC;
   --green-color:#5ACCA4;
+  --border-color-gray:#CECACA;
   --yellow-color:#E6CA52;
   --pink-color:#EAA2FC;
   --red-color:#FE654F;
   --border-radius-min: 10px;
+  --border-radius-big: 30px;
   --padding-min: 10px;
   --padding-medium: 20px;
   --padding-big: 30px;
@@ -30,7 +34,8 @@ h1,h2,h3,h4,h5,h6{
 }
 
 body{
-  max-width: 1350px;
-  margin: 10px auto;
-  height: 96vh;
+  max-width: 1400px;
+  margin: 0 auto;
+  height: 100vh;
+  overflow: hidden;
 }

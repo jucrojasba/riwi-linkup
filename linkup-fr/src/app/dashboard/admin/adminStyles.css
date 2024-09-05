@@ -13,7 +13,7 @@ div.content-layout{
 div.content-layout > header.header{
     background-color: var(--main-color);
     flex-basis: 20%;
-    border-radius: var(--border-radius-min);
+    border-top-right-radius: var(--border-radius-min);
     padding: var(--padding-big);
     display: flex;
     flex-direction: column;
@@ -61,13 +61,27 @@ ul.header-nav-list > div > li.nav-list-item{
     margin-bottom: var(--padding-min);
 }
 
-
-
-
 /* Styles for content main*/
 
-div.content-layout > main.main{
+div.content-layout > div > main.main{
     flex-basis: 80%;
+    height: 100%;
+    margin: var(--padding-min) 0;
+}
+
+/* */
+div.content-layout > div > main.main > section.main-section{
+    color: var(--paragraph-color);
+}
+
+h2.title-main{
+    color: var(--main-color);
+}
+
+div.content-layout > div > main.main > section.main-section > div.section-content-coders{
+    display: flex;
+    gap: var(--padding-medium);
+    align-items: center;
 }
 
 div.content-layout > footer.footer{
