@@ -1,0 +1,20 @@
+@import url("../../globals.css");
+
+div.content-layout{
+    display: flex;
+    gap: var(--border-radius-min);
+    height: 100vh;
+}
+div.content-layout > header.header{
+    background-color: var(--main-color);
+    flex-basis: 20%;
+    border-radius: var(--border-radius-min);
+}
+
+div.content-layout > main.main{
+    flex-basis: 80%;
+}
+
+div.content-layout > footer.footer{
+    background-color: red;
+}
