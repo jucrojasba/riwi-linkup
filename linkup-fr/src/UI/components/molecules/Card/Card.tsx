@@ -3,22 +3,31 @@ import EditIcon from '@mui/icons-material/Edit';
 import ButtonMore from '../../atoms/ButtonMore/ButtonMore';
 import "./cardStyles.css";
 import { ICoder, ICoders } from '@/UI/interfaces/ICoderInterface';
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { deleteCache } from 'next/dist/server/lib/render-server';
+import { deleteCoderService } from '@/services/coderServices';
 
 interface ICardProps{
+    id_coder:number,
     url_image: string,
     alt_image: string,
     name_user: string,
     age_user: string,
 }
-export default function Card({url_image,alt_image,name_user,age_user}:ICardProps):React.ReactNode{
+export default function Card({id_coder,url_image,alt_image,name_user,age_user}:ICardProps):React.ReactNode{
+    console.log(id_coder);
 
-    const handleClickUpdate = () =>{
-        console.log("Update coders"); // Agregar lógica para actualizar y navegar a la vista única
+    const handleClickUpdate = async(e:React.MouseEvent) =>{
+        
     }
 
-    const handleClickDelete = () =>{
-        console.log("Delete coders"); // Agregar lógica para borrar y mostrar modal
+    const handleClickDelete = async(e:React.MouseEvent): Promise<undefined> =>{
+        const isConfirm: boolean = confirm("Do you want delete this coder?"); // Agregar modal de confirmación
+        if(!isConfirm)return;
+        const id:string | null = (e.currentTarget as HTMLButtonElement).getAttribute("data-id");
+        if(!id)return;
+        const data = await deleteCoderService(parseInt(id));
+        console.log(data);
     }
     return(
         <div className="card">
@@ -30,8 +39,8 @@ export default function Card({url_image,alt_image,name_user,age_user}:ICardProps
                 height={80}
                 />
                 <div className="header-buttons">
-                    <EditIcon onClick={handleClickUpdate}/>
-                    <DeleteIcon onClick={handleClickDelete} />
+                    <EditIcon data-id={id_coder} className="edit-icon" onClick={(e)=>handleClickUpdate(e)}/>
+                    <DeleteIcon data-id={id_coder} className='delete-icon' onClick={(e)=>handleClickDelete(e)} />
                 </div>
             </div>
             <div className="card-body">

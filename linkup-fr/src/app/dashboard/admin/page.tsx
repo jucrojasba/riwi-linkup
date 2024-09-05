@@ -7,16 +7,15 @@ import Search from "@/UI/components/molecules/Search/Search";
 import Filter from "@/UI/components/molecules/Filter/Filter";
 import Card from "@/UI/components/molecules/Card/Card";
 import { ICoder,ICoders } from "@/UI/interfaces/ICoderInterface";
-import fetchApi from "@/utilities/fetchApi";
 import { getCodersService } from "@/services/coderServices";
+import calculateAge from "@/utilities/calculateAge";
 export default function DashboardAdminView():React.ReactNode{
-    const dateCurrency = new Date().toLocaleDateString(); 
     const initialCoder:ICoder = {
+        id: 0,
         url_image: "",
         name: "",
         birthday: ""
     }
-
     const initialCoders:ICoders = {
         coders: [initialCoder]
     }
@@ -60,11 +59,12 @@ export default function DashboardAdminView():React.ReactNode{
                             {coders.coders.length > 0
                             ? coders.coders.map((coder:ICoder)=>(
                                 <Card
+                                id_coder={coder.id}
                                 key={coder.name}
-                                url_image={coder.url_image}
+                                url_image={coder.url_image ? coder.url_image : "https://ehs.stanford.edu/wp-content/uploads/missing-image.png"}
                                 alt_image={`coder-${coder.name} image`}
                                 name_user={coder.name}
-                                age_user={coder.birthday}
+                                age_user={`${calculateAge(coder.birthday)} years`}
                                 />
                             ))
                             :<p>There are not coders...</p>}

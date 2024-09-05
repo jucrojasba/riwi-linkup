@@ -44,3 +44,23 @@ div.card > div.card-body > div.body-information{
 div.card > div.card-body > div.body-information > h3.body-title{
     font-size: 1rem;
 }
+
+/* Style icon*/
+div.card > div.card-header > div.header-buttons > .edit-icon{
+    color: var(--paragraph-color-gray);
+    cursor: pointer;
+}
+
+div.card > div.card-header > div.header-buttons > .delete-icon{
+    color: var(--paragraph-color-gray);
+    cursor: pointer;
+}
+
+div.card > div.card-header > div.header-buttons > .edit-icon:hover{
+    color: var(--main-color);
+    cursor: pointer;
+}
+div.card > div.card-header > div.header-buttons > .delete-icon:hover{
+    color: var(--red-color);
+    cursor: pointer;
+}
