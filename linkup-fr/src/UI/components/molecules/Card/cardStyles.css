@@ -32,6 +32,15 @@ div.card > div.card-header > div.header-buttons{
 }
 
 div.card > div.card-body{
-    background-color: red;
+    display: flex;
+    justify-content: space-between;
+    padding: var(--border-radius-min);
+}
 
+div.card > div.card-body > div.body-information{
+    width: 70%;
+}
+
+div.card > div.card-body > div.body-information > h3.body-title{
+    font-size: 1rem;
 }

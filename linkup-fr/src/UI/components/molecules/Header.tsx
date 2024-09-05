@@ -27,6 +27,7 @@ export default function Header(): React.ReactNode{
                         <div>
                             {navDataIcons.map((icon)=> (
                                 <ItemNav
+                                key={icon.name}
                                 icon={icon.src}
                                 href={icon.href}
                                 name={icon.name}

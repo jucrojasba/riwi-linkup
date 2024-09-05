@@ -6,7 +6,33 @@ import TitleMain from "@/UI/components/atoms/TitleMain";
 import Search from "@/UI/components/molecules/Search/Search";
 import Filter from "@/UI/components/molecules/Filter/Filter";
 import Card from "@/UI/components/molecules/Card/Card";
+import { ICoder,ICoders } from "@/UI/interfaces/ICoderInterface";
+import fetchApi from "@/utilities/fetchApi";
+import { getCodersService } from "@/services/coderServices";
 export default function DashboardAdminView():React.ReactNode{
+    const dateCurrency = new Date().toLocaleDateString(); 
+    const initialCoder:ICoder = {
+        url_image: "",
+        name: "",
+        birthday: ""
+    }
+
+    const initialCoders:ICoders = {
+        coders: [initialCoder]
+    }
+    const [coders, setCoders] = useState<ICoders>(initialCoders); // Agregar los coders
+
+    useEffect(()=>{
+        const getCoders = async() =>{
+            const coders = await getCodersService();
+            if(!coders){
+                console.log({message: "Error get users"});
+                return;
+            }
+            setCoders({coders});
+        }
+        getCoders();
+    }, []);
     
     return(
         <div className="content-layout">
@@ -31,30 +57,17 @@ export default function DashboardAdminView():React.ReactNode{
                             <Filter />
                         </div>
                         <div className="section-content-cards">
-                            <Card
-                            url_image="https://http2.mlstatic.com/D_Q_NP_2X_683319-MCO72329447420_102023-E.webp"
-                            alt_image=""
-                            name_user=""
-                            age_user=""
-                            />
-                            <Card
-                            url_image="https://http2.mlstatic.com/D_Q_NP_2X_683319-MCO72329447420_102023-E.webp"
-                            alt_image=""
-                            name_user=""
-                            age_user=""
-                            />
-                            <Card
-                            url_image="https://http2.mlstatic.com/D_Q_NP_2X_683319-MCO72329447420_102023-E.webp"
-                            alt_image=""
-                            name_user=""
-                            age_user=""
-                            />
-                            <Card
-                            url_image="https://http2.mlstatic.com/D_Q_NP_2X_683319-MCO72329447420_102023-E.webp"
-                            alt_image=""
-                            name_user=""
-                            age_user=""
-                            />
+                            {coders.coders.length > 0
+                            ? coders.coders.map((coder:ICoder)=>(
+                                <Card
+                                key={coder.name}
+                                url_image={coder.url_image}
+                                alt_image={`coder-${coder.name} image`}
+                                name_user={coder.name}
+                                age_user={coder.birthday}
+                                />
+                            ))
+                            :<p>There are not coders...</p>}
                         </div>
                     </section>
                 </main>
