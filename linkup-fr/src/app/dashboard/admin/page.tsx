@@ -5,6 +5,7 @@ import Header from "@/UI/components/molecules/Header";
 import TitleMain from "@/UI/components/atoms/TitleMain";
 import Search from "@/UI/components/molecules/Search/Search";
 import Filter from "@/UI/components/molecules/Filter/Filter";
+import Card from "@/UI/components/molecules/Card/Card";
 export default function DashboardAdminView():React.ReactNode{
     
     return(
@@ -28,6 +29,32 @@ export default function DashboardAdminView():React.ReactNode{
                             title="Filters"
                             />
                             <Filter />
+                        </div>
+                        <div className="section-content-cards">
+                            <Card
+                            url_image="https://http2.mlstatic.com/D_Q_NP_2X_683319-MCO72329447420_102023-E.webp"
+                            alt_image=""
+                            name_user=""
+                            age_user=""
+                            />
+                            <Card
+                            url_image="https://http2.mlstatic.com/D_Q_NP_2X_683319-MCO72329447420_102023-E.webp"
+                            alt_image=""
+                            name_user=""
+                            age_user=""
+                            />
+                            <Card
+                            url_image="https://http2.mlstatic.com/D_Q_NP_2X_683319-MCO72329447420_102023-E.webp"
+                            alt_image=""
+                            name_user=""
+                            age_user=""
+                            />
+                            <Card
+                            url_image="https://http2.mlstatic.com/D_Q_NP_2X_683319-MCO72329447420_102023-E.webp"
+                            alt_image=""
+                            name_user=""
+                            age_user=""
+                            />
                         </div>
                     </section>
                 </main>

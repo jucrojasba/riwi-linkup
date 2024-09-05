@@ -4,14 +4,16 @@ div.filter{
 }
 
 div.filter >div.filter-languages,
-div.filter >div.filter-skills{
+div.filter >div.filter-skills,
+div.filter >div.filter-teach{
     display: flex;
     flex-direction: column;
     gap: var(--padding-medium);
 }
 
 div.filter >div.filter-languages > div.languages-options,
-div.filter >div.filter-skills > div.skills-options{
+div.filter >div.filter-skills > div.skills-options,
+div.filter >div.filter-teach > div.teach-options{
     display: flex;
     gap: var(--padding-min);
 }

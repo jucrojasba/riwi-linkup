@@ -15,4 +15,5 @@ div.content-search > input.search-input{
 }
 input[type="search"]{
     outline: none;
+    width: 100%;
 }

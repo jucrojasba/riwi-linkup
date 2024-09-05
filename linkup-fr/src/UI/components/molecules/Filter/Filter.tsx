@@ -9,14 +9,18 @@ export default function Filter():ReactNode{
         checkedNextjs: false,
         checkedTeamwork:false,
         checkedCommunication:false,
-        checkedLeaderShip:false
+        checkedLeaderShip:false,
     }
     const [checkedStates, setCheckedStates] = useState(initialState);
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) =>{
         const {name, checked} = event.target;
-        console.log(name,checked);
+        setCheckedStates({
+            ...checkedStates,
+            [name]: checked
+        })
     }
+    console.log(checkedStates)
     return(
         <div className="filter">
             <div className="filter-languages">
@@ -39,6 +43,29 @@ export default function Filter():ReactNode{
                     name="nextjs"
                     onChange={handleChange}
                     checked={checkedStates.checkedNextjs}
+                    />
+                </div>
+            </div>
+            <div className="filter-teach">
+                <h3 className="teach-title">Teach Skills</h3>
+                <div className="teach-options">
+                    <InputFilter 
+                    label="Teamwork"
+                    name="teamwork"
+                    onChange={handleChange}
+                    checked={checkedStates.checkedTeamwork}
+                    />
+                    <InputFilter 
+                    label="Communication"
+                    name="communication"
+                    onChange={handleChange}
+                    checked={checkedStates.checkedCommunication}
+                    />
+                    <InputFilter 
+                    label="LeaderShip"
+                    name="leadership"
+                    onChange={handleChange}
+                    checked={checkedStates.checkedLeaderShip}
                     />
                 </div>
             </div>
@@ -65,7 +92,6 @@ export default function Filter():ReactNode{
                     />
                 </div>
             </div>
-            
         </div>
     )
 }
