@@ -5,7 +5,7 @@ import "./cardStyles.css";
 import { ICoder, ICoders } from '@/UI/interfaces/ICoderInterface';
 import React, { useState } from 'react';
 import { deleteCache } from 'next/dist/server/lib/render-server';
-import { deleteCoderService } from '@/services/coderServices';
+import { deleteCoderService } from '@/services/coderService';
 
 interface ICardProps{
     id_coder:number,
@@ -15,7 +15,6 @@ interface ICardProps{
     age_user: string,
 }
 export default function Card({id_coder,url_image,alt_image,name_user,age_user}:ICardProps):React.ReactNode{
-    console.log(id_coder);
 
     const handleClickUpdate = async(e:React.MouseEvent) =>{
         

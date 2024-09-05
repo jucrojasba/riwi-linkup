@@ -7,7 +7,7 @@ import Search from "@/UI/components/molecules/Search/Search";
 import Filter from "@/UI/components/molecules/Filter/Filter";
 import Card from "@/UI/components/molecules/Card/Card";
 import { ICoder,ICoders } from "@/UI/interfaces/ICoderInterface";
-import { getCodersService } from "@/services/coderServices";
+import { getCodersService } from "@/services/coderService";
 import calculateAge from "@/utilities/calculateAge";
 export default function DashboardAdminView():React.ReactNode{
     const initialCoder:ICoder = {

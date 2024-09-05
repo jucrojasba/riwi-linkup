@@ -26,7 +26,8 @@
     "coders":[
         { "id":1,"name":"Juan Pablo Arias Mesa","birthday":"2001-08-03","description":"23 años ingeniero de sistemas","url_image":"", "clan":"Gates", "genderId":2},
         { "id":2,"name":"Edgar Andres Cardona Gomez","birthday":"1997-05-22","description":"27 años arquitecto","url_image":"", "clan":"Bernes-Lee", "genderId":2},
-        { "id":3,"name":"Jose Simón Barreto Cardona","birthday":"2004-12-15","description":"20 años diseñador gráfico","url_image":"", "clan":"Bernes-Lee", "genderId":2}
+        { "id":3,"name":"Jose Simón Barreto Cardona","birthday":"2004-12-15","description":"20 años diseñador gráfico","url_image":"", "clan":"Bernes-Lee", "genderId":2},
+        { "id":4,"name":"Jose Simón Barreto Cardona","birthday":"2004-12-15","description":"20 años diseñador gráfico","url_image":"", "clan":"Bernes-Lee", "genderId":2}
     ],
     "genders":[
         {"id":1,"name":"Femenino"},
