@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace linkup_ms.Interfaces
+namespace linkup_ms.Services
 {
-    public interface ITokenService
+    public class TokenService() : ITokenService
     {
-        string CreateToken(User user);
+        
     }
 }
