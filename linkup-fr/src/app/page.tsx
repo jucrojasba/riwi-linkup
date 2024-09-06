@@ -15,8 +15,8 @@ export default function Home() {
       <TextInput label="Password" type="password" onChange={()=>{}} error helperText="Contraseña Incorrecta"></TextInput>
       <TextInput label="Celular" type="number" onChange={()=>{}}></TextInput>
       <CustomLink text="About Us" href="/aboutus"></CustomLink>
-      <CircularLoader/>
-      <LinearLoader/>
+      <CircularLoader flag={false}/>
+      <LinearLoader flag={false}/>
     </main>
   );
 }
