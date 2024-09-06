@@ -1,0 +1,103 @@
+@import url("../../globals.css");
+
+/* Styles for content layout dashbaord admin*/
+div.content-layout{
+    display: flex;
+    gap: var(--border-radius-big);
+    color: var(--white-color);
+    font-family: "Ubuntu", sans-serif;
+    height: 100%;
+}
+
+/* Styles for header */
+div.content-layout > header.header{
+    background-color: var(--main-color);
+    flex-basis: 20%;
+    border-top-right-radius: var(--border-radius-min);
+    padding: var(--padding-big);
+    display: flex;
+    flex-direction: column;
+    gap: var(--padding-medium);
+}
+
+/* Styles for content users*/
+div.content-layout > header.header > div.header-content-user{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--padding-min);
+}
+
+div.content-layout > header.header > div.header-content-user 
+> h5.content-user-welcome{
+    font-weight: 500;
+}
+
+/* Styles for content nav*/
+div.content-layout > header.header > nav.header-nav {
+    height: 65%;   
+}
+
+
+div.content-layout > header.header > nav.header-nav > ul.header-nav-list{
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    margin-top: 0;
+}
+
+div.content-layout > header.header > nav.header-nav > ul.header-nav-list > li.nav-list-item, 
+ul.header-nav-list > div > li.nav-list-item{
+    display: flex;
+    align-items: center;
+    gap: var(--padding-min);
+}
+
+div.content-layout > header.header > nav.header-nav >  
+ul.header-nav-list > div > li.nav-list-item{
+    color: var(--white-color);
+    margin-bottom: var(--padding-min);
+}
+
+/* Styles for content main*/
+
+div.content-layout > div > main.main{
+    flex-basis: 80%;
+    height: 100%;
+    margin: var(--padding-min) 0;
+}
+
+/* */
+div.content-layout > div > main.main > section.main-section{
+    color: var(--paragraph-color);
+    display: flex;
+    flex-direction: column;
+    gap: var(--padding-big);
+}
+
+h2.title-main{
+    color: var(--main-color);
+}
+
+/* Styles for content coders*/
+div.content-layout > div > main.main > section.main-section > div.section-content-coders{
+    display: flex;
+    gap: var(--padding-medium);
+    align-items: center;
+}
+
+/* Styles for filters*/
+
+
+/* Styles for cards*/
+div.content-layout > div > main.main > section.main-section > div.section-content-cards{
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--padding-medium);
+}
+
+div.content-layout > footer.footer{
+    background-color: red;
+}
