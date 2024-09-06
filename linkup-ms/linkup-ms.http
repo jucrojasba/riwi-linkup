@@ -1,0 +1,6 @@
+@linkup_ms_HostAddress = http://localhost:5288
+
+GET {{linkup_ms_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
