@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace linkup_ms.Services
 {
-    public class TokenService : ITokenService
+    public class TokenService() : ITokenService
     {
         
     }
