@@ -460,11 +460,14 @@
     ]
   },
   "packageFolders": {
+
     "/home/riwip5-013/.nuget/packages/": {}
+
   },
   "project": {
     "version": "1.0.0",
     "restore": {
+
       "projectUniqueName": "/home/riwip5-013/Documents/LINK-UP/riwi-linkup/linkup-ms/linkup-ms.csproj",
       "projectName": "linkup-ms",
       "projectPath": "/home/riwip5-013/Documents/LINK-UP/riwi-linkup/linkup-ms/linkup-ms.csproj",
@@ -473,6 +476,7 @@
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/riwip5-013/.nuget/NuGet/NuGet.Config"
+
       ],
       "originalTargetFrameworks": [
         "net8.0"
