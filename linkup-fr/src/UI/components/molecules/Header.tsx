@@ -6,14 +6,18 @@ import ComputerIcon from '@mui/icons-material/Computer';
 import LogoutIcon from '@mui/icons-material/Logout';
 import ItemNav from "@/UI/components/atoms/ItemNav";
 
-export default function Header(): React.ReactNode{
+interface IHeaderProps{
+    expand:boolean
+}
+
+export default function Header({expand}:IHeaderProps): React.ReactNode{
     const navDataIcons = [
         {name: "Dashboard", src: SpaceDashboardIcon, href: ""},
         {name: "Coders", src: ComputerIcon, href: ""},
         {name: "Config", src: SettingsIcon, href: ""},
     ]
     return(
-        <header className="header">
+        <header className={expand ? "header_expand" : "header"}>
                 <div className="header-content-user">
                 <h2 className="header-title">Riwi-LinkUp</h2>
                     <div className="content-user-image">

@@ -6,18 +6,29 @@ div.content-layout{
     gap: var(--border-radius-big);
     color: var(--white-color);
     font-family: "Ubuntu", sans-serif;
-    height: 100%;
+    height: auto;
+    overflow: visible;
+    transition: all .3s ease;
+}
+
+.open{
+    display: none;
 }
 
 /* Styles for header */
 div.content-layout > header.header{
+    position: sticky;
+    top: 0;
     background-color: var(--main-color);
     flex-basis: 20%;
     border-top-right-radius: var(--border-radius-min);
+    border-bottom-right-radius: var(--border-radius-min);
     padding: var(--padding-big);
     display: flex;
     flex-direction: column;
     gap: var(--padding-medium);
+    min-height: 634px;
+    max-height: 634px;
 }
 
 /* Styles for content users*/
@@ -65,7 +76,7 @@ ul.header-nav-list > div > li.nav-list-item{
 
 div.content-layout > div > main.main{
     flex-basis: 80%;
-    height: 100%;
+    height: auto;
     margin: var(--padding-min) 0;
 }
 
@@ -75,6 +86,7 @@ div.content-layout > div > main.main > section.main-section{
     display: flex;
     flex-direction: column;
     gap: var(--padding-big);
+    height: 100%;
 }
 
 h2.title-main{
@@ -96,8 +108,57 @@ div.content-layout > div > main.main > section.main-section > div.section-conten
     display: flex;
     flex-wrap: wrap;
     gap: var(--padding-medium);
+    height:auto;
+    margin-right: var(--padding-medium);
 }
 
-div.content-layout > footer.footer{
+div.content-layout > div > main.main > section.main-section > div.section-buttons{
+    display: flex;
+    justify-content: center;
+    color: var(--main-color);
+}
+
+div.content-layout > div > main.main > section.main-section > div.section-buttons > .button-left,
+div.content-layout > div > main.main > section.main-section > div.section-buttons > .button-right{
+    cursor: pointer;
+}
+
+div.content-layout > div > footer.footer{
+    height: auto;
+    display: flex;
+    gap: var(--padding-min);
+    padding-bottom: var(--padding-min);
+}
+
+div.content-layout > div > footer.footer .link{
+    text-decoration: none;
+    color: var(--paragraph-color);
+}
+
+div.content-layout > div > footer.footer .link:hover{
+    color: var(--main-color);
+}
+
+::-webkit-scrollbar{
+    width: 12px;
+};
+
+::-webkit-scrollbar-track{
+    background-color: transparent;
+    border-radius: var(--border-radius-min);
+}
+
+::-webkit-scrollbar-thumb{
+    background-color: var(--main-color);
+    border-radius: var(--border-radius-min);
+    border: none;
+    transition: background-color .4s ease-in-out ;
+}
+::-webkit-scrollbar-thumb:hover{
+    background-color: var(--secondary-color);
+    cursor: pointer;
+}
+
+.buttons{
     background-color: red;
 }
