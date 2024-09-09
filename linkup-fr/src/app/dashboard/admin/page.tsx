@@ -66,7 +66,7 @@ export default function DashboardAdminView():React.ReactNode{
                             />
                             <div>LanguageSwitcher</div>
                             <Search />
-                            <div>DarkMOde</div>
+                            <div>DarkMode</div>
                         </div>
                         <div className="section-content-filters">
                             <TitleMain 
