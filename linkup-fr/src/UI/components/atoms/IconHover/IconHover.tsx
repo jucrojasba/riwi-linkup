@@ -2,12 +2,12 @@
 
 import { ReactElement, useState } from "react";
 import { styled } from "@mui/material/styles";
-import Icon from "@mui/material/Icon";
 
 interface IconWithHoverProps {
   icon: ReactElement;
   color: string;
   hoverColor: string;
+  onClick?: () => void;
 }
 
 const StyledIcon = styled("div")<{ color: string; hoverColor: string }>(
@@ -15,7 +15,7 @@ const StyledIcon = styled("div")<{ color: string; hoverColor: string }>(
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    fontSize:"3rem",
+    fontSize: "3rem",
     color: color,
     transition: "background-color 0.3s ease",
     "&:hover": {
@@ -29,6 +29,7 @@ const IconWithHover: React.FC<IconWithHoverProps> = ({
   icon,
   color,
   hoverColor,
+  onClick,
 }) => {
   const [isHovered, setIsHovered] = useState(false);
 
@@ -38,6 +39,7 @@ const IconWithHover: React.FC<IconWithHoverProps> = ({
       hoverColor={hoverColor}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onClick={onClick} 
     >
       {icon}
     </StyledIcon>
@@ -45,3 +47,4 @@ const IconWithHover: React.FC<IconWithHoverProps> = ({
 };
 
 export default IconWithHover;
+

@@ -54,11 +54,13 @@ export default function HomeView() {
             icon={<InstagramIcon fontSize="inherit" />}
             color="var(--paragraph-color)"
             hoverColor="#FF00FF"
+            onClick={() => {}}
           />
           <IconWithHover
             icon={<WhatsAppIcon fontSize="inherit" />}
             color="var(--paragraph-color)"
             hoverColor="#25D366"
+            onClick={() => {}}
           />
         </div>
       </div>
