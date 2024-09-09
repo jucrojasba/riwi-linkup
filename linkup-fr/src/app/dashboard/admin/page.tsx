@@ -13,6 +13,7 @@ import calculateAge from "@/utilities/calculateAge";
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
+import LanguageSelector from "@/UI/components/molecules/SwitchLanguage/SwitchLanguage";
 import Link from "next/link";
 export default function DashboardAdminView():React.ReactNode{
     const [expand,setExpand] = useState<boolean>(false);
@@ -60,7 +61,7 @@ export default function DashboardAdminView():React.ReactNode{
                             title="Coders"
                             subtitle="General Information"
                             />
-                            <div>LanguageSwitcher</div>
+                            <LanguageSelector />
                             <Search />
                         </div>
                         <div className="section-content-filters">
