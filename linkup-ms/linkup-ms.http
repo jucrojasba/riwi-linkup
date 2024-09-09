@@ -1,0 +1,5 @@
+
+GET {{linkup_ms_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
