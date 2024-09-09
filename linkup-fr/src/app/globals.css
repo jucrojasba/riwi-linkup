@@ -2,7 +2,7 @@
 
 :root {
   --main-color: #6B5CFF;
-  --paragraph-color: #1d1d1d;
+  --paragraph-color: #323131;
   --paragraph-color-gray: #707070;
   --secondary-color: #181E4B;
   --white-color: #FFFFFF;
@@ -31,12 +31,20 @@ html {
   box-sizing: border-box;
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: inherit;
   /* border: 1px solid red; */
 }
 
-h1, h2, h3, h4, h5, h6, p {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
   margin: 0;
   font-family: var(--main-font);
 }
@@ -44,13 +52,12 @@ h1, h2, h3, h4, h5, h6, p {
 body{
   max-width: 100%;
 body {
-  max-width: 1400px;
+  max-width: none;
   margin: 0 auto;
   height: 100vh;
   overflow: hidden;
-  font-family: var(--main-font); 
+  font-family: var(--main-font);
   min-height: 100vh;
   height: 100vh;
   overflow-y: auto;
 }
-
