@@ -12,7 +12,7 @@ export default function TitleHome({
   return (
     <div className="title-container">
       <h1 className="title-home">{title}</h1>
-      <p className="home-subtitle">{subtitle}</p>
+      <h3 className="home-subtitle">{subtitle}</h3>
     </div>
   );
 }

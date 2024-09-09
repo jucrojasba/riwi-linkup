@@ -1,0 +1,15 @@
+.home-no-auth-wrapper {
+  display: flex;
+  min-width: 100vw;
+  min-height: 100vh;
+  padding: 0 var(--padding-extra-big);
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+
+.home-info {
+  display: flex;
+  flex-direction: column;
+  width: 430px;
+}
