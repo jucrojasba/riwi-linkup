@@ -1,6 +1,9 @@
 "use client";
-import "./adminStyles.css";
+import "./adminGlobalStyles.css";
+import "./adminHeaderStyles.css";
+import "./adminMainStyles.css";
 import "./adminStylesAdaptable.css";
+import "./adminFooterStyles.css";
 import React, { useEffect, useState } from "react";
 import Header from "@/UI/components/molecules/Header";
 import TitleMain from "@/UI/components/atoms/TitleMain";
@@ -63,6 +66,7 @@ export default function DashboardAdminView():React.ReactNode{
                             />
                             <LanguageSelector />
                             <Search />
+                            <div>DarkMode</div>
                         </div>
                         <div className="section-content-filters">
                             <TitleMain 

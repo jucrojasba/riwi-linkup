@@ -18,6 +18,10 @@
   --padding-medium: 20px;
   --padding-big: 30px;
   --padding-extra-big: 40px;
+  --padding-extra-big: 40px;
+  --font-size-min: .6rem;
+  --font-size-medium: .9rem;
+  --font-size-big: 1.2rem;
 
   /* Variable para la fuente */
   --main-font: 'Ubuntu', sans-serif;
@@ -37,6 +41,8 @@ h1, h2, h3, h4, h5, h6, p {
   font-family: var(--main-font);
 }
 
+body{
+  max-width: 100%;
 body {
   max-width: 1400px;
   margin: 0 auto;
@@ -44,6 +50,7 @@ body {
   overflow: hidden;
   font-family: var(--main-font); 
   min-height: 100vh;
+  height: 100vh;
   overflow-y: auto;
 }
 
