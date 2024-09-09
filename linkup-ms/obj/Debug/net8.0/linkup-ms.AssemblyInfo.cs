@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("linkup-ms")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+72840aaa29ce2b36fab58d08c6a44311223aee1b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+94ae6e213290a0d4e291e2bce8906be2c25355e1")]
 [assembly: System.Reflection.AssemblyProductAttribute("linkup-ms")]
 [assembly: System.Reflection.AssemblyTitleAttribute("linkup-ms")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
