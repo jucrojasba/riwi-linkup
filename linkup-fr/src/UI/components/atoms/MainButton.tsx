@@ -9,7 +9,7 @@ const MainButtonStyle = styled(Button)(() => ({
   borderRadius:'10px'
 }));
 
-const MainButton:React.FC<ButtonProps>=({type='button',text,onClick })=>{
+const MainButton:React.FC<ButtonProps>=({text,onClick,type='button'})=>{
   return(
     <MainButtonStyle type={type} variant="contained" onClick={onClick}>
       {text}
