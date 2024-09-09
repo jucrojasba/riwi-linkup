@@ -1,0 +1,17 @@
+
+div > label{
+    border: 1px solid var(--border-color-gray);
+    padding: var(--padding-min);
+    border-radius: var(--border-radius-min);
+    color: var(--paragraph-color-gray);
+}
+div > label > input{
+    display: none;
+    transition: background .4s ease-in-out ;
+}
+
+div > label:hover{
+    cursor: pointer;
+    background-color: var(--gray-color);
+
+}

@@ -1,0 +1,15 @@
+div.button-more{
+    background-color: var(--main-color);
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color .4s ease-in-out ;
+}
+
+div.button-more:hover{
+    background-color: var(--secondary-color);
+    cursor: pointer;
+}
