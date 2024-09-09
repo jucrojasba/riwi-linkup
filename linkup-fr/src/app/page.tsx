@@ -5,6 +5,9 @@ import RoundedButton from "@/UI/components/atoms/ButtonRounded/ButtonRounded";
 import EastIcon from "@mui/icons-material/East";
 import useNavigate from "@/utilities/NavigateTo";
 import Image from "next/image";
+import IconWithHover from "@/UI/components/atoms/IconHover/IconHover";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 
 export default function HomeView() {
   //Logic
@@ -31,7 +34,12 @@ export default function HomeView() {
           ></RoundedButton>
         </div>
         <div className="gretting-image">
-          <h2>{">"}</h2>
+          <Image
+            src="/icons/arrow_riwi.png"
+            alt="Coder Gretting"
+            width={120}
+            height={120}
+          />
           <div className="coder-gretting-container">
             <Image
               src="/images/coderGretting.png"
@@ -40,6 +48,18 @@ export default function HomeView() {
               height={500}
             />
           </div>
+        </div>
+        <div className="media-icons">
+          <IconWithHover
+            icon={<InstagramIcon fontSize="inherit" />}
+            color="var(--paragraph-color)"
+            hoverColor="#FF00FF"
+          />
+          <IconWithHover
+            icon={<WhatsAppIcon fontSize="inherit" />}
+            color="var(--paragraph-color)"
+            hoverColor="#25D366"
+          />
         </div>
       </div>
     </main>

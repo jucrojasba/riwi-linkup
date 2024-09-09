@@ -2,17 +2,16 @@
   display: flex;
   min-width: 100vw;
   min-height: 100vh;
-  padding: 0 var(--padding-extra-big);
-  justify-content: center;
+  padding: 0 var(--padding-big) 0 200px;
   align-items: center;
   margin: 0;
-  gap: 15%;
+  gap: 18%;
 }
 
 .home-info {
   display: flex;
   flex-direction: column;
-  width: 40%;
+  width: 35%;
 }
 
 .coder-gretting-container {
@@ -29,13 +28,26 @@
   right: -13%;
 }
 
-.gretting-image{
+.gretting-image {
   position: relative;
+  width: 300px;
+  height: 300px;
 }
-.gretting-image>h2{
+
+.gretting-image>img {
   position: absolute;
-  bottom:350px;
-  left: 450px;
+  bottom: 270px;
+  left: 430px;
   font-size: 10rem;
   color: var(--main-color);
+  transform: scaleX(-1);
+}
+
+.media-icons {
+  position: absolute;
+  bottom: 6%;
+  right: 3%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--padding-min);
 }

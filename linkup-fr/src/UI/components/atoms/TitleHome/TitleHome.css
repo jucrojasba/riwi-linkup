@@ -9,12 +9,12 @@
 .title-home {
     color: var(--paragraph-color);
     font-family: var(--main-font);
-    font-size: 5rem;
+    font-size: 4rem;
 }
 
 .home-subtitle {
     color: var(--paragraph-color-gray);
     font-family: var(--main-font);
     font-weight: 400;
-    font-size: 2.5rem;
+    font-size: 2rem;
 }
