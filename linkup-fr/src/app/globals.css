@@ -1,33 +1,63 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --main-color: #6B5CFF;
+  --paragraph-color: #323131;
+  --paragraph-color-gray: #707070;
+  --secondary-color: #181E4B;
+  --white-color: #FFFFFF;
+  --gray-color: #F9FAFC;
+  --green-color: #5ACCA4;
+  --border-color-gray: #CECACA;
+  --yellow-color: #E6CA52;
+  --pink-color: #EAA2FC;
+  --red-color: #FE654F;
+  --border-radius-min: 10px;
+  --border-radius-big: 30px;
+  --padding-min: 10px;
+  --padding-medium: 20px;
+  --padding-big: 30px;
+  --padding-extra-big: 40px;
+  --padding-extra-big: 40px;
+  --font-size-min: .6rem;
+  --font-size-medium: .9rem;
+  --font-size-big: 1.2rem;
+
+  /* Variable para la fuente */
+  --main-font: 'Ubuntu', sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+html {
+  box-sizing: border-box;
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  /* border: 1px solid red; */
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+  font-family: var(--main-font);
+}
+
+body{
+  max-width: 100%;
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+  max-width: none;
+  margin: 0 auto;
+  height: 100vh;
+  overflow: hidden;
+  font-family: var(--main-font);
+  min-height: 100vh;
+  height: 100vh;
+  overflow-y: auto;
 }
