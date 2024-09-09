@@ -47,7 +47,7 @@ export default function Card({id_coder,url_image,alt_image,name_user,age_user}:I
                     <h3 className="body-title">{name_user}</h3>
                     <h5 className="body-subtitle" style={{fontWeight: "400"}}>{age_user}</h5>
                 </div>
-                <ButtonMore />
+                <ButtonMore data-id={id_coder} />
             </div>
         </div>
     )

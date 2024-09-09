@@ -43,4 +43,7 @@ body {
   height: 100vh;
   overflow: hidden;
   font-family: var(--main-font); 
+  min-height: 100vh;
+  overflow-y: auto;
 }
+
