@@ -6,10 +6,36 @@
   justify-content: center;
   align-items: center;
   margin: 0;
+  gap: 15%;
 }
 
 .home-info {
   display: flex;
   flex-direction: column;
-  width: 430px;
+  width: 40%;
+}
+
+.coder-gretting-container {
+  background-color: var(--main-color);
+  border-radius: 50%;
+  width: 410px;
+  height: 410px;
+  position: relative;
+}
+
+.coder-gretting-container>img {
+  position: absolute;
+  bottom: -2%;
+  right: -13%;
+}
+
+.gretting-image{
+  position: relative;
+}
+.gretting-image>h2{
+  position: absolute;
+  bottom:350px;
+  left: 450px;
+  font-size: 10rem;
+  color: var(--main-color);
 }
