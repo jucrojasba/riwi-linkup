@@ -24,9 +24,12 @@ namespace linkup_ms.Models
         [StringLength(255)]
         public string UrlImage { get; set; }
 
+        [StringLength(255)]
+        public string ClanName { get; set; }
+
         [Required]
         public int GenderId { get; set; }
-        public Gender Gender { get; set; }
+        // public Gender Gender { get; set; }
 
         public ICollection<CoderSoftSkill> CoderSoftSkills { get; set; }
         public ICollection<CoderLanguageLevel> CoderLanguageLevels { get; set; }
