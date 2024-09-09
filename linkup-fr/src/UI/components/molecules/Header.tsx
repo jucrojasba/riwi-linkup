@@ -4,6 +4,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import SpaceDashboardIcon from '@mui/icons-material/SpaceDashboard';
 import ComputerIcon from '@mui/icons-material/Computer';
 import LogoutIcon from '@mui/icons-material/Logout';
+import ChecklistRtlIcon from '@mui/icons-material/ChecklistRtl';
 import ItemNav from "@/UI/components/atoms/ItemNav";
 
 interface IHeaderProps{
@@ -12,19 +13,20 @@ interface IHeaderProps{
 
 export default function Header({expand}:IHeaderProps): React.ReactNode{
     const navDataIcons = [
-        {name: "Dashboard", src: SpaceDashboardIcon, href: ""},
-        {name: "Coders", src: ComputerIcon, href: ""},
-        {name: "Config", src: SettingsIcon, href: ""},
+        {name: "Dashboard", src: SpaceDashboardIcon, href: "#"},
+        {name: "Coders", src: ComputerIcon, href: "#"},
+        {name: "Config", src: SettingsIcon, href: "#"},
+        {name: "MyList", src: ChecklistRtlIcon, href: "#"}
     ]
     return(
         <header className={expand ? "header_expand" : "header"}>
                 <div className="header-content-user">
                 <h2 className="header-title">Riwi-LinkUp</h2>
                     <div className="content-user-image">
-                        <Image className="image" src={"/images/imageDefault.jpg"} alt="" width={100} height={100} style={{borderRadius: "50%"}} />
+                        <Image className="image" src={"/images/womanImage.avif"} alt="" width={100} height={100} style={{borderRadius: "50%", objectFit: "cover"}} />
                     </div>
                     <h5 className="content-user-welcome">Welcome back.</h5>
-                    <h3 className="content-user-name">Riwi</h3>
+                    <h3 className="content-user-name">Team</h3>
                 </div>
                 <nav className="header-nav">
                     <ul className="header-nav-list">
