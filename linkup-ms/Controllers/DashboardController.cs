@@ -21,5 +21,14 @@ namespace linkup_ms.Controllers
         {
             return await _context.Coders.CountAsync();
         }
+
+        [HttpGet("frontend-coders")]
+        public async Task<int> GetFrontendCodersCount()
+        {
+            return await _context.Coders
+                .Where(c => c.CoderTechnicalSkillLevels
+                    .Any(cts => cts.TechnicalSkillLevel.TechnicalSkill.Name == "nextJs"))
+                .CountAsync();
+        }
     }
 }
