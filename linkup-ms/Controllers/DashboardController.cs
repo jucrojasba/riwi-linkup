@@ -40,6 +40,22 @@ namespace linkup_ms.Controllers
                 .CountAsync();
         }
 
-        
+        [HttpGet("companies-by-month")]
+        public async Task<IActionResult> GetCompaniesByMonth()
+        {
+            var companiesByMonth = await _context.Users
+                .Where(u => u.Role.Name == "client")
+                .GroupBy(u => new { u.CreatedAt.Year, u.CreatedAt.Month })
+                .Select(g => new
+                {
+                    Year = g.Key.Year,
+                    Month = g.Key.Month,
+                    Count = g.Count()
+                })
+                .OrderBy(c => c.Year)
+                .ThenBy(c => c.Month)
+                .ToListAsync();
+            return Ok(companiesByMonth);
+        }
     }
 }
