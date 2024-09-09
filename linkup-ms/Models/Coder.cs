@@ -31,10 +31,11 @@ namespace linkup_ms.Models
 
         [Required]
         public int GenderId { get; set; }
-        // public Gender Gender { get; set; }
+        public Gender Gender { get; set; }
 
-        // public ICollection<CoderSoftSkill> CoderSoftSkills { get; set; }
-        // public ICollection<CoderLanguageLevel> CoderLanguageLevels { get; set; }
-        // public ICollection<CoderTechnicalSkillLevel> CoderTechnicalSkillLevels { get; set; }
+        public ICollection<CoderSoftSkill> CoderSoftSkills { get; set; }
+        public ICollection<CoderLanguageLevel> CoderLanguageLevels { get; set; }
+        public ICollection<CoderTechnicalSkillLevel> CoderTechnicalSkillLevels { get; set; }
     }
 }
+
