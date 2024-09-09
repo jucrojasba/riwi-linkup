@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using linkup_ms.Models;
+using linkup_ms.seeders;
 using Microsoft.EntityFrameworkCore;
 
 namespace linkup_ms.Data
@@ -27,6 +28,9 @@ namespace linkup_ms.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            // Seed initial data
+            GenderSeeder.Seed(modelBuilder);
 
             // Configure many-to-many relationship for CoderSoftSkill
             modelBuilder.Entity<CoderSoftSkill>()
