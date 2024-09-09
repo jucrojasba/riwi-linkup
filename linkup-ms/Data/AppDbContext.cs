@@ -32,7 +32,8 @@ namespace linkup_ms.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            // Seed initial data
+            // Seed initial data   
+            UserSeeder.Seed(modelBuilder);
             GenderSeeder.Seed(modelBuilder);
 
             // Configure many-to-many relationship for CoderSoftSkill
