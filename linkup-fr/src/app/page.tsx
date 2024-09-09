@@ -1,11 +1,14 @@
-'use client'
+"use client";
 
-import TitleMain from "@/UI/components/atoms/TitleMain/TitleMain";
+import TitleHome from "@/UI/components/atoms/TitleHome/TitleHome";
 
 export default function HomeView() {
   return (
     <main>
-      <TitleMain title='easy management and acquisition of tech talent' subtitle="find tech talent with competitive knowledge"></TitleMain>
+      <TitleHome
+        title="easy management and acquisition of tech talent"
+        subtitle="find tech talent with competitive knowledge"
+      ></TitleHome>
     </main>
   );
 }

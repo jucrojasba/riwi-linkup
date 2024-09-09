@@ -1,18 +1,18 @@
-.title-container{
+.title-container {
     display: flex;
     flex-direction: column;
-    gap:var(--padding-medium);
+    gap: var(--padding-medium);
     width: 100cqw;
     height: 100cqh;
     margin: 0;
 }
 
-.title-main{
+.title-home {
     color: var(--paragraph-color);
     font-family: var(--main-font);
 }
 
-.main-subtitle{
+.home-subtitle {
     color: var(--paragraph-color-gray);
     font-family: var(--main-font);
 }
