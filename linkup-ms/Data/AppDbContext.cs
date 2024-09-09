@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Threading.Tasks;
 using linkup_ms.Models;
 using linkup_ms.seeders;
@@ -25,7 +26,7 @@ namespace linkup_ms.Data
         public DbSet<CoderLanguageLevel> CoderLanguageLevels { get; set; }
         public DbSet<CoderTechnicalSkillLevel> CoderTechnicalSkillLevels { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        protected override void OnModelCreating(ModuleBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
@@ -82,5 +83,13 @@ namespace linkup_ms.Data
                 .OnDelete(DeleteBehavior.Restrict); // No elimina TechnicalSkillLevels
         }
 
+    }
+
+    public class DbContext
+    {
+        internal void OnModelCreating(ModuleBuilder modelBuilder)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
