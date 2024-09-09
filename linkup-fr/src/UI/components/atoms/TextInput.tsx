@@ -32,14 +32,9 @@ const TextInputStyle = styled(TextField)(() => ({
     },
 }));
 
-const TextInput:React.FC<TextInputProps>=({type='text', defaultValue='', error=false, label, helperText='', onChange})=>{
-    if(error){
-        return(
-            <TextInputStyle id='outlined-error-helper-text' type={type} defaultValue={defaultValue} error label={label} helperText={helperText} size='small' onChange={onChange} ></TextInputStyle>
-        );
-    }
+const TextInput:React.FC<TextInputProps>=({type='text', defaultValue='', error=false, required=false, label, helperText='', onChange})=>{
     return(
-        <TextInputStyle id='outlined-error-helper-text' type={type} defaultValue={defaultValue} label={label} helperText={helperText} size='small' onChange={onChange} ></TextInputStyle>
+        <TextInputStyle id='outlined-error-helper-text' type={type} defaultValue={defaultValue} label={label} error={error} required={required} helperText={helperText} size='small' onChange={onChange} ></TextInputStyle>
     );
 };
 
