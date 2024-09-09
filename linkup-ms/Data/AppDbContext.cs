@@ -29,6 +29,9 @@ namespace linkup_ms.Data
         {
             base.OnModelCreating(modelBuilder);
 
+            // Seed initial data
+            GenderSeeder.Seed(modelBuilder);
+
             // Configure many-to-many relationship for CoderSoftSkill
             modelBuilder.Entity<CoderSoftSkill>()
                 .HasKey(css => new { css.CoderId, css.SoftSkillId });
