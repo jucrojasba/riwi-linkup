@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using linkup_ms.Models;
+using linkup_ms.seeders;
 using Microsoft.EntityFrameworkCore;
 
 namespace linkup_ms.Data
