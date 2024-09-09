@@ -30,5 +30,16 @@ namespace linkup_ms.Controllers
                     .Any(cts => cts.TechnicalSkillLevel.TechnicalSkill.Name == "nextJs"))
                 .CountAsync();
         }
+
+        [HttpGet("backend-coders")]
+        public async Task<int> GetBackendCodersCount()
+        {
+            return await _context.Coders
+                .Where(c => c.CoderTechnicalSkillLevels
+                    .Any(cts => new[] { "c#", "java", "nodeJs" }.Contains(cts.TechnicalSkillLevel.TechnicalSkill.Name)))
+                .CountAsync();
+        }
+
+        
     }
 }
