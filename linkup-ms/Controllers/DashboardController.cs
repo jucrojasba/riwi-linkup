@@ -10,18 +10,23 @@ namespace linkup_ms.Controllers
     [Route("api/[controller]")]
     public class DashboardController : ControllerBase
     {
+        // Dependency injection of the database context
         private readonly AppDbContext _context;
+        
+        // Constructor to initialize the context
         public DashboardController(AppDbContext context)
         {
             _context = context;
         }
 
+        // Endpoint to get the count of all coders in training
         [HttpGet("coders-in-training")]
         public async Task<int> GetCodersInTrainingCount()
         {
             return await _context.Coders.CountAsync();
         }
 
+        // Endpoint to get the count of frontend coders with specific skill
         [HttpGet("frontend-coders")]
         public async Task<int> GetFrontendCodersCount()
         {
@@ -31,6 +36,7 @@ namespace linkup_ms.Controllers
                 .CountAsync();
         }
 
+        // Endpoint to get the count of backend coders with specific skills
         [HttpGet("backend-coders")]
         public async Task<int> GetBackendCodersCount()
         {
@@ -40,6 +46,7 @@ namespace linkup_ms.Controllers
                 .CountAsync();
         }
 
+        // Endpoint to get the count of companies grouped by month and year
         [HttpGet("companies-by-month")]
         public async Task<IActionResult> GetCompaniesByMonth()
         {
@@ -55,6 +62,7 @@ namespace linkup_ms.Controllers
                 .OrderBy(c => c.Year)
                 .ThenBy(c => c.Month)
                 .ToListAsync();
+                
             return Ok(companiesByMonth);
         }
     }
