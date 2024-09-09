@@ -5,6 +5,8 @@ import TextField from '@mui/material/TextField';
 import { styled } from '@mui/material/styles';
 
 const TextInputStyle = styled(TextField)(() => ({
+    textTransform:'none',
+    fontFamily:'var(--main-font)',
     '& .MuiOutlinedInput-root': {
         '& fieldset': {
           borderColor: 'var(--main-color)', // Change border color
