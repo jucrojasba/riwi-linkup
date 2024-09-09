@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Api_Link_up.Models
+namespace linkup_ms.Models
 {
     public class Coder
     {
