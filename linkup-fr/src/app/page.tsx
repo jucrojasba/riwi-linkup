@@ -1,22 +1,14 @@
-'use client'
+"use client";
 
-import CustomLink from "@/UI/components/atoms/CustomLink";
-import MainButton from "@/UI/components/atoms/MainButton";
-import SecondaryButton from "@/UI/components/atoms/SecondaryButton";
-import TextInput from "@/UI/components/atoms/TextInput";
-import { CircularLoader, LinearLoader } from "@/UI/components/atoms/loaders/Loaders";
+import TitleHome from "@/UI/components/atoms/TitleHome/TitleHome";
 
-export default function Home() {
+export default function HomeView() {
   return (
     <main>
-      <MainButton text="Ejemplo" onClick={()=>{}}></MainButton>
-      <SecondaryButton text="Secundario" onClick={()=>{}}></SecondaryButton>
-      <TextInput label="Nombre" onChange={()=>{}}></TextInput>
-      <TextInput label="Password" type="password" onChange={()=>{}} error helperText="Contraseña Incorrecta"></TextInput>
-      <TextInput label="Celular" type="number" onChange={()=>{}}></TextInput>
-      <CustomLink text="About Us" href="/aboutus"></CustomLink>
-      <CircularLoader flag={false}/>
-      <LinearLoader flag={false}/>
+      <TitleHome
+        title="easy management and acquisition of tech talent"
+        subtitle="find tech talent with competitive knowledge"
+      ></TitleHome>
     </main>
   );
 }
