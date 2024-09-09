@@ -26,7 +26,9 @@ namespace linkup_ms.Data
         public DbSet<CoderLanguageLevel> CoderLanguageLevels { get; set; }
         public DbSet<CoderTechnicalSkillLevel> CoderTechnicalSkillLevels { get; set; }
 
-        protected override void OnModelCreating(ModuleBuilder modelBuilder)
+        public DbSet<User> Users { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
@@ -83,13 +85,5 @@ namespace linkup_ms.Data
                 .OnDelete(DeleteBehavior.Restrict); // No elimina TechnicalSkillLevels
         }
 
-    }
-
-    public class DbContext
-    {
-        internal void OnModelCreating(ModuleBuilder modelBuilder)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
