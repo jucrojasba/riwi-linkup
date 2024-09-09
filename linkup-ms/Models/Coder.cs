@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -14,7 +16,7 @@ namespace linkup_ms.Models
         [Required]
         [StringLength(100)]
         public string Name { get; set; }
-
+        
         [Required]
         public DateTime Birthday { get; set; }
 
@@ -29,7 +31,7 @@ namespace linkup_ms.Models
 
         [Required]
         public int GenderId { get; set; }
-        // public Gender Gender { get; set; }
+        public Gender Gender { get; set; }
 
         public ICollection<CoderSoftSkill> CoderSoftSkills { get; set; }
         public ICollection<CoderLanguageLevel> CoderLanguageLevels { get; set; }
