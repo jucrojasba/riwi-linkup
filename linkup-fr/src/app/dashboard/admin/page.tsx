@@ -1,6 +1,7 @@
 "use client";
-import React, { useEffect, useState } from "react";
 import "./adminStyles.css";
+import "./adminStylesAdaptable.css";
+import React, { useEffect, useState } from "react";
 import Header from "@/UI/components/molecules/Header";
 import TitleMain from "@/UI/components/atoms/TitleMain";
 import Search from "@/UI/components/molecules/Search/Search";
@@ -9,7 +10,12 @@ import Card from "@/UI/components/molecules/Card/Card";
 import { ICoder,ICoders } from "@/UI/interfaces/ICoderInterface";
 import { getCodersService } from "@/services/coderService";
 import calculateAge from "@/utilities/calculateAge";
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
+import Link from "next/link";
 export default function DashboardAdminView():React.ReactNode{
+    const [expand,setExpand] = useState<boolean>(false);
     const initialCoder:ICoder = {
         id: 0,
         url_image: "",
@@ -32,10 +38,19 @@ export default function DashboardAdminView():React.ReactNode{
         }
         getCoders();
     }, []);
-    
+    console.log(coders);
+
+    const handleButtonExpand = () =>{
+        setExpand(!expand);
+        console.log("do something");
+    }
     return(
         <div className="content-layout">
-            <Header />
+            
+            <div className="open" onClick={handleButtonExpand}>
+                <KeyboardArrowDownIcon />
+            </div>
+            <Header expand={expand} />
             <div>
                 <main className="main">
                     <section className="main-section">
@@ -57,7 +72,7 @@ export default function DashboardAdminView():React.ReactNode{
                         </div>
                         <div className="section-content-cards">
                             {coders.coders.length > 0
-                            ? coders.coders.map((coder:ICoder)=>(
+                            ? coders.coders.map((coder:ICoder, index:number)=>(
                                 <Card
                                 id_coder={coder.id}
                                 key={coder.name}
@@ -69,10 +84,17 @@ export default function DashboardAdminView():React.ReactNode{
                             ))
                             :<p>There are not coders...</p>}
                         </div>
+                        <div className="section-buttons">
+                            <KeyboardArrowLeftIcon className="button-left" />
+                            <KeyboardArrowRightIcon className="button-right" />
+                        </div>
                     </section>
                 </main>
                 <footer className="footer">
-                    footer
+                    <Link href="#" className="link">Riwi</Link>
+                    <Link href="#" className="link">Terms</Link>
+                    <Link href="#" className="link">Privacy</Link>
+                    <Link href="#" className="link">Docs</Link>
                 </footer>
             </div>
         </div>
