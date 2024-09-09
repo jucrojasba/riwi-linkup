@@ -25,6 +25,8 @@ namespace linkup_ms.Data
         public DbSet<CoderLanguageLevel> CoderLanguageLevels { get; set; }
         public DbSet<CoderTechnicalSkillLevel> CoderTechnicalSkillLevels { get; set; }
 
+        public DbSet<User> Users { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
