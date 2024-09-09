@@ -20,8 +20,11 @@ namespace linkup_ms.Models
         public string Password { get; set; }
         public string PhoneNumber { get; set; }
         public DateTime CreatedAt { get; set; }
-        public string Sector { get; set; }
         [Required]
+        public int SectorId { get; set; }
+        public Sector Sector { get; set; }
+        [Required]
+        public int RoleId { get; set; }
         public UserRole Role { get; set; }
     }
 }
