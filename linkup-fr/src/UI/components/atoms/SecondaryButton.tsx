@@ -5,12 +5,13 @@ import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 
 const SecondaryButtonStyle = styled(Button)(() => ({
-  backgroundColor: 'var(--white-color)',
-  color:'var(--main-color)',
-  borderColor: 'var(--main-color)',
-  borderRadius:'10px',
-  textTransform:'none',
-  fontFamily:'var(--main-font)',
+  backgroundColor: "transparent",
+  color: "var(--main-color)",
+  borderColor: "var(--main-color)",
+  borderRadius: "10px",
+  textTransform: "none",
+  fontFamily: "var(--main-font)",
+  minWidth: "fit-content",
 }));
 
 const SecondaryButton:React.FC<ButtonProps>=({type='button',text,onClick })=>{
