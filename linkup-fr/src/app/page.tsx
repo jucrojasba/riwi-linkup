@@ -10,6 +10,7 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import SwitchMode from "@/UI/components/atoms/SwitchDarkMode/SwitchDarkMode";
 import { useDarkMode } from "@/global-states/dark-mode";
+import NavbarHome from "@/UI/components/molecules/NavbarHome/NavbarHome";
 
 export default function HomeView() {
   //Logic
@@ -19,6 +20,7 @@ export default function HomeView() {
 
   return (
     <main>
+      <NavbarHome></NavbarHome>
       <div className={`home-no-auth-wrapper ${DarkMode ? "dark-mode" : ""}`}>
         <div className="home-info">
           <TitleHome
@@ -34,7 +36,7 @@ export default function HomeView() {
               </>
             }
             onClick={() => {
-              navigate("/register");
+              navigate("/login");
             }}
           ></RoundedButton>
         </div>
@@ -59,13 +61,15 @@ export default function HomeView() {
             icon={<InstagramIcon fontSize="inherit" />}
             color="var(--paragraph-color)"
             hoverColor="#FF00FF"
-            onClick={() => {}}
+            onClick={() => {window.location.href = 'https://www.instagram.com/riwi.io/?hl=en'}}
+            isDarkMode={DarkMode}
           />
           <IconWithHover
             icon={<WhatsAppIcon fontSize="inherit" />}
             color="var(--paragraph-color)"
             hoverColor="#25D366"
             onClick={() => {}}
+            isDarkMode={DarkMode}
           />
         </div>
         <div className="switch-mode-home">

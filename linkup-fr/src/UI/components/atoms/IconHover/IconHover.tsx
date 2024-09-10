@@ -8,6 +8,7 @@ interface IconWithHoverProps {
   color: string;
   hoverColor: string;
   onClick?: () => void;
+  isDarkMode: boolean;
 }
 
 const StyledIcon = styled("div")<{ color: string; hoverColor: string }>(
@@ -30,12 +31,13 @@ const IconWithHover: React.FC<IconWithHoverProps> = ({
   color,
   hoverColor,
   onClick,
+  isDarkMode,
 }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
     <StyledIcon
-      color={color}
+      color={isDarkMode? 'white':color}
       hoverColor={hoverColor}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
