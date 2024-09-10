@@ -38,7 +38,13 @@ namespace linkup_ms.Models
         [JsonIgnore]
         public Gender Gender { get; set; }
 
+
         [JsonIgnore]
+
+        [Required]
+        public int ClanId { get; set; }
+        public Clan Clan { get; set; }
+
         public ICollection<CoderSoftSkill> CoderSoftSkills { get; set; }
 
         [JsonIgnore]

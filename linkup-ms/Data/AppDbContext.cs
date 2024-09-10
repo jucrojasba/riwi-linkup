@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Threading.Tasks;
 using linkup_ms.Models;
 using linkup_ms.seeders;
@@ -25,12 +26,27 @@ namespace linkup_ms.Data
         public DbSet<CoderLanguageLevel> CoderLanguageLevels { get; set; }
         public DbSet<CoderTechnicalSkillLevel> CoderTechnicalSkillLevels { get; set; }
 
+        public DbSet<User> Users { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            // Seed initial data
-            GenderSeeder.Seed(modelBuilder);
+            // Seed initial data   
+            // RoleSeeder.Seed(modelBuilder);
+            // SectorSeeder.Seed(modelBuilder);
+            // UserSeeder.Seed(modelBuilder);
+            // GenderSeeder.Seed(modelBuilder);
+            // CoderSeeder.Seed(modelBuilder);
+            // SoftSkillSeeder.Seed(modelBuilder);
+            // CoderSoftSkillSeeder.Seed(modelBuilder);
+            // LanguageSeeder.Seed(modelBuilder);
+            // LanguageLevelSeeder.Seed(modelBuilder);
+            // TechnicalSkillSeeder.Seed(modelBuilder);
+            // TechnicalSkillLevelSeeder.Seed(modelBuilder);
+            // CoderLanguageLevelSeeder.Seed(modelBuilder);
+            // CoderTechnicalSkillLevelSeeder.Seed(modelBuilder);
+            // ClanSeeder.Seed(modelBuilder);
 
             // Configure many-to-many relationship for CoderSoftSkill
             modelBuilder.Entity<CoderSoftSkill>()
@@ -80,6 +96,7 @@ namespace linkup_ms.Data
                 .WithMany(tsl => tsl.CoderTechnicalSkillLevels)
                 .HasForeignKey(ctsl => ctsl.TechnicalSkillLevelId)
                 .OnDelete(DeleteBehavior.Restrict); // No elimina TechnicalSkillLevels
+
         }
 
     }

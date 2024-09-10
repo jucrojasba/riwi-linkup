@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace linkup_ms.Models
 {
-    public class UserRole
+    public class Clan
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -17,6 +17,6 @@ namespace linkup_ms.Models
         [StringLength(50)]
         public string Name { get; set; }
         
-        public ICollection<User> Users { get; set; }
+        public ICollection<Coder> Coders { get; set; }
     }
 }

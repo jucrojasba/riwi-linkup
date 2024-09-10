@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Threading.Tasks;
 using linkup_ms.Models;
 using Microsoft.EntityFrameworkCore;
@@ -16,6 +17,11 @@ namespace linkup_ms.seeders
                 new Gender { Id = 2, Name = "femenino" },
                 new Gender { Id = 3, Name = "prefiero no indicarlo" }
             );
+        }
+
+        internal static void Seed(ModuleBuilder modelBuilder)
+        {
+            throw new NotImplementedException();
         }
     }
 }
