@@ -6,7 +6,7 @@ import { CustomLinkProps } from '@/UI/interfaces/Link';
 
 const CustomLink:React.FC<CustomLinkProps>=({text,href,target=''})=>{
   return(
-      <MUILink color='var(--main-color)' href={href} target={target} underline="hover">{text}</MUILink>
+      <MUILink color='var(--main-color)' href={href} target={target} underline="hover" sx={{minWidth:'fit-content'}}>{text}</MUILink>
   );
 };
 
