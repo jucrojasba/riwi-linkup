@@ -38,6 +38,7 @@ namespace linkup_ms.Data
             SoftSkillSeeder.Seed(modelBuilder);
             CoderSoftSkillSeeder.Seed(modelBuilder);
             SectorSeeder.Seed(modelBuilder);
+            LanguageSeeder.Seed(modelBuilder);
 
             // Configure many-to-many relationship for CoderSoftSkill
             modelBuilder.Entity<CoderSoftSkill>()
