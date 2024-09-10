@@ -1,0 +1,15 @@
+div.content-layout > div > footer.footer{
+    height: auto;
+    display: flex;
+    gap: var(--padding-min);
+    padding-bottom: var(--padding-min);
+}
+
+div.content-layout > div > footer.footer .link{
+    text-decoration: none;
+    color: var(--paragraph-color);
+}
+
+div.content-layout > div > footer.footer .link:hover{
+    color: var(--main-color);
+}

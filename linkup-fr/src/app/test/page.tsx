@@ -1,5 +1,6 @@
-'use client'
+"use client";
 
+import ButtonMore from "@/UI/components/atoms/ButtonMore/ButtonMore";
 import CustomLink from "@/UI/components/atoms/CustomLink";
 import MainButton from "@/UI/components/atoms/MainButton";
 import SecondaryButton from "@/UI/components/atoms/SecondaryButton";
@@ -23,6 +24,25 @@ export default function TestView() {
         <LinearLoader flag={true}/>
       </Box>
       <LogInForm/>
+
+      <br />
+
+      <MainButton text="Ejemplo" onClick={() => {}}></MainButton>
+      <SecondaryButton text="Secundario" onClick={() => {}}></SecondaryButton>
+      <TextInput label="Nombre" onChange={() => {}}></TextInput>
+      <TextInput
+        label="Password"
+        type="password"
+        onChange={() => {}}
+        error
+        helperText="Contraseña Incorrecta"
+      ></TextInput>
+      <TextInput label="Celular" type="number" onChange={() => {}}></TextInput>
+      <CustomLink text="About Us" href="/aboutus"></CustomLink>
+      <CircularLoader flag={true} />
+      <LinearLoader flag={true} />
+      <ButtonMore></ButtonMore>
+
     </main>
   );
 }

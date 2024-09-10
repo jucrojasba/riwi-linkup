@@ -2,17 +2,19 @@
     display: flex;
     flex-direction: column;
     gap: var(--padding-medium);
-    width: 100cqw;
-    height: 100cqh;
     margin: 0;
+    padding-bottom: var(--padding-big);
 }
 
 .title-home {
     color: var(--paragraph-color);
     font-family: var(--main-font);
+    font-size: 4rem;
 }
 
 .home-subtitle {
     color: var(--paragraph-color-gray);
     font-family: var(--main-font);
+    font-weight: 400;
+    font-size: 2rem;
 }
