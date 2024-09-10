@@ -10,7 +10,7 @@ const MainButtonStyle = styled(Button)(() => ({
   borderRadius:'5px',
   textTransform:'none',
   fontFamily:'var(--main-font)',
-  width: '100%',
+  minWidth: 'fit-content',
 }));
 
 const MainButton:React.FC<ButtonProps>=({text,onClick,type='button'})=>{

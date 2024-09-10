@@ -3,6 +3,7 @@
 main.main {
     height: 100%;
 }
+
 main.main > section.main-section{
     display: flex;  
     justify-content: space-around;
