@@ -32,8 +32,19 @@ namespace linkup_ms.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            // Seed initial data
+            // Seed initial data   
+            UserSeeder.Seed(modelBuilder);
             GenderSeeder.Seed(modelBuilder);
+            SoftSkillSeeder.Seed(modelBuilder);
+            CoderSoftSkillSeeder.Seed(modelBuilder);
+            SectorSeeder.Seed(modelBuilder);
+            LanguageSeeder.Seed(modelBuilder);
+            LanguageLevelSeeder.Seed(modelBuilder);
+            TechnicalSkillSeeder.Seed(modelBuilder);
+            TechnicalSkillLevelSeeder.Seed(modelBuilder);
+            RoleSeeder.Seed(modelBuilder);
+            CoderLanguageLevelSeeder.Seed(modelBuilder);
+            CoderTechnicalSkillLevelSeeder.Seed(modelBuilder);
 
             // Configure many-to-many relationship for CoderSoftSkill
             modelBuilder.Entity<CoderSoftSkill>()
@@ -83,6 +94,7 @@ namespace linkup_ms.Data
                 .WithMany(tsl => tsl.CoderTechnicalSkillLevels)
                 .HasForeignKey(ctsl => ctsl.TechnicalSkillLevelId)
                 .OnDelete(DeleteBehavior.Restrict); // No elimina TechnicalSkillLevels
+
         }
 
     }

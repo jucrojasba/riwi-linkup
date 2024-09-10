@@ -53,7 +53,7 @@ namespace linkup_ms.Controllers
         public async Task<IActionResult> GetCompaniesByMonth()
         {
             var companiesByMonth = await _context.Users
-                .Where(u => u.Role.Name == "client")
+                .Where(u => u.Role.Name == "cliente")
                 .GroupBy(u => new { u.CreatedAt.Year, u.CreatedAt.Month })
                 .Select(g => new
                 {

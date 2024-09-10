@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-var builder = WebApplication.CreateBuilder(args);
 
 Env.Load();
 
@@ -17,13 +16,15 @@ var dbPassword = Environment.GetEnvironmentVariable("DB_PASSWORD");
 
 var DefaultConnection = $"Host={dbHost};Database={dbDatabaseName};Username={dbUser};Password={dbPassword};Port={dbPort};";
 
+
+var builder = WebApplication.CreateBuilder(args);
 // Configurar database para usar desarrollo
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseNpgsql(DefaultConnection));
+// builder.Services.AddDbContext<AppDbContext>(options =>
+//     options.UseNpgsql(DefaultConnection));
 
 // Configurar servicios para usar PostgreSQL
-// builder.Services.AddDbContext<AppDbContext>(options =>
-//     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddControllers()
     .AddNewtonsoftJson(options =>
