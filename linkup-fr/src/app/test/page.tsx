@@ -3,6 +3,7 @@
 import ButtonMore from "@/UI/components/atoms/ButtonMore/ButtonMore";
 import CustomLink from "@/UI/components/atoms/CustomLink";
 import MainButton from "@/UI/components/atoms/MainButton";
+import PasswordInput from "@/UI/components/atoms/PasswordInput";
 import SecondaryButton from "@/UI/components/atoms/SecondaryButton";
 import TextInput from "@/UI/components/atoms/TextInput";
 import { CircularLoader, LinearLoader } from "@/UI/components/atoms/loaders/Loaders";
@@ -15,17 +16,17 @@ export default function TestView() {
       <Box sx={{padding:'40px'}}>
         <MainButton text="Ejemplo" onClick={()=>{}}></MainButton>
         <SecondaryButton text="Secundario" onClick={()=>{}}></SecondaryButton>
+        <ButtonMore></ButtonMore>
         <TextInput label="Nombre" onChange={()=>{}}></TextInput>
         <TextInput label="Required" required onChange={()=>{}}></TextInput>
-        <TextInput label="Password" type="password" onChange={()=>{}} error helperText="Contraseña Incorrecta"></TextInput>
+        <PasswordInput label="Password" type='password' onChange={()=>{}} error helperText="Contraseña Incorrecta"></PasswordInput>
         <TextInput label="Celular" type="number" onChange={()=>{}}></TextInput>
         <CustomLink text="About Us" href="/aboutus"></CustomLink>
         <CircularLoader flag={true}/>
         <LinearLoader flag={true}/>
       </Box>
-      <LogInForm/>
 
-      <br />
+      <LogInForm/>
 
       <MainButton text="Ejemplo" onClick={() => {}}></MainButton>
       <SecondaryButton text="Secundario" onClick={() => {}}></SecondaryButton>
