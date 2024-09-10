@@ -1,5 +1,5 @@
 export interface ButtonProps {
   type?: 'button' | 'submit' | 'reset';
-  text: string;
+  text?: string;
   onClick: React.MouseEventHandler<HTMLButtonElement>;
 }
