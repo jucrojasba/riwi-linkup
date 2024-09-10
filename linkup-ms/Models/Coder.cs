@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace linkup_ms.Models
@@ -10,6 +11,7 @@ namespace linkup_ms.Models
     public class Coder
     {
         [Key]
+        [JsonIgnore]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
@@ -31,10 +33,18 @@ namespace linkup_ms.Models
 
         [Required]
         public int GenderId { get; set; }
+
+
+        [JsonIgnore]
         public Gender Gender { get; set; }
 
+        [JsonIgnore]
         public ICollection<CoderSoftSkill> CoderSoftSkills { get; set; }
+
+        [JsonIgnore]
         public ICollection<CoderLanguageLevel> CoderLanguageLevels { get; set; }
+
+        [JsonIgnore]
         public ICollection<CoderTechnicalSkillLevel> CoderTechnicalSkillLevels { get; set; }
     }
 }

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore;
 namespace linkup_ms.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     public class CodersController : ControllerBase
     {
         private readonly AppDbContext _context;
@@ -104,126 +104,22 @@ namespace linkup_ms.Controllers
 
         //POST
         [HttpPost]
-        public async Task<IActionResult> CreateCoder([FromBody] CoderCreationDto coderDto)
+        public async Task<IActionResult> CreateCoder([FromBody] Coder newCoder)
         {
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var gender = await _context.Genders.FindAsync(coderDto.GenderId);
-            if (gender == null)
-            {
-                return BadRequest("El género especificado no existe.");
-            }
-
-            var coder = new Coder
-            {
-                Name = coderDto.Name.ToLower(),
-                Birthday = coderDto.Birthday,
-                Description = coderDto.Description.ToLower(),
-                UrlImage = coderDto.UrlImage.ToLower(),
-                ClanName = coderDto.ClanName.ToLower(),
-                GenderId = coderDto.GenderId
-            };
-
-            _context.Coders.Add(coder);
+            _context.Coders.Add(newCoder);
             await _context.SaveChangesAsync();
 
-            // Agregar relaciones
-            await AddCoderRelationships(coder.Id, coderDto);
-
-            // Crear DTO de respuesta
-            var responseDto = await CreateCoderResponseDto(coder.Id);
-
-            return CreatedAtAction(nameof(GetCoder), new { id = coder.Id }, responseDto);
+            return Created();
         }
 
-        private async Task AddCoderRelationships(int coderId, CoderCreationDto coderDto)
-        {
-            // Agregar SoftSkills
-            foreach (var skillId in coderDto.SoftSkillIds)
-            {
-                _context.CoderSoftSkills.Add(new CoderSoftSkill { CoderId = coderId, SoftSkillId = skillId });
-            }
 
-            // Agregar LanguageLevels
-            foreach (var language in coderDto.Languages)
-            {
-                var languageLevel = await _context.LanguageLevels
-                    .FirstOrDefaultAsync(ll => ll.Language.Id == language.LanguageId && ll.Id == language.LevelId);
 
-                if (languageLevel != null)
-                {
-                    _context.CoderLanguageLevels.Add(new CoderLanguageLevel
-                    {
-                        CoderId = coderId,
-                        LanguageLevelId = languageLevel.Id
-                    });
-                }
-            }
-
-            // Agregar TechnicalSkillLevels
-            foreach (var technicalSkill in coderDto.TechnicalSkills)
-            {
-                var technicalSkillLevel = await _context.TechnicalSkillLevels
-                    .FirstOrDefaultAsync(tsl => tsl.TechnicalSkill.Id == technicalSkill.TechnicalSkillId && tsl.Id == technicalSkill.LevelId);
-
-                if (technicalSkillLevel != null)
-                {
-                    _context.CoderTechnicalSkillLevels.Add(new CoderTechnicalSkillLevel
-                    {
-                        CoderId = coderId,
-                        TechnicalSkillLevelId = technicalSkillLevel.Id
-                    });
-                }
-            }
-
-            await _context.SaveChangesAsync();
-        }
-
-        private async Task<CoderResponseDto> CreateCoderResponseDto(int coderId)
-        {
-            var coder = await _context.Coders
-                .Include(c => c.Gender)
-                .Include(c => c.CoderSoftSkills)
-                    .ThenInclude(css => css.SoftSkill)
-                .Include(c => c.CoderLanguageLevels)
-                    .ThenInclude(cll => cll.LanguageLevel)
-                        .ThenInclude(ll => ll.Language)
-                .Include(c => c.CoderTechnicalSkillLevels)
-                    .ThenInclude(ctsl => ctsl.TechnicalSkillLevel)
-                        .ThenInclude(tsl => tsl.TechnicalSkill)
-                .FirstOrDefaultAsync(c => c.Id == coderId);
-
-            if (coder == null)
-            {
-                return null;
-            }
-
-            return new CoderResponseDto
-            {
-                Id = coder.Id,
-                Name = coder.Name,
-                Birthday = coder.Birthday,
-                Description = coder.Description,
-                UrlImage = coder.UrlImage,
-                ClanName = coder.ClanName,
-                GenderId = coder.GenderId,
-                GenderName = coder.Gender.Name,
-                SoftSkills = coder.CoderSoftSkills.Select(css => css.SoftSkill.Name).ToList(),
-                LanguageLevels = coder.CoderLanguageLevels.Select(cll => new LanguageLevelDto
-                {
-                    LevelName = cll.LanguageLevel.Name,
-                    LanguageName = cll.LanguageLevel.Language.Name
-                }).ToList(),
-                TechnicalSkillLevels = coder.CoderTechnicalSkillLevels.Select(ctsl => new TechnicalSkillDto
-                {
-                    LevelName = ctsl.TechnicalSkillLevel.Name,
-                    TechnicalSkillName = ctsl.TechnicalSkillLevel.TechnicalSkill.Name
-                }).ToList()
-            };
-        }
 
         //PUT
         [HttpPut("{id}")]
@@ -404,7 +300,7 @@ namespace linkup_ms.Controllers
 
             await _context.SaveChangesAsync();
 
-            return Ok(await CreateCoderResponseDto(id));
+            return Ok("hola");
         }
 
         //DELETE
