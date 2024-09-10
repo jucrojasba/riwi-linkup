@@ -7,7 +7,7 @@ import PasswordInput from "../../atoms/PasswordInput";
 
 const LogInForm:React.FC=()=>{
     return(
-        <Box component='form'onSubmit={()=>{console.log("ok")}} sx={{display:'flex',flexDirection:'column',gap:'var(--padding-big)', alignItems:'center',width:'20%'}}>
+        <Box component='form'onSubmit={()=>{console.log("ok")}} sx={{display:'flex',flexDirection:'column',gap:'var(--padding-big)', alignItems:'center',width:'fit-content'}}>
             <Typography variant="h2" sx={{color:'var(--main-color)',fontFamily:'var(--main-font)',fontSize:'2rem', fontWeight:'500' }}>Welcome back</Typography>
             <TextInput label="Email" required onChange={()=>{}}></TextInput>
             <PasswordInput label="Password" type="password" required onChange={()=>{}}></PasswordInput>
