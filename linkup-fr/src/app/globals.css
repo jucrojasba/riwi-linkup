@@ -50,7 +50,7 @@ p {
 }
 
 body {
-  max-width: 100%;
+  max-width: none;
   margin: 0 auto;
   height: 100vh;
   overflow: hidden;

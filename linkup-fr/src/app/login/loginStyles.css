@@ -9,3 +9,8 @@ main.main > section.main-section{
     align-items: center;
     height: 100%;
 }
+
+main.main > section.main-section > div.section-image{
+    width: 30%;
+    height: 50%;
+}
