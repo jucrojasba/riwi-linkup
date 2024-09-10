@@ -5,6 +5,7 @@ import TextField from '@mui/material/TextField';
 import { styled } from '@mui/material/styles';
 
 const TextInputStyle = styled(TextField)(() => ({
+    width: '100%',
     textTransform:'none',
     fontFamily:'var(--main-font)',
     '& .MuiOutlinedInput-root': {

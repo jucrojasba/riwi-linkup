@@ -28,6 +28,21 @@ export default function TestView() {
 
       <LogInForm/>
 
+      <MainButton text="Ejemplo" onClick={() => {}}></MainButton>
+      <SecondaryButton text="Secundario" onClick={() => {}}></SecondaryButton>
+      <TextInput label="Nombre" onChange={() => {}}></TextInput>
+      <TextInput
+        label="Password"
+        type="password"   
+        onChange={() => {}}
+        error
+        helperText="Contraseña Incorrecta"
+      ></TextInput>
+      <TextInput label="Celular" type="number" onChange={() => {}}></TextInput>
+      <CustomLink text="About Us" href="/aboutus"></CustomLink>
+      <CircularLoader flag={true} />
+      <LinearLoader flag={true} />
+      <ButtonMore></ButtonMore>
 
     </main>
   );

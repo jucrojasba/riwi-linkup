@@ -7,9 +7,10 @@ import { styled } from '@mui/material/styles';
 
 const MainButtonStyle = styled(Button)(() => ({
   backgroundColor: 'var(--main-color)',
-  borderRadius:'10px',
+  borderRadius:'5px',
   textTransform:'none',
   fontFamily:'var(--main-font)',
+  width: '100%',
 }));
 
 const MainButton:React.FC<ButtonProps>=({text,onClick,type='button'})=>{
