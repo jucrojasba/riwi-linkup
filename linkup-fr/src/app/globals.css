@@ -49,8 +49,6 @@ p {
   font-family: var(--main-font);
 }
 
-body{
-  max-width: 100%;
 body {
   max-width: none;
   margin: 0 auto;
