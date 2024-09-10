@@ -10,6 +10,7 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import SwitchMode from "@/UI/components/atoms/SwitchDarkMode/SwitchDarkMode";
 import { useDarkMode } from "@/global-states/dark-mode";
+import NavbarHome from "@/UI/components/molecules/NavbarHome/NavbarHome";
 
 export default function HomeView() {
   //Logic
@@ -19,6 +20,7 @@ export default function HomeView() {
 
   return (
     <main>
+      <NavbarHome></NavbarHome>
       <div className={`home-no-auth-wrapper ${DarkMode ? "dark-mode" : ""}`}>
         <div className="home-info">
           <TitleHome
