@@ -8,7 +8,7 @@ const SecondaryButtonStyle = styled(Button)(() => ({
   backgroundColor: "transparent",
   color: "var(--main-color)",
   borderColor: "var(--main-color)",
-  borderRadius: "10px",
+  borderRadius: "5px",
   textTransform: "none",
   fontFamily: "var(--main-font)",
   minWidth: "fit-content",

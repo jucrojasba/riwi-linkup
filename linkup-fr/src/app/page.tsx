@@ -67,7 +67,7 @@ export default function HomeView() {
             icon={<WhatsAppIcon fontSize="inherit" />}
             color="var(--paragraph-color)"
             hoverColor="#25D366"
-            onClick={() => {}}
+            onClick={() => {window.location.href = 'https://wa.link/tptm6j'}}
             isDarkMode={DarkMode}
           />
         </div>

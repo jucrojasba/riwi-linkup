@@ -1,8 +1,8 @@
 import { Box, Typography } from "@mui/material";
-import CustomLink from "../../atoms/CustomLink";
+import CustomLink from "../../atoms/CustomLink/CustomLink";
 import Image from "next/image";
-import MainButton from "../../atoms/MainButton";
-import SecondaryButton from "../../atoms/SecondaryButton";
+import MainButton from "../../atoms/MainButton/MainButton";
+import SecondaryButton from "../../atoms/SecondaryButton/SecondaryButton";
 import SelectLanguage from "../../atoms/SwitchLanguage/SwitchLanguage";
 import './NavbarHome.css'
 import { BorderStyle } from "@mui/icons-material";
