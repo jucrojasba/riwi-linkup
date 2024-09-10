@@ -1,11 +1,11 @@
 "use client";
 
 import ButtonMore from "@/UI/components/atoms/ButtonMore/ButtonMore";
-import CustomLink from "@/UI/components/atoms/CustomLink";
-import MainButton from "@/UI/components/atoms/MainButton";
-import PasswordInput from "@/UI/components/atoms/PasswordInput";
-import SecondaryButton from "@/UI/components/atoms/SecondaryButton";
-import TextInput from "@/UI/components/atoms/TextInput";
+import CustomLink from "@/UI/components/atoms/CustomLink/CustomLink";
+import MainButton from "@/UI/components/atoms/MainButton/MainButton";
+import PasswordInput from "@/UI/components/atoms/PasswordInput/PasswordInput";
+import SecondaryButton from "@/UI/components/atoms/SecondaryButton/SecondaryButton";
+import TextInput from "@/UI/components/atoms/TextInput/TextInput";
 import { CircularLoader, LinearLoader } from "@/UI/components/atoms/loaders/Loaders";
 import LogInForm from "@/UI/components/molecules/LogInForm/LogInForm";
 import { Box } from "@mui/material";

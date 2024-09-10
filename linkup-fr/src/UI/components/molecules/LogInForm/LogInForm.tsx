@@ -1,9 +1,9 @@
 "use client";
 import { Box, Typography, } from "@mui/material";
-import TextInput from "../../atoms/TextInput";
-import MainButton from "../../atoms/MainButton";
-import CustomLink from "../../atoms/CustomLink";
-import PasswordInput from "../../atoms/PasswordInput";
+import TextInput from "../../atoms/TextInput/TextInput";
+import MainButton from "../../atoms/MainButton/MainButton";
+import CustomLink from "../../atoms/CustomLink/CustomLink";
+import PasswordInput from "../../atoms/PasswordInput/PasswordInput";
 
 const LogInForm:React.FC=()=>{
     return(

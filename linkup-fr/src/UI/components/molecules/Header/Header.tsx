@@ -5,7 +5,7 @@ import SpaceDashboardIcon from '@mui/icons-material/SpaceDashboard';
 import ComputerIcon from '@mui/icons-material/Computer';
 import LogoutIcon from '@mui/icons-material/Logout';
 import ChecklistRtlIcon from '@mui/icons-material/ChecklistRtl';
-import ItemNav from "@/UI/components/atoms/ItemNav";
+import ItemNav from "@/UI/components/atoms/ItemNav/ItemNav";
 
 interface IHeaderProps{
     expand:boolean
