@@ -1,5 +1,7 @@
+'use client'
 import "./loginStyles.css";
 import { LogInForm } from "@/UI/components/molecules";
+import NavbarHome from "@/UI/components/molecules/NavbarHome";
 import Image from "next/image";
 export default function LoginView(): JSX.Element{
     return(
