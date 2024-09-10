@@ -1,7 +1,6 @@
 import CircularProgress from '@mui/material/CircularProgress';
 import './Loaders.css';
 import { LinearProgress } from '@mui/material';
-import Image from 'next/image';
 
 interface LoaderProps {
     flag: boolean;
