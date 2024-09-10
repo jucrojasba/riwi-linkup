@@ -15,7 +15,7 @@ const StyledIcon = styled("div")<{ color: string; hoverColor: string }>(
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    fontSize: "3rem",
+    fontSize: "2.5rem",
     color: color,
     transition: "background-color 0.3s ease",
     "&:hover": {

@@ -8,18 +8,23 @@ import Image from "next/image";
 import IconWithHover from "@/UI/components/atoms/IconHover/IconHover";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
+import SwitchMode from "@/UI/components/atoms/SwitchDarkMode/SwitchDarkMode";
+import { useDarkMode } from "@/global-states/dark-mode";
 
 export default function HomeView() {
   //Logic
   const navigate = useNavigate();
+  const DarkMode = useDarkMode((state)=>state.DarkMode);
+  console.log("Dark Mode", DarkMode);
 
   return (
     <main>
-      <div className="home-no-auth-wrapper">
+      <div className={`home-no-auth-wrapper ${DarkMode ? "dark-mode" : ""}`}>
         <div className="home-info">
           <TitleHome
-            title="easy management and acquisition of tech talent"
+            title="Easy management and acquisition of tech talent"
             subtitle="find tech talent with competitive knowledge"
+            isDarkMode={DarkMode}
           ></TitleHome>
           <RoundedButton
             text="Get Started"
@@ -35,7 +40,7 @@ export default function HomeView() {
         </div>
         <div className="gretting-image">
           <Image
-            src="/icons/arrow_riwi.png"
+            src="/icons/arrowPurple.png"
             alt="Coder Gretting"
             width={120}
             height={120}
@@ -62,6 +67,9 @@ export default function HomeView() {
             hoverColor="#25D366"
             onClick={() => {}}
           />
+        </div>
+        <div className="switch-mode-home">
+          <SwitchMode onClick={() => {}}></SwitchMode>
         </div>
       </div>
     </main>
