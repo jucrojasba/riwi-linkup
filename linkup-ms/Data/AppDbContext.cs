@@ -45,7 +45,7 @@ namespace linkup_ms.Data
             RoleSeeder.Seed(modelBuilder);
             CoderLanguageLevelSeeder.Seed(modelBuilder);
             CoderTechnicalSkillLevelSeeder.Seed(modelBuilder);
-            
+
             // Configure many-to-many relationship for CoderSoftSkill
             modelBuilder.Entity<CoderSoftSkill>()
                 .HasKey(css => new { css.CoderId, css.SoftSkillId });
@@ -94,6 +94,7 @@ namespace linkup_ms.Data
                 .WithMany(tsl => tsl.CoderTechnicalSkillLevels)
                 .HasForeignKey(ctsl => ctsl.TechnicalSkillLevelId)
                 .OnDelete(DeleteBehavior.Restrict); // No elimina TechnicalSkillLevels
+
         }
 
     }

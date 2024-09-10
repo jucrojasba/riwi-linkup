@@ -12,16 +12,16 @@ namespace linkup_ms.seeders
         public static void Seed(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<TechnicalSkill>().HasData(
-                new TechnicalSkill {Name = "javaScript" },
-                new TechnicalSkill {Name = "python" },
-                new TechnicalSkill {Name = "java" },
-                new TechnicalSkill {Name = "c#" },
-                new TechnicalSkill {Name = "sql" },
-                new TechnicalSkill {Name = "nextJs" },
-                new TechnicalSkill {Name = "nodeJs" },
-                new TechnicalSkill {Name = "docker" },
-                new TechnicalSkill {Name = "aws" },
-                new TechnicalSkill {Name = "machine learning" }
+                new TechnicalSkill { Id = 1, Name = "javaScript" },
+                new TechnicalSkill { Id = 2, Name = "python" },
+                new TechnicalSkill { Id = 3, Name = "java" },
+                new TechnicalSkill { Id = 4, Name = "c#" },
+                new TechnicalSkill { Id = 5, Name = "sql" },
+                new TechnicalSkill { Id = 6, Name = "nextJs" },
+                new TechnicalSkill { Id = 7, Name = "nodeJs" },
+                new TechnicalSkill { Id = 8, Name = "docker" },
+                new TechnicalSkill { Id = 9, Name = "aws" },
+                new TechnicalSkill { Id = 10, Name = "machine learning" }
             );
         }
     }

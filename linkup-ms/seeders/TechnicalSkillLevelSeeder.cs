@@ -12,9 +12,9 @@ namespace linkup_ms.seeders
         public static void Seed(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<TechnicalSkillLevel>().HasData(
-                new TechnicalSkillLevel {Name = "junior" },
-                new TechnicalSkillLevel {Name = "semi-senior" },
-                new TechnicalSkillLevel {Name = "senior" }
+                new TechnicalSkillLevel { Id = 1, Name = "junior", TechnicalSkillId = 1 },
+                new TechnicalSkillLevel { Id = 2, Name = "semi-senior", TechnicalSkillId = 2 },
+                new TechnicalSkillLevel { Id = 3, Name = "senior", TechnicalSkillId = 3 }
             );
         }
     }

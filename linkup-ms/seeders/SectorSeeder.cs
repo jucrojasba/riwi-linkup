@@ -12,11 +12,11 @@ namespace linkup_ms.seeders
         public static void Seed(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Sector>().HasData(
-                new Sector {Name = "tecnología" },
-                new Sector {Name = "finanzas" },
-                new Sector {Name = "salud" },
-                new Sector {Name = "educación" },
-                new Sector {Name = "manufactura" }
+                new Sector { Id = 1, Name = "tecnología" },
+                new Sector { Id = 2, Name = "finanzas" },
+                new Sector { Id = 3, Name = "salud" },
+                new Sector { Id = 4, Name = "educación" },
+                new Sector { Id = 5, Name = "manufactura" }
             );
         }
     }

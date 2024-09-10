@@ -13,8 +13,8 @@ namespace linkup_ms.seeders
         public static void Seed(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<UserRole>().HasData(
-                new UserRole {Name = "administrador" },
-                new UserRole {Name = "cliente" }
+                new UserRole { Id = 1, Name = "administrador" },
+                new UserRole { Id = 2, Name = "cliente" }
             );
         }
     }
