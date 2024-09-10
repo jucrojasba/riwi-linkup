@@ -6,6 +6,11 @@
   align-items: center;
   margin: 0;
   gap: 18%;
+  transition: background-color 0.5s ease;
+}
+
+.home-no-auth-wrapper.dark-mode{
+  background-color: var(--paragraph-color);
 }
 
 .home-info {
@@ -50,4 +55,10 @@
   display: flex;
   flex-direction: column;
   gap: var(--padding-min);
+}
+
+.switch-mode-home{
+  position: absolute;
+  bottom: 50%;
+  right: 4%;
 }
