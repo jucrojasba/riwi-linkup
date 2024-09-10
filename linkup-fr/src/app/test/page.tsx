@@ -32,7 +32,7 @@ export default function TestView() {
       <TextInput label="Nombre" onChange={() => {}}></TextInput>
       <TextInput
         label="Password"
-        type="password"
+        type="password"   
         onChange={() => {}}
         error
         helperText="Contraseña Incorrecta"
