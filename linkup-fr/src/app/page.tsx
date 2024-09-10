@@ -16,7 +16,6 @@ export default function HomeView() {
   //Logic
   const navigate = useNavigate();
   const DarkMode = useDarkMode((state)=>state.DarkMode);
-  console.log("Dark Mode", DarkMode);
 
   return (
     <main>

@@ -4,6 +4,8 @@ import Image from "next/image";
 import MainButton from "../../atoms/MainButton";
 import SecondaryButton from "../../atoms/SecondaryButton";
 import SelectLanguage from "../../atoms/SwitchLanguage/SwitchLanguage";
+import './NavbarHome.css'
+import { BorderStyle } from "@mui/icons-material";
 
 const NavbarHome: React.FC = () => {
   return (
@@ -23,11 +25,11 @@ const NavbarHome: React.FC = () => {
       }}
     >
       <Box sx={{ display: "flex", alignItems: "center", gap: "var(--padding-big)" }}>
-        <Box component="span" sx={{ display: "flex", width: "fit-content", alignItems: "center" }}>
-          <Image src="/icons/logoRiwi.svg" alt="Riwi" width={90} height={40} />
+        <Box component="span" sx={{ display: "flex", width: "fit-content", alignItems: "center", gap:"5px"}}>
+          <Image className="nav-logo" src="/icons/logoRiwi.svg" alt="Riwi" width={90} height={40} />
           <Typography
             variant="h1"
-            sx={{ fontSize: "2rem", color: "var(--main-color)", fontFamily: "var(--main-font)", fontWeight: 500 }}
+            sx={{ fontSize: "2rem", color: "var(--main-color)",textShadow:'-0.5px -0.5px 0 var(--white-color),0.5px -0.5px 0 var(--white-color),-0.5px  0.5px 0 var(--white-color),0.5px  0.5px 0 var(--white-color)', fontFamily: "var(--main-font)", fontWeight: 500 }}
           >
             LinkUp
           </Typography>
