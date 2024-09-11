@@ -1,10 +1,11 @@
+'use client';
 import { Box, Typography } from "@mui/material";
 import CustomLink from "../../atoms/CustomLink/CustomLink";
 import Image from "next/image";
 import MainButton from "../../atoms/MainButton/MainButton";
 import SecondaryButton from "../../atoms/SecondaryButton/SecondaryButton";
 import SelectLanguage from "../../atoms/SwitchLanguage/SwitchLanguage";
-import './NavbarHome.css';
+
 
 interface NavbarHomeProps {
   isDarkMode: boolean;
@@ -20,7 +21,7 @@ const NavbarHome: React.FC<NavbarHomeProps> = ({ isDarkMode }) => {
         left: 0,
         right: 0,
         zIndex: 9999,
-        padding: "var(--padding-big)",
+        padding: "var(--padding-big) var(--padding-no-auth)",
         display: "flex",
         justifyContent: "space-between",
         backgroundColor: "transparent",
