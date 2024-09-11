@@ -5,6 +5,7 @@ import Image from "next/image";
 import MainButton from "../../atoms/MainButton/MainButton";
 import SecondaryButton from "../../atoms/SecondaryButton/SecondaryButton";
 import SelectLanguage from "../../atoms/SwitchLanguage/SwitchLanguage";
+import useNavigate from "@/utilities/NavigateTo";
 
 
 interface NavbarHomeProps {
@@ -12,6 +13,7 @@ interface NavbarHomeProps {
 }
 
 const NavbarHome: React.FC<NavbarHomeProps> = ({ isDarkMode }) => {
+  const navigate = useNavigate();
   return (
     <Box
       component="nav"
@@ -51,8 +53,8 @@ const NavbarHome: React.FC<NavbarHomeProps> = ({ isDarkMode }) => {
           href="https://riwi.io/empleadores/#Contacto"
           target="_blank"
         />
-        <SecondaryButton text="Sign Up" onClick={() => { }} />
-        <MainButton text="Join Us" onClick={() => { }} />
+        <SecondaryButton text="Log In" onClick={() => { navigate('/login') }} />
+        <MainButton text="Join Us" onClick={() => {  navigate('/register')}} />
       </Box>
     </Box>
   );
