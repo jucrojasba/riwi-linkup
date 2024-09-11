@@ -11,6 +11,7 @@ import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import SwitchMode from "@/UI/components/atoms/SwitchDarkMode/SwitchDarkMode";
 import { useDarkMode } from "@/global-states/dark-mode";
 import NavbarHome from "@/UI/components/molecules/NavbarHome/NavbarHome";
+import RiwiLogo from "@/UI/components/atoms/RiwiLogo/RiwiLogo";
 
 export default function HomeView() {
   //Logic
@@ -19,7 +20,7 @@ export default function HomeView() {
 
   return (
     <main>
-      <NavbarHome></NavbarHome>
+      <NavbarHome isDarkMode={DarkMode}></NavbarHome>
       <div className={`home-no-auth-wrapper ${DarkMode ? "dark-mode" : ""}`}>
         <div className="home-info">
           <TitleHome
@@ -74,7 +75,9 @@ export default function HomeView() {
         <div className="switch-mode-home">
           <SwitchMode onClick={() => {}}></SwitchMode>
         </div>
+        <RiwiLogo isDarkMode={DarkMode}></RiwiLogo>
       </div>
+
     </main>
   );
 }

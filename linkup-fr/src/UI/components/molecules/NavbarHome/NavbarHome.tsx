@@ -4,10 +4,13 @@ import Image from "next/image";
 import MainButton from "../../atoms/MainButton/MainButton";
 import SecondaryButton from "../../atoms/SecondaryButton/SecondaryButton";
 import SelectLanguage from "../../atoms/SwitchLanguage/SwitchLanguage";
-import './NavbarHome.css'
-import { BorderStyle } from "@mui/icons-material";
+import './NavbarHome.css';
 
-const NavbarHome: React.FC = () => {
+interface NavbarHomeProps {
+  isDarkMode: boolean;
+}
+
+const NavbarHome: React.FC<NavbarHomeProps> = ({ isDarkMode }) => {
   return (
     <Box
       component="nav"
@@ -21,17 +24,16 @@ const NavbarHome: React.FC = () => {
         display: "flex",
         justifyContent: "space-between",
         backgroundColor: "transparent",
-        boxShadow: "none", 
+        boxShadow: "none",
       }}
     >
       <Box sx={{ display: "flex", alignItems: "center", gap: "var(--padding-big)" }}>
-        <Box component="span" sx={{ display: "flex", width: "fit-content", alignItems: "center", gap:"5px"}}>
-          <Image className="nav-logo" src="/icons/logoRiwi.svg" alt="Riwi" width={90} height={40} />
+        <Box component="span" sx={{ display: "flex", width: "fit-content", alignItems: "center", gap: "5px" }}>
           <Typography
             variant="h1"
-            sx={{ fontSize: "2rem", color: "var(--main-color)",textShadow:'-0.5px -0.5px 0 var(--white-color),0.5px -0.5px 0 var(--white-color),-0.5px  0.5px 0 var(--white-color),0.5px  0.5px 0 var(--white-color)', fontFamily: "var(--main-font)", fontWeight: 500 }}
+            sx={{ fontSize: "1.5rem", color: isDarkMode ? "var(--main-color)" : "var(--paragraph-color)", fontFamily: "var(--main-font)", fontWeight: 500 }}
           >
-            LinkUp
+            Riwi LinkUp
           </Typography>
         </Box>
         <SelectLanguage />
@@ -42,14 +44,14 @@ const NavbarHome: React.FC = () => {
           text="About Us"
           href="https://riwi.io/empleadores/"
           target="_blank"
-        ></CustomLink>
+        />
         <CustomLink
           text="Contact Us"
           href="https://riwi.io/empleadores/#Contacto"
           target="_blank"
-        ></CustomLink>
-        <SecondaryButton text="Sign Up" onClick={() => { }}></SecondaryButton>
-        <MainButton text="Join Us" onClick={() => { }}></MainButton>
+        />
+        <SecondaryButton text="Sign Up" onClick={() => { }} />
+        <MainButton text="Join Us" onClick={() => { }} />
       </Box>
     </Box>
   );
