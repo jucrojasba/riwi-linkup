@@ -21,7 +21,7 @@ const NavbarHome: React.FC<NavbarHomeProps> = ({ isDarkMode }) => {
         left: 0,
         right: 0,
         zIndex: 9999,
-        padding: "var(--padding-big) var(--padding-no-auth)",
+        padding: "var(--padding-big) 5% 0 3%",
         display: "flex",
         justifyContent: "space-between",
         backgroundColor: "transparent",

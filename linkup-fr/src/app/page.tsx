@@ -9,6 +9,7 @@ import { useDarkMode } from "@/global-states/dark-mode";
 import NavbarHome from "@/UI/components/molecules/NavbarHome/NavbarHome";
 import RiwiLogo from "@/UI/components/atoms/RiwiLogo/RiwiLogo";
 import UtilityRightButtons from "@/UI/components/molecules/UtilityRightButtons/UtilityRightButtons";
+import AuthLayout from "@/UI/components/organisms/AuthLayout/AuthLayout";
 
 export default function HomeView() {
   //Logic
@@ -17,7 +18,7 @@ export default function HomeView() {
 
   return (
     <main>
-      <NavbarHome isDarkMode={DarkMode}></NavbarHome>
+      <AuthLayout isDarkMode={DarkMode} />
       <div className={`home-no-auth-wrapper ${DarkMode ? "dark-mode" : ""}`}>
         <div className="home-info">
           <TitleHome
@@ -55,8 +56,6 @@ export default function HomeView() {
             />
           </div>
         </div>
-        <UtilityRightButtons isDarkMode={DarkMode}></UtilityRightButtons>
-        <RiwiLogo isDarkMode={DarkMode}></RiwiLogo>
       </div>
     </main>
   );
