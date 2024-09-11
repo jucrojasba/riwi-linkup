@@ -38,6 +38,7 @@ const PasswordInputStyle = styled(TextField)(() => ({
 
 const PasswordInput: React.FC<TextInputProps> = ({
     type = "text",
+    name,
     defaultValue = "",
     error = false,
     required = false,
@@ -53,6 +54,7 @@ const PasswordInput: React.FC<TextInputProps> = ({
     return (
         <PasswordInputStyle
             id="outlined-error-helper-text"
+            name={name}
             type={type === "password" && !showPassword ? "password" : "text"}
             defaultValue={defaultValue}
             label={label}
