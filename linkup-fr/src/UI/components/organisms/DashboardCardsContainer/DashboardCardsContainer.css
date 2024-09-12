@@ -1,0 +1,4 @@
+.card-info-container{
+    display: flex;
+    gap:var(--padding-big)
+}
