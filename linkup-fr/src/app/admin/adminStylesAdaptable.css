@@ -1,64 +1,67 @@
-@import url("../../globals.css");
+@import url("../globals.css");
 
 @media screen and (max-width: 1200px) {
+  /* Styles navigation mobile*/
+  body {
+    overflow-x: hidden;
+    overflow-y: scroll;
+  }
+  .open {
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 5%;
+    width: 40px;
+    height: 40px;
+    z-index: 10;
+    cursor: pointer;
+    border-radius: 50%;
+  }
 
-    /* Styles navigation mobile*/
-    body{
-        overflow-x: hidden;
-        overflow-y: scroll;
-    }
-    .open{
-        display: block;
-        position: absolute;
-        right: 0;
-        top: 5%;
-        width: 40px;
-        height: 40px;
-        z-index: 10;
-        cursor: pointer;
-        border-radius: 50%;
-        
-    }
+  div.content-layout {
+    flex-direction: column;
+  }
 
-    div.content-layout{
-        flex-direction: column;
-    }
+  div.content-layout > header.header {
+    flex-basis: 100%;
+    width: 100%;
+    height: auto;
+    z-index: 2;
+    gap: calc(var(--border-radius-big) * 3);
+  }
 
-    div.content-layout > header.header{
-        flex-basis: 100%;
-        width: 100%;
-        height: auto;
-        z-index: 2;
-        gap: calc(var(--border-radius-big) * 3);
-    }
+  div.content-layout > header.header > nav.header-nav {
+    margin: 0 auto;
+  }
 
-    div.content-layout > header.header > nav.header-nav{
-        margin: 0 auto;
-    }
+  div.content-layout > header.header > nav.header-nav > ul.header-nav-list {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
 
-    div.content-layout > header.header > nav.header-nav > ul.header-nav-list{
-        width: 100%;
-        margin: 0;
-        padding: 0;
-    }
+  div.content-layout > header.header_expand {
+  }
 
-    div.content-layout > header.header_expand{
-    }
+  /* Styles for content main*/
+  div.content-layout > div > main.main {
+    margin: 0;
+    padding: var(--padding-min);
+  }
 
-    /* Styles for content main*/
-    div.content-layout > div > main.main{
-        margin: 0;
-        padding: var(--padding-min);
-    }
+  div.content-layout > div > main.main > section.main-section {
+    margin: 0;
+    height: auto;
+  }
+  div.content-layout
+    > div
+    > main.main
+    > section.main-section
+    > div.section-content-cards {
+    margin: 0;
+  }
 
-    div.content-layout > div > main.main > section.main-section{
-        margin: 0;
-        height: auto;
-    }
-    div.content-layout > div > main.main > section.main-section > div.section-content-cards{
-        margin: 0;
-    }
-
-    div.content-layout > div > footer.footer{
-    }
+  div.content-layout > div > footer.footer {
+  }
 }
+

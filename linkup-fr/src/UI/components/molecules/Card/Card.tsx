@@ -1,7 +1,7 @@
+import "./cardStyles.css";
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import ButtonMore from '../../atoms/ButtonMore/ButtonMore';
-import "./cardStyles.css";
 import { ICoder, ICoders } from '@/UI/interfaces/ICoderInterface';
 import React, { useState } from 'react';
 import { deleteCache } from 'next/dist/server/lib/render-server';

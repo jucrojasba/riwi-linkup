@@ -1,0 +1,38 @@
+/* Styles for section coders----------------->*/
+section.main-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--padding-medium);
+  margin-top: var(--padding-big);
+  overflow: scroll;
+  height: 84%;
+}
+
+section.main-section > div.section-content-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--padding-medium);
+  height: auto;
+}
+
+section.main-section > div.section-buttons {
+  color: var(--main-color);
+  display: flex;
+  cursor: pointer;
+}
+
+/*
+div.content-layout
+  > div
+  > main.main
+  > section.main-section
+  > div.section-buttons
+  > .button-left,
+div.content-layout
+  > div
+  > main.main
+  > section.main-section
+  > div.section-buttons
+  > .button-right {
+  cursor: pointer;
+}*/

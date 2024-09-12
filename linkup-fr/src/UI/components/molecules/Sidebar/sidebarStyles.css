@@ -1,0 +1,58 @@
+/* Styles for header */
+div.sidebar {
+  background-color: var(--main-color);
+  flex-basis: 15%;
+  border-radius: var(--border-radius-min);
+  padding: var(--padding-big);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 97.5vh;
+  margin: var(--padding-min) 0;
+  margin-left: var(--padding-min);
+  gap: var(--padding-extra-big);
+}
+/* Styles for content users*/
+div.sidebar > div.sidebar-content-user {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--padding-min);
+}
+
+div.sidebar > div.sidebar-content-user > h5.content-user-welcome {
+  font-weight: 500;
+  font-size: var(--font-size-medium);
+}
+
+div.sidebar > div.sidebar-content-user > h2.sidebar-title {
+  font-size: var(--font-size-big);
+}
+div.sidebar > div.sidebar-content-user > div.content-user-image {
+  cursor: pointer;
+}
+
+/* Styles for content nav*/
+div.sidebar > nav.navbar {
+  margin: 0 auto;
+  height: 100%;
+}
+
+div.sidebar > nav.navbar > ul.navbar-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  margin-top: 0;
+  padding-left: 0;
+  height: 100%;
+}
+
+div.sidebar > nav.navbar > ul.navbar-list > li.nav-list-item,
+ul.navbar-list > div > li.nav-list-item {
+  display: flex;
+  align-items: center;
+  gap: var(--padding-min);
+  margin-left: 0;
+}

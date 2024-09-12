@@ -3,7 +3,8 @@ import { IUser } from "@/UI/interfaces/IUserInterface";
 import fetchApi from "@/utilities/fetchApi";
 
 export async function getCodersService():Promise<ICoder[] | undefined>{
-    const data = await fetchApi(`http://localhost:5000/coders`);
+    const data = await fetchApi(`api/v1/Coders`, 
+);
     if(!data)return;
     const filteredCoders = data.map((coder:Partial<ICoder>)=>({
         id: coder.id!,
