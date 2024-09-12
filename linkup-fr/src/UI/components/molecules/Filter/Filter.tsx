@@ -2,8 +2,21 @@ import { ReactNode, useState } from "react";
 import InputFilter from "../../atoms/InputFilter/InputFilter";
 import "./filterStyles.css";
 
+interface FilterOption {
+  checked: boolean;
+  name: string;
+  label: string;
+}
+
+interface FilterState {
+  languages: FilterOption[];
+  teachSkills: FilterOption[];
+  softSkills: FilterOption[];
+  clans: FilterOption[];
+}
+
 export default function Filter(): ReactNode {
-  const initialState = {
+  const initialState:FilterState = {
     languages: [
       { checked: false, name: "cSharp", label: "C#-ASP.NET" },
       { checked: false, name: "java", label: "Java" },
@@ -25,11 +38,18 @@ export default function Filter(): ReactNode {
       { checked: false, name: "nextjs", label: "Next.js" },
     ],
   };
-  const [checkedStates, setCheckedStates] = useState(initialState);
+  const [checkedStates, setCheckedStates] = useState<FilterState>(initialState);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = event.target;
-    console.log(checked,name);
+    const updatedState = {...checkedStates};
+    (Object.keys(updatedState) as Array<keyof FilterState>).forEach((key) => {
+      updatedState[key] = updatedState[key].map((item) =>
+        item.name === name ? { ...item, checked } : item
+      );
+    });
+
+    setCheckedStates(updatedState);
   };
   console.log(checkedStates);
   return (
@@ -37,8 +57,9 @@ export default function Filter(): ReactNode {
       <div className="filter-languages">
         <h3 className="languages-title">Languages</h3>
         <div className="languages-options">
-          {initialState.languages.map((languages) => (
+          {checkedStates.languages.map((languages) => (
             <InputFilter
+              key={languages.name}
               label={languages.label}
               name={languages.name}
               onChange={handleChange}
@@ -50,8 +71,9 @@ export default function Filter(): ReactNode {
       <div className="filter-teach">
         <h3 className="teach-title">Teach Skills</h3>
         <div className="teach-options">
-          {initialState.teachSkills.map((teachSkills) => (
+          {checkedStates.teachSkills.map((teachSkills) => (
             <InputFilter
+              key={teachSkills.name}
               label={teachSkills.label}
               name={teachSkills.name}
               onChange={handleChange}
@@ -63,8 +85,9 @@ export default function Filter(): ReactNode {
       <div className="filter-skills">
         <h3 className="skills-title">Soft Skills</h3>
         <div className="skills-options">
-          {initialState.softSkills.map((softSkills) => (
+          {checkedStates.softSkills.map((softSkills) => (
             <InputFilter
+              key={softSkills.name}
               label={softSkills.label}
               name={softSkills.name}
               onChange={handleChange}
@@ -76,8 +99,9 @@ export default function Filter(): ReactNode {
       <div className="filter-clan">
         <h3 className="clan-title">Clan</h3>
         <div className="clan-options">
-          {initialState.clans.map((clans) => (
+          {checkedStates.clans.map((clans) => (
             <InputFilter
+              key={clans.name}
               label={clans.label}
               name={clans.name}
               onChange={handleChange}
