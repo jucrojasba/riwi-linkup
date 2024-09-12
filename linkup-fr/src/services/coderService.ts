@@ -1,4 +1,4 @@
-import { ICoder } from "@/UI/interfaces/ICoderInterface";
+import { ICoder, ICodersTraining } from "@/UI/interfaces/ICoderInterface";
 import { IUser } from "@/UI/interfaces/IUserInterface";
 import fetchApi from "@/utilities/fetchApi";
 
@@ -22,5 +22,11 @@ export async function deleteCoderService(coder_id:number):Promise<IUser[] | unde
         }
     });
     if(!data)return;
+    return data;
+}
+
+export async function getCodersInTraining():Promise<number | undefined>{
+    const data = await fetchApi(`http://192.168.88.72:5298/api/Dashboard/coders-in-training`);
+    if(!data) return;
     return data;
 }
