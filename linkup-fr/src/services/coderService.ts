@@ -1,4 +1,4 @@
-import { ICoder, ICodersTraining } from "@/UI/interfaces/ICoderInterface";
+import { ICoder } from "@/UI/interfaces/ICoderInterface";
 import { IUser } from "@/UI/interfaces/IUserInterface";
 import fetchApi from "@/utilities/fetchApi";
 
