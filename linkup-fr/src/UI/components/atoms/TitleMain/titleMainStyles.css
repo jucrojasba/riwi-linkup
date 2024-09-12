@@ -1,0 +1,4 @@
+div > h4.main-subtitle {
+  color: var(--paragraph-color-gray);
+  font-weight: 400;
+}
