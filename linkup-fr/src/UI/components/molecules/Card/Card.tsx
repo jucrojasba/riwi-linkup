@@ -6,15 +6,17 @@ import { ICoder, ICoders } from '@/UI/interfaces/ICoderInterface';
 import React, { useState } from 'react';
 import { deleteCache } from 'next/dist/server/lib/render-server';
 import { deleteCoderService } from '@/services/coderService';
+import { CircularLoader } from "../../atoms/loaders/Loaders";
 
 interface ICardProps{
-    id_coder:number,
-    url_image: string,
-    alt_image: string,
-    name_user: string,
-    age_user: string,
+    id_coder?:number,
+    url_image?: string,
+    alt_image?: string,
+    name_user?: string,
+    age_user?: string,
+    status: boolean
 }
-export default function Card({id_coder,url_image,alt_image,name_user,age_user}:ICardProps):React.ReactNode{
+export default function Card({id_coder,url_image,alt_image,name_user,age_user, status}:ICardProps):React.ReactNode{
 
     const handleClickUpdate = async(e:React.MouseEvent) =>{
         
@@ -28,27 +30,35 @@ export default function Card({id_coder,url_image,alt_image,name_user,age_user}:I
         const data = await deleteCoderService(parseInt(id));
         console.log(data);
     }
+
+    if(!status){
+        return (
+            <CircularLoader flag={true} />
+        )
+    }
     return(
-        <div className="card">
-            <div className="card-header">
-                <img
-                src={url_image}
-                alt={alt_image}
-                width={100}
-                height={80}
-                />
-                <div className="header-buttons">
-                    <EditIcon data-id={id_coder} className="edit-icon" onClick={(e)=>handleClickUpdate(e)}/>
-                    <DeleteIcon data-id={id_coder} className='delete-icon' onClick={(e)=>handleClickDelete(e)} />
+        <>
+            <div className="card">
+                <div className="card-header">
+                    <img
+                    src={url_image}
+                    alt={alt_image}
+                    width={100}
+                    height={80}
+                    />
+                    <div className="header-buttons">
+                        <EditIcon data-id={id_coder} className="edit-icon" onClick={(e)=>handleClickUpdate(e)}/>
+                        <DeleteIcon data-id={id_coder} className='delete-icon' onClick={(e)=>handleClickDelete(e)} />
+                    </div>
+                </div>
+                <div className="card-body">
+                    <div className='body-information'>
+                        <h3 className="body-title">{name_user}</h3>
+                        <h5 className="body-subtitle" style={{fontWeight: "400"}}>{age_user}</h5>
+                    </div>
+                    <ButtonMore data-id={id_coder} />
                 </div>
             </div>
-            <div className="card-body">
-                <div className='body-information'>
-                    <h3 className="body-title">{name_user}</h3>
-                    <h5 className="body-subtitle" style={{fontWeight: "400"}}>{age_user}</h5>
-                </div>
-                <ButtonMore data-id={id_coder} />
-            </div>
-        </div>
+        </>
     )
 }

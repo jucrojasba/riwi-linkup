@@ -7,9 +7,9 @@ div.sidebar {
   display: flex;
   flex-direction: column;
   height: 100%;
-  min-height: 97.5vh;
-  margin: var(--padding-min) 0;
-  margin-left: var(--padding-min);
+  min-height: 95.5vh;
+  margin: var(--padding-medium) 0;
+  margin-left: var(--padding-medium);
   gap: var(--padding-extra-big);
 }
 /* Styles for content users*/

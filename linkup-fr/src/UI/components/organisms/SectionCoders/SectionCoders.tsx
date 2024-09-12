@@ -63,12 +63,8 @@ export default function SectionCoders(): React.ReactElement {
   return (
     <section className="main-section">
       <div className="section-content-cards">
-        {loadingRequest ? (
-          <CircularLoader flag={true} />
-        ) : (
-          <CircularLoader flag={false} />
-        )}
-        {coders.coders.map((coder) => (
+        {loadingRequest 
+        ? coders.coders.map((coder) => (
           <Card
             id_coder={coder.id}
             key={coder.id}
@@ -76,8 +72,11 @@ export default function SectionCoders(): React.ReactElement {
             alt_image={`coder-${coder.name} image`}
             name_user={coder.name}
             age_user={`${calculateAge(coder.birthday)} years`}
+            status={true}
           />
-        ))}
+        ))
+        : <Card status={false} />
+        }
       </div>
       <div className="section-buttons">
         <KeyboardArrowLeftIcon
