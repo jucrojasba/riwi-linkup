@@ -5,21 +5,20 @@ import RoundedButton from "@/UI/components/atoms/ButtonRounded/ButtonRounded";
 import EastIcon from "@mui/icons-material/East";
 import useNavigate from "@/utilities/NavigateTo";
 import Image from "next/image";
-import IconWithHover from "@/UI/components/atoms/IconHover/IconHover";
-import InstagramIcon from "@mui/icons-material/Instagram";
-import WhatsAppIcon from "@mui/icons-material/WhatsApp";
-import SwitchMode from "@/UI/components/atoms/SwitchDarkMode/SwitchDarkMode";
 import { useDarkMode } from "@/global-states/dark-mode";
 import NavbarHome from "@/UI/components/molecules/NavbarHome/NavbarHome";
+import RiwiLogo from "@/UI/components/atoms/RiwiLogo/RiwiLogo";
+import UtilityRightButtons from "@/UI/components/molecules/UtilityRightButtons/UtilityRightButtons";
+import AuthLayout from "@/UI/components/organisms/AuthLayout/AuthLayout";
 
 export default function HomeView() {
   //Logic
   const navigate = useNavigate();
-  const DarkMode = useDarkMode((state)=>state.DarkMode);
+  const DarkMode = useDarkMode((state) => state.DarkMode);
 
   return (
     <main>
-      <NavbarHome></NavbarHome>
+      <AuthLayout isDarkMode={DarkMode} />
       <div className={`home-no-auth-wrapper ${DarkMode ? "dark-mode" : ""}`}>
         <div className="home-info">
           <TitleHome
@@ -39,13 +38,15 @@ export default function HomeView() {
             }}
           ></RoundedButton>
         </div>
-        <div className="gretting-image">
-          <Image
-            src="/icons/arrowPurple.png"
-            alt="Coder Gretting"
-            width={120}
-            height={120}
-          />
+        <div className="coder-gretting-wrapper">
+          <div className="gretting-image" onClick={()=>navigate('/login')}>
+            <Image
+              src="/icons/arrowPurple.png"
+              alt="Coder Gretting"
+              width={120}
+              height={120}
+            />
+          </div>
           <div className="coder-gretting-container">
             <Image
               src="/images/coderGretting.png"
@@ -54,25 +55,6 @@ export default function HomeView() {
               height={500}
             />
           </div>
-        </div>
-        <div className="media-icons">
-          <IconWithHover
-            icon={<InstagramIcon fontSize="inherit" />}
-            color="var(--paragraph-color)"
-            hoverColor="#FF00FF"
-            onClick={() => {window.location.href = 'https://www.instagram.com/riwi.io/?hl=en'}}
-            isDarkMode={DarkMode}
-          />
-          <IconWithHover
-            icon={<WhatsAppIcon fontSize="inherit" />}
-            color="var(--paragraph-color)"
-            hoverColor="#25D366"
-            onClick={() => {window.location.href = 'https://wa.link/tptm6j'}}
-            isDarkMode={DarkMode}
-          />
-        </div>
-        <div className="switch-mode-home">
-          <SwitchMode onClick={() => {}}></SwitchMode>
         </div>
       </div>
     </main>

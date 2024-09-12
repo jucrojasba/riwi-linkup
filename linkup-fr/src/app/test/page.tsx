@@ -8,6 +8,7 @@ import SecondaryButton from "@/UI/components/atoms/SecondaryButton/SecondaryButt
 import TextInput from "@/UI/components/atoms/TextInput/TextInput";
 import { CircularLoader, LinearLoader } from "@/UI/components/atoms/loaders/Loaders";
 import LogInForm from "@/UI/components/molecules/LogInForm/LogInForm";
+import RegisterForm from "@/UI/components/molecules/RegisterForm/RegisterForm";
 import { Box } from "@mui/material";
 
 export default function TestView() {
@@ -17,32 +18,15 @@ export default function TestView() {
         <MainButton text="Ejemplo" onClick={()=>{}}></MainButton>
         <SecondaryButton text="Secundario" onClick={()=>{}}></SecondaryButton>
         <ButtonMore></ButtonMore>
-        <TextInput label="Nombre" onChange={()=>{}}></TextInput>
-        <TextInput label="Required" required onChange={()=>{}}></TextInput>
-        <PasswordInput label="Password" type='password' onChange={()=>{}} error helperText="Contraseña Incorrecta"></PasswordInput>
-        <TextInput label="Celular" type="number" onChange={()=>{}}></TextInput>
+        <TextInput name="" label="Nombre" onChange={()=>{}}></TextInput>
+        <TextInput name="" label="Required" required onChange={()=>{}}></TextInput>
+        <PasswordInput name="" label="Password" type='password' onChange={()=>{}} error helperText="Contraseña Incorrecta"></PasswordInput>
+        <TextInput name="" label="Celular" type="number" onChange={()=>{}}></TextInput>
         <CustomLink text="About Us" href="/aboutus"></CustomLink>
         <CircularLoader flag={true}/>
         <LinearLoader flag={true}/>
       </Box>
-
-      <LogInForm/>
-
-      <MainButton text="Ejemplo" onClick={() => {}}></MainButton>
-      <SecondaryButton text="Secundario" onClick={() => {}}></SecondaryButton>
-      <TextInput label="Nombre" onChange={() => {}}></TextInput>
-      <TextInput
-        label="Password"
-        type="password"   
-        onChange={() => {}}
-        error
-        helperText="Contraseña Incorrecta"
-      ></TextInput>
-      <TextInput label="Celular" type="number" onChange={() => {}}></TextInput>
-      <CustomLink text="About Us" href="/aboutus"></CustomLink>
-      <CircularLoader flag={true} />
-      <LinearLoader flag={true} />
-      <ButtonMore></ButtonMore>
+      <RegisterForm/>
 
     </main>
   );
