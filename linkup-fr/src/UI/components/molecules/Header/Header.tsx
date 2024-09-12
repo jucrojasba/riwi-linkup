@@ -22,7 +22,7 @@ export default function Header({ expand }: IHeaderProps): React.ReactNode {
         />
         <SelectLanguage />
         <Search />
-        <SwitchMode onClick={handlerClick} />
+        <SwitchMode onClick={handlerClick} horizontalMode={true}/>
       </div>
     </header>
   );
