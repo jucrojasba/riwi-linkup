@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import { getCodersService } from "@/services/coderService";
 import { Card } from "../../molecules";
 
-export default function SectionCoders(): React.ReactNode {
+export default function SectionCoders(): React.ReactElement {
   const initialCoder: ICoder = {
     id: 0,
     url_image: "",

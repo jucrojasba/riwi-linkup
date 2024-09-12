@@ -4,15 +4,14 @@ import { Footer, Header } from "../../molecules";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { Filter } from "../../molecules";
 import TitleMain from "../../atoms/TitleMain/TitleMain";
-import SectionCoders from "../SectionCoders/SectionCoders";
 
 interface IDashboardLayoutProps {
   section: ReactElement;
 }
 
-export default function DashboardLayout(
-  section: IDashboardLayoutProps
-): React.ReactNode {
+export default function DashboardLayout({
+  section,
+}: IDashboardLayoutProps): React.ReactElement {
   const [expand, setExpand] = useState<boolean>(false);
   const handleButtonExpand = () => {
     setExpand(!expand);
@@ -27,7 +26,7 @@ export default function DashboardLayout(
       <main className="main">
         <TitleMain className="titleMain" title="Filters" subtitle="" />
         <Filter />
-        <SectionCoders />
+        {section}
       </main>
       <Footer />
     </div>
