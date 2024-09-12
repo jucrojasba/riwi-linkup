@@ -1,0 +1,52 @@
+/* Styles for content main ----------------->*/
+
+div.content-layout > div {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+div.content-layout > div > main.main{
+    flex-basis: 80%;
+    height: auto;
+    margin: var(--padding-min) 0;
+}
+
+div.content-layout > div > main.main > section.main-section{
+    color: var(--paragraph-color);
+    display: flex;
+    flex-direction: column;
+    gap: var(--padding-big);
+    height: 100%;
+}
+
+/* Styles for content coders -*/
+div.content-layout > div > main.main > section.main-section > div.section-content-coders{
+    display: flex;
+    gap: var(--padding-big);
+    align-items: center;
+}
+
+/* Styles for filters*/
+
+
+/* Styles for cards*/
+div.content-layout > div > main.main > section.main-section > div.section-content-cards{
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--padding-medium);
+    height:auto;
+    margin-right: var(--padding-medium);
+}
+
+div.content-layout > div > main.main > section.main-section > div.section-buttons{
+    display: flex;
+    justify-content: center;
+    color: var(--main-color);
+}
+
+div.content-layout > div > main.main > section.main-section > div.section-buttons > .button-left,
+div.content-layout > div > main.main > section.main-section > div.section-buttons > .button-right{
+    cursor: pointer;
+}

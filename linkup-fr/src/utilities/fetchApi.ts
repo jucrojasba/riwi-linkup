@@ -1,12 +1,10 @@
-import { IUser } from "@/UI/interfaces/IUserInterface";
-
 interface IOptionsProps{
     method?: string,
     headers?: {},
     body?: string
 }
 
-export default async function fetchApi(path:string,options?:IOptionsProps):Promise<IUser[] | undefined>{
+export default async function fetchApi(url:string,options?:IOptionsProps):Promise<any>{
     try{
         const url:string = "http://192.168.88.72:5298/" + path;
         console.log(url);
