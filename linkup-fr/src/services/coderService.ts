@@ -30,3 +30,15 @@ export async function getCodersInTraining():Promise<number | undefined>{
     if(!data) return;
     return data;
 }
+
+export async function getCodersFrontend():Promise<number | undefined>{
+    const data = await fetchApi(`http://192.168.88.72:5298/api/Dashboard/frontend-coders`);
+    if(!data) return;
+    return data;
+}
+
+export async function getCodersBackend():Promise<number | undefined>{
+    const data = await fetchApi(`http://192.168.88.72:5298/api/Dashboard/backend-coders`);
+    if(!data) return;
+    return data;
+}
