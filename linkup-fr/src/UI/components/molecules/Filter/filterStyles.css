@@ -1,6 +1,8 @@
 div.filter {
   display: flex;
+  align-items: center;
   gap: var(--padding-big);
+  height: 15%;
 }
 
 div.filter > div.filter-languages,
@@ -26,4 +28,8 @@ div.filter > div.filter-teach > h3,
 div.filter > div.filter-clan > h3 {
   font-weight: 400;
   color: var(--paragraph-color-gray);
+}
+
+div.filter > div.button-search {
+  margin-top: 40px;
 }
