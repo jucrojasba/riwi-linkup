@@ -1,17 +1,29 @@
-import Link from "next/link"
-import React from "react"
+import Link from "next/link";
+import React from "react";
+import "./itemNavStyles.css";
 
-interface IItemNavProps{ // 
-    icon: React.ComponentType
-    href: string
-    name: string
+interface IItemNavProps {
+  //
+  icon: React.ComponentType;
+  href: string;
+  name: string;
 }
 
-export default function ItemNav({icon:Icon, href,name}:IItemNavProps): React.ReactNode{
-    return(
+export default function ItemNav({
+  icon: Icon,
+  href,
+  name,
+}: IItemNavProps): React.ReactNode {
+  return (
     <li className="nav-list-item">
-        <Icon />
-        <Link className="list-item-link" href={href} style={{color: "var(--white-color)", textDecoration: "none"}}>{name}</Link>
+      <Icon />
+      <Link
+        className="list-item-link"
+        href={href}
+        style={{ color: "var(--white-color)", textDecoration: "none" }}
+      >
+        {name}
+      </Link>
     </li>
-    )
+  );
 }

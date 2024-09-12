@@ -1,0 +1,11 @@
+div.content-dashboard {
+  width: 100%;
+}
+
+div.content-dashboard > main.main {
+  position: absolute;
+  width: 80%;
+  height: 85%;
+  left: 16.5%;
+}
+
