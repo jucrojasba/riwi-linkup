@@ -12,7 +12,7 @@ export default function InputFilter({label, name, onChange, checked}:InputFilter
     return(
         <div>
             <label htmlFor={name}> {label} 
-                <input type="checkbox" checked={checked} id={name} name={name} onChange={onChange} />  
+                <input className={checked ? "checked-filter": ""} type="checkbox" checked={checked} id={name} name={name} onChange={onChange} />  
             </label>
         </div>
     )
