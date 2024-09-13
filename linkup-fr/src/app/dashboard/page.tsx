@@ -1,25 +1,20 @@
 'use client'
 
+import { useLanguage } from '@/global-states/language-mode';
 import './dashboardStyle.css'
 import { useDarkMode } from "@/global-states/dark-mode";
-import DashboardCard from "@/UI/components/molecules/DashboardCard/DashboardCard";
-import BarChartIcon from '@mui/icons-material/BarChart';
-import StorageIcon from '@mui/icons-material/Storage';
-import CodeOffIcon from '@mui/icons-material/CodeOff';
+import { DashboardLayout } from '@/UI/components/organisms';
+import DashboardCardsContainer from '@/UI/components/organisms/DashboardCardsContainer/DashboardCardsContainer';
+import SectionDashboard from '@/UI/components/organisms/SectionDashboard/SectionDashboard';
 
 export default function DashboardView(){
-    //Logic
+    // Logic
     const DarkMode = useDarkMode((state) => state.DarkMode);
+    const language=useLanguage((state) => state.language);
 
     return (
         <main>
-            <div className="dashboard-wrapper">
-                <div className="card-info-container">
-                <DashboardCard icon={<BarChartIcon/>} title='Quantity Coders' number={150} color='var(--red-color)'/>
-                <DashboardCard icon={<CodeOffIcon style={{ transform: 'scaleX(-1)', display: 'inline-block' }} />} title='Front Technologies' number={150} color='var(--green-color)'/>
-                <DashboardCard icon={<StorageIcon/>} title='Backend Technologies' number={150} color='var(--main-color)'/>
-                </div>
-            </div>
+            <DashboardLayout section={<SectionDashboard isDarkMode={DarkMode} language={language}/>} language={language}/>
         </main>
-    )
+    );
 }
