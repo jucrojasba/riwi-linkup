@@ -10,12 +10,13 @@ import { CircularLoader, LinearLoader } from "@/UI/components/atoms/loaders/Load
 import LogInForm from "@/UI/components/molecules/LogInForm/LogInForm";
 import RegisterForm from "@/UI/components/molecules/RegisterForm/RegisterForm";
 import { Box } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
 
 export default function TestView() {
   return (
     <main>
       <Box sx={{padding:'40px'}}>
-        <MainButton text="Ejemplo" onClick={()=>{}}></MainButton>
+        <MainButton text={<SearchIcon />} onClick={()=>{}}></MainButton>
         <SecondaryButton text="Secundario" onClick={()=>{}}></SecondaryButton>
         <ButtonMore></ButtonMore>
         <TextInput name="" label="Nombre" onChange={()=>{}}></TextInput>

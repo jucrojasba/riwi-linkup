@@ -5,10 +5,11 @@ import MenuItem from "@mui/material/MenuItem";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import TranslateIcon from "@mui/icons-material/Translate";
 import { Style } from "@mui/icons-material";
+import { useLanguage } from "@/global-states/language-mode";
 
 const LanguageSelector = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const [selectedLanguage, setSelectedLanguage] = useState("English");
+  const {language, setLanguage} = useLanguage();
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -18,8 +19,8 @@ const LanguageSelector = () => {
     setAnchorEl(null);
   };
 
-  const handleMenuItemClick = (language: string) => {
-    setSelectedLanguage(language);
+  const handleMenuItemClick = (language: boolean) => {
+    setLanguage(language);
     setAnchorEl(null);
     console.log(language);
   };
@@ -40,7 +41,7 @@ const LanguageSelector = () => {
           borderRadius: "var(--border-radius-min)",
         }}
       >
-        {selectedLanguage}
+        {language? "Spanish":"English"}
       </Button>
       <Menu
         anchorEl={anchorEl}
@@ -48,10 +49,10 @@ const LanguageSelector = () => {
         onClose={handleClose}
         disablePortal
       >
-        <MenuItem onClick={() => handleMenuItemClick("English")}>
+        <MenuItem onClick={() => handleMenuItemClick(false)}>
           English
         </MenuItem>
-        <MenuItem onClick={() => handleMenuItemClick("Spanish")}>
+        <MenuItem onClick={() => handleMenuItemClick(true)}>
           Spanish
         </MenuItem>
       </Menu>
