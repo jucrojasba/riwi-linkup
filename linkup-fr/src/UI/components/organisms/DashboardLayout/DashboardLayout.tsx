@@ -14,7 +14,6 @@ export default function DashboardLayout({
   section,
 }: IDashboardLayoutProps): React.ReactElement {
   const [expand, setExpand] = useState<boolean>(false);
-  const open = localStorage.getItem("open");
 
   const handleButtonExpand = () => {
     setExpand(!expand);
@@ -23,17 +22,19 @@ export default function DashboardLayout({
 
   console.log(open);
   return (
-    <div className="content-dashboard">
-      <div className="open" onClick={handleButtonExpand}>
-        <KeyboardArrowDownIcon />
+    <div className="content-layout">
+      <div className="content-dashboard">
+        <div className="open" onClick={handleButtonExpand}>
+          <KeyboardArrowDownIcon />
+        </div>
+        <Header expand={expand} />
+        <main className={"main"}>
+          <TitleMain className="titleMain" title="Filters" subtitle="" />
+          <Filter />
+          {section}
+        </main>
+        <Footer />
       </div>
-      <Header expand={expand} />
-      <main className={open ? "main-open" : "main"}>
-        <TitleMain className="titleMain" title="Filters" subtitle="" />
-        <Filter />
-        {section}
-      </main>
-      <Footer />
     </div>
   );
 }
