@@ -8,10 +8,11 @@ import { useLanguage } from "@/global-states/language-mode";
 
 interface IDashboardLayoutProps {
   section: ReactElement;
+  language:any;
 }
 
 export default function DashboardLayout({
-  section,
+  section, language
 }: IDashboardLayoutProps): React.ReactElement {
   const [expand, setExpand] = useState<boolean>(false);
 
