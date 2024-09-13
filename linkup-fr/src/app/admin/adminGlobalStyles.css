@@ -9,6 +9,7 @@ div.content-layout {
   overflow: visible;
   transition: all 0.3s ease;
   height: 100%;
+  width: 100%;
 }
 
 .open {

@@ -1,5 +1,5 @@
-import CircularProgress from '@mui/material/CircularProgress';
 import './Loaders.css';
+import CircularProgress from '@mui/material/CircularProgress';
 import { LinearProgress } from '@mui/material';
 
 interface LoaderProps {

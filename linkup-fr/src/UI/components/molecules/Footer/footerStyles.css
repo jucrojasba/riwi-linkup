@@ -3,8 +3,8 @@ footer.footer {
   align-items: end;
   gap: var(--padding-big);
   position: absolute;
-  bottom: 2%;
-  left: 16%;
+  bottom: 3%;
+  left: 17%;
 }
 
 footer.footer .link {

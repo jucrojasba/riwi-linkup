@@ -7,12 +7,14 @@ interface IItemNavProps {
   icon: React.ComponentType;
   href: string;
   name: string;
+  openSidebar?: boolean;
 }
 
 export default function ItemNav({
   icon: Icon,
   href,
   name,
+  openSidebar,
 }: IItemNavProps): React.ReactNode {
   return (
     <li className="nav-list-item">
