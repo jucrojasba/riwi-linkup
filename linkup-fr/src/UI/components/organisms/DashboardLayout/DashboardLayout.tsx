@@ -8,10 +8,11 @@ import { useLanguage } from "@/global-states/language-mode";
 
 interface IDashboardLayoutProps {
   section: ReactElement;
+  language:any;
 }
 
 export default function DashboardLayout({
-  section,
+  section, language
 }: IDashboardLayoutProps): React.ReactElement {
   const [expand, setExpand] = useState<boolean>(false);
   const open = localStorage.getItem("open");
@@ -27,7 +28,7 @@ export default function DashboardLayout({
       <div className="open" onClick={handleButtonExpand}>
         <KeyboardArrowDownIcon />
       </div>
-      <Header expand={expand} />
+      <Header expand={expand} language={language} />
       <main className={open ? "main-open" : "main"}>
         <TitleMain className="titleMain" title="Filters" subtitle="" />
         <Filter />
