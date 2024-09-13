@@ -24,7 +24,7 @@ export default function ItemNav({
         href={href}
         style={{ color: "var(--white-color)", textDecoration: "none" }}
       >
-        {name}
+        {openSidebar ? "": name}
       </Link>
     </li>
   );
