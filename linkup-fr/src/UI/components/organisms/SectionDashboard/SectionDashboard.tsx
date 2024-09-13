@@ -10,8 +10,10 @@ interface ISectionDashborad{
 
 const SectionDashboard: React.FC<ISectionDashborad> = ({isDarkMode, language})=>{
     return (
+        <>
         <DashboardCardsContainer language={language}/>
         <BarChart/>
+        </>
     );
 };
 
