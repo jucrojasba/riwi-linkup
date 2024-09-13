@@ -30,7 +30,6 @@ export default function Sidebar({ expand, language }: ISidebarProps): React.Reac
 
   const handleOpenMenu = () => {
     setOpenSidebar(!openSidebar);
-    localStorage.setItem("open", openSidebar.toString());
   };
   return (
     <div className={openSidebar ? "sidebarWidth" : "sidebar"}>
