@@ -4,9 +4,5 @@ import { DashboardLayout } from "@/UI/components/organisms";
 import { SectionCoders } from "@/UI/components/organisms";
 export default function AdminView(): React.ReactNode {
   const languages = useLanguage();
-  return (
-    <div className="content-layout">
-      <DashboardLayout section={<SectionCoders />} language={languages}/>
-    </div>
-  );
+  return <DashboardLayout section={<SectionCoders />} titleView="Coders" subtitle="General Information" path="" language={languages}/>;
 }
