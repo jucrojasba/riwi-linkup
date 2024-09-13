@@ -16,7 +16,7 @@ export default function Header({ expand, titleView, subtitle, path }: IHeaderPro
   const handlerClick = () => {};
   return (
     <header className="header">
-      <Sidebar expand={expand} />
+      <Sidebar expand={expand} language={language}/>
       <div className="section-content-coders">
         <TitleMain
           className="content-coders-title"

@@ -16,7 +16,7 @@ export default function HomeView() {
   //Logic
   const navigate = useNavigate();
   const DarkMode = useDarkMode((state) => state.DarkMode);
-  const language =useLanguage((state)=>state.language)
+  const language =useLanguage((state)=>state.language);
 
   return (
     <main>

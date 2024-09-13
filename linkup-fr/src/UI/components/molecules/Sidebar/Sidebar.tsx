@@ -12,12 +12,12 @@ import { useLanguage } from "@/global-states/language-mode";
 
 interface ISidebarProps {
   expand: boolean;
-  openSidebar: boolean;
-  setOpenSidebar: Dispatch<SetStateAction<boolean>>;
+  openSidebar?: boolean;
+  setOpenSidebar?: Dispatch<SetStateAction<boolean>>;
+  language:boolean;
 }
 
-export default function Sidebar({ expand }: ISidebarProps): React.ReactNode {
-  const language = useLanguage();
+export default function Sidebar({ expand, language }: ISidebarProps): React.ReactNode {
   const [openSidebar, setOpenSidebar] = useState<boolean>(false);
 
   const navDataIcons = [
@@ -53,7 +53,7 @@ export default function Sidebar({ expand }: ISidebarProps): React.ReactNode {
           />
         </div>
         <h5 className="content-user-welcome">
-          {language ? "Bienvenido" : "Welcome back."}
+          {language ? "Bienvenido" : "Welcome back"}
         </h5>
         <h3 className="content-user-name">Team</h3>
       </div>

@@ -11,13 +11,15 @@ interface IDashboardLayoutProps {
   titleView: string;
   subtitle:string;
   path: string;
+  language:any,
 }
 
 export default function DashboardLayout({
   section,
   titleView,
   subtitle,
-  path
+  path,
+  language:any
 }: IDashboardLayoutProps): React.ReactElement {
   const [expand, setExpand] = useState<boolean>(false);
 
