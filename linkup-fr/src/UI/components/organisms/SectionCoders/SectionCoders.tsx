@@ -58,6 +58,7 @@ export default function SectionCoders(): React.ReactElement {
       setCurrentPage(currentPage - 1);
     }
   };
+  console.log(coders)
 
   return (
     <section className="main-section">
