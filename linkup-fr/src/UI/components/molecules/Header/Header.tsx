@@ -11,8 +11,9 @@ interface IHeaderProps {
   titleView: string;
   subtitle: string;
   path: string;
+  language:boolean;
 }
-export default function Header({ expand, titleView, subtitle, path }: IHeaderProps): React.ReactNode {
+export default function Header({ expand, titleView, subtitle, path, language }: IHeaderProps): React.ReactNode {
   const handlerClick = () => {};
   return (
     <header className="header">
