@@ -32,7 +32,7 @@ const LogInForm:React.FC=()=>{
             <MainButton text="Log In" onClick={()=>{}}></MainButton>
             <CustomLink text="Forgot Password?" href="/recover-password"></CustomLink>
             <Box component={'span'}>
-                <Typography variant="body1" sx={{color:'var(--secondary-color)',fontFamily:'var(--main-font)'}}>Do not have an account? <CustomLink text="Sign up" href="/signup"></CustomLink></Typography>
+                <Typography variant="body1" sx={{color:'var(--secondary-color)',fontFamily:'var(--main-font)'}}>Do not have an account? <CustomLink text="Sign up" href="/register"></CustomLink></Typography>
             </Box>
         </Box>
     );
