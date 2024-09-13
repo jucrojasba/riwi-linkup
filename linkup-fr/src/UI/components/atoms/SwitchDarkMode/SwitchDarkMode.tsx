@@ -1,5 +1,3 @@
-'use client'
-
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import { ButtonProps } from '@/UI/interfaces/Button';
@@ -11,21 +9,25 @@ interface SwitchModeProps extends ButtonProps {
     horizontalMode?: boolean;
 }
 
-const SwitchModeStyle = styled(Button)<{ horizontal: boolean }>(({ horizontal }) => ({
+const SwitchModeStyle = styled(Button, {
+    shouldForwardProp: (prop) => prop !== 'horizontalMode'
+})<{ horizontalMode: boolean }>(({ horizontalMode }) => ({
     backgroundColor: 'var(--main-color)',
-    borderRadius: '50px', 
+    borderRadius: '50px',
     cursor: 'pointer',
-    height: horizontal ? '30px' : '80px', 
-    width: horizontal ? '80px' : '30px',  
+    height: horizontalMode ? '30px' : '80px',
+    width: horizontalMode ? '80px' : '30px',
     padding: '0px',
     minWidth: '30px',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    transition: 'all 0.5s ease', 
+    transition: 'all 0.5s ease',
 }));
 
-const IconStyle = styled('div')<{ rotate: boolean | undefined }>(({ rotate }) => ({
+const IconStyle = styled('div', {
+    shouldForwardProp: (prop) => prop !== 'rotate'
+})<{ rotate: boolean }>(({ rotate }) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -41,12 +43,12 @@ const SwitchMode: React.FC<SwitchModeProps> = ({ type = 'button', horizontalMode
     };
 
     return (
-        <SwitchModeStyle type={type} variant="contained" onClick={handleClick} horizontal={horizontalMode}>
-            <IconStyle rotate={DarkMode ? true : undefined}> 
+        <SwitchModeStyle type={type} variant="contained" onClick={handleClick} horizontalMode={horizontalMode}>
+            <IconStyle rotate={DarkMode}> 
                 {DarkMode ? (
-                    <DarkModeIcon style={{ fontSize: '22px' }} />  
+                    <DarkModeIcon style={{ fontSize: '22px' }} />
                 ) : (
-                    <LightModeIcon style={{ fontSize: '22px' }} />  
+                    <LightModeIcon style={{ fontSize: '22px' }} />
                 )}
             </IconStyle>
         </SwitchModeStyle>
@@ -54,5 +56,3 @@ const SwitchMode: React.FC<SwitchModeProps> = ({ type = 'button', horizontalMode
 };
 
 export default SwitchMode;
-
-

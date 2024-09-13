@@ -7,6 +7,11 @@
   justify-content: center;
   margin: 0;
   transition: background-color 0.5s ease;
+  padding-right: 5%;
+  -webkit-transition: background-color 0.5s ease;
+  -moz-transition: background-color 0.5s ease;
+  -ms-transition: background-color 0.5s ease;
+  -o-transition: background-color 0.5s ease;
 }
 
 .home-no-auth-wrapper.dark-mode{
@@ -16,7 +21,7 @@
 .home-info {
   display: flex;
   flex-direction: column;
-  width: 37%;
+  width: 45%;
 }
 .coder-gretting-wrapper{
   width: 500px;

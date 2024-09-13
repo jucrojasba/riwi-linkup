@@ -25,12 +25,15 @@ export default function HomeView() {
         <div className="home-info">
           <TitleHome
             title={language? "Gestión y reclutamiento ágil de talento tecnológico":"Agile management and recruitment of tech talent"}
-            subtitle="find tech talent with competitive knowledge"
+            subtitle={language? "Encuentra talento tecnológico con conocimientos competitivos":"Find tech talent with competitive knowledge"}
             isDarkMode={DarkMode}
           ></TitleHome>
           <RoundedButton
-            text="Get Started"
-            expandMessage={
+            text={language? 'Empecemos':"Get Started"}
+            expandMessage={language?
+              <>
+                Empecemos <EastIcon sx={{ fontSize: "2rem" }} />
+              </> :
               <>
                 Get Started <EastIcon sx={{ fontSize: "2rem" }} />
               </>
