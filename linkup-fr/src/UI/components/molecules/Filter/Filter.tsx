@@ -2,6 +2,7 @@ import "./filterStyles.css";
 import { ReactNode, useState } from "react";
 import InputFilter from "../../atoms/InputFilter/InputFilter";
 import MainButton from "../../atoms/MainButton/MainButton";
+import SearchIcon from "@mui/icons-material/Search";
 
 interface FilterOption {
   checked: boolean;
@@ -116,7 +117,7 @@ export default function Filter(): ReactNode {
         </div>
       </div>
       <div className="button-search">
-        <MainButton text="" type="button" onClick={handleClickButton} />
+        <MainButton text={<SearchIcon />} type="button" onClick={handleClickButton} />
       </div>
     </div>
   );

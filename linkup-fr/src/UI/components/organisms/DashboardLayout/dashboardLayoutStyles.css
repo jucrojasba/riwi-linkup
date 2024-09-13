@@ -8,3 +8,7 @@ div.content-dashboard > main.main {
   height: 85%;
   left: 17%;
 }
+
+div.content-dashboard > main.main-open {
+  background-color: red;
+}
