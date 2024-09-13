@@ -1,17 +1,18 @@
 /*Styles login main section */
 
-main.main {
-    height: 100%;
-}
-
-main.main > section.main-section{
-    display: flex;  
-    justify-content: space-around;
+.main-login-section{
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    justify-content: space-evenly;
     align-items: center;
-    height: 100%;
 }
 
-main.main > section.main-section > div.section-image{
-    width: 30%;
-    height: 50%;
+.dark-mode{
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: var(--paragraph-color);
 }

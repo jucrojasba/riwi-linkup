@@ -6,6 +6,7 @@ import CustomLink from "../../atoms/CustomLink/CustomLink";
 import PasswordInput from "../../atoms/PasswordInput/PasswordInput";
 import { useState } from "react";
 import { ICompanyLogin } from "@/UI/interfaces/Forms";
+import { useDarkMode } from "@/global-states/dark-mode";
 
 const CompanyInitialState={
     email:'',
@@ -16,6 +17,7 @@ const LogInForm:React.FC=()=>{
 
     const[passwordInputError,setPasswordInputError] =useState(false); // Este estado cambia si se hacen malas peticiones al servidor
     const[companyRegister,setCompanyRegister] =useState<ICompanyLogin>(CompanyInitialState);
+    const DarkMode = useDarkMode((state) => state.DarkMode);
 
     function handleChange (e: React.ChangeEvent<HTMLInputElement>) {
         setCompanyRegister((prevState) => ({
@@ -32,7 +34,7 @@ const LogInForm:React.FC=()=>{
             <MainButton text="Log In" onClick={()=>{}}></MainButton>
             <CustomLink text="Forgot Password?" href="/recover-password"></CustomLink>
             <Box component={'span'}>
-                <Typography variant="body1" sx={{color:'var(--secondary-color)',fontFamily:'var(--main-font)'}}>Do not have an account? <CustomLink text="Sign up" href="/register"></CustomLink></Typography>
+                {DarkMode?<Typography variant="body1" sx={{color:'var(--white-color)',fontFamily:'var(--main-font)'}}>Do not have an account? <CustomLink text="Sign up" href="/register"></CustomLink></Typography>:<Typography variant="body1" sx={{color:'var(--secondary-color)',fontFamily:'var(--main-font)'}}>Do not have an account? <CustomLink text="Sign up" href="/register"></CustomLink></Typography>}
             </Box>
         </Box>
     );
