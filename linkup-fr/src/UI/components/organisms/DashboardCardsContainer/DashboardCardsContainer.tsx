@@ -10,7 +10,11 @@ import CodeOffIcon from '@mui/icons-material/CodeOff';
 import { CircularLoader, LinearLoader } from '@/UI/components/atoms/loaders/Loaders';
 import { getCodersBackend, getCodersFrontend, getCodersInTraining } from '@/services/coderService';
 
-const DashboardCardsContainer: React.FC=()=>{
+interface IDashboardCardsContainerProps{
+    language:boolean;
+}
+
+const DashboardCardsContainer: React.FC<IDashboardCardsContainerProps>=({language})=>{
         //Logic
         // Estado de carga para cada API
         const [loadingCodersTraining, setLoadingCodersTraining] = useState<boolean>(true);
@@ -80,7 +84,7 @@ const DashboardCardsContainer: React.FC=()=>{
                     ) : (
                         <DashboardCard 
                             icon={<BarChartIcon />} 
-                            title='Quantity Coders' 
+                            title={language?'Programadores':'Coders'} 
                             number={codersTraining} 
                             color='var(--red-color)' 
                         />
@@ -94,7 +98,7 @@ const DashboardCardsContainer: React.FC=()=>{
                     ) : (
                         <DashboardCard 
                             icon={<CodeOffIcon style={{ transform: 'scaleX(-1)', display: 'inline-block' }} />} 
-                            title='Front Technologies' 
+                            title={language?'Desarrolladores Front':'Dev Front'} 
                             number={codersFrontend} 
                             color='var(--green-color)' 
                         />
@@ -108,7 +112,7 @@ const DashboardCardsContainer: React.FC=()=>{
                     ) : (
                         <DashboardCard 
                         icon={<StorageIcon />} 
-                        title='Backend Technologies' 
+                        title={language?'Desarrolladores Back':'Dev Back'}  
                         number={codersBackend} 
                         color='var(--main-color)' 
                     />

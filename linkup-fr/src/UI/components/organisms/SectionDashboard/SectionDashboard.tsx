@@ -1,14 +1,17 @@
 'use client'
 
+import BarChart from "../../atoms/BarChart/BarChart";
 import DashboardCardsContainer from "../DashboardCardsContainer/DashboardCardsContainer";
 
 interface ISectionDashborad{
-    isDarkMode:boolean
+    isDarkMode:boolean,
+    language:boolean
 }
 
-const SectionDashboard: React.FC<ISectionDashborad> = ({isDarkMode})=>{
+const SectionDashboard: React.FC<ISectionDashborad> = ({isDarkMode, language})=>{
     return (
-        <DashboardCardsContainer/>
+        <DashboardCardsContainer language={language}/>
+        <BarChart/>
     );
 };
 

@@ -14,7 +14,7 @@ export default function DashboardView(){
 
     return (
         <main>
-            <DashboardLayout section={<SectionDashboard isDarkMode={DarkMode}/>} language={language}/>
+            <DashboardLayout section={<SectionDashboard isDarkMode={DarkMode} language={language}/>} language={language}/>
         </main>
     );
 }
