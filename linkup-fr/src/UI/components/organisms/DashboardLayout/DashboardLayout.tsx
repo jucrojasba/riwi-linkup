@@ -8,11 +8,18 @@ import { useLanguage } from "@/global-states/language-mode";
 
 interface IDashboardLayoutProps {
   section: ReactElement;
-  language:any;
+  titleView: string;
+  subtitle:string;
+  path: string;
+  language:any,
 }
 
 export default function DashboardLayout({
-  section, language
+  section,
+  titleView,
+  subtitle,
+  path,
+  language:any
 }: IDashboardLayoutProps): React.ReactElement {
   const [expand, setExpand] = useState<boolean>(false);
 
@@ -28,10 +35,14 @@ export default function DashboardLayout({
         <div className="open" onClick={handleButtonExpand}>
           <KeyboardArrowDownIcon />
         </div>
-        <Header expand={expand} />
+        <Header expand={expand} titleView={titleView} subtitle={subtitle} path={path} />
         <main className={"main"}>
-          <TitleMain className="titleMain" title="Filters" subtitle="" />
+          <TitleMain className="titleMain" title={path === "/admin/coder" ? "": "Filters"} subtitle="" />
+          {path === "/admin/coder" 
+          ? null 
+          :
           <Filter />
+          }
           {section}
         </main>
         <Footer />
