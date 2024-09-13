@@ -41,7 +41,7 @@ const LanguageSelector = () => {
           borderRadius: "var(--border-radius-min)",
         }}
       >
-        {language? "Spanish":"English"}
+        {language? "Español":"English"}
       </Button>
       <Menu
         anchorEl={anchorEl}
@@ -50,10 +50,10 @@ const LanguageSelector = () => {
         disablePortal
       >
         <MenuItem onClick={() => handleMenuItemClick(false)}>
-          English
+        🇺🇸 English
         </MenuItem>
         <MenuItem onClick={() => handleMenuItemClick(true)}>
-          Spanish
+        🇨🇴 Español
         </MenuItem>
       </Menu>
     </>
