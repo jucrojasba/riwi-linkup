@@ -40,7 +40,7 @@ export default function Card({
   };
 
   const handleClickMore = () => {
-    router.push("/coder");
+    router.push("/admin/coder");
   };
 
   if (!status) {

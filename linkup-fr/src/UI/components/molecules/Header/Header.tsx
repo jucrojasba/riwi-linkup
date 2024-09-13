@@ -8,8 +8,11 @@ import SelectLanguage from "../../atoms/SwitchLanguage/SwitchLanguage";
 
 interface IHeaderProps {
   expand: boolean;
+  titleView: string;
+  subtitle: string;
+  path: string;
 }
-export default function Header({ expand }: IHeaderProps): React.ReactNode {
+export default function Header({ expand, titleView, subtitle, path }: IHeaderProps): React.ReactNode {
   const handlerClick = () => {};
   return (
     <header className="header">
@@ -17,8 +20,8 @@ export default function Header({ expand }: IHeaderProps): React.ReactNode {
       <div className="section-content-coders">
         <TitleMain
           className="content-coders-title"
-          title="Coders"
-          subtitle="General Information"
+          title={titleView}
+          subtitle={subtitle}
         />
         <SelectLanguage />
         <Search />
