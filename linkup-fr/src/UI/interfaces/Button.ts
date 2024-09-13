@@ -1,5 +1,7 @@
+import { ReactElement } from "react";
+
 export interface ButtonProps {
   type?: 'button' | 'submit' | 'reset';
-  text?: string;
+  text?: string | ReactElement;
   onClick: React.MouseEventHandler<HTMLButtonElement>;
 }

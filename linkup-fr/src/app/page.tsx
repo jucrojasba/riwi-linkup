@@ -10,11 +10,13 @@ import NavbarHome from "@/UI/components/molecules/NavbarHome/NavbarHome";
 import RiwiLogo from "@/UI/components/atoms/RiwiLogo/RiwiLogo";
 import UtilityRightButtons from "@/UI/components/molecules/UtilityRightButtons/UtilityRightButtons";
 import AuthLayout from "@/UI/components/organisms/AuthLayout/AuthLayout";
+import { useLanguage } from "@/global-states/language-mode";
 
 export default function HomeView() {
   //Logic
   const navigate = useNavigate();
   const DarkMode = useDarkMode((state) => state.DarkMode);
+  const language =useLanguage((state)=>state.language)
 
   return (
     <main>
@@ -22,7 +24,7 @@ export default function HomeView() {
       <div className={`home-no-auth-wrapper ${DarkMode ? "dark-mode" : ""}`}>
         <div className="home-info">
           <TitleHome
-            title="Easy management and acquisition of tech talent"
+            title={language? "Gestión y reclutamiento ágil de talento tecnológico":"Agile management and recruitment of tech talent"}
             subtitle="find tech talent with competitive knowledge"
             isDarkMode={DarkMode}
           ></TitleHome>

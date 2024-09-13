@@ -8,7 +8,7 @@ import { Button } from '@mui/material';
 import { useDarkMode } from '@/global-states/dark-mode';
 
 interface SwitchModeProps extends ButtonProps {
-    horizontalMode?: boolean; // Nueva propiedad opcional
+    horizontalMode?: boolean;
 }
 
 const SwitchModeStyle = styled(Button)<{ horizontal: boolean }>(({ horizontal }) => ({
