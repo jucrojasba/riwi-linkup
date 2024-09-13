@@ -4,8 +4,7 @@ section.main-section {
   flex-direction: column;
   gap: var(--padding-medium);
   margin-top: var(--padding-big);
-  overflow: scroll;
-  height: 84%;
+  height: 74%;
 }
 
 section.main-section > div.section-content-cards {
@@ -19,6 +18,9 @@ section.main-section > div.section-buttons {
   color: var(--main-color);
   display: flex;
   cursor: pointer;
+}
+
+section.main-section > div.section-buttons > .button-left {
 }
 
 /*

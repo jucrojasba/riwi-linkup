@@ -10,7 +10,7 @@ import { Card } from "../../molecules";
 import { CircularLoader } from "../../atoms/loaders/Loaders";
 
 export default function SectionCoders(): React.ReactElement {
-  const [loadingRequest, setLoadingRequest] = useState<boolean>(false);
+  const [loadingRequest, setLoadingRequest] = useState<boolean>(true); // Set initial state to true
   const initialCoder: ICoder = {
     id: 0,
     urlImage: "",
@@ -33,8 +33,8 @@ export default function SectionCoders(): React.ReactElement {
         setLoadingRequest(false);
         return;
       }
-      setLoadingRequest(true);
       setCoders({ coders });
+      setLoadingRequest(false); // Set to false after data is fetched
     };
     getCoders();
   }, []);
@@ -58,25 +58,25 @@ export default function SectionCoders(): React.ReactElement {
       setCurrentPage(currentPage - 1);
     }
   };
-  console.log(coders);
 
   return (
     <section className="main-section">
       <div className="section-content-cards">
-        {loadingRequest 
-        ? coders.coders.map((coder) => (
-          <Card
-            id_coder={coder.id}
-            key={coder.id}
-            url_image={coder.urlImage}
-            alt_image={`coder-${coder.name} image`}
-            name_user={coder.name}
-            age_user={`${calculateAge(coder.birthday)} years`}
-            status={true}
-          />
-        ))
-        : <Card status={false} />
-        }
+        {loadingRequest ? (
+          <CircularLoader flag={true} /> // Display loader when loading
+        ) : (
+          paginatedCoders.map((coder) => (
+            <Card
+              id_coder={coder.id}
+              key={coder.id}
+              url_image={coder.urlImage}
+              alt_image={`coder-${coder.name} image`}
+              name_user={coder.name}
+              age_user={`${calculateAge(coder.birthday)} years`}
+              status={true}
+            />
+          ))
+        )}
       </div>
       <div className="section-buttons">
         <KeyboardArrowLeftIcon
