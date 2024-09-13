@@ -3,6 +3,7 @@ import { ReactNode, useState } from "react";
 import InputFilter from "../../atoms/InputFilter/InputFilter";
 import MainButton from "../../atoms/MainButton/MainButton";
 import SearchIcon from "@mui/icons-material/Search";
+import FilterAltOffIcon from "@mui/icons-material/FilterAltOff";
 
 interface FilterOption {
   checked: boolean;
@@ -117,8 +118,13 @@ export default function Filter(): ReactNode {
         </div>
       </div>
       <div className="button-search">
-        <MainButton text={<SearchIcon />} type="button" onClick={handleClickButton} />
+        <MainButton
+          text={<FilterAltOffIcon />}
+          type="button"
+          onClick={handleClickButton}
+        />
       </div>
     </div>
   );
 }
+
