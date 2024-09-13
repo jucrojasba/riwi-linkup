@@ -3,6 +3,7 @@ div.filter {
   align-items: center;
   gap: var(--padding-big);
   height: 15%;
+  width: 100%;
 }
 
 div.filter > div.filter-languages,

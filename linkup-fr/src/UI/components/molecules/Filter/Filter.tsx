@@ -116,7 +116,7 @@ export default function Filter(): ReactNode {
         </div>
       </div>
       <div className="button-search">
-        <MainButton text="Search" type="button" onClick={handleClickButton} />
+        <MainButton text="" type="button" onClick={handleClickButton} />
       </div>
     </div>
   );

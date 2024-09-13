@@ -4,7 +4,7 @@ footer.footer {
   gap: var(--padding-big);
   position: absolute;
   bottom: 3%;
-  left: 16%;
+  left: 17%;
 }
 
 footer.footer .link {
