@@ -6,10 +6,10 @@ import Image from "next/image";
 export default function LoginView(): JSX.Element{
     return(
         <main className="main">
-            <NavbarHome/>
+            <NavbarHome isDarkMode={false}/>
             <section className="main-section">
                 <div className="section-image">
-                    <Image className="image" src={"/images/test.png"} alt="coderLogin" width={100} height={100} />
+                    <img src="/images/coderLogin01.png" alt="" />
                 </div>
                 <LogInForm />
             </section>
