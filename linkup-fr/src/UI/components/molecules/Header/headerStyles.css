@@ -11,4 +11,5 @@ header.header > div.section-content-coders {
   align-items: center;
   margin-top: var(--padding-min);
   gap: var(--padding-extra-big);
+  margin-left: -0.3%;
 }

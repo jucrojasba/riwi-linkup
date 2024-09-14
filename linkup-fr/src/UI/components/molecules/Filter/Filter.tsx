@@ -1,6 +1,9 @@
+import "./filterStyles.css";
 import { ReactNode, useState } from "react";
 import InputFilter from "../../atoms/InputFilter/InputFilter";
-import "./filterStyles.css";
+import MainButton from "../../atoms/MainButton/MainButton";
+import SearchIcon from "@mui/icons-material/Search";
+import FilterAltOffIcon from "@mui/icons-material/FilterAltOff";
 
 interface FilterOption {
   checked: boolean;
@@ -16,33 +19,33 @@ interface FilterState {
 }
 
 export default function Filter(): ReactNode {
-  const initialState:FilterState = {
+  const initialState: FilterState = {
     languages: [
       { checked: false, name: "cSharp", label: "C#-ASP.NET" },
       { checked: false, name: "java", label: "Java" },
       { checked: false, name: "nextjs", label: "Next.js" },
     ],
     teachSkills: [
-      { checked: false, name: "cSharp", label: "C#-ASP.NET" },
-      { checked: false, name: "java", label: "Java" },
-      { checked: false, name: "nextjs", label: "Next.js" },
+      { checked: false, name: "ingles", label: "Ingles" },
+      { checked: false, name: "espanol", label: "Español" },
+      { checked: false, name: "portugues", label: "Portugues" },
     ],
     softSkills: [
-      { checked: false, name: "cSharp", label: "C#-ASP.NET" },
-      { checked: false, name: "java", label: "Java" },
-      { checked: false, name: "nextjs", label: "Next.js" },
+      { checked: false, name: "teamwork", label: "Teamwork" },
+      { checked: false, name: "communication", label: "Communication" },
+      { checked: false, name: "leaderShip", label: "LeaderShip" },
     ],
     clans: [
-      { checked: false, name: "cSharp", label: "C#-ASP.NET" },
-      { checked: false, name: "java", label: "Java" },
-      { checked: false, name: "nextjs", label: "Next.js" },
+      { checked: false, name: "bernesLee", label: "Bernes Lee" },
+      { checked: false, name: "gates", label: "Gates" },
+      { checked: false, name: "jeffBezzos", label: "Jeff bezzos" },
     ],
   };
   const [checkedStates, setCheckedStates] = useState<FilterState>(initialState);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = event.target;
-    const updatedState = {...checkedStates};
+    const updatedState = { ...checkedStates };
     (Object.keys(updatedState) as Array<keyof FilterState>).forEach((key) => {
       updatedState[key] = updatedState[key].map((item) =>
         item.name === name ? { ...item, checked } : item
@@ -51,7 +54,11 @@ export default function Filter(): ReactNode {
 
     setCheckedStates(updatedState);
   };
-  console.log(checkedStates);
+
+  const handleClickButton = () => {
+    console.log(checkedStates);
+  };
+
   return (
     <div className="filter">
       <div className="filter-languages">
@@ -110,6 +117,14 @@ export default function Filter(): ReactNode {
           ))}
         </div>
       </div>
+      <div className="button-search">
+        <MainButton
+          text={<FilterAltOffIcon />}
+          type="button"
+          onClick={handleClickButton}
+        />
+      </div>
     </div>
   );
 }
+

@@ -10,7 +10,9 @@ div.sidebar {
   min-height: 95.5vh;
   margin: var(--padding-medium) 0;
   margin-left: var(--padding-medium);
-  gap: var(--padding-extra-big);
+  gap: calc(var(--padding-extra-big) * 2);
+  transition: flex-basis 0.4s ease, margin 0.4s ease, opacity 0.4s ease;
+  position: relative;
 }
 /* Styles for content users*/
 div.sidebar > div.sidebar-content-user {
@@ -18,6 +20,13 @@ div.sidebar > div.sidebar-content-user {
   flex-direction: column;
   align-items: center;
   gap: var(--padding-min);
+}
+
+div.sidebar > div.sidebar-content-user > div > div.icon {
+  cursor: pointer;
+  position: absolute;
+  top: 1%;
+  left: 5%;
 }
 
 div.sidebar > div.sidebar-content-user > h5.content-user-welcome {
@@ -30,6 +39,7 @@ div.sidebar > div.sidebar-content-user > h2.sidebar-title {
 }
 div.sidebar > div.sidebar-content-user > div.content-user-image {
   cursor: pointer;
+  opacity: 1;
 }
 
 /* Styles for content nav*/
@@ -55,4 +65,64 @@ ul.navbar-list > div > li.nav-list-item {
   align-items: center;
   gap: var(--padding-min);
   margin-left: 0;
+}
+
+/* Styles open with sidebar*/
+.sidebarWidth {
+  background-color: var(--main-color);
+  flex-basis: 5%;
+  height: 100%;
+  height: 100%;
+  min-height: 95.5vh;
+  margin: var(--padding-medium) 0;
+  margin-left: var(--padding-medium);
+  gap: var(--padding-extra-big);
+  border-radius: var(--border-radius-min);
+  padding: var(--padding-min);
+  transition: flex-basis 0.4s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sidebarWidth > div.sidebar-content-user {
+  display: flex;
+  flex-direction: column;
+  gap: var(--padding-medium);
+}
+
+.sidebarWidth > div.sidebar-content-user > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--padding-medium);
+}
+
+.sidebarWidth > div.sidebar-content-user > div > div.icon {
+  cursor: pointer;
+}
+
+.sidebarWidth > div.sidebar-content-user > div > h2.sidebar-title {
+  font-size: 0.9rem;
+}
+
+.sidebarWidth > div.sidebar-content-user > h5,
+.sidebarWidth > div.sidebar-content-user > h3 {
+  opacity: 0;
+}
+
+.sidebarWidth > div.sidebar-content-user > div.content-user-image {
+  opacity: 0;
+}
+
+.sidebarWidth > nav.navbar {
+  height: 50%;
+}
+.sidebarWidth > nav.navbar > ul.navbar-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 0;
+  list-style: none;
+  height: 100%;
 }

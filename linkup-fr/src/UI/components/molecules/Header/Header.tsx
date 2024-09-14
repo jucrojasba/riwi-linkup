@@ -8,21 +8,25 @@ import SelectLanguage from "../../atoms/SwitchLanguage/SwitchLanguage";
 
 interface IHeaderProps {
   expand: boolean;
+  titleView: string;
+  subtitle: string;
+  path: string;
+  language:boolean;
 }
-export default function Header({ expand }: IHeaderProps): React.ReactNode {
+export default function Header({ expand, titleView, subtitle, path, language }: IHeaderProps): React.ReactNode {
   const handlerClick = () => {};
   return (
     <header className="header">
-      <Sidebar expand={expand} />
+      <Sidebar expand={expand} language={language}/>
       <div className="section-content-coders">
         <TitleMain
           className="content-coders-title"
-          title="Coders"
-          subtitle="General Information"
+          title={titleView}
+          subtitle={subtitle}
         />
         <SelectLanguage />
         <Search />
-        <SwitchMode onClick={handlerClick} />
+        <SwitchMode onClick={handlerClick} horizontalMode={true}/>
       </div>
     </header>
   );
