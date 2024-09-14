@@ -5,7 +5,12 @@
 
 # dotenv files
 .env
+.env.local
+
+
 node_modules
+.next
+
 # User-specific files
 *.rsuser
 *.suo
