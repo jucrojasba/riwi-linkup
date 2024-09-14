@@ -8,6 +8,7 @@ const TextInputStyle = styled(TextField)(() => ({
     width: '100%',
     textTransform:'none',
     fontFamily:'var(--main-font)',
+    border: 'none',
     '& .MuiOutlinedInput-root': {
         '& fieldset': {
           borderColor: 'var(--main-color)', // Change border color
