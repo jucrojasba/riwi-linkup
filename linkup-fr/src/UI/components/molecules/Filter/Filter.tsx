@@ -57,13 +57,13 @@ export default function Filter(): ReactNode {
       <div className="filter-languages">
         <h3 className="languages-title">Languages</h3>
         <div className="languages-options">
-          {checkedStates.languages.map((languages) => (
+          {checkedStates.languages.map((language) => (
             <InputFilter
-              key={languages.name}
-              label={languages.label}
-              name={languages.name}
+              key={language.name}
+              label={language.label}
+              name={language.name}
               onChange={handleChange}
-              checked={languages.checked}
+              checked={language.checked}
             />
           ))}
         </div>
@@ -71,13 +71,13 @@ export default function Filter(): ReactNode {
       <div className="filter-teach">
         <h3 className="teach-title">Teach Skills</h3>
         <div className="teach-options">
-          {checkedStates.teachSkills.map((teachSkills) => (
+          {checkedStates.teachSkills.map((teachSkill) => (
             <InputFilter
-              key={teachSkills.name}
-              label={teachSkills.label}
-              name={teachSkills.name}
+              key={teachSkill.name}
+              label={teachSkill.label}
+              name={teachSkill.name}
               onChange={handleChange}
-              checked={teachSkills.checked}
+              checked={teachSkill.checked}
             />
           ))}
         </div>
@@ -85,13 +85,13 @@ export default function Filter(): ReactNode {
       <div className="filter-skills">
         <h3 className="skills-title">Soft Skills</h3>
         <div className="skills-options">
-          {checkedStates.softSkills.map((softSkills) => (
+          {checkedStates.softSkills.map((softSkill) => (
             <InputFilter
-              key={softSkills.name}
-              label={softSkills.label}
-              name={softSkills.name}
+              key={softSkill.name}
+              label={softSkill.label}
+              name={softSkill.name}
               onChange={handleChange}
-              checked={softSkills.checked}
+              checked={softSkill.checked}
             />
           ))}
         </div>
@@ -99,13 +99,13 @@ export default function Filter(): ReactNode {
       <div className="filter-clan">
         <h3 className="clan-title">Clan</h3>
         <div className="clan-options">
-          {checkedStates.clans.map((clans) => (
+          {checkedStates.clans.map((clan) => (
             <InputFilter
-              key={clans.name}
-              label={clans.label}
-              name={clans.name}
+              key={clan.name}
+              label={clan.label}
+              name={clan.name}
               onChange={handleChange}
-              checked={clans.checked}
+              checked={clan.checked}
             />
           ))}
         </div>
