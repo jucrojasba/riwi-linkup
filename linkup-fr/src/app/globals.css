@@ -1,17 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
 
 :root {
-  --main-color: #6B5CFF;
+  --main-color: #6b5cff;
   --paragraph-color: #323131;
   --paragraph-color-gray: #707070;
-  --secondary-color: #181E4B;
-  --white-color: #FFFFFF;
-  --gray-color: #F9FAFC;
-  --green-color: #5ACCA4;
-  --border-color-gray: #CECACA;
-  --yellow-color: #E6CA52;
-  --pink-color: #EAA2FC;
-  --red-color: #FE654F;
+  --secondary-color: #181e4b;
+  --white-color: #ffffff;
+  --gray-color: #eeeeee;
+  --gray-strong-color: #707070;
+  --green-color: #5acca4;
+  --border-color-gray: #cecaca;
+  --yellow-color: #e6ca52;
+  --pink-color: #eaa2fc;
+  --red-color: #fe654f;
   --border-radius-min: 10px;
   --border-radius-big: 30px;
   --padding-min: 10px;
@@ -19,12 +20,12 @@
   --padding-big: 30px;
   --padding-extra-big: 40px;
   --padding-extra-big: 40px;
-  --font-size-min: .6rem;
-  --font-size-medium: .9rem;
+  --font-size-min: 0.6rem;
+  --font-size-medium: 0.9rem;
   --font-size-big: 1.2rem;
 
   /* Variable para la fuente */
-  --main-font: 'Ubuntu', sans-serif;
+  --main-font: "Ubuntu", sans-serif;
 }
 
 html {
@@ -50,7 +51,7 @@ p {
 }
 
 body {
-  max-width: 100%;
+  max-width: none;
   margin: 0 auto;
   height: 100vh;
   overflow: hidden;
