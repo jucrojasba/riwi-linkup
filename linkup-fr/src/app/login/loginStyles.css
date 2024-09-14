@@ -2,16 +2,22 @@
 
 main.main {
     height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 main.main > section.main-section{
     display: flex;  
-    justify-content: space-around;
     align-items: center;
-    height: 100%;
+    justify-content: space-around;
 }
 
 main.main > section.main-section > div.section-image{
     width: 30%;
-    height: 50%;
+}
+
+main.main > section.main-section > div.section-image > img{
+    width: 100%;
+    height: 100%;
 }
