@@ -1,9 +1,10 @@
 'use client'
 import "./loginStyles.css";
-import { LogInForm } from "@/UI/components/molecules";
+import { LogInForm, NavbarHome } from "@/UI/components/molecules";
 import { AuthLayout } from "@/UI/components/organisms";
 import { useDarkMode } from "@/global-states/dark-mode";
 import Image from "next/image";
+
 
 export default function LoginView(): JSX.Element {
     const DarkMode = useDarkMode((state) => state.DarkMode);
