@@ -1,0 +1,99 @@
+{
+    "users": [
+        { "id": 1, "name": "admin", "email": "admin@example.com", "isConfirmed": true, "password": "admin123", "phone": "3142836573", "createdAt": "2024-09-05", "sectorId": 1, "rolId": 1},
+        { "id": 2, "name": "Celsia", "email": "celsia@example.com", "isConfirmed": true, "password": "celsia123", "phone": "3202436593", "createdAt": "2024-09-05", "sectorId": 2, "rolId": 2},
+        { "id": 3, "name": "Postobon", "email": "postobon@example.com", "isConfirmed": true, "password": "postobon123", "phone": "3204456583", "createdAt": "2024-09-05", "sectorId": 3, "rolId": 2},
+        { "id": 4, "name": "Smart Fit", "email": "smart@example.com", "isConfirmed": true, "password": "smart123", "phone": "3132539590", "createdAt": "2024-09-05", "sectorId": 3, "rolId": 2}
+    ],
+    "roles": [
+        { "id": 1, "name": "Admin" },
+        { "id": 2, "name": "Empresa" }
+    ],
+    "sectors": [
+        {"id":1,"name":"Agropecuario"},
+        {"id":2,"name":"Comercio"},
+        {"id":3,"name":"Hotelería y Turismo"},
+        {"id":4,"name":"Educación"},
+        {"id":5,"name":"Gobierno"},
+        {"id":6,"name":"Industrial"},
+        {"id":7,"name":"Transporte"},
+        {"id":8,"name":"Financiero"},
+        {"id":9,"name":"Construcción"},
+        {"id":10,"name":"Minero y energético"},
+        {"id":11,"name":"Solidario"},
+        {"id":12,"name":"Telecomunicaciones"}
+    ],
+    "coders":[
+        { "id":1,"name":"Juan Pablo Arias Mesa","birthday":"2001-08-03","description":"23 años ingeniero de sistemas","url_image":"", "clan":"Gates", "genderId":2},
+        { "id":2,"name":"Edgar Andres Cardona Gomez","birthday":"1997-05-22","description":"27 años arquitecto","url_image":"", "clan":"Bernes-Lee", "genderId":2},
+        { "id":3,"name":"J","birthday":"2004-12-15","description":"20 años diseñador gráfico","url_image":"", "clan":"Bernes-Lee", "genderId":2},
+        { "id":4,"name":"Jose Simón","birthday":"2004-12-15","description":"20 años diseñador gráfico","url_image":"", "clan":"Bernes-Lee", "genderId":2},
+        { "id":5,"name":"Juan ","birthday":"2001-08-03","description":"23 años ingeniero de sistemas","url_image":"", "clan":"Gates", "genderId":2},
+        { "id":6,"name":"Edgar Cardona Gomez","birthday":"1997-05-22","description":"27 años arquitecto","url_image":"", "clan":"Bernes-Lee", "genderId":2},
+        { "id":7,"name":"Jose Barreto Cardona","birthday":"2004-12-15","description":"20 años diseñador gráfico","url_image":"", "clan":"Bernes-Lee", "genderId":2},
+        { "id":8,"name":"Simón","birthday":"2004-12-15","description":"20 años diseñador gráfico","url_image":"", "clan":"Bernes-Lee", "genderId":2}
+    ],
+    "genders":[
+        {"id":1,"name":"Femenino"},
+        {"id":2,"name":"Masculino"},
+        {"id":3,"name":"No binario"}
+    ],
+    "languages":[
+        {"id":1,"name":"Ingles"},
+        {"id":2,"name":"Frances"},
+        {"id":3,"name":"Mandarín"},
+        {"id":4,"name":"Hindú"},
+        {"id":5,"name":"Árabe"}
+    ],
+    "me_levels":[
+        {"id":1,"name":"A1"},
+        {"id":2,"name":"A2"},
+        {"id":3,"name":"B1"},
+        {"id":4,"name":"B2"},
+        {"id":5,"name":"C1"},
+        {"id":6,"name":"C2"}
+    ],
+    "languagues_levels":[
+        {"id":1,"languageId":1,"levelId":4},
+        {"id":2,"languageId":2,"levelId":2}
+    ],
+    "coders_languagues_levels":[
+        {"id":1,"coderId":1,"languaguesLevelsID":1},
+        {"id":2,"coderId":1,"languaguesLevelsID":2}
+    ],
+    "skills":[
+        {"id":1,"name":"NextJS"},
+        {"id":2,"name":"Springboot"},
+        {"id":3,"name":".NET"},
+        {"id":4,"name":"NestJS"}
+    ],
+    "levels":[
+        {"id":1,"name":"Avanzado"},
+        {"id":2,"name":"Intermedio"},
+        {"id":3,"name":"Básico"}
+    ],
+    "skills_levels":[
+        {"id":1,"skillId":1,"levelId":1},
+        {"id":2,"skillId":3,"levelId":1}
+    ],
+    "coders_skills_levels":[
+        {"id":1,"coderId":1,"skillsLevelsId":1},
+        {"id":2,"coderId":2,"skillsLevelsId":2}
+    ],
+    "aptitudes":[
+        {"id":1,"name":"Liderazgo"},
+        {"id":2,"name":"Escucha activa"},
+        {"id":3,"name":"Comunicación asertiva"},
+        {"id":4,"name":"Proactividad"},
+        {"id":5,"name":"Creatividad"},
+        {"id":6,"name":"Pensamiento crítico"}
+    ],
+    "coders_aptitudes":[
+        {"id":1,"coderId":1,"aptitudeId":1},
+        {"id":2,"coderId":1,"aptitudeId":2},
+        {"id":3,"coderId":1,"aptitudeId":3},
+        {"id":4,"coderId":2,"aptitudeId":4},
+        {"id":5,"coderId":2,"aptitudeId":5},
+        {"id":6,"coderId":2,"aptitudeId":6}
+    ]
+}

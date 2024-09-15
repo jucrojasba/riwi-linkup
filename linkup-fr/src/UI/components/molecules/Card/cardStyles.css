@@ -1,0 +1,71 @@
+div.card {
+  border: 1px solid var(--border-color-gray);
+  border-radius: var(--border-radius-min);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-basis: calc(100% / 4 - 20px);
+  height: 250px;
+}
+
+div.card > div.card-header {
+  width: 100%;
+  height: 70%;
+  position: relative;
+}
+div.card > div.card-header > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-top-left-radius: var(--border-radius-min);
+  border-top-right-radius: var(--border-radius-min);
+}
+
+div.card > div.card-header > div.header-buttons {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: var(--padding-min);
+}
+
+div.card > div.card-body {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--border-radius-min);
+}
+
+div.card > div.card-body > div.body-information {
+  width: 70%;
+}
+
+div.card > div.card-body > div.body-information > h3.body-title {
+  font-size: 1rem;
+  color: var(--paragraph-color);
+}
+
+div.card > div.card-body > div.body-information > h5.body-subtitle {
+  color: var(--paragraph-color-gray);
+}
+
+/* Style icon*/
+div.card > div.card-header > div.header-buttons > .edit-icon {
+  color: var(--gray-strong-color);
+  cursor: pointer;
+}
+
+div.card > div.card-header > div.header-buttons > .delete-icon {
+  color: var(--gray-strong-color);
+  cursor: pointer;
+}
+
+div.card > div.card-header > div.header-buttons > .edit-icon:hover {
+  color: var(--main-color);
+  cursor: pointer;
+}
+div.card > div.card-header > div.header-buttons > .delete-icon:hover {
+  color: var(--red-color);
+  cursor: pointer;
+}

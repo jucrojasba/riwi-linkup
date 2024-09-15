@@ -1,0 +1,23 @@
+/*Styles register main section */
+
+main.mainRegister {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+main.mainRegister > section.mainRegister-section{
+    display: flex;  
+    align-items: center;
+    justify-content: space-around;
+}
+
+main.mainRegister > section.mainRegister-section > div.section-image{
+    width: 30%;
+}
+
+main.mainRegister > section.mainRegister-section > div.section-image > img{
+    width: 100%;
+    height: 100%;
+}
