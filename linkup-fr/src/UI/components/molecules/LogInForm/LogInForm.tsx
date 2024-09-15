@@ -12,9 +12,15 @@ import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import GoogleIcon from '@mui/icons-material/Google';
 import GitHubIcon from '@mui/icons-material/GitHub';
-import saveCredentials from "@/utilities/credentials";
 import { CircularLoader } from "../../atoms";
-
+import inputAlert from "../Alert/Alert";
+import { useAuthUser } from "@/global-states/authUser";
+import useNavigate from "@/utilities/NavigateTo";
+import './loginFormStyles.css'
+const CompanyInitialState={
+    email:'',
+    password:'',
+}
 
 function LogInForm():React.ReactNode{
     const[passwordInputError,setPasswordInputError] =useState(false); // Este estado cambia si se hacen malas peticiones al servidor
@@ -22,39 +28,37 @@ function LogInForm():React.ReactNode{
     const DarkMode = useDarkMode((state) => state.DarkMode);
     const {data: session, status} = useSession();
     const [loading, setLoading] = useState<boolean>(false);
-    const { data: session, status } = useSession();
     const router = useRouter();
-    const DarkMode = useDarkMode((state) => state.DarkMode);
+    const {setAuthUser} = useAuthUser();
+    const navigate = useNavigate();
 
     // Manejar cambios en los inputs
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+
         setCompanyRegister((prevState) => ({
         ...prevState,
         [e.target.name]: e.target.value
         }));  
     };
-
-    // Manejar el envío del formulario
-    const handleSubmit = async () => {
-        console.log(companyRegister);
+    const handleSubmit = async() =>{ // Logic for login with LinkUp
         setLoading(true);
         const data = await authLoginService(companyRegister);
-        if (!data) {
-            // Llamar modal para mostrar error
+        if(!data){
             setLoading(false);
-            setPasswordInputError(true);
+            inputAlert("Error to login", "error");
             return;
         }
-        const { name, email, token } = data;
-        saveCredentials({ name, email, token });
-        router.push("/dashboard");
-    };
+        const {name,email,token} = data;
+        setAuthUser({name,email,token, role:2});
+        setLoading(false);
+        navigate("/dashboard");
+    }
 
     // Redirigir si ya está autenticado
     useEffect(() => {
         if (status === "authenticated") {
             localStorage.setItem("session", JSON.stringify(session));
-            router.push("/company");
+            navigate("/company");
         }
     }, [status,router])
     return(
@@ -66,7 +70,7 @@ function LogInForm():React.ReactNode{
         <TextInput name="email" type="email" label="Email" required onChange={handleChange} />
         <PasswordInput name="password" label="Password" type="password" required onChange={handleChange} />
         <CustomLink text="Forgot Password?" href="/recover-password"></CustomLink>
-        <MainButton text={"Log In"} onClick={handleSubmit} />
+        <MainButton text={"Log In"} onClick={handleSubmit} className="button-login"/>
         <Typography variant="body1" sx={{color:'var(--secondary-color)',fontFamily:'var(--main-font)'}}>- Or Login with -</Typography>
         <Box sx={{display:'flex', gap:'var(--padding-big)'}}>
             <MainButton text={<GoogleIcon />} onClick={()=>signIn("google")} />

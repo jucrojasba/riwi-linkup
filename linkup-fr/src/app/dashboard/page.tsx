@@ -6,6 +6,7 @@ import { useDarkMode } from "@/global-states/dark-mode";
 import { DashboardLayout } from '@/UI/components/organisms';
 import DashboardCardsContainer from '@/UI/components/organisms/DashboardCardsContainer/DashboardCardsContainer';
 import SectionDashboard from '@/UI/components/organisms/SectionDashboard/SectionDashboard';
+import { useAuthUser } from '@/global-states/authUser';
 
 export default function DashboardView(){
     // Logic
@@ -13,6 +14,8 @@ export default function DashboardView(){
     const language=useLanguage((state) => state.language);
     const titleView = language? "Tablero":"Dashboard";
     const subtitle= language? "Estadisticas Globales":"General Stats";
+    const AuthUser = useAuthUser((state)=> state.authUser);
+    console.log(AuthUser);
 
     return (
         <main>
