@@ -13,17 +13,14 @@ import { useRouter } from "next/navigation";
 import GoogleIcon from '@mui/icons-material/Google';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import { CircularLoader } from "../../atoms";
-<<<<<<< HEAD
 import inputAlert from "../Alert/Alert";
 import { useAuthUser } from "@/global-states/authUser";
 import useNavigate from "@/utilities/NavigateTo";
+import './loginFormStyles.css'
 const CompanyInitialState={
     email:'',
     password:'',
 }
-=======
-
->>>>>>> d178a1c28b2682401af8d2c4e26f6f5aeed7d1e3
 
 function LogInForm():React.ReactNode{
     const[passwordInputError,setPasswordInputError] =useState(false); // Este estado cambia si se hacen malas peticiones al servidor
@@ -31,25 +28,18 @@ function LogInForm():React.ReactNode{
     const DarkMode = useDarkMode((state) => state.DarkMode);
     const {data: session, status} = useSession();
     const [loading, setLoading] = useState<boolean>(false);
-    const { data: session, status } = useSession();
     const router = useRouter();
-<<<<<<< HEAD
     const {setAuthUser} = useAuthUser();
     const navigate = useNavigate();
 
-    const handleChange  = (e: React.ChangeEvent<HTMLInputElement>) =>{
-=======
-    const DarkMode = useDarkMode((state) => state.DarkMode);
-
     // Manejar cambios en los inputs
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
->>>>>>> d178a1c28b2682401af8d2c4e26f6f5aeed7d1e3
+
         setCompanyRegister((prevState) => ({
         ...prevState,
         [e.target.name]: e.target.value
         }));  
     };
-<<<<<<< HEAD
     const handleSubmit = async() =>{ // Logic for login with LinkUp
         setLoading(true);
         const data = await authLoginService(companyRegister);
@@ -61,26 +51,8 @@ function LogInForm():React.ReactNode{
         const {name,email,token} = data;
         setAuthUser({name,email,token, role:2});
         setLoading(false);
-        navigate("/company");
+        navigate("/dashboard");
     }
-=======
-
-    // Manejar el envío del formulario
-    const handleSubmit = async () => {
-        console.log(companyRegister);
-        setLoading(true);
-        const data = await authLoginService(companyRegister);
-        if (!data) {
-            // Llamar modal para mostrar error
-            setLoading(false);
-            setPasswordInputError(true);
-            return;
-        }
-        const { name, email, token } = data;
-        saveCredentials({ name, email, token });
-        router.push("/dashboard");
-    };
->>>>>>> d178a1c28b2682401af8d2c4e26f6f5aeed7d1e3
 
     // Redirigir si ya está autenticado
     useEffect(() => {
@@ -98,7 +70,7 @@ function LogInForm():React.ReactNode{
         <TextInput name="email" type="email" label="Email" required onChange={handleChange} />
         <PasswordInput name="password" label="Password" type="password" required onChange={handleChange} />
         <CustomLink text="Forgot Password?" href="/recover-password"></CustomLink>
-        <MainButton text={"Log In"} onClick={handleSubmit} />
+        <MainButton text={"Log In"} onClick={handleSubmit} className="button-login"/>
         <Typography variant="body1" sx={{color:'var(--secondary-color)',fontFamily:'var(--main-font)'}}>- Or Login with -</Typography>
         <Box sx={{display:'flex', gap:'var(--padding-big)'}}>
             <MainButton text={<GoogleIcon />} onClick={()=>signIn("google")} />
