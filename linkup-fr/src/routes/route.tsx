@@ -16,7 +16,7 @@ export default function Route({ children }: { children: React.ReactNode }) {
             setPath(window.location.pathname);
             setLoading(false); // Set loading to false
         }
-    }, []); // Dependencias vacías para ejecutar solo en el montaje
+    }, []);
 
     useEffect(() => {
         if (path) { // 
@@ -40,14 +40,13 @@ export default function Route({ children }: { children: React.ReactNode }) {
                 return;
             }
         }
-    }, [path, navigate]); // El efecto depende del `path` y `navigate`
+    }, [path, navigate]); 
 
-    // Mostrar un loader mientras se determina el path
+    // Show loading while loading the routes
     if (loading) {
         return (
             <CircularLoader flag={loading} />
         )
     }
-
     return <>{children}</>;
 }
