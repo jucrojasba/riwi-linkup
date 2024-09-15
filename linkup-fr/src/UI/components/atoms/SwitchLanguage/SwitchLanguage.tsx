@@ -4,12 +4,12 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import TranslateIcon from "@mui/icons-material/Translate";
-import { Style } from "@mui/icons-material";
 import { useLanguage } from "@/global-states/language-mode";
+
 
 const LanguageSelector = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const {language, setLanguage} = useLanguage();
+  const { language, setLanguage } = useLanguage();
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -41,7 +41,7 @@ const LanguageSelector = () => {
           borderRadius: "var(--border-radius-min)",
         }}
       >
-        {language? "Español":"English"}
+        {language ? "Español" : "English"}
       </Button>
       <Menu
         anchorEl={anchorEl}
@@ -50,10 +50,12 @@ const LanguageSelector = () => {
         disablePortal
       >
         <MenuItem onClick={() => handleMenuItemClick(false)}>
-        🇺🇸 English
+          <img src="./icons/usaflag.jpg" alt="USA Flag" style={{ width: "20px", marginRight: "8px" }} />
+          English
         </MenuItem>
         <MenuItem onClick={() => handleMenuItemClick(true)}>
-        🇨🇴 Español
+          <img src="./icons/colflag.png" alt="Colombia Flag" style={{ width: "20px", marginRight: "8px" }} />
+          Español
         </MenuItem>
       </Menu>
     </>
