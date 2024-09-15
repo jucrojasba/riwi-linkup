@@ -1,0 +1,27 @@
+h4{
+    font-family: var(--main-font);
+}
+
+.my-custom-button {
+    background-color: var(--main-color);
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.my-custom-button:hover {
+    background-color: var(--secondary-color);
+}
+
+.my-custom-icon-success{
+    color: var(--green-color);
+}
+
+.my-custom-icon-error{
+    color: var(--red-color);
+}

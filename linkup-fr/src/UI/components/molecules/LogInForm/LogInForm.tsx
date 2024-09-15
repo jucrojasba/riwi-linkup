@@ -12,8 +12,10 @@ import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import GoogleIcon from '@mui/icons-material/Google';
 import GitHubIcon from '@mui/icons-material/GitHub';
-import saveCredentials from "@/utilities/credentials";
 import { CircularLoader } from "../../atoms";
+import inputAlert from "../Alert/Alert";
+import { useAuthUser } from "@/global-states/authUser";
+import useNavigate from "@/utilities/NavigateTo";
 const CompanyInitialState={
     email:'',
     password:'',
@@ -26,6 +28,9 @@ function LogInForm():React.ReactNode{
     const {data: session, status} = useSession();
     const [loading, setLoading] = useState<boolean>(false);
     const router = useRouter();
+    const {setAuthUser} = useAuthUser();
+    const navigate = useNavigate();
+
     const handleChange  = (e: React.ChangeEvent<HTMLInputElement>) =>{
         setCompanyRegister((prevState) => ({
         ...prevState,
@@ -33,23 +38,23 @@ function LogInForm():React.ReactNode{
         }));  
     };
     const handleSubmit = async() =>{ // Logic for login with LinkUp
-        console.log(companyRegister);
         setLoading(true);
         const data = await authLoginService(companyRegister);
         if(!data){
-            //Call modal for error - Is necesary all params
-            console.log("Show modal error");
+            setLoading(false);
+            inputAlert("Error to login", "error");
             return;
         }
         const {name,email,token} = data;
-        saveCredentials({name,email,token});
-        router.push("/company");
+        setAuthUser({name,email,token, role:2});
+        setLoading(false);
+        navigate("/company");
     }
 
     useEffect(()=>{
         if(status === "authenticated"){
             localStorage.setItem("session", JSON.stringify(session));
-            router.push("/company");
+            navigate("/company");
         }
     }, [status,router])
     return(
