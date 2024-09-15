@@ -8,10 +8,10 @@ import Image from "next/image";
 export default function LoginView(): React.ReactNode{
     const DarkMode = useDarkMode((state) => state.DarkMode);
     return(
-        <main className={DarkMode ? "dark-mode" : "main"}>
+        <main className={DarkMode ? "dark-mode" : "mainLogin"}>
             <AuthLayout isDarkMode={DarkMode} />
             <NavbarHome isDarkMode={false}/>
-            <section className="main-section">
+            <section className="mainLogin-section">
                 <div className="section-image">
                     <img src="/images/coderLogin01.png" alt="coderLogin - woman" />
                 </div>
