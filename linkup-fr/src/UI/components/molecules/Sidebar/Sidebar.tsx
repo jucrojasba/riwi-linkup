@@ -9,6 +9,8 @@ import ChecklistRtlIcon from "@mui/icons-material/ChecklistRtl";
 import ItemNav from "@/UI/components/atoms/ItemNav/ItemNav";
 import MenuOpenIcon from "@mui/icons-material/MenuOpen";
 import { useLanguage } from "@/global-states/language-mode";
+import { signOut } from "next-auth/react";
+import { clearLocalStorage } from "@/utilities/LocalStorage";
 
 interface ISidebarProps {
   expand: boolean;
@@ -26,11 +28,16 @@ export default function Sidebar({ expand, language }: ISidebarProps): React.Reac
     { name: "Config", src: SettingsIcon, href: "/config" },
     { name: "MyList", src: ChecklistRtlIcon, href: "/login" },
   ];
-  console.log(language);
 
   const handleOpenMenu = () => {
     setOpenSidebar(!openSidebar);
   };
+
+  const handleSignOut = () =>{
+    clearLocalStorage();
+    signOut({callbackUrl:"/"});
+
+  }
   return (
     <div className={openSidebar ? "sidebarWidth" : "sidebar"}>
       <div className="sidebar-content-user">
@@ -75,6 +82,7 @@ export default function Sidebar({ expand, language }: ISidebarProps): React.Reac
             icon={LogoutIcon}
             href={"#"}
             name="Logout"
+            onClick={handleSignOut}
           />
         </ul>
       </nav>

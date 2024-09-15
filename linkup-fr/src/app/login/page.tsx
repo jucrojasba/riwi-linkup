@@ -1,18 +1,28 @@
 'use client'
 import "./loginStyles.css";
-import { LogInForm } from "@/UI/components/molecules";
-import NavbarHome from "@/UI/components/molecules/NavbarHome/NavbarHome";
+import { LogInForm, NavbarHome } from "@/UI/components/molecules";
+import { AuthLayout } from "@/UI/components/organisms";
+import { useAuthUser } from "@/global-states/authUser";
+import { useDarkMode } from "@/global-states/dark-mode";
 import Image from "next/image";
-export default function LoginView(): JSX.Element{
-    return(
-        <main className="main">
-            <NavbarHome isDarkMode={false}/>
-            <section className="main-section">
+import Route from "@/routes/route";
+
+
+export default function LoginView(): JSX.Element {
+    const DarkMode = useDarkMode((state) => state.DarkMode);
+    
+    
+    return (
+        <Route>
+            <main className="mainLogin">
+                <AuthLayout isDarkMode={DarkMode} />
+                <section className={DarkMode ? "dark-mode" : "mainLogin-section"}>
                 <div className="section-image">
-                    <img src="/images/coderLogin01.png" alt="coderLogin - woman" />
-                </div>
-                <LogInForm />
-            </section>
-        </main>
+                            <Image className="image" src={"/images/test.png"} alt="coderLogin" width={600} height={600} />
+                        </div>
+                        <LogInForm />
+                </section>
+            </main>
+        </Route>
     );
 }

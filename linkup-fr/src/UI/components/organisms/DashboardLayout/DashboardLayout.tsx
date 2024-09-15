@@ -19,7 +19,7 @@ export default function DashboardLayout({
   titleView,
   subtitle,
   path,
-  language:any
+  language
 }: IDashboardLayoutProps): React.ReactElement {
   const [expand, setExpand] = useState<boolean>(false);
 
@@ -28,14 +28,13 @@ export default function DashboardLayout({
     console.log("do something");
   };
 
-  console.log(open);
   return (
     <div className="content-layout">
       <div className="content-dashboard">
         <div className="open" onClick={handleButtonExpand}>
           <KeyboardArrowDownIcon />
         </div>
-        <Header expand={expand} titleView={titleView} subtitle={subtitle} path={path} />
+        <Header expand={expand} titleView={titleView} subtitle={subtitle} path={path} language={language} />
         <main className={"main"}>
           <TitleMain className="titleMain" title={path === "/admin/coder" ? "": "Filters"} subtitle="" />
           {path === "/admin/coder" 
