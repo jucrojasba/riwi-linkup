@@ -13,6 +13,10 @@ export default function LoginView(): JSX.Element{
             <section className={DarkMode?"dark-mode": "main-login-section"}>
                 <div className="section-image">
                     <Image className="image" src={"/images/test.png"} alt="coderLogin" width={600} height={600} />
+            <NavbarHome isDarkMode={false}/>
+            <section className="main-section">
+                <div className="section-image">
+                    <img src="/images/coderLogin01.png" alt="coderLogin - woman" />
                 </div>
                 <LogInForm />
             </section>
