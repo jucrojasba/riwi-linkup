@@ -1,5 +1,5 @@
 "use client";
-import { Box, Typography, } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import TextInput from "../../atoms/TextInput/TextInput";
 import MainButton from "../../atoms/MainButton/MainButton";
 import CustomLink from "../../atoms/CustomLink/CustomLink";
@@ -13,6 +13,7 @@ import { useRouter } from "next/navigation";
 import GoogleIcon from '@mui/icons-material/Google';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import { CircularLoader } from "../../atoms";
+<<<<<<< HEAD
 import inputAlert from "../Alert/Alert";
 import { useAuthUser } from "@/global-states/authUser";
 import useNavigate from "@/utilities/NavigateTo";
@@ -20,6 +21,9 @@ const CompanyInitialState={
     email:'',
     password:'',
 }
+=======
+
+>>>>>>> d178a1c28b2682401af8d2c4e26f6f5aeed7d1e3
 
 function LogInForm():React.ReactNode{
     const[passwordInputError,setPasswordInputError] =useState(false); // Este estado cambia si se hacen malas peticiones al servidor
@@ -27,16 +31,25 @@ function LogInForm():React.ReactNode{
     const DarkMode = useDarkMode((state) => state.DarkMode);
     const {data: session, status} = useSession();
     const [loading, setLoading] = useState<boolean>(false);
+    const { data: session, status } = useSession();
     const router = useRouter();
+<<<<<<< HEAD
     const {setAuthUser} = useAuthUser();
     const navigate = useNavigate();
 
     const handleChange  = (e: React.ChangeEvent<HTMLInputElement>) =>{
+=======
+    const DarkMode = useDarkMode((state) => state.DarkMode);
+
+    // Manejar cambios en los inputs
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+>>>>>>> d178a1c28b2682401af8d2c4e26f6f5aeed7d1e3
         setCompanyRegister((prevState) => ({
         ...prevState,
         [e.target.name]: e.target.value
         }));  
     };
+<<<<<<< HEAD
     const handleSubmit = async() =>{ // Logic for login with LinkUp
         setLoading(true);
         const data = await authLoginService(companyRegister);
@@ -50,9 +63,28 @@ function LogInForm():React.ReactNode{
         setLoading(false);
         navigate("/company");
     }
+=======
 
-    useEffect(()=>{
-        if(status === "authenticated"){
+    // Manejar el envío del formulario
+    const handleSubmit = async () => {
+        console.log(companyRegister);
+        setLoading(true);
+        const data = await authLoginService(companyRegister);
+        if (!data) {
+            // Llamar modal para mostrar error
+            setLoading(false);
+            setPasswordInputError(true);
+            return;
+        }
+        const { name, email, token } = data;
+        saveCredentials({ name, email, token });
+        router.push("/dashboard");
+    };
+>>>>>>> d178a1c28b2682401af8d2c4e26f6f5aeed7d1e3
+
+    // Redirigir si ya está autenticado
+    useEffect(() => {
+        if (status === "authenticated") {
             localStorage.setItem("session", JSON.stringify(session));
             navigate("/company");
         }
@@ -91,3 +123,4 @@ function LogInForm():React.ReactNode{
 
   
 export default LogInForm;
+

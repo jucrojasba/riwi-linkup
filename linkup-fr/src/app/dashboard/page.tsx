@@ -11,16 +11,12 @@ export default function DashboardView(){
     // Logic
     const DarkMode = useDarkMode((state) => state.DarkMode);
     const language=useLanguage((state) => state.language);
-    const path=window.location.pathname;
     const titleView = language? "Tablero":"Dashboard";
     const subtitle= language? "Estadisticas Globales":"General Stats";
 
-
-
-
     return (
         <main>
-            <DashboardLayout section={<SectionDashboard isDarkMode={DarkMode} language={language}/>} language={language} titleView={titleView} subtitle={subtitle} path={path}/>
+            <DashboardLayout section={<SectionDashboard isDarkMode={DarkMode} language={language}/>} language={language} titleView={titleView} subtitle={subtitle} path="/dashboard"/>
         </main>
     );
 }
