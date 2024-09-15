@@ -33,9 +33,8 @@ const NavbarHome: React.FC<NavbarHomeProps> = ({ isDarkMode }) => {
         <Box component="span" sx={{ display: "flex", width: "fit-content", alignItems: "center", gap: "5px" }}>
           <Typography
             variant="h1"
-            sx={{ fontSize: "1.5rem", color: isDarkMode ? "var(--main-color)" : "var(--paragraph-color)", fontFamily: "var(--main-font)", fontWeight: 500 }}
-          >
-            Riwi LinkUp
+            style={{ fontSize: "1.5rem", color: isDarkMode ? "var(--main-color)" : "var(--paragraph-color)", fontFamily: "var(--main-font)", fontWeight: 500 }}
+          >Riwi LinkUp
           </Typography>
         </Box>
         <SelectLanguage />

@@ -13,6 +13,7 @@ import SwitchMode from "./SwitchDarkMode/SwitchDarkMode";
 import TextInput from "./TextInput/TextInput";
 import TitleHome from "./TitleHome/TitleHome";
 import TitleMain from "./TitleMain/TitleMain";
+import SelectOptions from "./Select/Select";
 
 export {
     ButtonMore,
@@ -30,5 +31,6 @@ export {
     SwitchMode,
     TextInput,
     TitleHome,
-    TitleMain
+    TitleMain,
+    SelectOptions
 }
