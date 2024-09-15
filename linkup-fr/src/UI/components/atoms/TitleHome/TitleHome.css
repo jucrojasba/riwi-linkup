@@ -18,3 +18,7 @@
     font-weight: 400;
     font-size: 2rem;
 }
+
+.title-home.dark-mode, .home-subtitle.dark-mode{
+    color:var(--white-color);
+}
