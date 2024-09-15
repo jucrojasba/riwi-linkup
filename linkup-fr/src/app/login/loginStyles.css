@@ -1,12 +1,10 @@
 /*Styles login main section */
-.main-login-section{
-    display: flex;
-    width: 100vw;
-    height: 100vh;
-    justify-content: space-evenly;
-    align-items: center;
-}
 
+main.main {
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
 .dark-mode{
     width: 100vw;
     height: 100vh;
@@ -15,19 +13,13 @@
     transition: background-color .2s ease;
 }
 
-main.main {
-    height: 100vh;
-    width: 100vw;
-    overflow: hidden;
-}
-
 main.main > section.main-section,
 main.dark-mode > section.main-section{
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
-    background-color: var(--paragraph-color);
+    height: 100%;
 
 }
 
