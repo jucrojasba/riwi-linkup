@@ -1,6 +1,6 @@
 /*Styles login main section */
 
-main.main {
+main.mainLogin {
     height: 100vh;
     width: 100vw;
     overflow: hidden;
@@ -13,8 +13,8 @@ main.main {
     transition: background-color .2s ease;
 }
 
-main.main > section.main-section,
-main.dark-mode > section.main-section{
+main.mainLogin > section.mainLogin-section,
+main.dark-mode > section.mainLogin-section{
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
@@ -23,13 +23,13 @@ main.dark-mode > section.main-section{
 
 }
 
-main.main > section.main-section > div.section-image,
-main.dark-mode > section.main-section > div.section-image{
+main.mainLogin > section.mainLogin-section > div.section-image,
+main.dark-mode > section.mainLogin-section > div.section-image{
     width: 30%;
 }
 
-main.main > section.main-section > div.section-image > img,
-main.dark-mode > section.main-section > div.section-image > img{
+main.mainLogin > section.mainLogin-section > div.section-image > img,
+main.dark-mode > section.mainLogin-section > div.section-image > img{
     width: 100%;
     height: 100%;
 }
