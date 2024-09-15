@@ -9,7 +9,7 @@ export async function authLoginService(user: Partial<IUser>): Promise<{name: str
         console.log({message: "is necesary all params"});
         return;
     }
-    const data = fetchApi("http://localhost:3000/api/auth/login", {
+    const data = fetchApi("https://linkupv1-production.up.railway.app/api/v1/Account/login", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
