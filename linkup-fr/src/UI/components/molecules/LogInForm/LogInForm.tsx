@@ -25,8 +25,6 @@ function LogInForm():React.ReactNode{
     const DarkMode = useDarkMode((state) => state.DarkMode);
     const {data: session, status} = useSession();
     const [loading, setLoading] = useState<boolean>(false);
-
-    function handleChange (e: React.ChangeEvent<HTMLInputElement>) {
     const router = useRouter();
     const handleChange  = (e: React.ChangeEvent<HTMLInputElement>) =>{
         setCompanyRegister((prevState) => ({
@@ -68,6 +66,7 @@ function LogInForm():React.ReactNode{
         <Box sx={{display:'flex', gap:'var(--padding-big)'}}>
             <MainButton text={<GoogleIcon />} onClick={()=>signIn("google")} />
             <MainButton text={<GitHubIcon />} onClick={()=>signIn("github")} />
+        </Box>
         <Box component={'span'}>
             {DarkMode?
             <Typography variant="body1" sx={{color:'var(--white-color)',fontFamily:'var(--main-font)'}}>
@@ -82,8 +81,7 @@ function LogInForm():React.ReactNode{
             </Typography>
             }
         </Box>
-    </Box>
-);
+    </Box>);
 };
 
   
