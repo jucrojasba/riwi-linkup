@@ -28,7 +28,6 @@ export default function DashboardLayout({
     console.log("do something");
   };
 
-  console.log(open);
   return (
     <div className="content-layout">
       <div className="content-dashboard">
