@@ -45,6 +45,7 @@ const RegisterForm:React.FC=()=>{
         const data = await authRegisterService({name,email,password, phone, sector});
         if(!data){
             //Call modal for error - Is necesary all params
+            console.log({message: "Error, show modal"});
             return;
         }
         // const {name,email,token} = data;
