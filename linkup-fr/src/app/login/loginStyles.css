@@ -1,6 +1,21 @@
 /*Styles login main section */
+.main-login-section{
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    justify-content: space-evenly;
+    align-items: center;
+}
 
-main.main {
+.dark-mode{
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: var(--paragraph-color);
+}
+main {
     height: 100%;
     display: flex;
     justify-content: center;

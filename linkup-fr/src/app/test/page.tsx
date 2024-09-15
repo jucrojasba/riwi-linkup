@@ -2,6 +2,8 @@
 import MobileNavbar from "@/UI/components/molecules/MobileNavbar/MobileNavbar";
 import { Box } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
+import { ButtonMore, CircularLoader, CustomLink, LinearLoader, MainButton, PasswordInput, SecondaryButton, TextInput } from "@/UI/components/atoms";
+import { RegisterForm } from "@/UI/components/molecules";
 
 
 export default function TestView() {
