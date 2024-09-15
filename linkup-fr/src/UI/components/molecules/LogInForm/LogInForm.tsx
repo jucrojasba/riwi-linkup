@@ -23,8 +23,10 @@ function LogInForm():React.ReactNode{
     const[passwordInputError,setPasswordInputError] =useState(false); // Este estado cambia si se hacen malas peticiones al servidor
     const[companyRegister,setCompanyRegister] =useState<ICompanyLogin>(CompanyInitialState);
     const DarkMode = useDarkMode((state) => state.DarkMode);
-    const [loading, setLoading] = useState<boolean>(false);
     const {data: session, status} = useSession();
+    const [loading, setLoading] = useState<boolean>(false);
+
+    function handleChange (e: React.ChangeEvent<HTMLInputElement>) {
     const router = useRouter();
     const handleChange  = (e: React.ChangeEvent<HTMLInputElement>) =>{
         setCompanyRegister((prevState) => ({
@@ -66,7 +68,6 @@ function LogInForm():React.ReactNode{
         <Box sx={{display:'flex', gap:'var(--padding-big)'}}>
             <MainButton text={<GoogleIcon />} onClick={()=>signIn("google")} />
             <MainButton text={<GitHubIcon />} onClick={()=>signIn("github")} />
-        </Box>
         <Box component={'span'}>
             {DarkMode?
             <Typography variant="body1" sx={{color:'var(--white-color)',fontFamily:'var(--main-font)'}}>
@@ -78,7 +79,8 @@ function LogInForm():React.ReactNode{
                 Do not have an account? 
                 <CustomLink text="Sign up" href="/register">
                 </CustomLink>
-            </Typography>}
+            </Typography>
+            }
         </Box>
     </Box>
 );
