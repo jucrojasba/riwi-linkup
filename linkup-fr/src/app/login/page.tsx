@@ -5,6 +5,7 @@ import { AuthLayout } from "@/UI/components/organisms";
 import { useAuthUser } from "@/global-states/authUser";
 import { useDarkMode } from "@/global-states/dark-mode";
 import Image from "next/image";
+import Route from "@/routes/route";
 
 
 export default function LoginView(): JSX.Element {
@@ -12,14 +13,16 @@ export default function LoginView(): JSX.Element {
     
     
     return (
-        <main className="mainLogin">
-            <AuthLayout isDarkMode={DarkMode} />
-            <section className={DarkMode ? "dark-mode" : "mainLogin-section"}>
-            <div className="section-image">
-                        <Image className="image" src={"/images/test.png"} alt="coderLogin" width={600} height={600} />
-                    </div>
-                    <LogInForm />
-            </section>
-        </main>
+        <Route>
+            <main className="mainLogin">
+                <AuthLayout isDarkMode={DarkMode} />
+                <section className={DarkMode ? "dark-mode" : "mainLogin-section"}>
+                <div className="section-image">
+                            <Image className="image" src={"/images/test.png"} alt="coderLogin" width={600} height={600} />
+                        </div>
+                        <LogInForm />
+                </section>
+            </main>
+        </Route>
     );
 }

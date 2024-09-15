@@ -17,14 +17,15 @@ import inputAlert from "../Alert/Alert";
 import { useAuthUser } from "@/global-states/authUser";
 import useNavigate from "@/utilities/NavigateTo";
 import './loginFormStyles.css'
+import {saveLocalStorage} from "@/utilities/LocalStorage";
 const CompanyInitialState={
     email:'',
     password:'',
 }
 
 function LogInForm():React.ReactNode{
-    const[passwordInputError,setPasswordInputError] =useState(false); // Este estado cambia si se hacen malas peticiones al servidor
-    const[companyRegister,setCompanyRegister] =useState<ICompanyLogin>(CompanyInitialState);
+    const[passwordInputError,setPasswordInputError] =useState(false); // This statte change if do bad request the server
+    const[companyRegister,setCompanyRegister] =useState<ICompanyLogin>(CompanyInitialState); // States
     const DarkMode = useDarkMode((state) => state.DarkMode);
     const {data: session, status} = useSession();
     const [loading, setLoading] = useState<boolean>(false);
@@ -32,7 +33,7 @@ function LogInForm():React.ReactNode{
     const {setAuthUser} = useAuthUser();
     const navigate = useNavigate();
 
-    // Manejar cambios en los inputs
+    // Management change on the inputs
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 
         setCompanyRegister((prevState) => ({
@@ -45,20 +46,22 @@ function LogInForm():React.ReactNode{
         const data = await authLoginService(companyRegister);
         if(!data){
             setLoading(false);
-            inputAlert("Error to login", "error");
+            inputAlert("Authentication error: The credentials provided are incorrect.", "error");
             return;
         }
         const {name,email,token} = data;
-        setAuthUser({name,email,token, role:2});
+        setAuthUser({name,email,token, role:2}); // Save user on global state
+        saveLocalStorage("token",token); //Save token on local storage
         setLoading(false);
+        inputAlert("Login successful", "success");
         navigate("/dashboard");
     }
 
     // Redirigir si ya está autenticado
     useEffect(() => {
         if (status === "authenticated") {
-            localStorage.setItem("session", JSON.stringify(session));
-            navigate("/company");
+            saveLocalStorage("session", JSON.stringify(session));
+            navigate("/dashboard");
         }
     }, [status,router])
     return(

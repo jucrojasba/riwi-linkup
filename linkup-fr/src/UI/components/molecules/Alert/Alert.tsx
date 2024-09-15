@@ -7,7 +7,7 @@ const MySwal = withReactContent(Swal);
 
 export default function inputAlert(message: string, type: 'success' | 'error') {
     return MySwal.fire({
-        title: <h4>{message}</h4>,
+        title: <i>{message}</i>,
         icon: type,
         confirmButtonText: 'OK',
         customClass: {

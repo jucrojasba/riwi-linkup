@@ -1,5 +1,4 @@
-'use client'
-
+'use client';
 import { useLanguage } from '@/global-states/language-mode';
 import './dashboardStyle.css'
 import { useDarkMode } from "@/global-states/dark-mode";
@@ -7,6 +6,8 @@ import { DashboardLayout } from '@/UI/components/organisms';
 import DashboardCardsContainer from '@/UI/components/organisms/DashboardCardsContainer/DashboardCardsContainer';
 import SectionDashboard from '@/UI/components/organisms/SectionDashboard/SectionDashboard';
 import { useAuthUser } from '@/global-states/authUser';
+import Route from '@/routes/route';
+
 
 export default function DashboardView(){
     // Logic
@@ -15,11 +16,11 @@ export default function DashboardView(){
     const titleView = language? "Tablero":"Dashboard";
     const subtitle= language? "Estadisticas Globales":"General Stats";
     const AuthUser = useAuthUser((state)=> state.authUser);
-    console.log(AuthUser);
-
     return (
-        <main>
-            <DashboardLayout section={<SectionDashboard isDarkMode={DarkMode} language={language}/>} language={language} titleView={titleView} subtitle={subtitle} path="/dashboard"/>
-        </main>
+        <Route>
+            <main>
+                <DashboardLayout section={<SectionDashboard isDarkMode={DarkMode} language={language}/>} language={language} titleView={titleView} subtitle={subtitle} path="/dashboard"/>
+            </main>
+        </Route>
     );
 }
