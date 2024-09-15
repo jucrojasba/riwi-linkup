@@ -29,7 +29,6 @@ export default function DashboardLayout({
     console.log("do something");
   };
 
-  console.log(open);
   return (
     <div className="content-layout">
       <div className="content-dashboard">
@@ -43,13 +42,13 @@ export default function DashboardLayout({
           path={path}
           language={language}
         />
-        <main className={"main"}>
+        <main className={"mainGeneral"}>
           <TitleMain
             className="titleMain"
             title={path === "/admin/coder" ? "" : "Filters"}
             subtitle=""
           />
-          {path === "/admin/coder" ? null : <Filter />}
+          {path === "/admin/coder" || path === "/dashboard" || path === "/config"  ? null : <Filter />}
           {section}
         </main>
         <Footer />
