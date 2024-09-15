@@ -6,6 +6,7 @@ import CustomLink from "../../atoms/CustomLink/CustomLink";
 import PasswordInput from "../../atoms/PasswordInput/PasswordInput";
 import { useEffect, useState } from "react";
 import { ICompanyLogin } from "@/UI/interfaces/Forms";
+import { useDarkMode } from "@/global-states/dark-mode";
 import { authLoginService } from "@/services/authService";
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -21,6 +22,9 @@ const CompanyInitialState={
 const LogInForm:React.FC=()=>{
     const[passwordInputError,setPasswordInputError] =useState(false); // Este estado cambia si se hacen malas peticiones al servidor
     const[companyRegister,setCompanyRegister] =useState<ICompanyLogin>(CompanyInitialState);
+    const DarkMode = useDarkMode((state) => state.DarkMode);
+
+    function handleChange (e: React.ChangeEvent<HTMLInputElement>) {
     const {data: session, status} = useSession();
     const [loading, setLoading] = useState<boolean>(false);
     const router = useRouter();
@@ -65,9 +69,6 @@ const LogInForm:React.FC=()=>{
                 <MainButton text={<GitHubIcon />} onClick={()=>signIn("github")} />
             </Box>
             <Box component={'span'}>
-                <Typography variant="body1" sx={{color:'var(--secondary-color)',fontFamily:'var(--main-font)'}}>Do not have an account? 
-                    <CustomLink text="Sign up" href="/register" />
-                </Typography>
             </Box>
         </Box>
     );
