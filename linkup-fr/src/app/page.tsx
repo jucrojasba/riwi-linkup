@@ -5,41 +5,53 @@ import RoundedButton from "@/UI/components/atoms/ButtonRounded/ButtonRounded";
 import EastIcon from "@mui/icons-material/East";
 import useNavigate from "@/utilities/NavigateTo";
 import Image from "next/image";
-import IconWithHover from "@/UI/components/atoms/IconHover/IconHover";
-import InstagramIcon from "@mui/icons-material/Instagram";
-import WhatsAppIcon from "@mui/icons-material/WhatsApp";
+import { useDarkMode } from "@/global-states/dark-mode";
+import NavbarHome from "@/UI/components/molecules/NavbarHome/NavbarHome";
+import RiwiLogo from "@/UI/components/atoms/RiwiLogo/RiwiLogo";
+import UtilityRightButtons from "@/UI/components/molecules/UtilityRightButtons/UtilityRightButtons";
+import AuthLayout from "@/UI/components/organisms/AuthLayout/AuthLayout";
+import { useLanguage } from "@/global-states/language-mode";
 
 export default function HomeView() {
   //Logic
   const navigate = useNavigate();
+  const DarkMode = useDarkMode((state) => state.DarkMode);
+  const language =useLanguage((state)=>state.language);
 
   return (
     <main>
-      <div className="home-no-auth-wrapper">
+      <AuthLayout isDarkMode={DarkMode} />
+      <div className={`home-no-auth-wrapper ${DarkMode ? "dark-mode" : ""}`}>
         <div className="home-info">
           <TitleHome
-            title="easy management and acquisition of tech talent"
-            subtitle="find tech talent with competitive knowledge"
+            title={language? "Gestión y reclutamiento ágil de talento tecnológico":"Agile management and recruitment of tech talent"}
+            subtitle={language? "Encuentra talento tecnológico con conocimientos competitivos":"Find tech talent with competitive knowledge"}
+            isDarkMode={DarkMode}
           ></TitleHome>
           <RoundedButton
-            text="Get Started"
-            expandMessage={
+            text={language? 'Empecemos':"Get Started"}
+            expandMessage={language?
+              <>
+                Empecemos <EastIcon sx={{ fontSize: "2rem" }} />
+              </> :
               <>
                 Get Started <EastIcon sx={{ fontSize: "2rem" }} />
               </>
             }
             onClick={() => {
-              navigate("/register");
+              navigate("/login");
             }}
           ></RoundedButton>
         </div>
-        <div className="gretting-image">
-          <Image
-            src="/icons/arrow_riwi.png"
-            alt="Coder Gretting"
-            width={120}
-            height={120}
-          />
+        <div className="coder-gretting-wrapper">
+          <div className="gretting-image" onClick={()=>navigate('/login')}>
+            <Image
+              src="/icons/arrowPurple.png"
+              alt="Coder Gretting"
+              width={120}
+              height={120}
+            />
+          </div>
           <div className="coder-gretting-container">
             <Image
               src="/images/coderGretting.png"
@@ -48,20 +60,6 @@ export default function HomeView() {
               height={500}
             />
           </div>
-        </div>
-        <div className="media-icons">
-          <IconWithHover
-            icon={<InstagramIcon fontSize="inherit" />}
-            color="var(--paragraph-color)"
-            hoverColor="#FF00FF"
-            onClick={() => {}}
-          />
-          <IconWithHover
-            icon={<WhatsAppIcon fontSize="inherit" />}
-            color="var(--paragraph-color)"
-            hoverColor="#25D366"
-            onClick={() => {}}
-          />
         </div>
       </div>
     </main>
