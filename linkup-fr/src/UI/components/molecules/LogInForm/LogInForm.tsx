@@ -1,5 +1,5 @@
 "use client";
-import { Box, Typography, } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import TextInput from "../../atoms/TextInput/TextInput";
 import MainButton from "../../atoms/MainButton/MainButton";
 import CustomLink from "../../atoms/CustomLink/CustomLink";
@@ -14,10 +14,7 @@ import GoogleIcon from '@mui/icons-material/Google';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import saveCredentials from "@/utilities/credentials";
 import { CircularLoader } from "../../atoms";
-const CompanyInitialState={
-    email:'',
-    password:'',
-}
+
 
 function LogInForm():React.ReactNode{
     const[passwordInputError,setPasswordInputError] =useState(false); // Este estado cambia si se hacen malas peticiones al servidor
@@ -25,29 +22,37 @@ function LogInForm():React.ReactNode{
     const DarkMode = useDarkMode((state) => state.DarkMode);
     const {data: session, status} = useSession();
     const [loading, setLoading] = useState<boolean>(false);
+    const { data: session, status } = useSession();
     const router = useRouter();
-    const handleChange  = (e: React.ChangeEvent<HTMLInputElement>) =>{
+    const DarkMode = useDarkMode((state) => state.DarkMode);
+
+    // Manejar cambios en los inputs
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setCompanyRegister((prevState) => ({
         ...prevState,
         [e.target.name]: e.target.value
         }));  
     };
-    const handleSubmit = async() =>{ // Logic for login with LinkUp
+
+    // Manejar el envío del formulario
+    const handleSubmit = async () => {
         console.log(companyRegister);
         setLoading(true);
         const data = await authLoginService(companyRegister);
-        if(!data){
-            //Call modal for error - Is necesary all params
-            console.log("Show modal error");
+        if (!data) {
+            // Llamar modal para mostrar error
+            setLoading(false);
+            setPasswordInputError(true);
             return;
         }
-        const {name,email,token} = data;
-        saveCredentials({name,email,token});
-        router.push("/company");
-    }
+        const { name, email, token } = data;
+        saveCredentials({ name, email, token });
+        router.push("/dashboard");
+    };
 
-    useEffect(()=>{
-        if(status === "authenticated"){
+    // Redirigir si ya está autenticado
+    useEffect(() => {
+        if (status === "authenticated") {
             localStorage.setItem("session", JSON.stringify(session));
             router.push("/company");
         }
@@ -86,3 +91,4 @@ function LogInForm():React.ReactNode{
 
   
 export default LogInForm;
+

@@ -5,17 +5,18 @@ import { AuthLayout } from "@/UI/components/organisms";
 import { useDarkMode } from "@/global-states/dark-mode";
 import Image from "next/image";
 
-export default function LoginView(): React.ReactNode{
+
+export default function LoginView(): JSX.Element {
     const DarkMode = useDarkMode((state) => state.DarkMode);
-    return(
-        <main className={DarkMode ? "dark-mode" : "mainLogin"}>
+    
+    return (
+        <main>
             <AuthLayout isDarkMode={DarkMode} />
-            <NavbarHome isDarkMode={false}/>
-            <section className="mainLogin-section">
-                <div className="section-image">
-                    <img src="/images/coderLogin01.png" alt="coderLogin - woman" />
-                </div>
-                <LogInForm />
+            <section className={DarkMode ? "dark-mode" : "main-login-section"}>
+            <div className="section-image">
+                        <Image className="image" src={"/images/test.png"} alt="coderLogin" width={600} height={600} />
+                    </div>
+                    <LogInForm />
             </section>
         </main>
     );
