@@ -18,6 +18,8 @@ import { useAuthUser } from "@/global-states/authUser";
 import useNavigate from "@/utilities/NavigateTo";
 import './loginFormStyles.css'
 import {saveLocalStorage} from "@/utilities/LocalStorage";
+import { useLanguage } from "@/global-states/language-mode";
+import CustomIconButton from "../../atoms/IconButton/IconButton";
 const CompanyInitialState={
     email:'',
     password:'',
@@ -26,6 +28,7 @@ const CompanyInitialState={
 function LogInForm():React.ReactNode{
     const[passwordInputError,setPasswordInputError] =useState(false); // This statte change if do bad request the server
     const[companyRegister,setCompanyRegister] =useState<ICompanyLogin>(CompanyInitialState); // States
+    const Language = useLanguage((state) => state.language); //true español
     const DarkMode = useDarkMode((state) => state.DarkMode);
     const {data: session, status} = useSession();
     const [loading, setLoading] = useState<boolean>(false);
@@ -62,28 +65,34 @@ function LogInForm():React.ReactNode{
     component='form'
     sx={{display:'flex',flexDirection:'column',gap:'var(--padding-big)', alignItems:'center',width:'fit-content'}}>
         {loading ? <CircularLoader flag={loading} /> : null} 
-        <Typography variant="h2" sx={{color:'var(--main-color)',fontFamily:'var(--main-font)',fontSize:'2rem', fontWeight:'500' }}>Welcome back</Typography>
-        <TextInput name="email" type="email" label="Email" required onChange={handleChange} />
-        <PasswordInput name="password" label="Password" type="password" required onChange={handleChange} />
-        <CustomLink text="Forgot Password?" href="/recover-password"></CustomLink>
-        <MainButton text={"Log In"} onClick={handleSubmit} className="button-login"/>
-        <Typography variant="body1" sx={{color:'var(--secondary-color)',fontFamily:'var(--main-font)'}}>- Or Login with -</Typography>
-        <Box sx={{display:'flex', gap:'var(--padding-big)'}}>
-            <MainButton text={<GoogleIcon />} onClick={()=>signIn("google")} />
-            <MainButton text={<GitHubIcon />} onClick={()=>signIn("github")} />
-        </Box>
+        <Typography variant="h2" sx={{color:'var(--main-color)',fontFamily:'var(--main-font)',fontSize:'2rem', fontWeight:'500' }}>{Language?'Bienvenido':'Welcome back'}</Typography>
+        <TextInput name="email" type="email" label={Language?"Correo Electrónico":"Email"} required onChange={handleChange} />
+        <PasswordInput name="password" label={Language?"Contraseña":"Password"} type="password" required onChange={handleChange} />
+        {Language?<CustomLink text="Olvidaste tu contraseña?" href="/recover-password"/>:<CustomLink text="Forgot Password?" href="/recover-password"/>}
+        
+        <MainButton text={Language?"Iniciar Sesión":"Log In"} onClick={handleSubmit} className="button-login"/>
+        <h4 className={DarkMode?"login-separator-dark":"login-separator"}><span>{Language?'Inicia Sesión con:':'Login with:'}</span></h4>
+        {DarkMode?
+            <Box sx={{display:'flex', gap:'var(--padding-big)'}}>
+                <CustomIconButton icon="google" iconColor="#db4437" backgroundColor="var(--white-color)" onClick={()=>{}}/>
+                <CustomIconButton icon="github" iconColor="black" backgroundColor="var(--white-color)" onClick={()=>{}}/>
+            </Box>
+            :<Box sx={{display:'flex', gap:'var(--padding-big)'}}>
+                <CustomIconButton icon="google" iconColor="#db4437" backgroundColor="var(--gray-color)" onClick={()=>{}}/>
+                <CustomIconButton icon="github" iconColor="black" backgroundColor="var(--gray-color)" onClick={()=>{}}/>
+            </Box>
+        }
+        
         <Box component={'span'}>
             {DarkMode?
-            <Typography variant="body1" sx={{color:'var(--white-color)',fontFamily:'var(--main-font)'}}>
-                Do not have an account? 
-                <CustomLink text="Sign up" href="/register">
-                </CustomLink>
-            </Typography>
-            :<Typography variant="body1" sx={{color:'var(--secondary-color)',fontFamily:'var(--main-font)'}}>
-                Do not have an account? 
-                <CustomLink text="Sign up" href="/register">
-                </CustomLink>
-            </Typography>
+                <Typography variant="body1" sx={{color:'var(--white-color)',fontFamily:'var(--main-font)'}}>
+                    {Language?'No tienes una cuenta? ':'Do not have an account? '}
+                    {Language?<CustomLink text="Registrate" href="/register"/>:<CustomLink text="Sign up" href="/register"/>}
+                </Typography>
+                :<Typography variant="body1" sx={{color:'var(--secondary-color)',fontFamily:'var(--main-font)'}}>
+                    {Language?'No tienes una cuenta? ':'Do not have an account? '}
+                    {Language?<CustomLink text="Registrate" href="/register"/>:<CustomLink text="Sign up" href="/register"/>}
+                </Typography>
             }
         </Box>
     </Box>);

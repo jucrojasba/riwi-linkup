@@ -7,6 +7,7 @@ import { styled } from '@mui/material/styles';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { IconButton, InputAdornment } from '@mui/material';
+import { useDarkMode } from '@/global-states/dark-mode';
 
 const PasswordInputStyle = styled(TextField)(() => ({
     textTransform: 'none',
@@ -50,14 +51,45 @@ const PasswordInput: React.FC<TextInputProps> = ({
     helperText = '',
     onChange,
 }) => {
+
     const [showPassword, setShowPassword] = useState(false);
+    const DarkMode = useDarkMode((state) => state.DarkMode);
 
     const handleShowPassword = () => {
         setShowPassword((prevState) => !prevState);
     };
 
     return (
-        <PasswordInputStyle
+        <>
+            {DarkMode?
+            <PasswordInputStyle
+            id="outlined-error-helper-text"
+            name={name}
+            type={type === 'password' && !showPassword ? 'password' : 'text'}
+            defaultValue={defaultValue}
+            label={label}
+            error={error}
+            required={required}
+            helperText={helperText}
+            size="small"
+            onChange={onChange}
+            sx={{ width: '250px', '& .MuiInputBase-input': {color:'var(--white-color)'}}}
+            InputProps={{
+                endAdornment: type === 'password' && (
+                    <InputAdornment position="end">
+                        <IconButton
+                            aria-label="toggle password visibility"
+                            onClick={handleShowPassword}
+                            edge="end"
+                            sx={{color:'var(--main-color)'}}
+                        >
+                            {showPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                    </InputAdornment>
+                ),
+            }}
+        />
+            :<PasswordInputStyle
             id="outlined-error-helper-text"
             name={name}
             type={type === 'password' && !showPassword ? 'password' : 'text'}
@@ -76,13 +108,17 @@ const PasswordInput: React.FC<TextInputProps> = ({
                             aria-label="toggle password visibility"
                             onClick={handleShowPassword}
                             edge="end"
+                            sx={{color:'var(--main-color)'}}
                         >
                             {showPassword ? <VisibilityOff /> : <Visibility />}
                         </IconButton>
                     </InputAdornment>
                 ),
             }}
-        />
+        />}
+        
+        </>
+        
     );
 };
 

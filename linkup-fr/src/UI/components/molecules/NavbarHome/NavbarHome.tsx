@@ -5,6 +5,7 @@ import MainButton from "../../atoms/MainButton/MainButton";
 import SecondaryButton from "../../atoms/SecondaryButton/SecondaryButton";
 import SelectLanguage from "../../atoms/SwitchLanguage/SwitchLanguage";
 import useNavigate from "@/utilities/NavigateTo";
+import { useLanguage } from "@/global-states/language-mode";
 
 
 interface NavbarHomeProps {
@@ -13,6 +14,7 @@ interface NavbarHomeProps {
 
 const NavbarHome: React.FC<NavbarHomeProps> = ({ isDarkMode }) => {
   const navigate = useNavigate();
+  const Language = useLanguage((state) => state.language); //true español
   return (
     <Box
       component="nav"
@@ -42,17 +44,17 @@ const NavbarHome: React.FC<NavbarHomeProps> = ({ isDarkMode }) => {
 
       <Box component="span" sx={{ display: "flex", alignItems: "center", gap: "var(--padding-medium)" }}>
         <CustomLink
-          text="About Us"
+          text={Language?"Quiénes somos?":"About Us"}
           href="https://riwi.io/empleadores/"
           target="_blank"
         />
         <CustomLink
-          text="Contact Us"
+          text={Language?"Contáctanos":"Contact Us"}
           href="https://riwi.io/empleadores/#Contacto"
           target="_blank"
         />
-        <SecondaryButton text="Log In" onClick={() => { navigate('/login') }} />
-        <MainButton text="Join Us" onClick={() => {  navigate('/register')}} />
+        <SecondaryButton text={Language?"Iniciar Sesión":"Log In" }onClick={() => { navigate('/login') }} />
+        <MainButton text={Language?"Registrate":"Join Us"} onClick={() => {  navigate('/register')}} />
       </Box>
     </Box>
   );
