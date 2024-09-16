@@ -57,13 +57,6 @@ function LogInForm():React.ReactNode{
         navigate("/dashboard");
     }
 
-    // Redirigir si ya está autenticado
-    useEffect(() => {
-        if (status === "authenticated") {
-            saveLocalStorage("session", JSON.stringify(session));
-            navigate("/dashboard");
-        }
-    }, [status,router])
     return(
     <Box
     component='form'
