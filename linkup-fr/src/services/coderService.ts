@@ -51,3 +51,24 @@ export async function getCodersBackend(): Promise<number | undefined> {
   if (!data) return;
   return data;
 }
+
+export async function getCompaniesByMonth(): Promise<{ formattedDates: string[], counts: number[] } | undefined> {
+  try {
+    const response = await fetch('https://linkupv1-production.up.railway.app/api/Dashboard/companies-by-month');
+    const data = await response.json();
+
+    if (!data || !Array.isArray(data)) return;
+
+    // Obtener los últimos 5 elementos
+    const lastFive = data.slice(-5);
+
+    // Mapear los últimos 5 elementos
+    const formattedDates = lastFive.map(item => `${item.month}/${item.year}`);
+    const counts = lastFive.map(item => item.count);
+
+    return { formattedDates, counts };
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    return;
+  }
+}
