@@ -55,7 +55,7 @@ export default function Sidebar({ expand, language }: ISidebarProps): React.Reac
         <div className="content-user-image">
           <Image
             className="image"
-            src={"/images/womanImage.avif"}
+            src={"/images/womanImage.png"}
             alt=""
             width={100}
             height={100}
