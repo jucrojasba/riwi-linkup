@@ -12,7 +12,19 @@
     flex-direction: column;
     background-color: var(--gray-color);
   }
-  
+  .chat-containe-dark-mode{
+    position: absolute;
+    bottom: 10%;
+    right: 0%;
+    width: 48%;
+    height: 500px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    background-color: #151B23;
+  }
   .chat-box {
     flex: 1;
     padding: var(--padding-medium);
@@ -33,7 +45,7 @@
   }
   
   .bot-message {
-    background-color: #6a0dad;
+    background-color: var(--main-color);
     color: #fff;
     border-radius: 10px;
     padding: var(--padding-medium);
@@ -68,7 +80,7 @@
     display: flex;
     align-items: center;
     padding: var(--padding-medium);
-    border-top: 1px solid #ddd;
+    width: 98%;
   }
   
   .textarea {
@@ -76,16 +88,28 @@
     margin-right: 10px;
     padding: var(--padding-medium);
     border-radius: 5px;
-    border: 1px solid #ddd;
     font: var(--main-font);
-    background-color: rgba(255, 255, 255, 0.656);
+    background-color: transparent;
+    border:none;
+  }
+  .textarea-dark-mode {
+    flex: 1;
+    margin-right: 10px;
+    padding: var(--padding-medium);
+    border-radius: 5px;
+    font: var(--main-font);
+    background-color: transparent;
+    border:none;
+    color:var(--white-color)
   }
   
   .send-button {
-    background-color: #6a0dad;
+    background-color: var(--main-color);
     border: none;
     border-radius: 50%;
     cursor: pointer;
+    width: 50px;
+    height: 50px;
   }
   
   .send-icon {
@@ -93,15 +117,16 @@
   }
   
   .start-button {
-    background-color: #6a0dad;
+    background-color: var(--main-color);
     color: #fff;
     border: none;
-    padding: var(--padding-min);
-    border-radius: 5px;
+    padding: var(--padding-medium);
+    border-radius: var(--border-radius-min);
     cursor: pointer;
     align-self: center;
     position: absolute;
     bottom: 5%;
+    font: var(--main-font);
   }
   .send-icon {
     transform: rotate(-45deg);

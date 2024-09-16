@@ -50,7 +50,7 @@ const SectionDashboard: React.FC<ISectionDashboard> = ({ isDarkMode, language })
                         darkMode={isDarkMode} 
                         title={language ? 'Compañias en los últimos meses' : 'Companies in the last months'} 
                     />
-                    <ChatBot botImage='./icons/logoR.svg' userImage='./images/womanImage.png'/>
+                    <ChatBot botImage='./icons/logoR.svg' userImage='./images/womanImage.png' isDarkMode={isDarkMode} language={language}/>
                 </>
             )}
         </>

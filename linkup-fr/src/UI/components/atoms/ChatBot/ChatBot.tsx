@@ -5,6 +5,8 @@ import './ChatBot.css';
 interface ChatBotProps {
   botImage: string;
   userImage: string;
+  language:boolean;
+  isDarkMode:boolean;
 }
 
 interface Message {
@@ -12,11 +14,11 @@ interface Message {
   isBot: boolean;
 }
 
-const ChatBot: React.FC<ChatBotProps> = ({ botImage, userImage }) => {
+const ChatBot: React.FC<ChatBotProps> = ({ botImage, userImage, language, isDarkMode }) => {
   const [showMessageForm, setShowMessageForm] = useState<boolean>(false);
   const [message, setMessage] = useState<string>('');
   const [messages, setMessages] = useState<Message[]>([
-    { text: "¡Hola! ¿En qué puedo ayudarte?", isBot: true }
+    { text: `${language?"¡Hola! ¿En qué puedo ayudarte?":"Hello! How can I help you?"}`, isBot: true }
   ]);
   const [stage, setStage] = useState<'initial' | 'confirm' | 'final'>('initial');
 
@@ -35,15 +37,15 @@ const ChatBot: React.FC<ChatBotProps> = ({ botImage, userImage }) => {
       setMessages([
         ...messages,
         { text: message, isBot: false },
-        { text: "¿Deseas ser redirigido a WhatsApp para hablar con alguien de Riwi?", isBot: true }
+        { text: `${language? "¿Deseas ser redirigido a WhatsApp para hablar con alguien de Riwi?":"Would you like to be redirected to WhatsApp to chat with someone from Riwi?"}`, isBot: true }
       ]);
       setStage('confirm');
     } else if (stage === 'confirm') {
-      if (message.toLowerCase() === 'sí' || message.toLowerCase() === 'si') {
+      if (message.toLowerCase() === 'sí' || message.toLowerCase() === 'si' || message.toLowerCase() === 'yes') {
         setMessages([
           ...messages,
           { text: message, isBot: false },
-          { text: "Voy a redirigirte a WhatsApp para hablar con alguien de Riwi.", isBot: true }
+          { text: `${language?"Voy a redirigirte a WhatsApp para hablar con alguien de Riwi.":'I’m going to redirect you to WhatsApp to chat with someone from Riwi.'}`, isBot: true }
         ]);
         const encodedMessage = encodeURIComponent(message);
         window.open(`https://api.whatsapp.com/send?phone=+573007446873&text=${encodedMessage}`);
@@ -51,7 +53,7 @@ const ChatBot: React.FC<ChatBotProps> = ({ botImage, userImage }) => {
         setMessages([
           ...messages,
           { text: message, isBot: false },
-          { text: "Lo siento, no puedo ayudarte en este momento. Por favor, intenta más tarde.", isBot: true }
+          { text: `${language?"Lo siento, no puedo ayudarte en este momento. Por favor, intenta más tarde.":"I'm sorry, I can't assist you right now. Please try again later."}`, isBot: true }
         ]);
         setStage('final');
       }
@@ -70,7 +72,7 @@ const ChatBot: React.FC<ChatBotProps> = ({ botImage, userImage }) => {
   };
 
   return (
-    <div className="chat-container">
+    <div className={isDarkMode?'chat-containe-dark-mode':"chat-container"}>
       <div className="chat-box">
         {messages.map((msg, index) => (
           <div
@@ -91,14 +93,14 @@ const ChatBot: React.FC<ChatBotProps> = ({ botImage, userImage }) => {
             value={message}
             onChange={handleInputChange}
             placeholder="Escribe tu mensaje..."
-            className="textarea"
+            className={isDarkMode?'textarea-dark-mode':"textarea"}
           />
           <button onClick={handleSendMessage} className="send-button">
             <SendIcon className="send-icon" />
           </button>
         </div>
       )}
-      {!showMessageForm && <button onClick={handleButtonClick} className="start-button">¡Hola!</button>}
+      {!showMessageForm && <button onClick={handleButtonClick} className="start-button">{language?'¡Hola!':'Hello!'}</button>}
     </div>
   );
 };
