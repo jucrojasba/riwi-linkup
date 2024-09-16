@@ -39,9 +39,9 @@ const SectionDashboard: React.FC<ISectionDashboard> = ({ isDarkMode, language })
     return (
         <>
             {loadingCompanies ? (
-                <LinearLoader flag={true} /> // Mostrar el loader si está cargando
+                <LinearLoader flag={true} />
             ) : (
-                <main className="main-dashboard">
+                <>
                     <DashboardCardsContainer language={language} />
                     <BarChart 
                         xData={xDataExample} 
@@ -49,7 +49,7 @@ const SectionDashboard: React.FC<ISectionDashboard> = ({ isDarkMode, language })
                         darkMode={isDarkMode} 
                         title={language ? 'Compañias en los últimos meses' : 'Companies in the last months'} 
                     />
-                </main>
+                </>
             )}
         </>
     );

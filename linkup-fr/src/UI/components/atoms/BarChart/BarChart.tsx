@@ -118,7 +118,7 @@ const BarChart: React.FC<BarChartProps> = ({ xData, yData, darkMode, title }) =>
             textAlign: 'center',
           }}
         >
-          No Data
+          -- No Data --
         </div>
       ) : (
         <div
@@ -130,7 +130,7 @@ const BarChart: React.FC<BarChartProps> = ({ xData, yData, darkMode, title }) =>
             height: '94%',
             borderRadius: '30px',
             overflow: 'hidden',
-            backgroundColor: darkMode ? '#333' : '#f5f5f5',
+            backgroundColor: darkMode ? '#333' : '#d3d3d3',
             zIndex: 10,
           }}
         ></div>
