@@ -30,7 +30,7 @@ export async function deleteCoderService(
 
 export async function getCodersInTraining(): Promise<number | undefined> {
   const data = await fetchApi(
-    `https://linkup.azurewebsites.net/api/Dashboard/coders-in-training`
+    `https://linkupv1-production.up.railway.app/api/Dashboard/coders-in-training`
   );
   if (!data) return;
   return data;
@@ -38,7 +38,7 @@ export async function getCodersInTraining(): Promise<number | undefined> {
 
 export async function getCodersFrontend(): Promise<number | undefined> {
   const data = await fetchApi(
-    `https://linkup.azurewebsites.net/api/Dashboard/frontend-coders`
+    `https://linkupv1-production.up.railway.app/api/Dashboard/frontend-coders`
   );
   if (!data) return;
   return data;
@@ -46,7 +46,7 @@ export async function getCodersFrontend(): Promise<number | undefined> {
 
 export async function getCodersBackend(): Promise<number | undefined> {
   const data = await fetchApi(
-    `https://linkup.azurewebsites.net/api/Dashboard/backend-coders`
+    `https://linkupv1-production.up.railway.app/api/Dashboard/backend-coders`
   );
   if (!data) return;
   return data;
