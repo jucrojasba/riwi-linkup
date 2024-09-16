@@ -45,7 +45,7 @@ export default function DashboardLayout({
         <main className={"mainGeneral"}>
           <TitleMain
             className="titleMain"
-            title={path === "/admin/coder" ? "" : "Filters"}
+            title={path === "/admin/coder" || path === "/dashboard" || path === "/config" ? "" : "Filters"}
             subtitle=""
           />
           {path === "/admin/coder" || path === "/dashboard" || path === "/config"  ? null : <Filter />}
