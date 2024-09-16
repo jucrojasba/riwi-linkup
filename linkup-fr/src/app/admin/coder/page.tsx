@@ -5,6 +5,5 @@ import { DashboardLayout } from "@/UI/components/organisms";
 import SectionCoderOnly from "@/UI/components/organisms/sectionCoderOnly/sectionCoderOnly";
 export default function CoderView(): React.ReactNode {
   const language = useLanguage();
-
   return <DashboardLayout section={<div>dasd</div>} titleView="Coder" subtitle="Information" path="/coder" language={language}/>;
 }

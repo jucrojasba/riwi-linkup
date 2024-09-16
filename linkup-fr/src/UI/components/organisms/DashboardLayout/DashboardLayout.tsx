@@ -21,6 +21,7 @@ export default function DashboardLayout({
   subtitle,
   path,
   language,
+
 }: IDashboardLayoutProps): React.ReactElement {
   const [expand, setExpand] = useState<boolean>(false);
 
