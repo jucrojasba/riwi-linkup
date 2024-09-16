@@ -11,6 +11,8 @@ import MenuOpenIcon from "@mui/icons-material/MenuOpen";
 import { useLanguage } from "@/global-states/language-mode";
 import { signOut } from "next-auth/react";
 import { clearLocalStorage } from "@/utilities/LocalStorage";
+import { capitalizeSentece } from "@/utilities/CapitalizeSentence";
+import { useAuthUser } from "@/global-states/authUser";
 
 interface ISidebarProps {
   expand: boolean;
@@ -21,6 +23,7 @@ interface ISidebarProps {
 
 export default function Sidebar({ expand, language }: ISidebarProps): React.ReactNode {
   const [openSidebar, setOpenSidebar] = useState<boolean>(false);
+  const authState = useAuthUser((state)=>state.authUser);
 
   const navDataIcons = [
     { name: language? 'Tablero':"Dashboard", src: SpaceDashboardIcon, href: "/dashboard" },
@@ -62,7 +65,7 @@ export default function Sidebar({ expand, language }: ISidebarProps): React.Reac
         <h5 className="content-user-welcome">
           {language ? "Bienvenido" : "Welcome back"}
         </h5>
-        <h3 className="content-user-name">Team</h3>
+        <h3 className="content-user-name">{capitalizeSentece(authState.name)}</h3>
       </div>
       <nav className="navbar">
         <ul className="navbar-list">
