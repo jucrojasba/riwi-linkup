@@ -1,5 +1,5 @@
 import "./filterStyles.css";
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useEffect, useState, useLayoutEffect } from "react";
 import InputFilter from "../../atoms/InputFilter/InputFilter";
 import MainButton from "../../atoms/MainButton/MainButton";
 import FilterAltOffIcon from "@mui/icons-material/FilterAltOff";
@@ -27,6 +27,30 @@ export default function Filter({setRender, render}:IFilterProps): ReactNode {
   const [checkedStates, setCheckedStates] = useState<FilterState>(initialState);
   const {setCodersFilter} = useCodersFilter();
 
+  useLayoutEffect(() => {
+    const fetchFiltersData = async () => {
+      try {
+        const languages = await getLanguagesService();
+        const techSkills = await getTechnicalSkillsService();
+        const softSkills = await getSoftSkillsService();
+        const clans = await getClansService();
+
+        if (languages && techSkills && softSkills && clans) {
+          setCheckedStates({
+            languages,
+            techSkills,
+            softSkills,
+            clans,
+          });
+        }
+      } catch (error) {
+        console.error("Error loading filters", error);
+      }
+    };
+
+    fetchFiltersData();
+  }, []);
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = event.target;
     const updatedState = { ...checkedStates };
@@ -50,54 +74,7 @@ export default function Filter({setRender, render}:IFilterProps): ReactNode {
     }
   };
 
-  useEffect(()=>{
-    const getLanguages = async() => {
-      const data = await getLanguagesService();
-      if(!data){
-        console.log({message: "Error to get languages"})
-        return;
-      }
-    } 
-
-    getLanguages();
-    
-  });
-  useEffect(()=>{
-    const getTechSkills = async() => {
-      const data = await getTechnicalSkillsService();
-      if(!data){
-        console.log({message: "Error to get tech skills"})
-        return;
-      }
-      console.log(data);
-    }
-    getTechSkills();
-  });
-  useEffect(()=>{
-    const getSoftSkills = async() => {
-      const data = await getSoftSkillsService();
-      if(!data){
-        console.log({message: "Error to get soft skills"})
-        return;
-      }
-      console.log(data);
-    }
-    getSoftSkills();
-  });
-  useEffect(()=>{
-    const getClans = async() => {
-      const data = await getClansService();
-      if(!data){
-        console.log({message: "Error to get Clans"})
-        return;
-      }
-      console.log(data);
-    };
-    getClans()
-  })
-
   const handleCLickButtonClear = async() =>{
-    setCheckedStates(initialState);
     const data = await getCodersService();
     if(!data){
       console.log({message: "Error to filter"})

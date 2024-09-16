@@ -1,7 +1,7 @@
 import { ILanguages, ILanguage } from "@/UI/interfaces/languageInterface";
 import fetchApi from "@/utilities/fetchApi";
 
-export async function getLanguagesService():Promise<ILanguages | null>{
+export async function getLanguagesService():Promise<ILanguage[] | null>{
     const data = await fetchApi("https://linkupv1-production.up.railway.app/api/v1/Coders/Languages");
     if(!data){
         console.log({message: "Error to get languages"})

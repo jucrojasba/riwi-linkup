@@ -1,7 +1,7 @@
 import { ISoftSkill, ISoftSkills } from "@/UI/interfaces/softSkillInterface";
 import fetchApi from "@/utilities/fetchApi";
 
-export async function getSoftSkillsService():Promise<ISoftSkills | null>{
+export async function getSoftSkillsService():Promise<ISoftSkill[] | null>{
     const data = await fetchApi("https://linkupv1-production.up.railway.app/api/v1/Coders/SoftSkills");
     if(!data){
         console.log({message: "Error to get Soft Skills"})
