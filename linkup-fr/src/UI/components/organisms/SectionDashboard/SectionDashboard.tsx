@@ -1,11 +1,10 @@
 'use client'
 
-import { getCompaniesByMonth } from "@/services/coderService";
+import { getCompaniesByMonth } from "@/services/clientServices";
 import BarChart from "../../atoms/BarChart/BarChart";
 import DashboardCardsContainer from "../DashboardCardsContainer/DashboardCardsContainer";
 import { useEffect, useState } from "react";
 import { LinearLoader } from "../../atoms";
-import './SectionDashboardStyles.css'
 import ChatBot from "../../atoms/ChatBot/ChatBot";
 
 interface ISectionDashboard {
@@ -33,9 +32,7 @@ const SectionDashboard: React.FC<ISectionDashboard> = ({ isDarkMode, language })
 
     // Si companiesData no está definido, se debe proporcionar valores por defecto
     const xDataExample: string[] = companiesData?.formattedDates ?? [];
-    const yDataExample: number[] = companiesData?.counts ?? [];
-
-    
+    const yDataExample: number[] = companiesData?.counts ?? []; 
 
     return (
         <>
