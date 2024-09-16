@@ -128,7 +128,7 @@ const BarChart: React.FC<BarChartProps> = ({ xData, yData, darkMode, title }) =>
             top: '6%',
             width: '100%',
             height: '94%',
-            borderRadius: '30px',
+            borderRadius: 'var(--border-radius-min)',
             overflow: 'hidden',
             backgroundColor: darkMode ? '#333' : 'var(--gray-color)',
             zIndex: 10,
