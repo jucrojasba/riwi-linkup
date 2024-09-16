@@ -6,21 +6,20 @@ import useNavigate from "@/utilities/NavigateTo";
 import { CircularLoader } from "@/UI/components/atoms";
 
 export default function Route({ children }: { children: React.ReactNode }) {
-    const [loading, setLoading] = useState<boolean>(true); // Estado de loading
+    const [loading, setLoading] = useState<boolean>(true); // States for loading
     const navigate = useNavigate();
     const [path, setPath] = useState<string>("");
 
-    // Ejecutar cuando el componente se monta
+    // Only execute one time when the componente is mounted
     useLayoutEffect(() => {
         if (typeof window !== "undefined") {
-            const currentPath = window.location.pathname;
-            setPath(currentPath);
+            setPath(window.location.pathname);
+            setLoading(false); // Set loading to false
         }
     }, []);
 
     useLayoutEffect(() => {
-        if (path) {
-            // Lógica de verificación de rutas
+        if (path) { // 
             const isPrivateRoute = routes.privateRoutes.find((route) => route.path === path);
             const isPublicRoute = routes.publicRoutes.find((route) => route.path === path);
             const token = localStorage.getItem("token");
@@ -38,17 +37,16 @@ export default function Route({ children }: { children: React.ReactNode }) {
             }
 
             if (isPublicRoute) {
-                setLoading(false); // Permitir el renderizado solo si es una ruta pública o si ya se verificó todo
                 return;
             }
         }
-    }, [path, navigate]);
+    }, [path, navigate]); 
 
-    // Mostrar cargador mientras se verifica la ruta y la autenticación
+    // Show loading while loading the routes
     if (loading) {
-        return <CircularLoader flag={loading} />;
+        return (
+            <CircularLoader flag={loading} />
+        )
     }
-
-    // Mostrar el contenido solo después de la verificación
     return <>{children}</>;
 }
