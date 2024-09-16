@@ -10,7 +10,7 @@ export default function Route({ children }: { children: React.ReactNode }) {
     const navigate = useNavigate();
     const [path, setPath] = useState<string>("");
 
-    // Only execute one time when the componente is mounted
+    // Ejecutar cuando el componente se monta
     useLayoutEffect(() => {
         if (typeof window !== "undefined") {
             setPath(window.location.pathname);
@@ -18,25 +18,25 @@ export default function Route({ children }: { children: React.ReactNode }) {
         }
     }, []);
 
+    // Ejecutar la lógica de verificación de rutas y autenticación
     useLayoutEffect(() => {
-        if (path) { // 
+        if (path) {
+            // Lógica de verificación de rutas
             const isPrivateRoute = routes.privateRoutes.find((route) => route.path === path);
             const isPublicRoute = routes.publicRoutes.find((route) => route.path === path);
-            const token = localStorage.getItem("token");
 
+            // Verificar si el usuario está autenticado y redirigir si es necesario
             if ((path === "/login" || path === "/" || path === "/register") && token) {
                 console.log("Token exists, redirecting to dashboard");
                 navigate("/dashboard");
-                return;
-            }
-
-            if (isPrivateRoute && !token) {
+            } else if (isPrivateRoute && !token) {
                 console.log("Access denied: Private route requires authentication");
                 navigate("/login");
                 return;
             }
 
             if (isPublicRoute) {
+                setLoading(false); // Permitir el renderizado solo si es una ruta pública o si ya se verificó todo
                 return;
             }
         }
@@ -48,5 +48,7 @@ export default function Route({ children }: { children: React.ReactNode }) {
             <CircularLoader flag={loading} />
         )
     }
+
+    // Mostrar el contenido solo después de la verificación
     return <>{children}</>;
 }

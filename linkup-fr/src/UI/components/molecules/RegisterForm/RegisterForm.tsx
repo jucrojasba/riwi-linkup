@@ -6,7 +6,6 @@ import CustomLink from "../../atoms/CustomLink/CustomLink";
 import PasswordInput from "../../atoms/PasswordInput/PasswordInput";
 import { useEffect, useState } from "react";
 import { ICompanyRegister } from "@/UI/interfaces/Forms";
-import saveCredentials from "@/utilities/credentials";
 import { authRegisterService } from "@/services/authService";
 import { CircularLoader } from "../../atoms";
 import {SelectOptions} from "../../atoms";
