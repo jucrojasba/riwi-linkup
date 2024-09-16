@@ -4,8 +4,7 @@ import fetchApi from "@/utilities/fetchApi";
 
 export async function getCodersService(): Promise<ICoder[] | undefined> {
   const data =
-    await fetchApi(`http://192.168.88.72:5298/api/v2/CodersControllerV2
-  `);
+    await fetchApi("https://linkupv1-production.up.railway.app/api/v2/CodersControllerV2");
   if (!data) return;
   const filteredCoders = data.map((coder: Partial<ICoder>) => ({
     id: coder.id!,
