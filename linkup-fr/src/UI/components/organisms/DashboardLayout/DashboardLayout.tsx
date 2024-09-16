@@ -4,8 +4,6 @@ import { Footer, Header } from "../../molecules";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { Filter } from "../../molecules";
 import TitleMain from "../../atoms/TitleMain/TitleMain";
-import { useLanguage } from "@/global-states/language-mode";
-import { Language } from "@mui/icons-material";
 
 interface IDashboardLayoutProps {
   section: ReactElement;
@@ -13,6 +11,7 @@ interface IDashboardLayoutProps {
   subtitle: string;
   path: string;
   language: any;
+  isDarkMode: boolean;
 }
 
 export default function DashboardLayout({
@@ -21,6 +20,7 @@ export default function DashboardLayout({
   subtitle,
   path,
   language,
+  isDarkMode,
 }: IDashboardLayoutProps): React.ReactElement {
   const [expand, setExpand] = useState<boolean>(false);
 
@@ -30,7 +30,7 @@ export default function DashboardLayout({
   };
 
   return (
-    <div className="content-layout">
+    <div className={isDarkMode?'content-layout-dark-mode':"content-layout"}>
       <div className="content-dashboard">
         <div className="open" onClick={handleButtonExpand}>
           <KeyboardArrowDownIcon />
