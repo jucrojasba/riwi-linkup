@@ -4,11 +4,14 @@ import { routes } from "./routes";
 import "./routeStyles.css";
 import useNavigate from "@/utilities/NavigateTo";
 import { CircularLoader } from "@/UI/components/atoms";
+import { useSession } from "next-auth/react";
+import { saveLocalStorage } from "@/utilities/LocalStorage";
 
 export default function Route({ children }: { children: React.ReactNode }) {
     const [loading, setLoading] = useState<boolean>(true); // Estado de loading
     const navigate = useNavigate();
     const [path, setPath] = useState<string>("");
+    const { data: session, status } = useSession();
 
     // Obtener el path actual cuando el componente se monta
     useLayoutEffect(() => {
@@ -22,9 +25,25 @@ export default function Route({ children }: { children: React.ReactNode }) {
     useLayoutEffect(() => {
         if (path) {
             const token = localStorage.getItem("token");
-
             const isPrivateRoute = routes.privateRoutes.find((route) => route.path === path);
             const isPublicRoute = routes.publicRoutes.find((route) => route.path === path);
+            if(status === "authenticated"){
+                // console.log("Authenticated");
+                // setLoading(false);
+                // const {user} = session;
+                // if(!user){
+                //     console.log({message: "Error get user with google or Github"});
+                //     return;
+                // }
+                // const name = user!.name;
+                // const email = user!.email;
+                // const image = user!.image;
+                // const token = generateToken({name, email, image});
+                // console.log({token});
+                // saveLocalStorage("token", token!);
+                // navigate("/dashboard");
+                // return;
+            }
 
             // Verificar si el usuario está autenticado y redirigir si es necesario
             if ((path === "/login" || path === "/" || path === "/register") && token) {

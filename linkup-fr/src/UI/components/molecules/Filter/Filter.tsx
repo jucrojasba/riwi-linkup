@@ -4,44 +4,38 @@ import InputFilter from "../../atoms/InputFilter/InputFilter";
 import MainButton from "../../atoms/MainButton/MainButton";
 import SearchIcon from "@mui/icons-material/Search";
 import FilterAltOffIcon from "@mui/icons-material/FilterAltOff";
+import { FilterState } from "@/UI/interfaces/Filter";
+import { filterService } from "@/services/filterService";
+import { useCodersFilter } from "@/global-states/coder";
+import { ICoder } from "@/UI/interfaces/ICoderInterface";
 
-interface FilterOption {
-  checked: boolean;
-  name: string;
-  label: string;
+interface IFilterProps{
+  setRender?: (value:boolean) => void
 }
-
-interface FilterState {
-  languages: FilterOption[];
-  teachSkills: FilterOption[];
-  softSkills: FilterOption[];
-  clans: FilterOption[];
-}
-
-export default function Filter(): ReactNode {
+export default function Filter({setRender}:IFilterProps): ReactNode {
   const initialState: FilterState = {
     languages: [
-      { checked: false, name: "cSharp", label: "C#-ASP.NET" },
-      { checked: false, name: "java", label: "Java" },
-      { checked: false, name: "nextjs", label: "Next.js" },
+      { checked: false, name: "ingles", label: "English", id: 1 },
+      { checked: false, name: "portugues", label: "Portuguese", id: 2 },
+      { checked: false, name: "frances", label: "French", id: 3 },
     ],
-    teachSkills: [
-      { checked: false, name: "ingles", label: "Ingles" },
-      { checked: false, name: "espanol", label: "Español" },
-      { checked: false, name: "portugues", label: "Portugues" },
+    techSkills: [
+      { checked: false, name: "javascript", label: "Javascript", id: 1 },
+      { checked: false, name: "python", label: "Python", id: 2 },
+      { checked: false, name: "java", label: "Java", id: 3},
     ],
     softSkills: [
-      { checked: false, name: "teamwork", label: "Teamwork" },
-      { checked: false, name: "communication", label: "Communication" },
-      { checked: false, name: "leaderShip", label: "LeaderShip" },
+      { checked: false, name: "communication", label: "Communication", id: 1 },
+      { checked: false, name: "teamwork", label: "Teamwork", id: 2 },
     ],
     clans: [
-      { checked: false, name: "bernesLee", label: "Bernes Lee" },
-      { checked: false, name: "gates", label: "Gates" },
-      { checked: false, name: "jeffBezzos", label: "Jeff bezzos" },
+      { checked: false, name: "bernesLee", label: "Bernes Lee", id: 1},
+      { checked: false, name: "ritchie", label: "Ritchie", id: 2 },
+      { checked: false, name: "gates", label: "Gates", id:  3},
     ],
   };
   const [checkedStates, setCheckedStates] = useState<FilterState>(initialState);
+  const {setCodersFilter} = useCodersFilter();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = event.target;
@@ -51,12 +45,19 @@ export default function Filter(): ReactNode {
         item.name === name ? { ...item, checked } : item
       );
     });
-
     setCheckedStates(updatedState);
   };
 
-  const handleClickButton = () => {
-    console.log(checkedStates);
+  const handleClickButton = async() => {
+    const data = await filterService(checkedStates);
+    if(!data){
+      console.log({message: "Error to filter"})
+      return;
+    }
+    setCodersFilter(data);
+    if(setRender){
+      setRender(true);
+    }
   };
 
   return (
@@ -78,13 +79,13 @@ export default function Filter(): ReactNode {
       <div className="filter-teach">
         <h3 className="teach-title">Teach Skills</h3>
         <div className="teach-options">
-          {checkedStates.teachSkills.map((teachSkill) => (
+          {checkedStates.techSkills.map((techSkill) => (
             <InputFilter
-              key={teachSkill.name}
-              label={teachSkill.label}
-              name={teachSkill.name}
+              key={techSkill.name}
+              label={techSkill.label}
+              name={techSkill.name}
               onChange={handleChange}
-              checked={teachSkill.checked}
+              checked={techSkill.checked}
             />
           ))}
         </div>
