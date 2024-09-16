@@ -23,10 +23,10 @@ export default function Sidebar({ expand, language }: ISidebarProps): React.Reac
   const [openSidebar, setOpenSidebar] = useState<boolean>(false);
 
   const navDataIcons = [
-    { name: "Dashboard", src: SpaceDashboardIcon, href: "/dashboard" },
-    { name: "Coders", src: ComputerIcon, href: "/coders" },
-    { name: "Config", src: SettingsIcon, href: "/config" },
-    { name: "MyList", src: ChecklistRtlIcon, href: "/login" },
+    { name: language? 'Tablero':"Dashboard", src: SpaceDashboardIcon, href: "/dashboard" },
+    { name: language? 'Desarrolladores':"Coders", src: ComputerIcon, href: "/coders" },
+    { name: language? 'Configuración':"Config", src: SettingsIcon, href: "/config" },
+    { name: language? 'Mi Lista':"My List", src: ChecklistRtlIcon, href: "/login" },
   ];
 
   const handleOpenMenu = () => {
@@ -81,7 +81,7 @@ export default function Sidebar({ expand, language }: ISidebarProps): React.Reac
             openSidebar={openSidebar}
             icon={LogoutIcon}
             href={"#"}
-            name="Logout"
+            name={language?'Salir':"Logout"}
             onClick={handleSignOut}
           />
         </ul>
