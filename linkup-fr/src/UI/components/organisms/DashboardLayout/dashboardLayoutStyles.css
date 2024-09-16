@@ -11,7 +11,17 @@ div.content-layout {
   height: 100%;
   width: 100%;
 }
-
+.content-layout-dark-mode{
+  background-color: var(--paragraph-color);
+  display: flex;
+  gap: var(--border-radius-big);
+  color: var(--white-color);
+  font-family: "Ubuntu", sans-serif;
+  overflow: visible;
+  transition: all 0.3s ease;
+  height: 100%;
+  width: 100%;
+}
 .open {
   display: none;
 }

@@ -29,7 +29,7 @@ export async function deleteCoderService(
 
 export async function getCodersInTraining(): Promise<number | undefined> {
   const data = await fetchApi(
-    `https://linkup.azurewebsites.net/api/Dashboard/coders-in-training`
+    `https://linkupv1-production.up.railway.app/api/Dashboard/coders-in-training`
   );
   if (!data) return;
   return data;
@@ -37,7 +37,7 @@ export async function getCodersInTraining(): Promise<number | undefined> {
 
 export async function getCodersFrontend(): Promise<number | undefined> {
   const data = await fetchApi(
-    `https://linkup.azurewebsites.net/api/Dashboard/frontend-coders`
+    `https://linkupv1-production.up.railway.app/api/Dashboard/frontend-coders`
   );
   if (!data) return;
   return data;
@@ -45,8 +45,29 @@ export async function getCodersFrontend(): Promise<number | undefined> {
 
 export async function getCodersBackend(): Promise<number | undefined> {
   const data = await fetchApi(
-    `https://linkup.azurewebsites.net/api/Dashboard/backend-coders`
+    `https://linkupv1-production.up.railway.app/api/Dashboard/backend-coders`
   );
   if (!data) return;
   return data;
+}
+
+export async function getCompaniesByMonth(): Promise<{ formattedDates: string[], counts: number[] } | undefined> {
+  try {
+    const response = await fetch('https://linkupv1-production.up.railway.app/api/Dashboard/companies-by-month');
+    const data = await response.json();
+
+    if (!data || !Array.isArray(data)) return;
+
+    const monthAbbreviations = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+    const lastFive = data.slice(-5);
+
+    const formattedDates = lastFive.map(item => monthAbbreviations[item.month - 1]); 
+    const counts = lastFive.map(item => item.count);
+
+    return { formattedDates, counts };
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    return;
+  }
 }

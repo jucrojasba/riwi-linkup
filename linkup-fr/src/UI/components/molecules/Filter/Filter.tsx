@@ -6,8 +6,13 @@ import SearchIcon from "@mui/icons-material/Search";
 import FilterAltOffIcon from "@mui/icons-material/FilterAltOff";
 import { FilterState } from "@/UI/interfaces/Filter";
 import { filterService } from "@/services/filterService";
+import { useCodersFilter } from "@/global-states/coder";
+import { ICoder } from "@/UI/interfaces/ICoderInterface";
 
-export default function Filter(): ReactNode {
+interface IFilterProps{
+  setRender?: (value:boolean) => void
+}
+export default function Filter({setRender}:IFilterProps): ReactNode {
   const initialState: FilterState = {
     languages: [
       { checked: false, name: "ingles", label: "English", id: 1 },
@@ -30,6 +35,7 @@ export default function Filter(): ReactNode {
     ],
   };
   const [checkedStates, setCheckedStates] = useState<FilterState>(initialState);
+  const {setCodersFilter} = useCodersFilter();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = event.target;
@@ -39,13 +45,19 @@ export default function Filter(): ReactNode {
         item.name === name ? { ...item, checked } : item
       );
     });
-
     setCheckedStates(updatedState);
   };
 
   const handleClickButton = async() => {
     const data = await filterService(checkedStates);
-    console.log(data);
+    if(!data){
+      console.log({message: "Error to filter"})
+      return;
+    }
+    setCodersFilter(data);
+    if(setRender){
+      setRender(true);
+    }
   };
 
   return (

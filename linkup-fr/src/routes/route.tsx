@@ -6,7 +6,6 @@ import useNavigate from "@/utilities/NavigateTo";
 import { CircularLoader } from "@/UI/components/atoms";
 import { useSession } from "next-auth/react";
 import { saveLocalStorage } from "@/utilities/LocalStorage";
-// import { generateToken } from "@/utilities/generateToken";
 
 export default function Route({ children }: { children: React.ReactNode }) {
     const [loading, setLoading] = useState<boolean>(true); // Estado de loading

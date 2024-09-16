@@ -5,12 +5,14 @@ import SearchIcon from "@mui/icons-material/Search";
 import { ButtonMore, CircularLoader, CustomLink, LinearLoader, MainButton, PasswordInput, SecondaryButton, TextInput } from "@/UI/components/atoms";
 import { RegisterForm } from "@/UI/components/molecules";
 import CustomIconButton from "@/UI/components/atoms/IconButton/IconButton";
+import ChatBot from "@/UI/components/atoms/ChatBot/ChatBot";
+
 
 
 export default function TestView() {
   return (
     <main>
-      <Box sx={{padding:'40px'}}>
+       <Box sx={{padding:'40px'}}>
         <MainButton text={<SearchIcon />} onClick={()=>{}}></MainButton>
         <SecondaryButton text="Secundario" onClick={()=>{}}></SecondaryButton>
         <ButtonMore></ButtonMore>
@@ -25,7 +27,7 @@ export default function TestView() {
       <RegisterForm/>
       <CustomIconButton icon="google" iconColor="#db4437" backgroundColor="var(--gray-color)" onClick={()=>{}}></CustomIconButton>
       <CustomIconButton icon="github" iconColor="black" backgroundColor="var(--gray-color)" onClick={()=>{}}></CustomIconButton>
-
+      <RegisterForm/> 
     </main>
   );
 }
