@@ -8,6 +8,7 @@ interface IItemNavProps {
   href: string;
   name: string;
   openSidebar?: boolean;
+  onClick?: () => void;
 }
 
 export default function ItemNav({
@@ -15,9 +16,10 @@ export default function ItemNav({
   href,
   name,
   openSidebar,
+  onClick
 }: IItemNavProps): React.ReactNode {
   return (
-    <li className="nav-list-item">
+    <li className="nav-list-item" onClick={onClick}>
       <Icon />
       <Link
         className="list-item-link"
