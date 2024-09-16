@@ -1,5 +1,5 @@
 /* Styles for section coders----------------->*/
-section.main-section {
+section.mainGeneral-section {
   display: flex;
   flex-direction: column;
   gap: var(--padding-medium);
@@ -7,20 +7,20 @@ section.main-section {
   height: 74%;
 }
 
-section.main-section > div.section-content-cards {
+section.mainGeneral-section > div.section-content-cards {
   display: flex;
   flex-wrap: wrap;
   gap: var(--padding-medium);
   height: auto;
 }
 
-section.main-section > div.section-buttons {
+section.mainGeneral-section > div.section-buttons {
   color: var(--main-color);
   display: flex;
   cursor: pointer;
 }
 
-section.main-section > div.section-buttons > .button-left {
+section.mainGeneral-section > div.section-buttons > .button-left {
 }
 
 /*

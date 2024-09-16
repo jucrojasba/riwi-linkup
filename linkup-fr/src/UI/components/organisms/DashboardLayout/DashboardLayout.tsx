@@ -5,13 +5,14 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { Filter } from "../../molecules";
 import TitleMain from "../../atoms/TitleMain/TitleMain";
 import { useLanguage } from "@/global-states/language-mode";
+import { Language } from "@mui/icons-material";
 
 interface IDashboardLayoutProps {
   section: ReactElement;
   titleView: string;
-  subtitle:string;
+  subtitle: string;
   path: string;
-  language:any,
+  language: any;
 }
 
 export default function DashboardLayout({
@@ -19,7 +20,7 @@ export default function DashboardLayout({
   titleView,
   subtitle,
   path,
-  language
+  language,
 }: IDashboardLayoutProps): React.ReactElement {
   const [expand, setExpand] = useState<boolean>(false);
 
@@ -34,15 +35,20 @@ export default function DashboardLayout({
         <div className="open" onClick={handleButtonExpand}>
           <KeyboardArrowDownIcon />
         </div>
-        <Header expand={expand} titleView={titleView} subtitle={subtitle} path={path} language={language} />
-
-        <main className={"main"}>
-          <TitleMain className="titleMain" title={path === "/admin/coder" ? "": "Filters"} subtitle="" />
-          {path === "/admin/coder" 
-          ? null 
-          :
-          <Filter />
-          }
+        <Header
+          expand={expand}
+          titleView={titleView}
+          subtitle={subtitle}
+          path={path}
+          language={language}
+        />
+        <main className={"mainGeneral"}>
+          <TitleMain
+            className="titleMain"
+            title={path === "/admin/coder" || path === "/dashboard" || path === "/config" ? "" : "Filters"}
+            subtitle=""
+          />
+          {path === "/admin/coder" || path === "/dashboard" || path === "/config"  ? null : <Filter />}
           {section}
         </main>
         <Footer />

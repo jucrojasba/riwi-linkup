@@ -58,9 +58,10 @@ export default function SectionCoders(): React.ReactElement {
       setCurrentPage(currentPage - 1);
     }
   };
+  console.log(coders)
 
   return (
-    <section className="main-section">
+    <section className="mainGeneral-section">
       <div className="section-content-cards">
         {loadingRequest ? (
           <CircularLoader flag={true} /> // Display loader when loading
