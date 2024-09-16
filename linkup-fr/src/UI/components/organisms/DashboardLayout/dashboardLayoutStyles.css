@@ -48,7 +48,7 @@ div.content-dashboard {
   width: 100%;
 }
 
-div.content-dashboard > main.main {
+div.content-dashboard > main.mainGeneral {
   position: absolute;
   width: 80%;
   height: 85%;
