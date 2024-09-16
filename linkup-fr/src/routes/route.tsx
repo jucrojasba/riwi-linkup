@@ -6,22 +6,23 @@ import useNavigate from "@/utilities/NavigateTo";
 import { CircularLoader } from "@/UI/components/atoms";
 
 export default function Route({ children }: { children: React.ReactNode }) {
-    const [loading, setLoading] = useState<boolean>(true); // States for loading
+    const [loading, setLoading] = useState<boolean>(true); // Estado de loading
     const navigate = useNavigate();
     const [path, setPath] = useState<string>("");
 
-    // Ejecutar cuando el componente se monta
+    // Obtener el path actual cuando el componente se monta
     useLayoutEffect(() => {
         if (typeof window !== "undefined") {
-            setPath(window.location.pathname);
-            setLoading(false); // Set loading to false
+            const currentPath = window.location.pathname;
+            setPath(currentPath);
         }
     }, []);
 
     // Ejecutar la lógica de verificación de rutas y autenticación
     useLayoutEffect(() => {
         if (path) {
-            // Lógica de verificación de rutas
+            const token = localStorage.getItem("token");
+
             const isPrivateRoute = routes.privateRoutes.find((route) => route.path === path);
             const isPublicRoute = routes.publicRoutes.find((route) => route.path === path);
 
@@ -32,23 +33,18 @@ export default function Route({ children }: { children: React.ReactNode }) {
             } else if (isPrivateRoute && !token) {
                 console.log("Access denied: Private route requires authentication");
                 navigate("/login");
-                return;
-            }
-
-            if (isPublicRoute) {
-                setLoading(false); // Permitir el renderizado solo si es una ruta pública o si ya se verificó todo
-                return;
+            } else {
+                // Si la ruta es pública o el usuario tiene acceso, finaliza la carga
+                setLoading(false);
             }
         }
-    }, [path, navigate]); 
+    }, [path, navigate]);
 
-    // Show loading while loading the routes
+    // Mostrar cargador mientras se verifica la ruta y la autenticación
     if (loading) {
-        return (
-            <CircularLoader flag={loading} />
-        )
+        return <CircularLoader flag={loading} />;
     }
 
-    // Mostrar el contenido solo después de la verificación
+    // Mostrar el contenido solo después de que la lógica se haya ejecutado
     return <>{children}</>;
 }
