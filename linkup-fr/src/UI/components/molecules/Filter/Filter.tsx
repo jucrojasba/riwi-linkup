@@ -2,17 +2,19 @@ import "./filterStyles.css";
 import { ReactNode, useState } from "react";
 import InputFilter from "../../atoms/InputFilter/InputFilter";
 import MainButton from "../../atoms/MainButton/MainButton";
-import SearchIcon from "@mui/icons-material/Search";
 import FilterAltOffIcon from "@mui/icons-material/FilterAltOff";
+import SearchIcon from '@mui/icons-material/Search';
 import { FilterState } from "@/UI/interfaces/Filter";
 import { filterService } from "@/services/filterService";
 import { useCodersFilter } from "@/global-states/coder";
 import { ICoder } from "@/UI/interfaces/ICoderInterface";
+import { getCodersService } from "@/services/coderService";
 
 interface IFilterProps{
+  render?: boolean;
   setRender?: (value:boolean) => void
 }
-export default function Filter({setRender}:IFilterProps): ReactNode {
+export default function Filter({setRender, render}:IFilterProps): ReactNode {
   const initialState: FilterState = {
     languages: [
       { checked: false, name: "ingles", label: "English", id: 1 },
@@ -48,7 +50,7 @@ export default function Filter({setRender}:IFilterProps): ReactNode {
     setCheckedStates(updatedState);
   };
 
-  const handleClickButton = async() => {
+  const handleClickButtonFilter = async() => {
     const data = await filterService(checkedStates);
     if(!data){
       console.log({message: "Error to filter"})
@@ -59,6 +61,19 @@ export default function Filter({setRender}:IFilterProps): ReactNode {
       setRender(true);
     }
   };
+
+  const handleCLickButtonClear = async() =>{
+    setCheckedStates(initialState);
+    const data = await getCodersService();
+    if(!data){
+      console.log({message: "Error to filter"})
+      return;
+    }
+    setCodersFilter(data);
+    if(setRender){
+      setRender(true);
+    }
+  }
 
   return (
     <div className="filter">
@@ -120,9 +135,18 @@ export default function Filter({setRender}:IFilterProps): ReactNode {
       </div>
       <div className="button-search">
         <MainButton
-          text={<FilterAltOffIcon />}
+          icon={<FilterAltOffIcon />}
+          text={""}
           type="button"
-          onClick={handleClickButton}
+          onClick={handleCLickButtonClear}
+        />
+      </div>
+      <div className="button-search">
+        <MainButton
+          icon={<SearchIcon />}
+          text={""}
+          type="button"
+          onClick={handleClickButtonFilter}
         />
       </div>
     </div>

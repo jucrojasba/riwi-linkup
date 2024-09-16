@@ -2,7 +2,7 @@ div.filter {
   display: flex;
   align-items: center;
   gap: var(--padding-big);
-  height: 15%;
+  height: 12%;
   width: 100%;
 }
 
@@ -13,6 +13,7 @@ div.filter > div.filter-clan {
   display: flex;
   flex-direction: column;
   gap: var(--padding-medium);
+  height: 100%;
 }
 
 div.filter > div.filter-languages > div.languages-options,
@@ -32,5 +33,6 @@ div.filter > div.filter-clan > h3 {
 }
 
 div.filter > div.button-search {
-  margin-top: 40px;
+  height: 100%;
+  padding-top: var(--padding-big);
 }

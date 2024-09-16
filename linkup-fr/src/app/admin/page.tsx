@@ -9,7 +9,7 @@ export default function AdminView(): React.ReactNode {
   const [render,setRender] = useState<boolean>(false);
   return (
     <Route>
-      <DashboardLayout section={<SectionCoders render={render} />} titleView="Coders" subtitle="General Information" path="/admin" language={languages} setRender={setRender}/>
+      <DashboardLayout section={<SectionCoders render={render} />} titleView="Coders" subtitle="General Information" path="/admin" language={languages} setRender={setRender} render={render}/>
     </Route>
   );
 }
