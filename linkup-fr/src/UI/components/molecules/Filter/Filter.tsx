@@ -1,5 +1,5 @@
 import "./filterStyles.css";
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import InputFilter from "../../atoms/InputFilter/InputFilter";
 import MainButton from "../../atoms/MainButton/MainButton";
 import FilterAltOffIcon from "@mui/icons-material/FilterAltOff";
@@ -8,6 +8,7 @@ import { FilterState } from "@/UI/interfaces/Filter";
 import { filterService } from "@/services/filterService";
 import { useCodersFilter } from "@/global-states/coder";
 import { ICoder } from "@/UI/interfaces/ICoderInterface";
+import { getClansService, getLanguagesService, getSoftSkillsService, getTechnicalSkillsService } from "@/services";
 import { getCodersService } from "@/services/coderService";
 
 interface IFilterProps{
@@ -62,6 +63,51 @@ export default function Filter({setRender, render}:IFilterProps): ReactNode {
     }
   };
 
+  useEffect(()=>{
+    const getLanguages = async() => {
+      const data = await getLanguagesService();
+      if(!data){
+        console.log({message: "Error to get languages"})
+        return;
+      }
+      console.log(data);
+    } 
+    getLanguages();
+  });
+  useEffect(()=>{
+    const getTechSkills = async() => {
+      const data = await getTechnicalSkillsService();
+      if(!data){
+        console.log({message: "Error to get tech skills"})
+        return;
+      }
+      console.log(data);
+    }
+    getTechSkills();
+  });
+  useEffect(()=>{
+    const getSoftSkills = async() => {
+      const data = await getSoftSkillsService();
+      if(!data){
+        console.log({message: "Error to get soft skills"})
+        return;
+      }
+      console.log(data);
+    }
+    getSoftSkills();
+  });
+  useEffect(()=>{
+    const getClans = async() => {
+      const data = await getClansService();
+      if(!data){
+        console.log({message: "Error to get Clans"})
+        return;
+      }
+      console.log(data);
+    };
+    getClans()
+  })
+
   const handleCLickButtonClear = async() =>{
     setCheckedStates(initialState);
     const data = await getCodersService();
@@ -74,6 +120,7 @@ export default function Filter({setRender, render}:IFilterProps): ReactNode {
       setRender(true);
     }
   }
+
 
   return (
     <div className="filter">
