@@ -39,8 +39,9 @@ export default function Card({
     console.log(data);
   };
 
-  const handleClickMore = () => {
-    router.push("/admin/coder");
+  const handleClickMore = (id_coder:number | undefined) => {
+    console.log(id_coder)
+    router.push(`/admin/coder?user=${id_coder}`);
   };
 
   if (!status) {
@@ -71,8 +72,8 @@ export default function Card({
               {age_user}
             </h5>
           </div>
-          <div onClick={handleClickMore}>
-            <ButtonMore data-id={id_coder} />
+          <div onClick={()=>handleClickMore(id_coder)}>
+            <ButtonMore />
           </div>
         </div>
       </div>
