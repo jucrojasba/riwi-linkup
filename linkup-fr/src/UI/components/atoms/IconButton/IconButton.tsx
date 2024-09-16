@@ -24,7 +24,7 @@ const CustomIconButton: React.FC<IconButtonProps> = ({
   className
 }) => {
   return (
-    <IconButtonStyle className={className} onClick={onClick} sx={{width:'100px',color:iconColor,backgroundColor:'transparent','&:hover':{backgroundColor: backgroundColor, color: iconColor},}}>
+    <IconButtonStyle className={className} onClick={onClick} sx={{width:'100px',color:iconColor,backgroundColor:backgroundColor,'&:hover':{backgroundColor: backgroundColor, color: iconColor},}}>
       {icon==='google'?<GoogleIcon/>:icon==='github'?<GitHubIcon/>:''}
     </IconButtonStyle>
   );

@@ -6,7 +6,7 @@
     width:100%;
     text-align:center;
     border-bottom: 1px solid var(--secondary-color);
-    line-height:0.1em; margin:10px 0 20px;
+    line-height:0.1em;
     color: var(--secondary-color);
 }
 
@@ -18,9 +18,9 @@
 .login-separator-dark{
     width:100%;
     text-align:center;
-    border-bottom: 1px solid var(--main-color);
-    line-height:0.1em; margin:10px 0 20px;
-    color: var(--main-color);
+    border-bottom: 1px solid var(--white-color);
+    line-height:0.1em;
+    color: var(--white-color);
 }
 
 .login-separator-dark span{

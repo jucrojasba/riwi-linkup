@@ -63,7 +63,7 @@ function LogInForm():React.ReactNode{
     return(
     <Box
     component='form'
-    sx={{display:'flex',flexDirection:'column',gap:'var(--padding-medium)', alignItems:'center',width:'fit-content'}}>
+    sx={{display:'flex',flexDirection:'column',gap:'var(--padding-big)', alignItems:'center',width:'fit-content'}}>
         {loading ? <CircularLoader flag={loading} /> : null} 
         <Typography variant="h2" sx={{color:'var(--main-color)',fontFamily:'var(--main-font)',fontSize:'2rem', fontWeight:'500' }}>{Language?'Bienvenido':'Welcome back'}</Typography>
         <TextInput name="email" type="email" label={Language?"Correo Electrónico":"Email"} required onChange={handleChange} />
@@ -72,10 +72,17 @@ function LogInForm():React.ReactNode{
         
         <MainButton text={Language?"Iniciar Sesión":"Log In"} onClick={handleSubmit} className="button-login"/>
         <h4 className={DarkMode?"login-separator-dark":"login-separator"}><span>{Language?'Inicia Sesión con:':'Login with:'}</span></h4>
-        <Box sx={{display:'flex', gap:'var(--padding-medium)'}}>
-            <CustomIconButton icon="google" iconColor="#db4437" backgroundColor="var(--gray-color)" onClick={()=>{}}/>
-            <CustomIconButton icon="github" iconColor="black" backgroundColor="var(--gray-color)" onClick={()=>{}}/>
-        </Box>
+        {DarkMode?
+            <Box sx={{display:'flex', gap:'var(--padding-big)'}}>
+                <CustomIconButton icon="google" iconColor="#db4437" backgroundColor="var(--white-color)" onClick={()=>{}}/>
+                <CustomIconButton icon="github" iconColor="black" backgroundColor="var(--white-color)" onClick={()=>{}}/>
+            </Box>
+            :<Box sx={{display:'flex', gap:'var(--padding-big)'}}>
+                <CustomIconButton icon="google" iconColor="#db4437" backgroundColor="var(--gray-color)" onClick={()=>{}}/>
+                <CustomIconButton icon="github" iconColor="black" backgroundColor="var(--gray-color)" onClick={()=>{}}/>
+            </Box>
+        }
+        
         <Box component={'span'}>
             {DarkMode?
                 <Typography variant="body1" sx={{color:'var(--white-color)',fontFamily:'var(--main-font)'}}>
