@@ -3,7 +3,7 @@ import React, { ReactElement, ReactNode, useState } from "react";
 import { Footer, Header } from "../../molecules";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { Filter } from "../../molecules";
-import TitleMain from "../../atoms/TitleMain/TitleMain";
+import { TitleMain } from "../../atoms";
 
 interface IDashboardLayoutProps {
   section: ReactElement;
@@ -53,7 +53,7 @@ export default function DashboardLayout({
           {path === "/admin/coder" || path === "/dashboard" || path === "/config"  ? null : <Filter setRender={setRender} />}
           {section}
         </main>
-        <Footer />
+        <Footer isDarkMode={isDarkMode}/>
       </div>
     </div>
   );

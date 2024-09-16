@@ -22,6 +22,7 @@ const BarChart: React.FC<BarChartProps> = ({ xData, yData, darkMode, title }) =>
     const textColor = darkMode ? '#fff' : rootStyle.getPropertyValue('--paragraph-color-gray').trim();
 
     const option: echarts.EChartsOption = {
+      backgroundColor: darkMode ? '#151B23' : 'transparent', // Configuración del color de fondo
       xAxis: {
         type: 'category',
         data: xData,
@@ -89,7 +90,7 @@ const BarChart: React.FC<BarChartProps> = ({ xData, yData, darkMode, title }) =>
       <h4
         style={{
           position: 'absolute',
-          top: '10%', 
+          top: '10%',
           left: '5%',
           width: '100%',
           display: 'flex',
@@ -130,7 +131,7 @@ const BarChart: React.FC<BarChartProps> = ({ xData, yData, darkMode, title }) =>
             height: '94%',
             borderRadius: 'var(--border-radius-min)',
             overflow: 'hidden',
-            backgroundColor: darkMode ? '#333' : 'var(--gray-color)',
+            backgroundColor: darkMode ? '#151B23' : 'var(--gray-color)',
             zIndex: 10,
           }}
         ></div>
@@ -140,3 +141,4 @@ const BarChart: React.FC<BarChartProps> = ({ xData, yData, darkMode, title }) =>
 };
 
 export default BarChart;
+
