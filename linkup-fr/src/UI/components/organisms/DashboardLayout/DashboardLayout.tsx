@@ -12,7 +12,7 @@ interface IDashboardLayoutProps {
   path: string;
   language: any;
   isDarkMode: boolean;
-
+  setRender?: (value:boolean) => void;
 }
 
 export default function DashboardLayout({
@@ -22,6 +22,7 @@ export default function DashboardLayout({
   path,
   language,
   isDarkMode,
+  setRender
 }: IDashboardLayoutProps): React.ReactElement {
   const [expand, setExpand] = useState<boolean>(false);
 
@@ -49,7 +50,7 @@ export default function DashboardLayout({
             title={path === "/admin/coder" || path === "/dashboard" || path === "/config" ? "" : "Filters"}
             subtitle=""
           />
-          {path === "/admin/coder" || path === "/dashboard" || path === "/config"  ? null : <Filter />}
+          {path === "/admin/coder" || path === "/dashboard" || path === "/config"  ? null : <Filter setRender={setRender} />}
           {section}
         </main>
         <Footer />
