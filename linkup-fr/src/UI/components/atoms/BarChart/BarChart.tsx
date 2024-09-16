@@ -90,7 +90,7 @@ const BarChart: React.FC<BarChartProps> = ({ xData, yData, darkMode, title }) =>
       <h4
         style={{
           position: 'absolute',
-          top: '10%',
+          top: '12%',
           left: '5%',
           width: '100%',
           display: 'flex',
@@ -126,9 +126,9 @@ const BarChart: React.FC<BarChartProps> = ({ xData, yData, darkMode, title }) =>
           id="main"
           style={{
             position: 'absolute',
-            top: '6%',
+            top: '10%',
             width: '100%',
-            height: '94%',
+            height: '100%',
             borderRadius: 'var(--border-radius-min)',
             overflow: 'hidden',
             backgroundColor: darkMode ? '#151B23' : 'var(--gray-color)',
