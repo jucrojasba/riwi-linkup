@@ -10,7 +10,7 @@ export default function Route({ children }: { children: React.ReactNode }) {
     const navigate = useNavigate();
     const [path, setPath] = useState<string>("");
 
-    // Ejecutar cuando el componente se monta
+    // Obtener el path actual cuando el componente se monta
     useLayoutEffect(() => {
         if (typeof window !== "undefined") {
             const currentPath = window.location.pathname;
@@ -18,28 +18,24 @@ export default function Route({ children }: { children: React.ReactNode }) {
         }
     }, []);
 
+    // Ejecutar la lógica de verificación de rutas y autenticación
     useLayoutEffect(() => {
         if (path) {
-            // Lógica de verificación de rutas
-            const isPrivateRoute = routes.privateRoutes.find((route) => route.path === path);
-            const isPublicRoute = routes.publicRoutes.find((route) => route.path === path);
             const token = localStorage.getItem("token");
 
+            const isPrivateRoute = routes.privateRoutes.find((route) => route.path === path);
+            const isPublicRoute = routes.publicRoutes.find((route) => route.path === path);
+
+            // Verificar si el usuario está autenticado y redirigir si es necesario
             if ((path === "/login" || path === "/" || path === "/register") && token) {
                 console.log("Token exists, redirecting to dashboard");
                 navigate("/dashboard");
-                return;
-            }
-
-            if (isPrivateRoute && !token) {
+            } else if (isPrivateRoute && !token) {
                 console.log("Access denied: Private route requires authentication");
                 navigate("/login");
-                return;
-            }
-
-            if (isPublicRoute) {
-                setLoading(false); // Permitir el renderizado solo si es una ruta pública o si ya se verificó todo
-                return;
+            } else {
+                // Si la ruta es pública o el usuario tiene acceso, finaliza la carga
+                setLoading(false);
             }
         }
     }, [path, navigate]);
@@ -49,6 +45,6 @@ export default function Route({ children }: { children: React.ReactNode }) {
         return <CircularLoader flag={loading} />;
     }
 
-    // Mostrar el contenido solo después de la verificación
+    // Mostrar el contenido solo después de que la lógica se haya ejecutado
     return <>{children}</>;
 }
