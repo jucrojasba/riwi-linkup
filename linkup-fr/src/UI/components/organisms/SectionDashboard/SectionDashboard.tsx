@@ -6,6 +6,7 @@ import DashboardCardsContainer from "../DashboardCardsContainer/DashboardCardsCo
 import { useEffect, useState } from "react";
 import { LinearLoader } from "../../atoms";
 import './SectionDashboardStyles.css'
+import ChatBot from "../../atoms/ChatBot/ChatBot";
 
 interface ISectionDashboard {
     isDarkMode: boolean;
@@ -49,6 +50,7 @@ const SectionDashboard: React.FC<ISectionDashboard> = ({ isDarkMode, language })
                         darkMode={isDarkMode} 
                         title={language ? 'Compañias en los últimos meses' : 'Companies in the last months'} 
                     />
+                    <ChatBot botImage='./icons/logoR.svg' userImage='./images/womanImage.png' isDarkMode={isDarkMode} language={language}/>
                 </>
             )}
         </>

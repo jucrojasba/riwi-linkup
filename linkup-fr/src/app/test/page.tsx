@@ -4,12 +4,13 @@ import { Box } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { ButtonMore, CircularLoader, CustomLink, LinearLoader, MainButton, PasswordInput, SecondaryButton, TextInput } from "@/UI/components/atoms";
 import { RegisterForm } from "@/UI/components/molecules";
+import ChatBot from "@/UI/components/atoms/ChatBot/ChatBot";
 
 
 export default function TestView() {
   return (
     <main>
-      <Box sx={{padding:'40px'}}>
+       <Box sx={{padding:'40px'}}>
         <MainButton text={<SearchIcon />} onClick={()=>{}}></MainButton>
         <SecondaryButton text="Secundario" onClick={()=>{}}></SecondaryButton>
         <ButtonMore></ButtonMore>
@@ -21,8 +22,7 @@ export default function TestView() {
         <CircularLoader flag={true}/>
         <LinearLoader flag={true}/>
       </Box>
-      <RegisterForm/>
-
+      <RegisterForm/> 
     </main>
   );
 }
