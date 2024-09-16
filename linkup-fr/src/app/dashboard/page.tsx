@@ -16,10 +16,14 @@ export default function DashboardView(){
     const titleView = language? "Tablero":"Dashboard";
     const subtitle= language? "Estadisticas Globales":"General Stats";
     const AuthUser = useAuthUser((state)=> state.authUser);
+
+    const xDataExample: string[] = ['January', 'February', 'March', 'April', 'May'];
+    const yDataExample: number[] = [500, 400, 600, 300, 700];
+
     return (
         <Route>
             <main>
-                <DashboardLayout section={<SectionDashboard isDarkMode={DarkMode} language={language}/>} language={language} titleView={titleView} subtitle={subtitle} path="/dashboard"/>
+                <DashboardLayout section={<SectionDashboard isDarkMode={DarkMode} language={language}/>} language={language} titleView={titleView} subtitle={subtitle} path="/dashboard" isDarkMode={DarkMode}/>
             </main>
         </Route>
     );
