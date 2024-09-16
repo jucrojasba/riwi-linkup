@@ -59,11 +59,11 @@ export async function getCompaniesByMonth(): Promise<{ formattedDates: string[],
 
     if (!data || !Array.isArray(data)) return;
 
-    // Obtener los últimos 5 elementos
+    const monthAbbreviations = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
     const lastFive = data.slice(-5);
 
-    // Mapear los últimos 5 elementos
-    const formattedDates = lastFive.map(item => `${item.month}/${item.year}`);
+    const formattedDates = lastFive.map(item => monthAbbreviations[item.month - 1]); 
     const counts = lastFive.map(item => item.count);
 
     return { formattedDates, counts };

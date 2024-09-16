@@ -4,6 +4,8 @@ import { getCompaniesByMonth } from "@/services/coderService";
 import BarChart from "../../atoms/BarChart/BarChart";
 import DashboardCardsContainer from "../DashboardCardsContainer/DashboardCardsContainer";
 import { useEffect, useState } from "react";
+import { LinearLoader } from "../../atoms";
+import './SectionDashboardStyles.css'
 
 interface ISectionDashboard {
     isDarkMode: boolean;
@@ -32,12 +34,26 @@ const SectionDashboard: React.FC<ISectionDashboard> = ({ isDarkMode, language })
     const xDataExample: string[] = companiesData?.formattedDates ?? [];
     const yDataExample: number[] = companiesData?.counts ?? [];
 
+    
+
     return (
         <>
-            <DashboardCardsContainer language={language} />
-            <BarChart xData={xDataExample} yData={yDataExample} darkMode={isDarkMode} />
+            {loadingCompanies ? (
+                <LinearLoader flag={true} /> // Mostrar el loader si está cargando
+            ) : (
+                <main className="main-dashboard">
+                    <DashboardCardsContainer language={language} />
+                    <BarChart 
+                        xData={xDataExample} 
+                        yData={yDataExample} 
+                        darkMode={isDarkMode} 
+                        title={language ? 'Compañias en los últimos meses' : 'Companies in the last months'} 
+                    />
+                </main>
+            )}
         </>
     );
 };
 
 export default SectionDashboard;
+

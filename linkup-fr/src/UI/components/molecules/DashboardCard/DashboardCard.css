@@ -3,7 +3,7 @@
     flex-direction: column;
     gap: var(--padding-medium);
     width: fit-content;
-    min-width: 25%;
+    min-width: 27%;
     padding:var(--padding-medium) var(--padding-medium) var(--padding-extra-big) var(--padding-medium);
     color:var(--white-color);
     justify-content: center;

@@ -21,7 +21,7 @@ export default function SectionCoders(): React.ReactElement {
     coders: [initialCoder],
   };
 
-  const [coders, setCoders] = useState<ICoders>(initialCoders); // Full list of coders
+  const [coders, setCoders] = useState<ICoders>(initialCoders);
   const [currentPage, setCurrentPage] = useState(0);
   const itemsPerPage = 8;
 
@@ -34,7 +34,7 @@ export default function SectionCoders(): React.ReactElement {
         return;
       }
       setCoders({ coders });
-      setLoadingRequest(false); // Set to false after data is fetched
+      setLoadingRequest(false); 
     };
     getCoders();
   }, []);
