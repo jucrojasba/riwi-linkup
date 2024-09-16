@@ -12,82 +12,90 @@ import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import GoogleIcon from '@mui/icons-material/Google';
 import GitHubIcon from '@mui/icons-material/GitHub';
-import saveCredentials from "@/utilities/credentials";
 import { CircularLoader } from "../../atoms";
+import inputAlert from "../Alert/Alert";
+import { useAuthUser } from "@/global-states/authUser";
+import useNavigate from "@/utilities/NavigateTo";
+import './loginFormStyles.css'
+import {saveLocalStorage} from "@/utilities/LocalStorage";
+const CompanyInitialState={
+    email:'',
+    password:'',
+}
 
-const CompanyInitialState = {
-    email: '',
-    password: '',
-};
-
-const LogInForm: React.FC = () => {
-    const [passwordInputError, setPasswordInputError] = useState(false); // Cambia si se hacen malas peticiones al servidor
-    const [companyRegister, setCompanyRegister] = useState<ICompanyLogin>(CompanyInitialState);
-    const [loading, setLoading] = useState<boolean>(false);
-    const { data: session, status } = useSession();
-    const router = useRouter();
+function LogInForm():React.ReactNode{
+    const[passwordInputError,setPasswordInputError] =useState(false); // This statte change if do bad request the server
+    const[companyRegister,setCompanyRegister] =useState<ICompanyLogin>(CompanyInitialState); // States
     const DarkMode = useDarkMode((state) => state.DarkMode);
+    const {data: session, status} = useSession();
+    const [loading, setLoading] = useState<boolean>(false);
+    const router = useRouter();
+    const {setAuthUser} = useAuthUser();
+    const navigate = useNavigate();
 
-    // Manejar cambios en los inputs
+    // Management change on the inputs
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setCompanyRegister((prevState) => ({
-            ...prevState,
-            [e.target.name]: e.target.value
-        }));
-    };
 
-    // Manejar el envío del formulario
-    const handleSubmit = async () => {
-        console.log(companyRegister);
+        setCompanyRegister((prevState) => ({
+        ...prevState,
+        [e.target.name]: e.target.value
+        }));  
+    };
+    const handleSubmit = async() =>{ // Logic for login with LinkUp
         setLoading(true);
         const data = await authLoginService(companyRegister);
-        if (!data) {
-            // Llamar modal para mostrar error
+        if(!data){
             setLoading(false);
-            setPasswordInputError(true);
+            inputAlert("Authentication error: The credentials provided are incorrect.", "error");
             return;
         }
-        const { name, email, token } = data;
-        saveCredentials({ name, email, token });
-        router.push("/company");
-    };
+        const {name,email,token} = data;
+        setAuthUser({name,email,token, role:2}); // Save user on global state
+        saveLocalStorage("token",token); //Save token on local storage
+        setLoading(false);
+        inputAlert("Login successful", "success");
+        navigate("/dashboard");
+    }
 
     // Redirigir si ya está autenticado
     useEffect(() => {
         if (status === "authenticated") {
-            localStorage.setItem("session", JSON.stringify(session));
-            router.push("/company");
+            saveLocalStorage("session", JSON.stringify(session));
+            navigate("/dashboard");
         }
-    }, [status, router, session]);
-
-    return (
-        <Box
-            component='form'
-            sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                gap: 'var(--padding-big)',
-                alignItems: 'center',
-                width: 'fit-content'
-            }}
-        >
-            {loading ? <CircularLoader flag={loading} /> : null}
-            <Typography variant="h2" sx={{ color: 'var(--main-color)', fontFamily: 'var(--main-font)', fontSize: '2rem', fontWeight: '500' }}>
-                Welcome back
-            </Typography>
-            <TextInput name="email" type="email" label="Email" required onChange={handleChange} />
-            <PasswordInput name="password" label="Password" type="password" required onChange={handleChange} />
-            <CustomLink text="Forgot Password?" href="/recover-password" />
-            <MainButton text={"Log In"} onClick={handleSubmit} />
-            <Typography variant="body1" sx={{ color: 'var(--secondary-color)', fontFamily: 'var(--main-font)' }}>
-                - Or Login with -
-            </Typography>
-            <Box sx={{ display: 'flex', gap: 'var(--padding-big)' }}>
-                <MainButton text={<GoogleIcon />} onClick={() => signIn("google")} />
-                <MainButton text={<GitHubIcon />} onClick={() => signIn("github")} />
-            </Box>
+    }, [status,router])
+    return(
+    <Box
+    component='form'
+    sx={{display:'flex',flexDirection:'column',gap:'var(--padding-big)', alignItems:'center',width:'fit-content'}}>
+        {loading ? <CircularLoader flag={loading} /> : null} 
+        <Typography variant="h2" sx={{color:'var(--main-color)',fontFamily:'var(--main-font)',fontSize:'2rem', fontWeight:'500' }}>Welcome back</Typography>
+        <TextInput name="email" type="email" label="Email" required onChange={handleChange} />
+        <PasswordInput name="password" label="Password" type="password" required onChange={handleChange} />
+        <CustomLink text="Forgot Password?" href="/recover-password"></CustomLink>
+        <MainButton text={"Log In"} onClick={handleSubmit} className="button-login"/>
+        <Typography variant="body1" sx={{color:'var(--secondary-color)',fontFamily:'var(--main-font)'}}>- Or Login with -</Typography>
+        <Box sx={{display:'flex', gap:'var(--padding-big)'}}>
+            <MainButton text={<GoogleIcon />} onClick={()=>signIn("google")} />
+            <MainButton text={<GitHubIcon />} onClick={()=>signIn("github")} />
         </Box>
-    );
+        <Box component={'span'}>
+            {DarkMode?
+            <Typography variant="body1" sx={{color:'var(--white-color)',fontFamily:'var(--main-font)'}}>
+                Do not have an account? 
+                <CustomLink text="Sign up" href="/register">
+                </CustomLink>
+            </Typography>
+            :<Typography variant="body1" sx={{color:'var(--secondary-color)',fontFamily:'var(--main-font)'}}>
+                Do not have an account? 
+                <CustomLink text="Sign up" href="/register">
+                </CustomLink>
+            </Typography>
+            }
+        </Box>
+    </Box>);
 };
 
+  
 export default LogInForm;
+

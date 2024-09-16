@@ -34,7 +34,8 @@ export default function DashboardLayout({
         <div className="open" onClick={handleButtonExpand}>
           <KeyboardArrowDownIcon />
         </div>
-        <Header expand={expand} titleView={titleView} subtitle={subtitle} path={path} language={language}/>
+        <Header expand={expand} titleView={titleView} subtitle={subtitle} path={path} language={language} />
+
         <main className={"main"}>
           <TitleMain className="titleMain" title={path === "/admin/coder" ? "": "Filters"} subtitle="" />
           {path === "/admin/coder" 

@@ -18,9 +18,10 @@ const MainButton: React.FC<ButtonProps> = ({
   text,
   onClick,
   type = "button",
+  className
 }) => {
   return (
-    <MainButtonStyle type={type} variant="contained" onClick={onClick}>
+    <MainButtonStyle type={type} variant="contained" onClick={onClick} className={className}>
       {text}
     </MainButtonStyle>
   );
