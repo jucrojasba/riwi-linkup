@@ -1,3 +1,29 @@
 .button-login{
     width: 100%;
 }
+
+.login-separator { 
+    width:100%;
+    text-align:center;
+    border-bottom: 1px solid var(--secondary-color);
+    line-height:0.1em;
+    color: var(--secondary-color);
+}
+
+.login-separator  span { 
+    background: var(--white-color);
+    padding:0 10px
+}
+
+.login-separator-dark{
+    width:100%;
+    text-align:center;
+    border-bottom: 1px solid var(--white-color);
+    line-height:0.1em;
+    color: var(--white-color);
+}
+
+.login-separator-dark span{
+    background: var(--paragraph-color);
+    padding:0 10px;
+}

@@ -1,4 +1,4 @@
-"use client";
+    "use client";
 import { Box, SelectChangeEvent, Typography, } from "@mui/material";
 import TextInput from "../../atoms/TextInput/TextInput";
 import MainButton from "../../atoms/MainButton/MainButton";
@@ -9,7 +9,9 @@ import { ICompanyRegister } from "@/UI/interfaces/Forms";
 import { authRegisterService } from "@/services/authService";
 import { CircularLoader } from "../../atoms";
 import {SelectOptions} from "../../atoms";
-import { PanoramaHorizontalSelectOutlined } from "@mui/icons-material";
+import { LanguageSharp, PanoramaHorizontalSelectOutlined } from "@mui/icons-material";
+import { useLanguage } from "@/global-states/language-mode";
+import { useDarkMode } from "@/global-states/dark-mode";
 
 const CompanyInitialState={
     name: '',
@@ -24,6 +26,8 @@ const RegisterForm:React.FC=()=>{
     const[passwordInputError,setPasswordInputError] =useState(false);
     const[companyRegister,setCompanyRegister] =useState<ICompanyRegister>(CompanyInitialState);
     const [loading, setLoading] = useState<boolean>(false);
+    const Language = useLanguage((state) => state.language); //true español
+    const DarkMode = useDarkMode((state) => state.DarkMode);
 
     function handleChange (e: React.ChangeEvent<HTMLInputElement>) {
         setCompanyRegister((prevState) => ({
@@ -62,22 +66,22 @@ const RegisterForm:React.FC=()=>{
     return(
         <Box component='form' onSubmit={()=>{console.log("ok")}} sx={{display:'flex',flexDirection:'column',gap:'var(--padding-big)', alignItems:'center',width:'fit-content'}}>
             {loading?<CircularLoader flag={loading}/>:null}
-            <Typography variant="h2" sx={{color:'var(--main-color)',fontFamily:'var(--main-font)',fontSize:'2rem', fontWeight:'500' }}>Get Started</Typography>
-            <TextInput name="name" label="Company Name" required onChange={handleChange} />
-            <TextInput name="email" type="email" label="Email" required onChange={handleChange} />
-            {passwordInputError?<PasswordInput name="password" label="Password" type="password" required error helperText="Las contraseñas no coinciden" onChange={handleChange}></PasswordInput>:<PasswordInput name="password" label="Password" type="password" required onChange={handleChange}></PasswordInput>}
-            {passwordInputError?<PasswordInput name="confirmPassword" label="Confirm Password" type="password" required error helperText="Las contraseñas no coinciden" onChange={handleChange}></PasswordInput>:<PasswordInput name="confirmPassword" label="Confirm Password" type="password" required onChange={handleChange}></PasswordInput>}
-            <TextInput name="phone" type="number" label="Phone Number" required onChange={handleChange} />
+            <Typography variant="h2" sx={{color:'var(--main-color)',fontFamily:'var(--main-font)',fontSize:'2rem', fontWeight:'500' }}>{Language?'Registrate':'Get Started'}</Typography>
+            <TextInput name="name" label={Language?"Nombre de la compañía":"Company Name"} required onChange={handleChange} />
+            <TextInput name="email" type="email" label={Language?"Correo Electrónico":"Email"} required onChange={handleChange} />
+            {passwordInputError?<PasswordInput name="password" label={Language?"Contraseña":"Password"} type="password" required error helperText={Language?"Las contraseñas no coinciden":"Passwords doesn't match"} onChange={handleChange}></PasswordInput>:<PasswordInput name="password" label={Language?"Contraseña":"Password"} type="password" required onChange={handleChange}></PasswordInput>}
+            {passwordInputError?<PasswordInput name="confirmPassword" label={Language?"Confirmar contraseña":"Confirm password"} type="password" required error helperText={Language?"Las contraseñas no coinciden":"Passwords doesn't match"} onChange={handleChange}></PasswordInput>:<PasswordInput name="confirmPassword" label={Language?"Confirmar contraseña":"Confirm password"} type="password" required onChange={handleChange}></PasswordInput>}
+            <TextInput name="phone" label={Language?"Número de teléfono":"Phone Number"} onChange={handleChange} />
             <SelectOptions
-            label="Sectors"
-            values={["Tecnology", "Health", "Education"]}
+            label={Language?"Sectores":"Sectors"}
+            values={Language?["Tecnología", "Salud", "Educación"]:["Tecnology", "Health", "Education"]}
             onchange={handleChangeSelect}
             value={companyRegister.sector}
             name={"sector"}>
             </SelectOptions>
-            <MainButton text="Register" onClick={handleSubmit} />
+            <MainButton text={Language?"Registrarme":"Register"} onClick={handleSubmit} />
             <Box component={'span'}>
-                <Typography variant="body1" sx={{color:'var(--secondary-color)',fontFamily:'var(--main-font)'}}>Already have an account? <CustomLink text="Log In" href="/login"></CustomLink></Typography>
+                <Typography variant="body1" sx={{color:'var(--secondary-color)',fontFamily:'var(--main-font)'}}>{Language?'Ya tienes una cuenta?':'Already have an account?'} <CustomLink text={Language?"Iniciar Sesión":"Log In"} href="/login"></CustomLink></Typography>
             </Box>
         </Box>
     );
