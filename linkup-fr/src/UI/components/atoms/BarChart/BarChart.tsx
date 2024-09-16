@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import * as echarts from 'echarts';
+import './BarChart.css'; 
 
 interface BarChartProps {
   xData: string[];
@@ -10,19 +11,19 @@ interface BarChartProps {
 
 const BarChart: React.FC<BarChartProps> = ({ xData, yData, darkMode, title }) => {
   useEffect(() => {
-    if (xData.length === 0 || yData.length === 0) return; // No inicializar gráfico si no hay datos
+    if (xData.length === 0 || yData.length === 0) return; 
 
     const rootStyle = getComputedStyle(document.documentElement);
     const mainColor = rootStyle.getPropertyValue('--main-color').trim();
     const mainFont = rootStyle.getPropertyValue('--main-font').trim();
 
-    const chartDom = document.getElementById('main')!;
+    const chartDom = document.getElementById('bar-chart')!; 
     const myChart = echarts.init(chartDom, darkMode ? 'dark' : undefined);
 
     const textColor = darkMode ? '#fff' : rootStyle.getPropertyValue('--paragraph-color-gray').trim();
 
     const option: echarts.EChartsOption = {
-      backgroundColor: darkMode ? '#151B23' : 'transparent', // Configuración del color de fondo
+      backgroundColor: darkMode ? '#151B23' : 'transparent',
       xAxis: {
         type: 'category',
         data: xData,
@@ -86,59 +87,16 @@ const BarChart: React.FC<BarChartProps> = ({ xData, yData, darkMode, title }) =>
   }, [xData, yData, darkMode]);
 
   return (
-    <div style={{ position: 'relative', width: '50%', height: '60%' }}>
-      <h4
-        style={{
-          position: 'absolute',
-          top: '12%',
-          left: '5%',
-          width: '100%',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'left',
-          fontFamily: 'var(--main-font)',
-          color: darkMode ? '#fff' : 'var(--paragraph-color-gray)',
-          fontWeight: '400',
-          fontSize: '1.5rem',
-          zIndex: 20,
-        }}
-      >
-        {title}
-      </h4>
+    <div className={`chart-container ${darkMode ? 'dark-mode' : 'light-mode'}`}>
+      <h4 className={darkMode?'chart-title-dark-mode':"chart-title"}>{title}</h4>
       
       {xData.length === 0 || yData.length === 0 ? (
-        <div
-          style={{
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            color: darkMode ? '#fff' : '#333',
-            fontFamily: 'var(--main-font)',
-            fontSize: '1.2rem',
-            textAlign: 'center',
-          }}
-        >
-          -- No Data --
-        </div>
+        <div className="chart-no-data">-- No Data --</div>
       ) : (
-        <div
-          id="main"
-          style={{
-            position: 'absolute',
-            top: '10%',
-            width: '100%',
-            height: '100%',
-            borderRadius: 'var(--border-radius-min)',
-            overflow: 'hidden',
-            backgroundColor: darkMode ? '#151B23' : 'var(--gray-color)',
-            zIndex: 10,
-          }}
-        ></div>
+        <div id="bar-chart"></div>
       )}
     </div>
   );
 };
 
 export default BarChart;
-

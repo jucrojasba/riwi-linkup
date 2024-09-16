@@ -2,7 +2,7 @@ import "./footerStyles.css";
 import Link from "next/link";
 
 interface IFooter {
-  isDarkMode: boolean;
+  isDarkMode: boolean | undefined;
 }
 
 export default function Footer({ isDarkMode }: IFooter): React.ReactNode {
