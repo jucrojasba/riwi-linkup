@@ -10,32 +10,19 @@ import { useCodersFilter } from "@/global-states/coder";
 import { ICoder } from "@/UI/interfaces/ICoderInterface";
 import { getClansService, getLanguagesService, getSoftSkillsService, getTechnicalSkillsService } from "@/services";
 import { getCodersService } from "@/services/coderService";
+import { ILanguage } from "@/UI/interfaces/languageInterface";
 
 interface IFilterProps{
   render?: boolean;
   setRender?: (value:boolean) => void
 }
 export default function Filter({setRender, render}:IFilterProps): ReactNode {
+  const [languages, setLanguage] = useState<ILanguage[]>([]);
   const initialState: FilterState = {
-    languages: [
-      { checked: false, name: "ingles", label: "English", id: 1 },
-      { checked: false, name: "portugues", label: "Portuguese", id: 2 },
-      { checked: false, name: "frances", label: "French", id: 3 },
-    ],
-    techSkills: [
-      { checked: false, name: "javascript", label: "Javascript", id: 1 },
-      { checked: false, name: "python", label: "Python", id: 2 },
-      { checked: false, name: "java", label: "Java", id: 3},
-    ],
-    softSkills: [
-      { checked: false, name: "communication", label: "Communication", id: 1 },
-      { checked: false, name: "teamwork", label: "Teamwork", id: 2 },
-    ],
-    clans: [
-      { checked: false, name: "bernesLee", label: "Bernes Lee", id: 1},
-      { checked: false, name: "ritchie", label: "Ritchie", id: 2 },
-      { checked: false, name: "gates", label: "Gates", id:  3},
-    ],
+    languages: [],
+    techSkills: [],
+    softSkills: [],
+    clans: []
   };
   const [checkedStates, setCheckedStates] = useState<FilterState>(initialState);
   const {setCodersFilter} = useCodersFilter();
@@ -70,9 +57,10 @@ export default function Filter({setRender, render}:IFilterProps): ReactNode {
         console.log({message: "Error to get languages"})
         return;
       }
-      console.log(data);
     } 
+
     getLanguages();
+    
   });
   useEffect(()=>{
     const getTechSkills = async() => {
