@@ -63,7 +63,7 @@ const ChatBot: React.FC<ChatBotProps> = ({ botImage, userImage, language, isDark
       setMessages([
         ...messages,
         { text: message, isBot: false },
-        { text: "¿En qué puedo ayudarte?", isBot: true }
+        { text: `${language?"¿En qué puedo ayudarte?":"How can I help you?"}`, isBot: true }
       ]);
       setStage('initial');
       setMessage('');
@@ -72,7 +72,10 @@ const ChatBot: React.FC<ChatBotProps> = ({ botImage, userImage, language, isDark
   };
 
   return (
-    <div className={isDarkMode?'chat-containe-dark-mode':"chat-container"}>
+    <div className={isDarkMode ? 'chat-containe-dark-mode' : "chat-container"}>
+      <div className="title-chat-bot">
+        <h3>Chat</h3>
+      </div>
       <div className="chat-box">
         {messages.map((msg, index) => (
           <div
@@ -93,16 +96,17 @@ const ChatBot: React.FC<ChatBotProps> = ({ botImage, userImage, language, isDark
             value={message}
             onChange={handleInputChange}
             placeholder="Escribe tu mensaje..."
-            className={isDarkMode?'textarea-dark-mode':"textarea"}
+            className={isDarkMode ? 'textarea-dark-mode' : "textarea"}
           />
           <button onClick={handleSendMessage} className="send-button">
             <SendIcon className="send-icon" />
           </button>
         </div>
       )}
-      {!showMessageForm && <button onClick={handleButtonClick} className="start-button">{language?'¡Hola!':'Hello!'}</button>}
+      {!showMessageForm && <button onClick={handleButtonClick} className="start-button">{language ? '¡Hola!' : 'Hello!'}</button>}
     </div>
   );
+  
 };
 
 export default ChatBot;
