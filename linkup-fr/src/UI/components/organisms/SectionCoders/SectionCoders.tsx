@@ -8,8 +8,13 @@ import { useEffect, useState } from "react";
 import { getCodersService } from "@/services/coderService";
 import { Card } from "../../molecules";
 import { CircularLoader } from "../../atoms/loaders/Loaders";
+import { useCodersFilter } from "@/global-states/coder";
 
-export default function SectionCoders(): React.ReactElement {
+interface ISectionCodersProps {
+  render: boolean;
+}
+
+export default function SectionCoders({render}: ISectionCodersProps): React.ReactElement {
   const [loadingRequest, setLoadingRequest] = useState<boolean>(true); // Set initial state to true
   const initialCoder: ICoder = {
     id: 0,
@@ -20,10 +25,10 @@ export default function SectionCoders(): React.ReactElement {
   const initialCoders: ICoders = {
     coders: [initialCoder],
   };
-
-  const [coders, setCoders] = useState<ICoders>(initialCoders);
+  const [coders, setCoders] = useState<ICoders>(initialCoders); // Full list of coders
+  const codersFilter = useCodersFilter((state) => state.CodersFilter);
   const [currentPage, setCurrentPage] = useState(0);
-  const itemsPerPage = 8;
+  const limitItems = 8;
 
   useEffect(() => {
     const getCoders = async () => {
@@ -33,32 +38,45 @@ export default function SectionCoders(): React.ReactElement {
         setLoadingRequest(false);
         return;
       }
-      setCoders({ coders });
-      setLoadingRequest(false); 
+      setCoders({coders});
+      setLoadingRequest(false);
     };
     getCoders();
   }, []);
 
+  if(render){
+    useEffect(() => {
+      console.log(coders, "BEFORE")
+      setCoders({coders:codersFilter});
+      console.log(coders, "AFTER");
+    }, [render, codersFilter]);
+  }
+
+
+  if(!coders || !coders.coders){
+    return <p>Error loading coders...</p>
+  }
+  console.log(coders);
+
   // Calculate paginated coders
-  const startIndex = currentPage * itemsPerPage;
-  const paginatedCoders = coders.coders.slice(
+  const startIndex = currentPage * limitItems;
+  const paginatedCoders =  coders.coders.slice(
     startIndex,
-    startIndex + itemsPerPage
+    startIndex + limitItems
   );
 
   // Pagination handlers
   const handleNext = () => {
-    if ((currentPage + 1) * itemsPerPage < coders.coders.length) {
+    if ((currentPage + 1) * limitItems < coders.coders.length) {
       setCurrentPage(currentPage + 1);
     }
   };
 
-  const handlePrevious = () => {
+  const handleBack = () => {
     if (currentPage > 0) {
       setCurrentPage(currentPage - 1);
     }
   };
-  console.log(coders)
 
   return (
     <section className="mainGeneral-section">
@@ -82,7 +100,7 @@ export default function SectionCoders(): React.ReactElement {
       <div className="section-buttons">
         <KeyboardArrowLeftIcon
           className="button-left"
-          onClick={handlePrevious}
+          onClick={handleBack}
           style={{
             cursor: "pointer",
             visibility: currentPage === 0 ? "hidden" : "visible",
@@ -94,7 +112,7 @@ export default function SectionCoders(): React.ReactElement {
           style={{
             cursor: "pointer",
             visibility:
-              (currentPage + 1) * itemsPerPage >= coders.coders.length
+              (currentPage + 1) * limitItems >= coders.coders.length
                 ? "hidden"
                 : "visible",
           }}
