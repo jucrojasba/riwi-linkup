@@ -12,6 +12,7 @@ interface IDashboardLayoutProps {
   path: string;
   language: any;
   isDarkMode: boolean;
+
 }
 
 export default function DashboardLayout({
