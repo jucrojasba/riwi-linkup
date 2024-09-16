@@ -1,0 +1,36 @@
+div.filter {
+  display: flex;
+  align-items: center;
+  gap: var(--padding-big);
+  height: 15%;
+  width: 100%;
+}
+
+div.filter > div.filter-languages,
+div.filter > div.filter-skills,
+div.filter > div.filter-teach,
+div.filter > div.filter-clan {
+  display: flex;
+  flex-direction: column;
+  gap: var(--padding-medium);
+}
+
+div.filter > div.filter-languages > div.languages-options,
+div.filter > div.filter-skills > div.skills-options,
+div.filter > div.filter-teach > div.teach-options,
+div.filter > div.filter-clan > div.clan-options {
+  display: flex;
+  gap: var(--padding-min);
+}
+
+div.filter > div.filter-languages > h3,
+div.filter > div.filter-skills > h3,
+div.filter > div.filter-teach > h3,
+div.filter > div.filter-clan > h3 {
+  font-weight: 400;
+  color: var(--paragraph-color-gray);
+}
+
+div.filter > div.button-search {
+  margin-top: 40px;
+}
