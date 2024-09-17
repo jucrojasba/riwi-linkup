@@ -1,6 +1,6 @@
 .chat-container {
     position: absolute;
-    bottom: 10%;
+    top: 35%;
     right: 0%;
     width: 46.5%;
     height: 60%;
@@ -12,9 +12,9 @@
     flex-direction: column;
     background-color: var(--gray-color);
   }
-  .chat-containe-dark-mode{
+  .chat-container-dark-mode{
     position: absolute;
-    bottom: 10%;
+    top: 35%;
     right: 0%;
     width: 46.5%;
     height: 60%;
@@ -116,7 +116,7 @@
   .send-icon {
     font-size: 1.5rem;
   }
-  
+
   .start-button {
     background-color: var(--main-color);
     color: #fff;
@@ -128,8 +128,8 @@
     margin-top: auto; 
     font: var(--main-font);
     position: absolute; 
-    bottom: 4%;
-    right: 2%;
+    bottom: 10%;
+    right: 4%;
   }
   .send-icon {
     transform: rotate(-45deg);
