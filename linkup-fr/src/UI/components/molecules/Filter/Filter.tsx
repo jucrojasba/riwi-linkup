@@ -72,6 +72,25 @@ export default function Filter({setRender, render}:IFilterProps): ReactNode {
     }
   };
   const handleCLickButtonClear = async() =>{
+    setCheckedStates((beforeState) => ({
+      ...beforeState,
+      languages: beforeState.languages.map((language) => ({
+        ...language,
+        checked: false,
+      })),
+      techSkills: beforeState.techSkills.map((techSkill) => ({
+        ...techSkill,
+        checked: false,
+      })),
+      softSkills: beforeState.softSkills.map((softSkill) => ({
+        ...softSkill,
+        checked: false,
+      })),
+      clans: beforeState.clans.map((clan) => ({
+        ...clan,
+        checked: false,
+      })),
+    }));
     const data = await getCodersService();
     if(!data){
       console.log({message: "Error to filter"})
@@ -82,8 +101,6 @@ export default function Filter({setRender, render}:IFilterProps): ReactNode {
       setRender(true);
     }
   }
-
-
   return (
     <div className="filter">
       <div className="filter-languages">

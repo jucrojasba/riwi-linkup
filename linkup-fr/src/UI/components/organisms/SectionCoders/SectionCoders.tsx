@@ -46,19 +46,9 @@ export default function SectionCoders({render}: ISectionCodersProps): React.Reac
 
   useEffect(() => {
     if(render){ // Is rendered when a filter is applied
-        console.log(coders, "BEFORE")
         setCoders({coders:codersFilter});
-        console.log(coders, "AFTER");
     }
   }, [render, codersFilter]);
-
-  
-
-  if(!coders || !coders.coders){
-    return <p>Error loading coders...</p>
-  }
-  console.log(coders);
-
   // Calculate paginated coders
   const startIndex = currentPage * limitItems;
   const paginatedCoders =  coders.coders.slice(
