@@ -1,5 +1,6 @@
 'use client'
 import './ProfileMain.css'
+import { RoundedButton} from '../../atoms/index'
 interface IMainProfile {
     language: boolean;
     email: string;
@@ -14,6 +15,10 @@ const MainProfile: React.FC<IMainProfile> = ({ language, isDarkMode, email, phon
                 <h3>Personal Information</h3>
                 <p>{email}</p>
                 <p>{phone}</p>
+                <RoundedButton
+                text={language? 'Editar':"Edit"}
+                onClick={() => {
+                }}/>
         </div>
     );
 };

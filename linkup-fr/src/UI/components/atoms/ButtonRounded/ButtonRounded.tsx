@@ -6,7 +6,7 @@ import { styled } from "@mui/material/styles";
 import { useState } from "react";
 
 interface RoundedButtonProps extends ButtonProps {
-  expandMessage: any;
+  expandMessage?: any;
   bgColor?: string;
 }
 
