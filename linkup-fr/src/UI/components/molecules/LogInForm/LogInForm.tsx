@@ -13,7 +13,7 @@ import { useRouter } from "next/navigation";
 import GoogleIcon from '@mui/icons-material/Google';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import { CircularLoader } from "../../atoms";
-import inputAlert from "../Alert/Alert";
+import {inputAlert} from "../Alert/Alert";
 import { useAuthUser } from "@/global-states/authUser";
 import useNavigate from "@/utilities/NavigateTo";
 import './loginFormStyles.css'
@@ -38,7 +38,6 @@ function LogInForm():React.ReactNode{
 
     // Management change on the inputs
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-
         setCompanyRegister((prevState) => ({
         ...prevState,
         [e.target.name]: e.target.value
@@ -74,12 +73,12 @@ function LogInForm():React.ReactNode{
         <h4 className={DarkMode?"login-separator-dark":"login-separator"}><span>{Language?'Inicia Sesión con:':'Login with:'}</span></h4>
         {DarkMode?
             <Box sx={{display:'flex', gap:'var(--padding-big)'}}>
-                <CustomIconButton icon="google" iconColor="#db4437" backgroundColor="var(--white-color)" onClick={()=>{}}/>
-                <CustomIconButton icon="github" iconColor="black" backgroundColor="var(--white-color)" onClick={()=>{}}/>
+                <CustomIconButton icon="google" iconColor="#db4437" backgroundColor="var(--white-color)" onClick={()=>signIn("google")}/>
+                <CustomIconButton icon="github" iconColor="black" backgroundColor="var(--white-color)" onClick={()=>signIn("github")}/>
             </Box>
             :<Box sx={{display:'flex', gap:'var(--padding-big)'}}>
-                <CustomIconButton icon="google" iconColor="#db4437" backgroundColor="var(--gray-color)" onClick={()=>{}}/>
-                <CustomIconButton icon="github" iconColor="black" backgroundColor="var(--gray-color)" onClick={()=>{}}/>
+                <CustomIconButton icon="google" iconColor="#db4437" backgroundColor="var(--gray-color)" onClick={()=>signIn("google")}/>
+                <CustomIconButton icon="github" iconColor="black" backgroundColor="var(--gray-color)" onClick={()=>signIn("github")}/>
             </Box>
         }
         

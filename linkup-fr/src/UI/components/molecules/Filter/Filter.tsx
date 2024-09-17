@@ -1,41 +1,53 @@
 import "./filterStyles.css";
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import InputFilter from "../../atoms/InputFilter/InputFilter";
 import MainButton from "../../atoms/MainButton/MainButton";
-import SearchIcon from "@mui/icons-material/Search";
 import FilterAltOffIcon from "@mui/icons-material/FilterAltOff";
+import SearchIcon from '@mui/icons-material/Search';
 import { FilterState } from "@/UI/interfaces/Filter";
 import { filterService } from "@/services/filterService";
 import { useCodersFilter } from "@/global-states/coder";
 import { ICoder } from "@/UI/interfaces/ICoderInterface";
+import { getClansService, getLanguagesService, getSoftSkillsService, getTechnicalSkillsService } from "@/services";
+import { getCodersService } from "@/services/coderService";
+import { ILanguage } from "@/UI/interfaces/languageInterface";
 
 interface IFilterProps{
+  render?: boolean;
   setRender?: (value:boolean) => void
 }
-export default function Filter({setRender}:IFilterProps): ReactNode {
+export default function Filter({setRender, render}:IFilterProps): ReactNode {
   const initialState: FilterState = {
-    languages: [
-      { checked: false, name: "ingles", label: "English", id: 1 },
-      { checked: false, name: "portugues", label: "Portuguese", id: 2 },
-      { checked: false, name: "frances", label: "French", id: 3 },
-    ],
-    techSkills: [
-      { checked: false, name: "javascript", label: "Javascript", id: 1 },
-      { checked: false, name: "python", label: "Python", id: 2 },
-      { checked: false, name: "java", label: "Java", id: 3},
-    ],
-    softSkills: [
-      { checked: false, name: "communication", label: "Communication", id: 1 },
-      { checked: false, name: "teamwork", label: "Teamwork", id: 2 },
-    ],
-    clans: [
-      { checked: false, name: "bernesLee", label: "Bernes Lee", id: 1},
-      { checked: false, name: "ritchie", label: "Ritchie", id: 2 },
-      { checked: false, name: "gates", label: "Gates", id:  3},
-    ],
+    languages: [],
+    techSkills: [],
+    softSkills: [],
+    clans: []
   };
   const [checkedStates, setCheckedStates] = useState<FilterState>(initialState);
   const {setCodersFilter} = useCodersFilter();
+
+  useEffect(() => {
+    const fetchFiltersData = async () => {
+      try {
+        const languages = await getLanguagesService();
+        const techSkills = await getTechnicalSkillsService();
+        const softSkills = await getSoftSkillsService();
+        const clans = await getClansService();
+        if (languages && techSkills && softSkills && clans) {
+          setCheckedStates({
+            languages,
+            techSkills,
+            softSkills,
+            clans,
+          });
+        }
+      } catch (error) {
+        console.error("Error loading filters", error);
+      }
+    };
+
+    fetchFiltersData();
+  }, []);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = event.target;
@@ -47,8 +59,7 @@ export default function Filter({setRender}:IFilterProps): ReactNode {
     });
     setCheckedStates(updatedState);
   };
-
-  const handleClickButton = async() => {
+  const handleClickButtonFilter = async() => {
     const data = await filterService(checkedStates);
     if(!data){
       console.log({message: "Error to filter"})
@@ -59,7 +70,36 @@ export default function Filter({setRender}:IFilterProps): ReactNode {
       setRender(true);
     }
   };
-
+  const handleCLickButtonClear = async() =>{
+    setCheckedStates((beforeState) => ({
+      ...beforeState,
+      languages: beforeState.languages.map((language) => ({
+        ...language,
+        checked: false,
+      })),
+      techSkills: beforeState.techSkills.map((techSkill) => ({
+        ...techSkill,
+        checked: false,
+      })),
+      softSkills: beforeState.softSkills.map((softSkill) => ({
+        ...softSkill,
+        checked: false,
+      })),
+      clans: beforeState.clans.map((clan) => ({
+        ...clan,
+        checked: false,
+      })),
+    }));
+    const data = await getCodersService();
+    if(!data){
+      console.log({message: "Error to filter"})
+      return;
+    }
+    setCodersFilter(data);
+    if(setRender){
+      setRender(true);
+    }
+  }
   return (
     <div className="filter">
       <div className="filter-languages">
@@ -67,7 +107,7 @@ export default function Filter({setRender}:IFilterProps): ReactNode {
         <div className="languages-options">
           {checkedStates.languages.map((language) => (
             <InputFilter
-              key={language.name}
+              key={language.id}
               label={language.label}
               name={language.name}
               onChange={handleChange}
@@ -81,7 +121,7 @@ export default function Filter({setRender}:IFilterProps): ReactNode {
         <div className="teach-options">
           {checkedStates.techSkills.map((techSkill) => (
             <InputFilter
-              key={techSkill.name}
+              key={techSkill.id}
               label={techSkill.label}
               name={techSkill.name}
               onChange={handleChange}
@@ -95,7 +135,7 @@ export default function Filter({setRender}:IFilterProps): ReactNode {
         <div className="skills-options">
           {checkedStates.softSkills.map((softSkill) => (
             <InputFilter
-              key={softSkill.name}
+              key={softSkill.id}
               label={softSkill.label}
               name={softSkill.name}
               onChange={handleChange}
@@ -109,7 +149,7 @@ export default function Filter({setRender}:IFilterProps): ReactNode {
         <div className="clan-options">
           {checkedStates.clans.map((clan) => (
             <InputFilter
-              key={clan.name}
+              key={clan.id}
               label={clan.label}
               name={clan.name}
               onChange={handleChange}
@@ -120,9 +160,18 @@ export default function Filter({setRender}:IFilterProps): ReactNode {
       </div>
       <div className="button-search">
         <MainButton
-          text={<FilterAltOffIcon />}
+          icon={<FilterAltOffIcon />}
+          text={""}
           type="button"
-          onClick={handleClickButton}
+          onClick={handleCLickButtonClear}
+        />
+      </div>
+      <div className="button-search">
+        <MainButton
+          icon={<SearchIcon />}
+          text={""}
+          type="button"
+          onClick={handleClickButtonFilter}
         />
       </div>
     </div>
