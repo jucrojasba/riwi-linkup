@@ -15,13 +15,15 @@ const MainButtonStyle = styled(Button)(() => ({
 }));
 
 const MainButton: React.FC<ButtonProps> = ({
+  icon,
   text,
   onClick,
   type = "button",
-  className
+  className,
 }) => {
   return (
     <MainButtonStyle type={type} variant="contained" onClick={onClick} className={className}>
+      {icon}
       {text}
     </MainButtonStyle>
   );

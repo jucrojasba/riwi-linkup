@@ -3,7 +3,7 @@ import React, { ReactElement, ReactNode, useState } from "react";
 import { Footer, Header } from "../../molecules";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { Filter } from "../../molecules";
-import TitleMain from "../../atoms/TitleMain/TitleMain";
+import { TitleMain } from "../../atoms";
 
 interface IDashboardLayoutProps {
   section: ReactElement;
@@ -11,7 +11,8 @@ interface IDashboardLayoutProps {
   subtitle: string;
   path: string;
   language: any;
-  isDarkMode: boolean;
+  isDarkMode?: boolean;
+  render?:boolean;
   setRender?: (value:boolean) => void;
 }
 
@@ -22,6 +23,7 @@ export default function DashboardLayout({
   path,
   language,
   isDarkMode,
+  render,
   setRender
 }: IDashboardLayoutProps): React.ReactElement {
   const [expand, setExpand] = useState<boolean>(false);
@@ -50,10 +52,10 @@ export default function DashboardLayout({
             title={path === "/admin/coder" || path === "/dashboard" || path === "/config" ? "" : "Filters"}
             subtitle=""
           />
-          {path === "/admin/coder" || path === "/dashboard" || path === "/config"  ? null : <Filter setRender={setRender} />}
+          {path === "/admin/coder" || path === "/dashboard" || path === "/config"  ? null : <Filter render={render} setRender={setRender} />}
           {section}
         </main>
-        <Footer />
+        <Footer isDarkMode={isDarkMode}/>
       </div>
     </div>
   );

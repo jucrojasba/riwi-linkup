@@ -3,7 +3,7 @@ section.mainGeneral-section {
   display: flex;
   flex-direction: column;
   gap: var(--padding-medium);
-  margin-top: var(--padding-big);
+  margin-top: var(--padding-min);
   height: 74%;
 }
 

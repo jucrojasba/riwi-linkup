@@ -6,11 +6,11 @@ import { useAuthUser } from "@/global-states/authUser";
 import { useDarkMode } from "@/global-states/dark-mode";
 import Image from "next/image";
 import Route from "@/routes/route";
+import { useLanguage } from "@/global-states/language-mode";
 
 
 export default function LoginView(): JSX.Element {
     const DarkMode = useDarkMode((state) => state.DarkMode);
-    
     
     return (
         <Route>
@@ -18,8 +18,8 @@ export default function LoginView(): JSX.Element {
                 <AuthLayout isDarkMode={DarkMode} />
                 <section className={DarkMode ? "dark-mode" : "mainLogin-section"}>
                 <div className="section-image">
-                            <Image className="image" src={"/images/test.png"} alt="coderLogin" width={600} height={600} />
-                        </div>
+                    <Image className="image" src={"/images/test.png"} alt="coderLogin" width={600} height={600} />
+                </div>
                         <LogInForm />
                 </section>
             </main>
