@@ -14,7 +14,7 @@ interface IAuthUserState{
 
 export const useAuthUser = create<IAuthUserState>((set)=>({
     authUser: {
-        name: "",
+        name: "jose barreto",
         email: "",
         token: "",
         role: 2

@@ -10,4 +10,4 @@ export interface FilterState {
     techSkills: FilterOption[];
     softSkills: FilterOption[];
     clans: FilterOption[];
-  }
+}

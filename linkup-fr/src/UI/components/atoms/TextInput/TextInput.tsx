@@ -1,6 +1,7 @@
 'use client'
 
 import { TextInputProps } from '@/UI/interfaces/Input';
+import { useDarkMode } from '@/global-states/dark-mode';
 import TextField from '@mui/material/TextField';
 import { styled } from '@mui/material/styles';
 
@@ -47,20 +48,42 @@ const TextInput: React.FC<TextInputProps> = ({
     helperText = '', 
     onChange 
 }) => {
+
+    const DarkMode = useDarkMode((state) => state.DarkMode);
+
     return (
-        <TextInputStyle 
-            id='outlined-error-helper-text' 
-            type={type} 
-            name={name} 
-            defaultValue={defaultValue} 
-            label={label} 
-            error={error} 
-            required={required} 
-            helperText={helperText} 
-            size='small' 
-            onChange={onChange} 
-            sx={{ width: '250px' }} 
-        />
+        <>
+            {DarkMode?
+                <TextInputStyle 
+                    id='outlined-error-helper-text' 
+                    type={type} 
+                    name={name} 
+                    defaultValue={defaultValue} 
+                    label={label} 
+                    error={error} 
+                    required={required} 
+                    helperText={helperText} 
+                    size='small' 
+                    onChange={onChange} 
+                    sx={{ width: '250px','& .MuiInputBase-input': {color:'var(--white-color)'}}} 
+                />
+                :<TextInputStyle 
+                    id='outlined-error-helper-text' 
+                    type={type} 
+                    name={name} 
+                    defaultValue={defaultValue} 
+                    label={label} 
+                    error={error} 
+                    required={required} 
+                    helperText={helperText} 
+                    size='small' 
+                    onChange={onChange} 
+                    sx={{ width: '250px'}} 
+                />
+            }
+            
+        </>
+        
     );
 };
 

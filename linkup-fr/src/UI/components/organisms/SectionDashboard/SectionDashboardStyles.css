@@ -1,5 +1,0 @@
-.dashboard-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: var(--padding-extra-big);
-}
