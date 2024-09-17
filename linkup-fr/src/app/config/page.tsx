@@ -1,6 +1,5 @@
 'use client';
 import { useLanguage } from '@/global-states/language-mode';
-import './dashboardStyle.css'
 import { useDarkMode } from "@/global-states/dark-mode";
 import { DashboardLayout } from '@/UI/components/organisms';
 import SectionDashboard from '@/UI/components/organisms/SectionDashboard/SectionDashboard';
@@ -23,4 +22,4 @@ export default function DashboardView(){
             </main>
         </Route>
     );
-}
+};

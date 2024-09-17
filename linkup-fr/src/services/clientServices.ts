@@ -1,7 +1,8 @@
 export async function getCompaniesByMonth(): Promise<{ formattedDates: string[], counts: number[] } | undefined> {
     try {
-      const response = await fetch('https://linkupv1-production.up.railway.app/api/Dashboard/companies-by-month');
-      const data = await response.json();
+      const response = await fetch('api/companies');
+      const companies = await response.json();
+      const {data} = companies;
   
       if (!data || !Array.isArray(data)) return;
   
@@ -9,7 +10,7 @@ export async function getCompaniesByMonth(): Promise<{ formattedDates: string[],
   
       const lastFive = data.slice(-5);
   
-      const formattedDates = lastFive.map(item => monthAbbreviations[item.month - 1]); 
+      const formattedDates = lastFive.map((item) => monthAbbreviations[item.month - 1]); 
       const counts = lastFive.map(item => item.count);
   
       return { formattedDates, counts };
