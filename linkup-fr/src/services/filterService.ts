@@ -4,7 +4,6 @@ import { ICoder } from "@/UI/interfaces/ICoderInterface";
 import fetchApi from "@/utilities/fetchApi";
 
 export async function filterService(filter:FilterState){
-    console.log("filters", filter);
     const clan = filter.clans.find(clan=>clan.checked);
     const softSkill = filter.softSkills.find(softSkill => softSkill.checked);
     const techSkill = filter.techSkills.find(techSkill => techSkill.checked);

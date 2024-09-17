@@ -28,26 +28,26 @@ export async function deleteCoderService(
 }
 
 export async function getCodersInTraining(): Promise<number | undefined> {
-  const data = await fetchApi(
-    `https://linkupv1-production.up.railway.app/api/Dashboard/coders-in-training`
+  const codersTraining = await fetchApi(
+    `api/codersTraining`
   );
-  if (!data) return;
-  return data;
+  if (!codersTraining) return;
+  return codersTraining.data;
 }
 
 export async function getCodersFrontend(): Promise<number | undefined> {
-  const data = await fetchApi(
-    `https://linkupv1-production.up.railway.app/api/Dashboard/frontend-coders`
+  const codersFrontend = await fetchApi(
+    `api/codersFrontend`
   );
-  if (!data) return;
-  return data;
+  if (!codersFrontend) return;
+  return codersFrontend.data;
 }
 
 export async function getCodersBackend(): Promise<number | undefined> {
-  const data = await fetchApi(
-    `https://linkupv1-production.up.railway.app/api/Dashboard/backend-coders`
+  const codersBackend = await fetchApi(
+    `api/codersBackend`
   );
-  if (!data) return;
-  return data;
+  if (!codersBackend) return;
+  return codersBackend.data;
 }
 
