@@ -6,14 +6,13 @@ import { capitalizeSentece } from '@/utilities/CapitalizeSentence';
 
 
 interface IHeaderProfile {
-    language: boolean; // true = español, false = inglés
+    language: boolean;
     companyName: string;
     sector: string;
     imageProfile: string;
     isDarkMode: boolean;
 }
 
-// Definir los sectores y sus traducciones como un tipo
 type Sector = 'tecnología' | 'finanzas' | 'salud' | 'educación' | 'manufactura';
 
 const sectorTranslations: Record<Sector, { es: string; en: string }> = {
@@ -40,7 +39,6 @@ const sectorTranslations: Record<Sector, { es: string; en: string }> = {
 };
 
 const HeaderProfile: React.FC<IHeaderProfile> = ({ language, companyName, sector, imageProfile, isDarkMode }) => {
-    // Obtener la traducción o usar el sector con la primera letra en mayúscula
     const translatedSector = sectorTranslations[sector as Sector]?.[language ? 'es' : 'en']
         || capitalizeSentece(sector);
 
