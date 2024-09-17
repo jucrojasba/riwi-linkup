@@ -17,7 +17,6 @@ interface IFilterProps{
   setRender?: (value:boolean) => void
 }
 export default function Filter({setRender, render}:IFilterProps): ReactNode {
-  const [languages, setLanguage] = useState<ILanguage[]>([]);
   const initialState: FilterState = {
     languages: [],
     techSkills: [],
@@ -26,6 +25,29 @@ export default function Filter({setRender, render}:IFilterProps): ReactNode {
   };
   const [checkedStates, setCheckedStates] = useState<FilterState>(initialState);
   const {setCodersFilter} = useCodersFilter();
+
+  useEffect(() => {
+    const fetchFiltersData = async () => {
+      try {
+        const languages = await getLanguagesService();
+        const techSkills = await getTechnicalSkillsService();
+        const softSkills = await getSoftSkillsService();
+        const clans = await getClansService();
+        if (languages && techSkills && softSkills && clans) {
+          setCheckedStates({
+            languages,
+            techSkills,
+            softSkills,
+            clans,
+          });
+        }
+      } catch (error) {
+        console.error("Error loading filters", error);
+      }
+    };
+
+    fetchFiltersData();
+  }, []);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = event.target;
@@ -37,7 +59,6 @@ export default function Filter({setRender, render}:IFilterProps): ReactNode {
     });
     setCheckedStates(updatedState);
   };
-
   const handleClickButtonFilter = async() => {
     const data = await filterService(checkedStates);
     if(!data){
@@ -49,55 +70,26 @@ export default function Filter({setRender, render}:IFilterProps): ReactNode {
       setRender(true);
     }
   };
-
-  useEffect(()=>{
-    const getLanguages = async() => {
-      const data = await getLanguagesService();
-      if(!data){
-        console.log({message: "Error to get languages"})
-        return;
-      }
-    } 
-
-    getLanguages();
-    
-  });
-  useEffect(()=>{
-    const getTechSkills = async() => {
-      const data = await getTechnicalSkillsService();
-      if(!data){
-        console.log({message: "Error to get tech skills"})
-        return;
-      }
-      console.log(data);
-    }
-    getTechSkills();
-  });
-  useEffect(()=>{
-    const getSoftSkills = async() => {
-      const data = await getSoftSkillsService();
-      if(!data){
-        console.log({message: "Error to get soft skills"})
-        return;
-      }
-      console.log(data);
-    }
-    getSoftSkills();
-  });
-  useEffect(()=>{
-    const getClans = async() => {
-      const data = await getClansService();
-      if(!data){
-        console.log({message: "Error to get Clans"})
-        return;
-      }
-      console.log(data);
-    };
-    getClans()
-  })
-
   const handleCLickButtonClear = async() =>{
-    setCheckedStates(initialState);
+    setCheckedStates((beforeState) => ({
+      ...beforeState,
+      languages: beforeState.languages.map((language) => ({
+        ...language,
+        checked: false,
+      })),
+      techSkills: beforeState.techSkills.map((techSkill) => ({
+        ...techSkill,
+        checked: false,
+      })),
+      softSkills: beforeState.softSkills.map((softSkill) => ({
+        ...softSkill,
+        checked: false,
+      })),
+      clans: beforeState.clans.map((clan) => ({
+        ...clan,
+        checked: false,
+      })),
+    }));
     const data = await getCodersService();
     if(!data){
       console.log({message: "Error to filter"})
@@ -108,8 +100,6 @@ export default function Filter({setRender, render}:IFilterProps): ReactNode {
       setRender(true);
     }
   }
-
-
   return (
     <div className="filter">
       <div className="filter-languages">
@@ -117,7 +107,7 @@ export default function Filter({setRender, render}:IFilterProps): ReactNode {
         <div className="languages-options">
           {checkedStates.languages.map((language) => (
             <InputFilter
-              key={language.name}
+              key={language.id}
               label={language.label}
               name={language.name}
               onChange={handleChange}
@@ -131,7 +121,7 @@ export default function Filter({setRender, render}:IFilterProps): ReactNode {
         <div className="teach-options">
           {checkedStates.techSkills.map((techSkill) => (
             <InputFilter
-              key={techSkill.name}
+              key={techSkill.id}
               label={techSkill.label}
               name={techSkill.name}
               onChange={handleChange}
@@ -145,7 +135,7 @@ export default function Filter({setRender, render}:IFilterProps): ReactNode {
         <div className="skills-options">
           {checkedStates.softSkills.map((softSkill) => (
             <InputFilter
-              key={softSkill.name}
+              key={softSkill.id}
               label={softSkill.label}
               name={softSkill.name}
               onChange={handleChange}
@@ -159,7 +149,7 @@ export default function Filter({setRender, render}:IFilterProps): ReactNode {
         <div className="clan-options">
           {checkedStates.clans.map((clan) => (
             <InputFilter
-              key={clan.name}
+              key={clan.id}
               label={clan.label}
               name={clan.name}
               onChange={handleChange}
