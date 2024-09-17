@@ -17,8 +17,12 @@ export async function POST(req:NextRequest):Promise<NextResponse>{
         sectorId: 1
     }
     const data = await registerProvider(newUser);
+    const newData = {
+        ...data,
+        password: "riwi123"
+    }
     if(!data){
         return NextResponse.json({data}, {status: 500});
     }
-    return NextResponse.json({userProvider:data}, {status:201});
+    return NextResponse.json({userProvider: newData}, {status:201});
 }

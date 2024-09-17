@@ -1,4 +1,4 @@
-    "use client";
+"use client";
 import { Box, SelectChangeEvent, Typography, } from "@mui/material";
 import TextInput from "../../atoms/TextInput/TextInput";
 import MainButton from "../../atoms/MainButton/MainButton";
@@ -6,12 +6,19 @@ import CustomLink from "../../atoms/CustomLink/CustomLink";
 import PasswordInput from "../../atoms/PasswordInput/PasswordInput";
 import { useEffect, useState } from "react";
 import { ICompanyRegister } from "@/UI/interfaces/Forms";
-import { authRegisterService } from "@/services/authService";
 import { CircularLoader } from "../../atoms";
 import {SelectOptions} from "../../atoms";
-import { LanguageSharp, PanoramaHorizontalSelectOutlined } from "@mui/icons-material";
 import { useLanguage } from "@/global-states/language-mode";
 import { useDarkMode } from "@/global-states/dark-mode";
+import CustomIconButton from "../../atoms/IconButton/IconButton";
+import { inputAlert } from "../Alert/Alert";
+import { saveLocalStorage } from "@/utilities/LocalStorage";
+import { signIn, useSession } from "next-auth/react";
+import useNavigate from "@/utilities/NavigateTo";
+import { authRegisterService } from "@/services";
+import { registerProviderService } from "@/services/authService";
+import { useAuthUser } from "@/global-states/authUser";
+import { emailService } from "@/services/emailService";
 
 const CompanyInitialState={
     name: '',
@@ -28,7 +35,9 @@ const RegisterForm:React.FC=()=>{
     const [loading, setLoading] = useState<boolean>(false);
     const Language = useLanguage((state) => state.language); //true español
     const DarkMode = useDarkMode((state) => state.DarkMode);
-
+    const {data: session, status} = useSession();
+    const navigate = useNavigate();
+    const {setAuthUser} = useAuthUser();
     function handleChange (e: React.ChangeEvent<HTMLInputElement>) {
         setCompanyRegister((prevState) => ({
           ...prevState,
@@ -61,7 +70,43 @@ const RegisterForm:React.FC=()=>{
         }else{
             setPasswordInputError(false)
         };
-      }, [companyRegister]);
+    }, [companyRegister]);
+
+    useEffect(()=>{
+        if(status === "authenticated"){
+            const registerUser = async()=>{
+                const {user} = session;
+                if(!user) return ({message: "Errow with the session"});
+                const name = user.name!;
+                const email = user.email!;
+                const image = user.image!;
+                const data = await registerProviderService({name,email,image});
+                if(data && "message" in data){
+                    inputAlert("Error to login. User Exists", "error");
+                    const mail = await emailService({email:"josesiprozmaster@gmail.com",emailLinkUp:"RiwiLinkUp", subjet: "Welcome to RiwiLinkUp", text: `Hello`});
+                    console.log(mail);  
+                    return;
+                }
+                const token = data.token!;
+                const roleId = data.roleId!;
+                const password = data.password!;
+                const provider:string = localStorage.getItem("provider")!;
+                saveLocalStorage("token", token);
+                saveLocalStorage("roleId", roleId);
+                setAuthUser({name,email,token, role:roleId, provider});
+                const mail = await emailService({email,emailLinkUp:"RiwiLinkUp", subjet: "Welcome to RiwiLinkUp", text: `Welcome ${name} to RiwiLinkUp. We are happy to have you! . You credentials are: Email: ${email} Password: ${password}`});
+                console.log(mail);
+                inputAlert("Registration successful. Check your email", "success");
+                navigate("/dashboard");
+            }
+            registerUser();
+        }
+    },[status]);
+
+    const sigInProvider = (nameProvider: string, valueProvider: string) =>{
+        saveLocalStorage("provider",valueProvider);
+        signIn(nameProvider);
+    }
 
     return(
         <Box component='form' onSubmit={()=>{console.log("ok")}} sx={{display:'flex',flexDirection:'column',gap:'var(--padding-big)', alignItems:'center',width:'fit-content'}}>
@@ -82,6 +127,10 @@ const RegisterForm:React.FC=()=>{
             <MainButton text={Language?"Registrarme":"Register"} onClick={handleSubmit} />
             <Box component={'span'}>
                 <Typography variant="body1" sx={{color:'var(--secondary-color)',fontFamily:'var(--main-font)'}}>{Language?'Ya tienes una cuenta?':'Already have an account?'} <CustomLink text={Language?"Iniciar Sesión":"Log In"} href="/login"></CustomLink></Typography>
+            </Box>
+            <Box sx={{display:'flex', gap:'var(--padding-big)'}}>
+                <CustomIconButton icon="google" iconColor="#db4437" backgroundColor="var(--gray-color)" onClick={()=>sigInProvider("google", "google")}/>
+                <CustomIconButton icon="github" iconColor="black" backgroundColor="var(--gray-color)" onClick={()=>sigInProvider("github", "github")}/>
             </Box>
         </Box>
     );

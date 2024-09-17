@@ -1,5 +1,6 @@
 export interface IUserProdiver{
     roleId: number,
     email:string,
-    token:string
+    token:string,
+    password?:string,
 }
