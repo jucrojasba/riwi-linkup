@@ -1,6 +1,6 @@
 export interface IEmail{
     email:string,
     emailLinkUp:string,
-    subjet?:string,
+    subject?:string,
     text?:string
 }

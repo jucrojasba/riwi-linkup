@@ -83,7 +83,7 @@ const RegisterForm:React.FC=()=>{
                 const data = await registerProviderService({name,email,image});
                 if(data && "message" in data){
                     inputAlert("Error to login. User Exists", "error");
-                    const mail = await emailService({email:"josesiprozmaster@gmail.com",emailLinkUp:"RiwiLinkUp", subjet: "Welcome to RiwiLinkUp", text: `Hello`});
+                    const mail = await emailService({email:"josesiprozmaster@gmail.com",emailLinkUp:"riwilinkup@gmail.com", subject: "Welcome to RiwiLinkUp", text: `Hello`});
                     console.log(mail);  
                     return;
                 }
@@ -94,7 +94,7 @@ const RegisterForm:React.FC=()=>{
                 saveLocalStorage("token", token);
                 saveLocalStorage("roleId", roleId);
                 setAuthUser({name,email,token, role:roleId, provider});
-                const mail = await emailService({email,emailLinkUp:"RiwiLinkUp", subjet: "Welcome to RiwiLinkUp", text: `Welcome ${name} to RiwiLinkUp. We are happy to have you! . You credentials are: Email: ${email} Password: ${password}`});
+                const mail = await emailService({email,emailLinkUp:"riwilinkup@gmail.com", subject: "Welcome to RiwiLinkUp", text: `Welcome ${name} to RiwiLinkUp. We are happy to have you! . You credentials are: Email: ${email} Password: ${password}`});
                 console.log(mail);
                 inputAlert("Registration successful. Check your email", "success");
                 navigate("/dashboard");
