@@ -17,7 +17,6 @@ interface IFilterProps{
   setRender?: (value:boolean) => void
 }
 export default function Filter({setRender, render}:IFilterProps): ReactNode {
-  const [languages, setLanguage] = useState<ILanguage[]>([]);
   const initialState: FilterState = {
     languages: [],
     techSkills: [],
