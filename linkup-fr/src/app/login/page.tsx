@@ -17,10 +17,10 @@ export default function LoginView(): JSX.Element {
             <main className="mainLogin">
                 <AuthLayout isDarkMode={DarkMode} />
                 <section className={DarkMode ? "dark-mode" : "mainLogin-section"}>
-                <div className="section-image">
-                    <Image className="image" src={"/images/test.png"} alt="coderLogin" width={600} height={600} />
-                </div>
-                        <LogInForm />
+                    <div className="section-image">
+                        <Image className="image" src={"/images/test.png"} alt="coderLogin" width={600} height={600} />
+                    </div>
+                    <LogInForm />
                 </section>
             </main>
         </Route>
