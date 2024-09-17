@@ -13,7 +13,7 @@ import { useRouter } from "next/navigation";
 import GoogleIcon from '@mui/icons-material/Google';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import { CircularLoader } from "../../atoms";
-import inputAlert from "../Alert/Alert";
+import {inputAlert} from "../Alert/Alert";
 import { useAuthUser } from "@/global-states/authUser";
 import useNavigate from "@/utilities/NavigateTo";
 import './loginFormStyles.css'
@@ -38,7 +38,6 @@ function LogInForm():React.ReactNode{
 
     // Management change on the inputs
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-
         setCompanyRegister((prevState) => ({
         ...prevState,
         [e.target.name]: e.target.value

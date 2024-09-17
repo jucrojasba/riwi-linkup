@@ -1,5 +1,5 @@
 import "./filterStyles.css";
-import { ReactNode, useEffect, useState, useLayoutEffect } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import InputFilter from "../../atoms/InputFilter/InputFilter";
 import MainButton from "../../atoms/MainButton/MainButton";
 import FilterAltOffIcon from "@mui/icons-material/FilterAltOff";
@@ -27,14 +27,13 @@ export default function Filter({setRender, render}:IFilterProps): ReactNode {
   const [checkedStates, setCheckedStates] = useState<FilterState>(initialState);
   const {setCodersFilter} = useCodersFilter();
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const fetchFiltersData = async () => {
       try {
         const languages = await getLanguagesService();
         const techSkills = await getTechnicalSkillsService();
         const softSkills = await getSoftSkillsService();
         const clans = await getClansService();
-
         if (languages && techSkills && softSkills && clans) {
           setCheckedStates({
             languages,
@@ -61,7 +60,6 @@ export default function Filter({setRender, render}:IFilterProps): ReactNode {
     });
     setCheckedStates(updatedState);
   };
-
   const handleClickButtonFilter = async() => {
     const data = await filterService(checkedStates);
     if(!data){
@@ -73,7 +71,6 @@ export default function Filter({setRender, render}:IFilterProps): ReactNode {
       setRender(true);
     }
   };
-
   const handleCLickButtonClear = async() =>{
     const data = await getCodersService();
     if(!data){
@@ -94,7 +91,7 @@ export default function Filter({setRender, render}:IFilterProps): ReactNode {
         <div className="languages-options">
           {checkedStates.languages.map((language) => (
             <InputFilter
-              key={language.name}
+              key={language.id}
               label={language.label}
               name={language.name}
               onChange={handleChange}
@@ -108,7 +105,7 @@ export default function Filter({setRender, render}:IFilterProps): ReactNode {
         <div className="teach-options">
           {checkedStates.techSkills.map((techSkill) => (
             <InputFilter
-              key={techSkill.name}
+              key={techSkill.id}
               label={techSkill.label}
               name={techSkill.name}
               onChange={handleChange}
@@ -122,7 +119,7 @@ export default function Filter({setRender, render}:IFilterProps): ReactNode {
         <div className="skills-options">
           {checkedStates.softSkills.map((softSkill) => (
             <InputFilter
-              key={softSkill.name}
+              key={softSkill.id}
               label={softSkill.label}
               name={softSkill.name}
               onChange={handleChange}
@@ -136,7 +133,7 @@ export default function Filter({setRender, render}:IFilterProps): ReactNode {
         <div className="clan-options">
           {checkedStates.clans.map((clan) => (
             <InputFilter
-              key={clan.name}
+              key={clan.id}
               label={clan.label}
               name={clan.name}
               onChange={handleChange}
