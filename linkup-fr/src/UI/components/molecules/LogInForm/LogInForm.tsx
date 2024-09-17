@@ -7,8 +7,8 @@ import PasswordInput from "../../atoms/PasswordInput/PasswordInput";
 import { useEffect, useState } from "react";
 import { ICompanyLogin } from "@/UI/interfaces/Forms";
 import { useDarkMode } from "@/global-states/dark-mode";
-import { authLoginService } from "@/services/authService";
-import { signIn, useSession } from "next-auth/react";
+import { authLoginService,registerProviderService } from "@/services/authService";
+import { signIn, signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import GoogleIcon from '@mui/icons-material/Google';
 import GitHubIcon from '@mui/icons-material/GitHub';
@@ -57,8 +57,38 @@ function LogInForm():React.ReactNode{
         setLoading(false);
         inputAlert("Login successful", "success");
         navigate("/dashboard");
-    }
+    };
 
+    useEffect(()=>{
+        if(status === "authenticated"){
+            const registerUser = async()=>{
+                const {user} = session;
+                if(!user) return ({message: "Errow with the session"});
+                const name = user.name!;
+                const email = user.email!;
+                const image = user.image!;
+                const data = await registerProviderService({name,email,image});
+                if(data && "message" in data){
+                    inputAlert("Error to login", "error");
+                    return;
+                }
+                const token = data.token!;
+                const roleId = data.roleId!;
+                const provider:string = localStorage.getItem("provider")!;
+                inputAlert("Login successful", "success");
+                saveLocalStorage("token", token);
+                saveLocalStorage("roleId", roleId);
+                setAuthUser({name,email,token, role:roleId, provider});
+                navigate("/dashboard");
+            }
+            registerUser();
+        }
+    },[status]);
+
+    const sigInProvider = (nameProvider: string, valueProvider: string) =>{
+        saveLocalStorage("provider",valueProvider);
+        signIn(nameProvider);
+    }
     return(
     <Box
     component='form'
@@ -73,12 +103,12 @@ function LogInForm():React.ReactNode{
         <h4 className={DarkMode?"login-separator-dark":"login-separator"}><span>{Language?'Inicia Sesión con:':'Login with:'}</span></h4>
         {DarkMode?
             <Box sx={{display:'flex', gap:'var(--padding-big)'}}>
-                <CustomIconButton icon="google" iconColor="#db4437" backgroundColor="var(--white-color)" onClick={()=>signIn("google")}/>
-                <CustomIconButton icon="github" iconColor="black" backgroundColor="var(--white-color)" onClick={()=>signIn("github")}/>
+                <CustomIconButton icon="google" iconColor="#db4437" backgroundColor="var(--white-color)" onClick={()=>sigInProvider("google", "google")}/>
+                <CustomIconButton icon="github" iconColor="black" backgroundColor="var(--white-color)" onClick={()=>sigInProvider("github", "github")}/>
             </Box>
             :<Box sx={{display:'flex', gap:'var(--padding-big)'}}>
-                <CustomIconButton icon="google" iconColor="#db4437" backgroundColor="var(--gray-color)" onClick={()=>signIn("google")}/>
-                <CustomIconButton icon="github" iconColor="black" backgroundColor="var(--gray-color)" onClick={()=>signIn("github")}/>
+                <CustomIconButton icon="google" iconColor="#db4437" backgroundColor="var(--gray-color)" onClick={()=>sigInProvider("google", "google")}/>
+                <CustomIconButton icon="github" iconColor="black" backgroundColor="var(--gray-color)" onClick={()=>sigInProvider("github", "github")}/>
             </Box>
         }
         
