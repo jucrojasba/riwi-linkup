@@ -1,8 +1,8 @@
 export interface FilterOption {
-    checked: boolean;
+    id:number;
     name: string;
     label: string;
-    id:number;
+    checked: boolean;
 }
   
 export interface FilterState {
