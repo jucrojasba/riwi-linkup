@@ -3,7 +3,6 @@ import { useLanguage } from '@/global-states/language-mode';
 import './dashboardStyle.css'
 import { useDarkMode } from "@/global-states/dark-mode";
 import { DashboardLayout } from '@/UI/components/organisms';
-import DashboardCardsContainer from '@/UI/components/organisms/DashboardCardsContainer/DashboardCardsContainer';
 import SectionDashboard from '@/UI/components/organisms/SectionDashboard/SectionDashboard';
 import { useAuthUser } from '@/global-states/authUser';
 import Route from '@/routes/route';
@@ -16,9 +15,6 @@ export default function DashboardView(){
     const titleView = language? "Tablero":"Dashboard";
     const subtitle= language? "Estadisticas Globales":"General Stats";
     const AuthUser = useAuthUser((state)=> state.authUser);
-
-    const xDataExample: string[] = ['January', 'February', 'March', 'April', 'May'];
-    const yDataExample: number[] = [500, 400, 600, 300, 700];
 
     return (
         <Route>
