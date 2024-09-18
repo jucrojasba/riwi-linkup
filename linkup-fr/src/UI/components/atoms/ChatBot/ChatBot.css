@@ -23,7 +23,7 @@
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    background-color: #151B23;
+    background-color: var(--background-dark-mode);
   }
   .chat-box {
     flex: 1;

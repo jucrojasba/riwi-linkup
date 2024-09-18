@@ -6,11 +6,12 @@ import { styled } from "@mui/material/styles";
 import { useState } from "react";
 
 interface RoundedButtonProps extends ButtonProps {
-  expandMessage: any;
+  expandMessage?: any;
+  bgColor?: string;
 }
 
-const RoundedButtonStyle = styled(Button)(() => ({
-  backgroundColor: "var(--main-color)",
+const RoundedButtonStyle = styled(Button)<{ bgColor?: string }>(({ bgColor }) => ({
+  backgroundColor: bgColor || "var(--main-color)", 
   borderRadius: "80px",
   textTransform: "none",
   textAlign: "start",
@@ -37,6 +38,7 @@ const RoundedButton: React.FC<RoundedButtonProps> = ({
   expandMessage,
   onClick,
   type = "button",
+  bgColor,
 }) => {
   const [isHovered, setIsHovered] = useState(false);
 
@@ -47,6 +49,7 @@ const RoundedButton: React.FC<RoundedButtonProps> = ({
       onClick={onClick}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      bgColor={bgColor}
     >
       {isHovered ? expandMessage : text}
     </RoundedButtonStyle>
@@ -54,3 +57,4 @@ const RoundedButton: React.FC<RoundedButtonProps> = ({
 };
 
 export default RoundedButton;
+
