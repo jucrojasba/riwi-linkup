@@ -2,6 +2,7 @@
 
 :root {
   --main-color: #6b5cff;
+  --button-color-coder:#6B5CFF;
   --paragraph-color: #0D1117;
   --paragraph-color-gray: #707070;
   --secondary-color: #181e4b;
@@ -14,6 +15,7 @@
   --pink-color: #eaa2fc;
   --red-color: #fe654f;
   --border-radius-min: 10px;
+  --border-radius-medium: 20px;
   --border-radius-big: 30px;
   --padding-min: 10px;
   --padding-medium: 20px;

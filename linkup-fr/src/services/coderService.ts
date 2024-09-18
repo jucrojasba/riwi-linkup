@@ -1,4 +1,4 @@
-import { ICoder } from "@/UI/interfaces/ICoderInterface";
+import { ICoder, ICoderBack } from "@/UI/interfaces/ICoderInterface";
 import { IUser } from "@/UI/interfaces/IUserInterface";
 import fetchApi from "@/utilities/fetchApi";
 
@@ -51,3 +51,9 @@ export async function getCodersBackend(): Promise<number | undefined> {
   return codersBackend.data;
 }
 
+export async function getCoderByIdService(id:number): Promise< ICoderBack |{message:string}>{
+  console.log(id);
+  const coder = await fetchApi(`api/coderById/${id}`);
+  if(!coder)return coder;
+  return coder.data;
+}

@@ -42,7 +42,7 @@ export default function Card({
 
   const handleClickMore = (id_coder:number | undefined) => {
     console.log(id_coder)
-    router.push(`/admin/coder?user=${id_coder}`);
+    router.push(`/admin/coder?coder=${id_coder}`);
   };
 
   if (!status) {

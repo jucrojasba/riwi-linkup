@@ -14,6 +14,7 @@ import TextInput from "./TextInput/TextInput";
 import TitleHome from "./TitleHome/TitleHome";
 import TitleMain from "./TitleMain/TitleMain";
 import SelectOptions from "./Select/Select";
+import ButtonCoder from "./ButtonCoder/ButtonCoder";
 
 export {
     ButtonMore,
@@ -32,5 +33,5 @@ export {
     TextInput,
     TitleHome,
     TitleMain,
-    SelectOptions
+    ButtonCoder
 }
