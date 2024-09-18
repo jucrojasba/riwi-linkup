@@ -1,5 +1,6 @@
 'use client'
 
+import { useAuthUser } from "@/global-states/authUser";
 import HeaderProfile from "../../molecules/ProfileHeader/ProfileHeader";
 import MainProfile from "../../molecules/ProfileMain/ProfileMain";
 import './SectionProfile.css'
