@@ -1,5 +1,14 @@
-export interface IUserProdiver{
-    name:string | null,
-    email?:string | null,
-    image?:string | null
+export interface IUserProdiverRegister{
+    roleId: number,
+    email:string,
+    token:string,
+    password?:string,
+}
+
+export interface IUserProviderLogin{
+    roleId: number,
+    email:string,
+    token:string,
+    name:string,
+    password:string
 }
