@@ -11,6 +11,10 @@ export interface IUser{
 export interface IUserState{
     users: IUser[]
 }
+export interface IApiResponse {
+    user: IUserBack; 
+
+}
 
 export interface IUserBack {
     id:           number;

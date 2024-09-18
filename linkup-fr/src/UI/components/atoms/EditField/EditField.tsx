@@ -20,16 +20,18 @@ const EditFieldStyle = styled(TextField)<{ edit: boolean | undefined }>(({ theme
     '& .MuiOutlinedInput-root': {
         '& fieldset': {
             borderColor: edit ? 'var(--main-color)' : 'transparent',
+            borderWidth: edit ? '2px' : '1px', 
         },
         '&.Mui-focused fieldset': {
             borderColor: edit ? 'var(--main-color)' : 'transparent',
+            borderWidth: edit ? '2px' : '1px', 
         },
     },
     '& .MuiInputLabel-outlined': {
-        display: 'none', 
+        display: 'none',
     },
     '& .MuiInputLabel-outlined.Mui-focused': {
-        display: 'none', 
+        display: 'none',
     },
     '& .MuiInputLabel-root.Mui-error': {
         color: 'var(--red-color)',
@@ -42,6 +44,9 @@ const EditFieldStyle = styled(TextField)<{ edit: boolean | undefined }>(({ theme
     },
     '& .MuiOutlinedInput-root.Mui-disabled .MuiOutlinedInput-notchedOutline': {
         borderColor: 'transparent',
+    },
+    '& .MuiInputBase-input.Mui-disabled': {
+        WebkitTextFillColor: 'inherit',
     },
 }));
 
@@ -110,13 +115,13 @@ const EditField: React.FC<EditFieldProps> = ({
             sx={{ 
                 width: '250px',
                 '& .MuiInputBase-input': {
-                    color: DarkMode ? 'var(--white-color)' : 'var(--paragraph-color-gray)',
-                    backgroundColor: 'transparent'
-                }
+                    color: DarkMode ? 'var(--white-color)' : 'var(--paragraph-color-gray)', 
+                    backgroundColor: 'transparent',
+                    WebkitTextFillColor: DarkMode ? 'var(--white-color)' : 'var(--paragraph-color-gray)',
+                },
             }}
         />
     );
 };
 
 export default EditField;
-
