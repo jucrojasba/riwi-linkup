@@ -13,7 +13,7 @@ const MainProfile: React.FC<IMainProfile> = ({ language, isDarkMode, email, phon
 
     return (
         <div className={isDarkMode?'main-profile-dark':"main-profile"}>
-                <h3>Personal Information</h3>
+                <h3>{language?'Información Personal':'Personal Information'}</h3>
                 <p>{email}</p>
                 <p>{phone}</p>
                 <CustomButton 
