@@ -2,6 +2,7 @@ div.content-coder{
     display: flex;
     justify-content: center;
     height: 80%;
+    background-color: red;
 }
 
 div.content-coder div.coder{
