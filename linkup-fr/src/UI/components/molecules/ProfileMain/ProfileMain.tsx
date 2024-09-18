@@ -1,6 +1,7 @@
 'use client'
 import { CustomButton } from '../../atoms';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
+import SaveIcon from '@mui/icons-material/Save';
 import './ProfileMain.css'
 interface IMainProfile {
     language: boolean;
@@ -13,9 +14,10 @@ const MainProfile: React.FC<IMainProfile> = ({ language, isDarkMode, email, phon
 
     return (
         <div className={isDarkMode?'main-profile-dark':"main-profile"}>
-                <h3>Personal Information</h3>
+                <h3>{language?'Información Personal':'Personal Information'}</h3>
                 <p>{email}</p>
                 <p>{phone}</p>
+                <div className="action-buttons">
                 <CustomButton 
                 initialText={language?
                     <>
@@ -25,13 +27,21 @@ const MainProfile: React.FC<IMainProfile> = ({ language, isDarkMode, email, phon
                       Edit <ModeEditIcon sx={{ fontSize: "1rem" }} />
                     </>
                   }
-                  clickedText={language? 'Guardar':'Save'}
-                  initialBgColor='var(--border-color-gray)'
-                  clickedBgColor='var(--white-color)'
+                  clickedText={language? 
+                  <>
+                    Guardar <SaveIcon sx={{ fontSize: "1rem" }} />
+                  </>:
+                  <>
+                    Save <SaveIcon sx={{ fontSize: "1rem" }} />
+                  </>
+                  }
+                  initialBgColor='var(--main-color)'
+                  clickedBgColor='var(--green-color)'
                   onClick={()=>{}}
                   secondOnClick={()=>{}}
                 
                 />
+                </div>
         </div>
     );
 };
