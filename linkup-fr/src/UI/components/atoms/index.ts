@@ -14,9 +14,11 @@ import TextInput from "./TextInput/TextInput";
 import TitleHome from "./TitleHome/TitleHome";
 import TitleMain from "./TitleMain/TitleMain";
 import SelectOptions from "./Select/Select";
+import CustomButton from "./CustomeButton/CustomeButton"
 
 
 export {
+    CustomButton,
     ButtonMore,
     RoundedButton,
     CustomLink,
