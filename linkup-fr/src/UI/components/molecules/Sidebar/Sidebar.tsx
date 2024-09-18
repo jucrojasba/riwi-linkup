@@ -1,5 +1,5 @@
 import "./sidebarStyles.css";
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import Image from "next/image";
 import SettingsIcon from "@mui/icons-material/Settings";
 import SpaceDashboardIcon from "@mui/icons-material/SpaceDashboard";
@@ -36,10 +36,9 @@ export default function Sidebar({ expand, language }: ISidebarProps): React.Reac
     setOpenSidebar(!openSidebar);
   };
 
-  const handleSignOut = () =>{
+  const handleSignOut = async() =>{
     clearLocalStorage();
-    signOut({callbackUrl:"/"});
-
+    await signOut({callbackUrl: "/login"});
   }
   return (
     <div className={openSidebar ? "sidebarWidth" : "sidebar"}>

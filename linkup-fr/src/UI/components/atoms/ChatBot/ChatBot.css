@@ -23,7 +23,7 @@
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    background-color: #151B23;
+    background-color: var(--background-dark-mode);
   }
   .chat-box {
     flex: 1;
@@ -116,11 +116,7 @@
   .send-icon {
     font-size: 1.5rem;
   }
-  .start-button-container{
-    position: relative;
-    width: 100%;
-    height: 40%;
-  }
+
   .start-button {
     background-color: var(--main-color);
     color: #fff;

@@ -1,15 +1,18 @@
 export async function getCompaniesByMonth(): Promise<{ formattedDates: string[], counts: number[] } | undefined> {
     try {
-      const response = await fetch('https://linkupv1-production.up.railway.app/api/Dashboard/companies-by-month');
-      const data = await response.json();
+      const response = await fetch('api/companies');
+      const companies = await response.json();
+      const {data} = companies;
+      console.log('data bien',data);
   
       if (!data || !Array.isArray(data)) return;
   
       const monthAbbreviations = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   
       const lastFive = data.slice(-5);
+      console.log(lastFive);
   
-      const formattedDates = lastFive.map(item => monthAbbreviations[item.month - 1]); 
+      const formattedDates = lastFive.map((item) => monthAbbreviations[item.month-1]); 
       const counts = lastFive.map(item => item.count);
   
       return { formattedDates, counts };

@@ -1,13 +1,13 @@
-import { ILanguages, ILanguage } from "@/UI/interfaces/languageInterface";
+import { ILanguage } from "@/UI/interfaces/languageInterface";
 import fetchApi from "@/utilities/fetchApi";
 
-export async function getLanguagesService():Promise<ILanguages | null>{
-    const data = await fetchApi("https://linkupv1-production.up.railway.app/api/v1/Coders/Languages");
-    if(!data){
+export async function getLanguagesService():Promise<ILanguage[] | null>{
+    const languages = await fetchApi("api/languages");
+    if(!languages){
         console.log({message: "Error to get languages"})
         return null;
     }
-    const filteredLanguage = data.map((language: ILanguage) => ({
+    const filteredLanguage = languages.data.map((language: Partial<ILanguage>) => ({
         id: language.id,
         name: language.name,
         label: language.name,

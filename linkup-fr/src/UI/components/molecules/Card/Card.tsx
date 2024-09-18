@@ -8,6 +8,7 @@ import { deleteCache } from "next/dist/server/lib/render-server";
 import { deleteCoderService } from "@/services/coderService";
 import { CircularLoader } from "../../atoms/loaders/Loaders";
 import { useRouter } from "next/navigation";
+import { confirmDeleteAlert } from "../Alert/Alert";
 
 interface ICardProps {
   id_coder?: number;
@@ -29,8 +30,8 @@ export default function Card({
   const handleClickUpdate = async (e: React.MouseEvent) => {};
 
   const handleClickDelete = async (e: React.MouseEvent): Promise<undefined> => {
-    const isConfirm: boolean = confirm("Do you want delete this coder?"); // Agregar modal de confirmación
-    if (!isConfirm) return;
+    const isConfirm: boolean = await confirmDeleteAlert();
+    if(!isConfirm) return;
     const id: string | null = (
       e.currentTarget as HTMLButtonElement
     ).getAttribute("data-id");
