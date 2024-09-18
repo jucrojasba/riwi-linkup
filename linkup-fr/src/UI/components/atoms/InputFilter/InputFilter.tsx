@@ -5,6 +5,7 @@ interface InputFilterProps {
   name: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   checked: boolean;
+  className?: string;
 }
 
 export default function InputFilter({
@@ -12,6 +13,7 @@ export default function InputFilter({
   name,
   onChange,
   checked,
+  className
 }: InputFilterProps): React.ReactNode {
   return (
     <div>
@@ -26,6 +28,7 @@ export default function InputFilter({
           id={name}
           name={name}
           onChange={onChange}
+          className={className}
         />
       </label>
     </div>

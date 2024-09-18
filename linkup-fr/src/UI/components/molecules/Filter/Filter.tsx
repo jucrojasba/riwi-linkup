@@ -7,10 +7,8 @@ import SearchIcon from '@mui/icons-material/Search';
 import { FilterState } from "@/UI/interfaces/Filter";
 import { filterService } from "@/services/filterService";
 import { useCodersFilter } from "@/global-states/coder";
-import { ICoder } from "@/UI/interfaces/ICoderInterface";
 import { getClansService, getLanguagesService, getSoftSkillsService, getTechnicalSkillsService } from "@/services";
 import { getCodersService } from "@/services/coderService";
-import { ILanguage } from "@/UI/interfaces/languageInterface";
 
 interface IFilterProps{
   render?: boolean;
@@ -110,6 +108,7 @@ export default function Filter({setRender, render}:IFilterProps): ReactNode {
               key={language.id}
               label={language.label}
               name={language.name}
+              className={language.name === "english" || language.name === "español" ? "english" : ""}
               onChange={handleChange}
               checked={language.checked}
             />

@@ -24,3 +24,8 @@ div > label:hover {
 .checked-filter:hover {
   color: var(--main-color);
 }
+
+/* styles for filters */
+.english{
+  background-color: red;
+}
