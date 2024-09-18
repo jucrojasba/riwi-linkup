@@ -9,7 +9,7 @@
   }
   
   .dark-mode #bar-chart {
-    background-color: #151B23;
+    background-color: var(--background-dark-mode);
   }
   
   .light-mode #bar-chart {
