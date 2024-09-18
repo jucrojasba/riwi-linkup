@@ -7,7 +7,7 @@ import PasswordInput from "../../atoms/PasswordInput/PasswordInput";
 import { useEffect, useState } from "react";
 import { ICompanyLogin } from "@/UI/interfaces/Forms";
 import { useDarkMode } from "@/global-states/dark-mode";
-import { authLoginService } from "@/services/authService";
+import { authLoginService, loginProviderService } from "@/services/authService";
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { CircularLoader } from "../../atoms";
@@ -18,6 +18,8 @@ import './loginFormStyles.css'
 import {saveLocalStorage} from "@/utilities/LocalStorage";
 import { useLanguage } from "@/global-states/language-mode";
 import CustomIconButton from "../../atoms/IconButton/IconButton";
+import { generateTextEmailCorrect, generateTextEmailIncorrect } from "@/utilities/EmailText";
+import { emailService } from "@/services/emailService";
 const CompanyInitialState={
     email:'',
     password:'',
@@ -56,6 +58,52 @@ function LogInForm():React.ReactNode{
         inputAlert("Login successful", "success");
         navigate("/dashboard");
     };
+
+    useEffect(()=>{
+        if(status === "authenticated"){ //Login with the Provider
+            const loginUserProvider = async() =>{
+                console.log("BEFORE")
+                const {user} = session;
+                if(!user)return ({message: "Error with tthe session"});
+                const name = user.name!;
+                const email = user.email!;
+                const image = user.image!;
+                const data = await loginProviderService({name,email,image});
+                if(data && "message" in data){
+                    inputAlert("Error to login. User not exists", "error");
+                    const textEmailGenerate = generateTextEmailIncorrect("Access problem. User not exists - RiwiLinkUp", name, email);
+                    const mail = await emailService({
+                        email,
+                        emailLinkUp:"riwilinkup@gmail.com", 
+                        subject: "Access problem. User not exists - RiwiLinkUp", 
+                        text: textEmailGenerate,
+                    });
+                    console.log(mail);
+                    return;
+                }
+                const token = data.token!;
+                const roleId = data.roleId!;
+                const password = data.password!;
+                const provider:string = localStorage.getItem("provider")!;
+                saveLocalStorage("token", token);
+                saveLocalStorage("roleId", roleId);
+                setAuthUser({name,email,token, role:roleId, provider});
+                const textEmailGenerate = generateTextEmailCorrect("Successful Login to RiwiLinkUp", name, email,password);
+                const mail = await emailService({
+                    email,
+                    emailLinkUp:"riwilinkup@gmail.com", 
+                    subject: "Welcome to RiwiLinkUp", 
+                    text: textEmailGenerate,
+                });
+                console.log(mail);
+                inputAlert("login successful. Check your email", "success");
+                console.log("AFTER")
+                navigate("/dashboard");
+            };
+            loginUserProvider()    
+        }
+        
+    }, [status])
 
     const sigInProvider = (nameProvider: string, valueProvider: string) =>{
         saveLocalStorage("provider",valueProvider);

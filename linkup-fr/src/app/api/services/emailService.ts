@@ -7,7 +7,7 @@ export async function sendEmailService(email:string, emailLinkUp: string, subjec
             from: emailLinkUp,
             subject:subjectText || "default subject",
             text: textSend,
-            html:`<p>${textSend}</p>`
+            html:`${textSend}`
     
         }
         const send = await sengridEmail.send(message);

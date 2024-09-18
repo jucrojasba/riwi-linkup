@@ -13,6 +13,9 @@ const handler = NextAuth({
         clientSecret: process.env.GITHUB_CLIENT_SECRET as string,
     })
     ],
+    pages: {
+        signOut: "/login"
+    }
 })
 
 export {handler as GET, handler as POST}

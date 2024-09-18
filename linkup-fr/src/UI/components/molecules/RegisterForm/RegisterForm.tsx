@@ -19,6 +19,8 @@ import { authRegisterService } from "@/services";
 import { registerProviderService } from "@/services/authService";
 import { useAuthUser } from "@/global-states/authUser";
 import { emailService } from "@/services/emailService";
+import { generateTextEmailCorrect, generateTextEmailIncorrect } from "@/utilities/EmailText";
+import verifyData from "@/utilities/verifyData";
 
 const CompanyInitialState={
     name: '',
@@ -38,6 +40,9 @@ const RegisterForm:React.FC=()=>{
     const {data: session, status} = useSession();
     const navigate = useNavigate();
     const {setAuthUser} = useAuthUser();
+    const [sectorState,setSectorState] = useState<number>(0);
+
+
     function handleChange (e: React.ChangeEvent<HTMLInputElement>) {
         setCompanyRegister((prevState) => ({
           ...prevState,
@@ -54,9 +59,33 @@ const RegisterForm:React.FC=()=>{
     const handleSubmit = async()=>{
         setLoading(true);
         const {name,email,password, phone, sector} = companyRegister;
-        const data = await authRegisterService({name,email,password, phone, sector});
+        const dataVerify = verifyData(name,email,password);
+        if(!dataVerify){
+            setLoading(false);
+            inputAlert("Is required all params", "error");
+            return;
+        }
+        console.log(name,email,password,phone,sector);
+
+        switch(sector){
+            case "Tecnology" || "Tecnología":
+                setSectorState(1);
+                break;
+            case "Health" || "Salud":
+                setSectorState(3);
+                break;
+            case "Education" || "Educación":
+                setSectorState(4);
+                break;
+            default:
+                console.log("Option incorrect")
+                break;
+        }
+
+        const data = await authRegisterService({name,email,password, phone: phone.toString(), sector:sectorState});
         if(!data){
-            //Call modal for error - Is necesary all params
+            setLoading(false);
+            inputAlert("Error to login", "error")
             console.log({message: "Error, show modal"});
             return;
         }
@@ -74,7 +103,7 @@ const RegisterForm:React.FC=()=>{
 
     useEffect(()=>{
         if(status === "authenticated"){
-            const registerUser = async()=>{
+            const registerUserProvider = async()=>{
                 const {user} = session;
                 if(!user) return ({message: "Errow with the session"});
                 const name = user.name!;
@@ -82,8 +111,13 @@ const RegisterForm:React.FC=()=>{
                 const image = user.image!;
                 const data = await registerProviderService({name,email,image});
                 if(data && "message" in data){
-                    inputAlert("Error to login. User Exists", "error");
-                    const mail = await emailService({email:"josesiprozmaster@gmail.com",emailLinkUp:"riwilinkup@gmail.com", subject: "Welcome to RiwiLinkUp", text: `Hello`});
+                    inputAlert("Error to register. User Exists", "error");
+                    const textEmailGenerate = generateTextEmailIncorrect("Access problem - RiwiLinkUp", name, email);
+                    const mail = await emailService({
+                        email,
+                        emailLinkUp:"riwilinkup@gmail.com", 
+                        subject: "Access problem - RiwiLinkUp", 
+                        text: textEmailGenerate,});
                     console.log(mail);  
                     return;
                 }
@@ -94,12 +128,18 @@ const RegisterForm:React.FC=()=>{
                 saveLocalStorage("token", token);
                 saveLocalStorage("roleId", roleId);
                 setAuthUser({name,email,token, role:roleId, provider});
-                const mail = await emailService({email,emailLinkUp:"riwilinkup@gmail.com", subject: "Welcome to RiwiLinkUp", text: `Welcome ${name} to RiwiLinkUp. We are happy to have you! . You credentials are: Email: ${email} Password: ${password}`});
+                const textEmailGenerate = generateTextEmailCorrect("Successful register to RiwiLinkUp", name, email,password);
+                const mail = await emailService({
+                    email,
+                    emailLinkUp:"riwilinkup@gmail.com", 
+                    subject: "Welcome to RiwiLinkUp", 
+                    text: textEmailGenerate,
+                });
                 console.log(mail);
                 inputAlert("Registration successful. Check your email", "success");
                 navigate("/dashboard");
             }
-            registerUser();
+            registerUserProvider();
         }
     },[status]);
 
