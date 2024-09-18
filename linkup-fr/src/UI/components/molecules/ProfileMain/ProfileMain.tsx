@@ -4,7 +4,6 @@ import { CustomButton, EditField } from '../../atoms';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import SaveIcon from '@mui/icons-material/Save';
 import './ProfileMain.css';
-
 interface IMainProfile {
     language: boolean;
     email: string;
@@ -15,6 +14,7 @@ interface IMainProfile {
 const MainProfile: React.FC<IMainProfile> = ({ language, isDarkMode, email, phone }) => {
     const [isEditing, setIsEditing] = useState<boolean>(false);
     const [isSaving, setIsSaving] = useState<boolean>(false);
+    
 
     return (
         <div className={isDarkMode ? 'main-profile-dark' : 'main-profile'}>

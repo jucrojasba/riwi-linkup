@@ -13,7 +13,7 @@ interface EditFieldProps extends TextInputProps {
     defaultValue: string;
 }
 
-const EditFieldStyle = styled(TextField)<{ edit: boolean }>(({ theme, edit }) => ({
+const EditFieldStyle = styled(TextField)<{ edit: boolean | undefined }>(({ theme, edit }) => ({
     width: '100%',
     textTransform: 'none',
     fontFamily: 'var(--main-font)',
@@ -95,7 +95,7 @@ const EditField: React.FC<EditFieldProps> = ({
 
     return (
         <EditFieldStyle
-            edit={edit}
+            edit={edit ? true : undefined}  // Corregido para evitar pasar booleanos al DOM
             id='outlined-error-helper-text'
             type={type}
             name={name}
@@ -119,3 +119,4 @@ const EditField: React.FC<EditFieldProps> = ({
 };
 
 export default EditField;
+
