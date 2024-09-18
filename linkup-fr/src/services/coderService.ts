@@ -51,9 +51,8 @@ export async function getCodersBackend(): Promise<number | undefined> {
   return codersBackend.data;
 }
 
-export async function getCoderByIdService(id:number): Promise< ICoderBack |{message:string}>{
-  console.log(id);
-  const coder = await fetchApi(`api/coderById/${id}`);
-  if(!coder)return coder;
-  return coder.data;
-}
+  export async function getCoderByIdService(id:number): Promise< ICoderBack |{message:string}>{
+    const coder = await fetchApi(`/api/coders/${id}`);
+    if(!coder)return coder;
+    return coder.data;
+  }

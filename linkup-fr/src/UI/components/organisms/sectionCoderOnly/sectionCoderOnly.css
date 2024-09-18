@@ -1,7 +1,9 @@
 div.content-coder{
     display: flex;
     justify-content: center;
+    align-items: center;
     height: 80%;
+    transform: translateX(10%);
 }
 
 div.content-coder div.coder{
@@ -39,6 +41,12 @@ div.content-coder > div.coder div.content-information{
 div.content-coder > div.coder div.content-information > div.information-header{
     display: flex;
     gap: var(--padding-medium);
+}
+
+div.content-coder > div.coder div.content-information > div.information-body{
+    display: flex;
+    flex-direction: column;
+    gap: var(--padding-min);
 }
 
 

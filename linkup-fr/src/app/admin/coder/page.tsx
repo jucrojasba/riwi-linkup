@@ -10,7 +10,7 @@ export default function CoderView(): React.ReactNode {
 
   return(
     <Route>
-      <DashboardLayout section={<SectionCoderOnly />} titleView="Coder" subtitle="Information" path="/coder" language={language} isDarkMode={DarkMode}/>;
+      <DashboardLayout section={<SectionCoderOnly />} titleView="Coder" subtitle="Information" language={language} isDarkMode={DarkMode}/>;
     </Route>
   )
 }

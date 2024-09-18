@@ -15,7 +15,8 @@ export interface ICoderBack{
   birthday:string,
   description:string,
   urlImage:string,
-  clanId:number,
+  clanId:number,  
+  genderName:string,
   softSkills: string[],
   languageLevels: ILanguageLevel[],
   technicalSkillLevels: ITechnicalSkillLevel[]

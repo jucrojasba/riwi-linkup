@@ -2,13 +2,12 @@ import "./cardStyles.css";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import ButtonMore from "../../atoms/ButtonMore/ButtonMore";
-import { ICoder, ICoders } from "@/UI/interfaces/ICoderInterface";
 import React, { useState } from "react";
-import { deleteCache } from "next/dist/server/lib/render-server";
 import { deleteCoderService } from "@/services/coderService";
 import { CircularLoader } from "../../atoms/loaders/Loaders";
 import { useRouter } from "next/navigation";
 import { confirmDeleteAlert } from "../Alert/Alert";
+import { useTechSkill } from "@/global-states/techSkill";
 
 interface ICardProps {
   id_coder?: number;
@@ -17,6 +16,8 @@ interface ICardProps {
   name_user?: string;
   age_user?: string;
   status: boolean;
+  techSkill?:string;
+  isDarkMode: boolean;
 }
 export default function Card({
   id_coder,
@@ -25,9 +26,11 @@ export default function Card({
   name_user,
   age_user,
   status,
+  isDarkMode
 }: ICardProps): React.ReactNode {
   const router = useRouter();
   const handleClickUpdate = async (e: React.MouseEvent) => {};
+  const {techSkill} = useTechSkill();
 
   const handleClickDelete = async (e: React.MouseEvent): Promise<undefined> => {
     const isConfirm: boolean = await confirmDeleteAlert();
@@ -50,7 +53,7 @@ export default function Card({
   }
   return (
     <>
-      <div className="card">
+      <div className={isDarkMode?"card dark-mode":"card"}>
         <div className="card-header">
           <img src={url_image} alt={alt_image} width={100} height={80} />
           <div className="header-buttons">
@@ -72,6 +75,7 @@ export default function Card({
             <h5 className="body-subtitle" style={{ fontWeight: "400" }}>
               {age_user}
             </h5>
+            <button>{techSkill}</button>
           </div>
           <div onClick={()=>handleClickMore(id_coder)}>
             <ButtonMore />

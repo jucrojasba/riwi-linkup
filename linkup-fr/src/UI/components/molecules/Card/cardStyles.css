@@ -4,8 +4,13 @@ div.card {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  flex-basis: calc(100% / 4 - 20px);
-  height: 250px;
+  flex-basis: calc(100% / 3 - 15px);
+  height: 320px;
+}
+
+div.card.dark-mode{
+  background-color: var(--background-color-dark-light);
+  border: none;
 }
 
 div.card > div.card-header {
@@ -39,6 +44,9 @@ div.card > div.card-body {
 
 div.card > div.card-body > div.body-information {
   width: 70%;
+}
+div.card.dark-mode > div.card-body > div.body-information > h3.body-title {
+  color: var(--white-color);
 }
 
 div.card > div.card-body > div.body-information > h3.body-title {

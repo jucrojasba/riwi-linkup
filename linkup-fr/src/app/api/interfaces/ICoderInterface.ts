@@ -5,6 +5,7 @@ export interface ICoder{
     description:string,
     urlImage:string,
     clanId:number,
+    genderName:string,
     softSkills: string[],
     languageLevels: ILanguageLevel[],
     technicalSkillLevels: ITechnicalSkillLevel[]

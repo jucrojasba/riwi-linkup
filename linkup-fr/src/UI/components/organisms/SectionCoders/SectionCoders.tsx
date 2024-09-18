@@ -6,15 +6,19 @@ import calculateAge from "@/utilities/calculateAge";
 import { ICoder, ICoders } from "@/UI/interfaces/ICoderInterface";
 import { useEffect, useState } from "react";
 import { getCodersService } from "@/services/coderService";
-import { Card } from "../../molecules";
+import { Card, Filter } from "../../molecules";
 import { CircularLoader } from "../../atoms/loaders/Loaders";
 import { useCodersFilter } from "@/global-states/coder";
+import { useTechSkill } from "@/global-states/techSkill";
+import { TitleMain } from "../../atoms";
 
 interface ISectionCodersProps {
   render: boolean;
+  setRender: (render: boolean) => void;
+  isDarkMode: boolean;
 }
 
-export default function SectionCoders({render}: ISectionCodersProps): React.ReactElement {
+export default function SectionCoders({render,setRender,isDarkMode}: ISectionCodersProps): React.ReactElement {
   const [loadingRequest, setLoadingRequest] = useState<boolean>(true); // Set initial state to true
   const initialCoder: ICoder = {
     id: 0,
@@ -28,7 +32,8 @@ export default function SectionCoders({render}: ISectionCodersProps): React.Reac
   const [coders, setCoders] = useState<ICoders>(initialCoders); // Full list of coders
   const codersFilter = useCodersFilter((state) => state.CodersFilter);
   const [currentPage, setCurrentPage] = useState(0);
-  const limitItems = 8;
+  const limitItems = 6;
+  const {techSkill} = useTechSkill();
 
   useEffect(() => {
     const getCoders = async () => {
@@ -71,6 +76,14 @@ export default function SectionCoders({render}: ISectionCodersProps): React.Reac
 
   return (
     <section className="mainGeneral-section">
+      <div className="section-filters">
+        <TitleMain
+              className="titleMain"
+              title={"Filters"}
+              subtitle=""
+            />
+        <Filter render={render} setRender={setRender} />
+      </div>
       <div className="section-content-cards">
         {loadingRequest ? (
           <CircularLoader flag={true} /> // Display loader when loading
@@ -84,6 +97,8 @@ export default function SectionCoders({render}: ISectionCodersProps): React.Reac
               name_user={coder.name}
               age_user={`${calculateAge(coder.birthday)} years`}
               status={true}
+              techSkill={techSkill}
+              isDarkMode={isDarkMode}
             />
           ))
         )}
