@@ -1,4 +1,4 @@
-export interface IUserProdiverRegister{
+export interface IUserProviderRegister{
     roleId: number,
     email:string,
     token:string,
