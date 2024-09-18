@@ -1,95 +1,117 @@
 'use client';
 
 import { TextInputProps } from '@/UI/interfaces/Input';
-import { useDarkMode } from '@/global-states/dark-mode';
 import TextField from '@mui/material/TextField';
 import { styled } from '@mui/material/styles';
-import { ChangeEvent, FocusEvent } from 'react';
+import { ChangeEvent, useState, useEffect } from 'react';
 
-// Definir una interfaz extendida para los props del componente
 interface EditFieldProps extends TextInputProps {
     edit?: boolean;
     save?: boolean;
     onSave?: (value: string) => void;
-    value: string;
+    DarkMode: boolean;
+    defaultValue: string;
 }
 
-// Estilización del TextField utilizando MUI
-const EditFieldStyle = styled(TextField)(({ theme }) => ({
+const EditFieldStyle = styled(TextField)<{ edit: boolean }>(({ theme, edit }) => ({
     width: '100%',
     textTransform: 'none',
     fontFamily: 'var(--main-font)',
     '& .MuiOutlinedInput-root': {
         '& fieldset': {
-            borderColor: 'transparent', // Inicialmente transparente
+            borderColor: edit ? 'var(--main-color)' : 'transparent',
         },
         '&.Mui-focused fieldset': {
-            borderColor: 'var(--main-color)', // Cambia el color del borde al estar enfocado
+            borderColor: edit ? 'var(--main-color)' : 'transparent',
         },
-        // No hover effect
     },
     '& .MuiInputLabel-outlined': {
-        color: theme.palette.text.primary, // Color del label basado en el tema
-        backgroundColor: 'transparent', // Elimina cualquier fondo en el label
-        borderColor: 'transparent', // Quita cualquier borde gris
-        cursor: 'default', // Elimina el cursor pointer
+        display: 'none', 
     },
     '& .MuiInputLabel-outlined.Mui-focused': {
-        color: 'var(--main-color)', // Cambia el color del label al estar enfocado
+        display: 'none', 
     },
-    "& .MuiInputLabel-root.Mui-error": {
-        color: "var(--red-color)", // Cambia el color del label en caso de error
+    '& .MuiInputLabel-root.Mui-error': {
+        color: 'var(--red-color)',
     },
-    "& .MuiOutlinedInput-root.Mui-error .MuiOutlinedInput-notchedOutline": {
-        borderColor: "var(--main-color)", // Cambia el borde al haber error
+    '& .MuiOutlinedInput-root.Mui-error .MuiOutlinedInput-notchedOutline': {
+        borderColor: 'var(--main-color)',
     },
-    "& .MuiFormHelperText-root.Mui-error": {
-        color: "var(--red-color)", // Cambia el color del texto de ayuda en caso de error
+    '& .MuiFormHelperText-root.Mui-error': {
+        color: 'var(--red-color)',
+    },
+    '& .MuiOutlinedInput-root.Mui-disabled .MuiOutlinedInput-notchedOutline': {
+        borderColor: 'transparent',
     },
 }));
 
 const EditField: React.FC<EditFieldProps> = ({ 
     type = 'text', 
     name, 
-    value, // Usar `value` en lugar de `defaultValue`
+    defaultValue, 
     error = false, 
     required = false, 
     helperText = '', 
     onChange,
     edit = false,
     save = false,
-    onSave
+    onSave,
+    DarkMode,
 }) => {
-    const DarkMode = useDarkMode((state) => state.DarkMode);
+    const [inputValue, setInputValue] = useState(defaultValue);
+    const [inputError, setInputError] = useState(false);
+
+    useEffect(() => {
+        if (!edit) {
+            setInputError(false);
+        }
+    }, [edit]);
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-        onChange?.(event); // Asegúrate de que onChange esté pasando el valor actualizado
+        setInputValue(event.target.value);
+        onChange?.(event);
     };
 
-    const handleBlur = (event: FocusEvent<HTMLInputElement>) => {
+    const handleBlur = (event: React.FocusEvent<HTMLInputElement>) => {
         if (save && onSave) {
-            onSave(event.target.value); // Guarda el valor al perder el foco si es necesario
+            const value = event.target.value;
+            let isValid = true;
+
+            if (name === 'email') {
+                isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+            } else if (name === 'number') {
+                isValid = /^[0-9]+$/.test(value);
+            }
+
+            if (!isValid) {
+                setInputError(true);
+                setInputValue(defaultValue);
+            } else {
+                setInputError(false);
+                onSave(value);
+            }
         }
     };
 
     return (
         <EditFieldStyle
+            edit={edit}
             id='outlined-error-helper-text'
             type={type}
-            value={value} // Usar `value` en lugar de `defaultValue`
-            placeholder={name} // Usar `name` como el placeholder
-            error={error}
+            name={name}
+            value={inputValue}
+            error={inputError} 
             required={required}
-            helperText={helperText}
+            helperText={inputError ? 'Valor no válido' : helperText}
             size='small'
             onChange={handleChange}
             onBlur={handleBlur}
-            disabled={!edit} // Desactiva el input si no está en modo de edición
+            disabled={!edit}
             sx={{ 
                 width: '250px',
                 '& .MuiInputBase-input': {
-                    color: DarkMode ? 'var(--white-color)' : 'var(--grey-color)', // Color del texto basado en el tema
-                    backgroundColor: DarkMode ? 'transparent' : 'transparent' // Fondo transparente
+                    color: DarkMode ? 'var(--white-color)' : 'var(--paragraph-color-gray)',
+                    backgroundColor: 'transparent'
                 }
             }}
         />
@@ -97,5 +119,3 @@ const EditField: React.FC<EditFieldProps> = ({
 };
 
 export default EditField;
-
-

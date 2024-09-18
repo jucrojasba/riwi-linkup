@@ -14,14 +14,21 @@ interface IMainProfile {
 
 const MainProfile: React.FC<IMainProfile> = ({ language, isDarkMode, email, phone }) => {
     const [isEditing, setIsEditing] = useState<boolean>(false);
-
+    const [isSaving, setIsSaving] = useState<boolean>(false);
 
     return (
         <div className={isDarkMode ? 'main-profile-dark' : 'main-profile'}>
             <h3>{language ? 'Información Personal' : 'Personal Information'}</h3>
-            <EditField value='celsia@example.com' name='email' label='email' onChange={() => {}} edit={isEditing}/>
-            <p>{email}</p>
-            <p>{phone}</p>
+            <div className='personal-information'>
+              <p>{language?'Correo':'Email'}</p>
+              <EditField name='email' label='' defaultValue={email} onChange={() => {}} edit={isEditing} DarkMode={isDarkMode} save={isSaving} onSave={(value)=>{
+                console.log('value', value);
+              }}/>
+              <p>{language?'Teléfono':'Phone'}</p>
+              <EditField name='number' label='' defaultValue={phone} onChange={() => {}} edit={isEditing} DarkMode={isDarkMode} save={isSaving} onSave={(value)=>{
+                console.log('value', value);
+              }}/>
+            </div>
             <div className="action-buttons">
                 <CustomButton 
                     initialText={language ? 
@@ -43,7 +50,10 @@ const MainProfile: React.FC<IMainProfile> = ({ language, isDarkMode, email, phon
                     initialBgColor='var(--main-color)'
                     clickedBgColor='var(--green-color)'
                     onClick={()=>{setIsEditing(true)}}
-                    secondOnClick={() => {setIsEditing(false)}}
+                    secondOnClick={() => {
+                      setIsEditing(false);
+                      setIsSaving(true);
+                    }}
                 />
             </div>
         </div>
