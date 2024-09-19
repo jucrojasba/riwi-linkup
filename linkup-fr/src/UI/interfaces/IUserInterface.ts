@@ -11,7 +11,7 @@ export interface IUser{
 export interface IUserState{
     users: IUser[]
 }
-export interface IApiResponse {
+export interface IApiResponseUser {
     user: IUserBack; 
 
 }
