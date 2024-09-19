@@ -6,7 +6,7 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 
 interface ISelectProps {
-  label: string;
+  label?: string;
   values: string[],
   onchange: (e: SelectChangeEvent) => void,
   value:string,
@@ -25,7 +25,7 @@ export default function SelectOptions({label,values,onchange,value, name}: ISele
         name={name}
       >
         <MenuItem value={value}>
-          <em>None</em>
+          <em>{value}</em>
         </MenuItem>
         {values.map((value, index) => <MenuItem key={index} value={value}>{value}</MenuItem>)}
       </Select>
