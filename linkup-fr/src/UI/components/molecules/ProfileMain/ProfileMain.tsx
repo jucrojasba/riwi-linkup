@@ -5,6 +5,9 @@ import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import SaveIcon from '@mui/icons-material/Save';
 import './ProfileMain.css';
 import { IAuthUser, useAuthUser } from '@/global-states/authUser';
+import { IPatchUserRequest } from '@/UI/interfaces/IUserInterface';
+import { patchUserService } from '@/services/userService';
+import { inputAlert } from '../Alert/Alert';
 
 interface IMainProfile {
     language: boolean;
@@ -28,10 +31,28 @@ const MainProfile: React.FC<IMainProfile> = ({ language, isDarkMode, email, phon
         provider: authUser.provider,
     };
 
-    const handleSave = () => {
+    const userPatchData: IPatchUserRequest = {
+        email: emailEdit,
+        phoneNumber: phoneEdit,
+    };
+
+    const handleSave = async () => {
         setIsEditing(false);
         setIsSaving(true);
-        setAuthUser(userInfoEdit);
+
+        try {
+            const response = await patchUserService(authUser.email, userPatchData);
+            if (response && 'status' in response) {
+                setAuthUser(userInfoEdit);
+                inputAlert(`${language? 'Datos Actualizados Correctamente':'Data Updated Successfully'}`,'success');
+            } else {
+                inputAlert(`${language? 'Error al Actualizar los Datos':'Data Update Failed'}`,'error');
+            }
+        } catch (error) {
+            inputAlert(`${language? 'Error al Actualizar los Datos':'Data Update Failed'}`,'error');
+        } finally {
+            setIsSaving(false);
+        }
     };
 
     return (

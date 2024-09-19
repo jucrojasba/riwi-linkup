@@ -25,10 +25,10 @@ export async function patchUserService(email: string, data: IPatchUserRequest): 
         });
 
         if (response && 'message' in response) {
-            return;
+            return { status: 200 };
         }
 
-        return { status: 200 };
+        return;
     } catch (error) {
         return { message: "Error updating user" };
     }
