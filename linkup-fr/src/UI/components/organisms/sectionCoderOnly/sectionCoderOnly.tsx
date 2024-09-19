@@ -33,7 +33,6 @@ export default function SectionCoderOnly(): React.ReactElement {
   const [imageLoaded, setImageLoaded] = useState<boolean>(false);
   const searchParams = useSearchParams();
   const router = useRouter();
-
   useEffect(() => {
     const getCoderById = async () => {
       const coderId = searchParams.get("coder");
@@ -54,68 +53,76 @@ export default function SectionCoderOnly(): React.ReactElement {
     router.push("/admin");
   }
 
-  return (
-    <>
-      {loading ? <LinearLoader flag={true} /> : null}
-      <div className="content-coder">
-        <div className="coder">
-          <div className="coder-image">
-            <img 
-              src={coder.urlImage} 
-              alt={`image ${coder.name}`} 
-              onLoad={() => setImageLoaded(true)} 
-              style={{ display: imageLoaded ? 'block' : 'none' }} 
-            />
-             <MainButton
-              type="button"
-              text={<KeyboardBackspaceIcon />}
-              onClick={handleBack}
+  if(!loading){
+    return (
+      <>
+        {loading ? <LinearLoader flag={true} /> : null}
+        <div className="content-coder">
+          <div className="coder">
+            <div className="coder-image">
+              <img 
+                src={coder.urlImage} 
+                alt={`image ${coder.name}`} 
+                onLoad={() => setImageLoaded(true)} 
+                style={{ display: imageLoaded ? 'block' : 'none' }} 
               />
-          </div>
-          <div className="content-information">
-            <div className="information-header">
-              <UserText
-                title="Name"
-                paragraph={coder.name ? capitalizeSentece(coder.name) : "Loading name..."}
-                className="user-name"
-              />
-              <UserText
-                title="Years"
-                paragraph={coder.birthday ? `${calculateAge(coder.birthday)} years` : "Loading birthday..."}
-                className="user-age"
-              />
-              <UserText
-                title="Gender"
-                paragraph={coder.genderName ? capitalizeSentece(coder.genderName) : "Loading gender..."}
-                className="user-gender"
-              />
+               <MainButton
+                type="button"
+                text={<KeyboardBackspaceIcon />}
+                onClick={handleBack}
+                />
             </div>
-            <div className="information-body">
-              <h4>Description</h4>
-              <p>{coder.description ? capitalizeFirstLetter(coder.description) : "Loading description..."}</p>
-            </div>
-            <div className="information-footer">
-              <ButtonCoder 
-                content="CV"
-                onClick={() => console.log("click")}
-              />
-              <ButtonCoder 
-                content={<PlayArrowIcon />}
-                className="play-button"
-                onClick={() => console.log("click")}
-              />
-              <ButtonCoder 
-                content="Portfolio"
-                onClick={() => console.log("click")}
-              />
-              <ButtonCoder 
-                content="Repository"
-                onClick={() => console.log("click")}
-              /> 
+            <div className="content-information">
+              <div className="information-header">
+                <UserText
+                  title="Name"
+                  paragraph={coder.name ? capitalizeSentece(coder.name) : "Loading name..."}
+                  className="user-name"
+                />
+                <UserText
+                  title="Years"
+                  paragraph={coder.birthday ? `${calculateAge(coder.birthday)} years` : "Loading birthday..."}
+                  className="user-age"
+                />
+                <UserText
+                  title="Gender"
+                  paragraph={coder.genderName ? capitalizeSentece(coder.genderName) : "Loading gender..."}
+                  className="user-gender"
+                />
+              </div>
+              <div className="information-body">
+                <h4>Description</h4>
+                <p>{coder.description ? capitalizeFirstLetter(coder.description) : "Loading description..."}</p>
+              </div>
+              <div className="information-footer">
+                <ButtonCoder 
+                  content="CV"
+                  onClick={() => console.log("click")}
+                />
+                <ButtonCoder 
+                  content={<PlayArrowIcon />}
+                  className="play-button"
+                  onClick={() => console.log("click")}
+                />
+                <ButtonCoder 
+                  content="Portfolio"
+                  onClick={() => console.log("click")}
+                />
+                <ButtonCoder 
+                  content="Repository"
+                  onClick={() => console.log("click")}
+                /> 
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </>
-  );
+      </>
+    );
+  }else{
+    return(
+      <LinearLoader flag={true} />
+    )
+  }
+
+  
 }
