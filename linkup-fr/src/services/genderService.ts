@@ -10,6 +10,8 @@ export async function getGendersService():Promise<IGender[] | null>{
     const filteredGender = genders.data.map((gender: Partial<IGender>) => ({
         id: gender.id,
         name: gender.name,
+        label:gender.name,
+        checked: false
     }))
     return filteredGender;
 }

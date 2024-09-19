@@ -6,17 +6,20 @@ div.modal {
     transform: translate(-50%, -50%); 
     background-color: var(--white-color-light);
     width: 30%;
-    height: 80%;
+    height: 55%;
     z-index: 1000;
     border-radius: var(--border-radius-min);
-    padding: var(--padding-medium);
+    padding: var(--padding-big);
     color: var(--paragraph-color);
+    transition: all .4s ease;
 }
 
 div.modal > form.modal-information{
     display:flex;
     flex-direction:column;
-    gap: var(--padding-medium)
+    gap: var(--padding-medium);
+    margin-top: var(--padding-big);
+    width: 100%;
 }
 
 div.content-modal > div.modal > form.modal-information > div.information-name-birthday,
@@ -24,4 +27,5 @@ div.content-modal > div.modal > form.modal-information > div.information-gender-
 div.content-modal > div.modal > form.modal-information > div.information-languages-techSkills
 {
     display: flex;
+    gap: var(--padding-min);
 }

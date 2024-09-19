@@ -22,6 +22,12 @@ interface ISectionCodersProps {
 
 export default function SectionCoders({render,setRender,isDarkMode}: ISectionCodersProps): React.ReactElement {
   const [loadingRequest, setLoadingRequest] = useState<boolean>(true); // Set initial state to true
+  const codersFilter = useCodersFilter((state) => state.CodersFilter);
+  const [currentPage, setCurrentPage] = useState(0);
+  const limitItems = 6;
+  const {techSkill} = useTechSkill();
+  const [showModal, setShowModal] = useState<boolean>(false);
+
   const initialCoder: ICoder = {
     id: 0,
     urlImage: "",
@@ -32,12 +38,6 @@ export default function SectionCoders({render,setRender,isDarkMode}: ISectionCod
     coders: [initialCoder],
   };
   const [coders, setCoders] = useState<ICoders>(initialCoders); // Full list of coders
-  const codersFilter = useCodersFilter((state) => state.CodersFilter);
-  const [currentPage, setCurrentPage] = useState(0);
-  const limitItems = 6;
-  const {techSkill} = useTechSkill();
-  const [showModal, setShowModal] = useState<boolean>(false);
-
   useEffect(() => {
     const getCoders = async () => {
       const coders = await getCodersService();
@@ -83,7 +83,7 @@ export default function SectionCoders({render,setRender,isDarkMode}: ISectionCod
 
   return (
     <>
-    {showModal ? <Modal showModal={showModal} setShowModal={setShowModal} />: null}
+    {showModal ? <Modal showModal={showModal} setShowModal={setShowModal}  />: null}
       <section className="mainGeneral-section">
         <div className="section-filters">
           <TitleMain

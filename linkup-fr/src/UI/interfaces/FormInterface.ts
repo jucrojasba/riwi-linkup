@@ -6,5 +6,6 @@ export interface IForm{
     clan:string,
     softSkill:string,
     language:string,
-    techSkill:string
+    techSkill:string,
+    description:string
 }

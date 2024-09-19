@@ -14,7 +14,7 @@ interface ISelectProps {
 
 export default function SelectOptions({ label, values, onChange, value, name }: ISelectProps) {
     return (
-        <FormControl sx={{ width: '100%' }} size="small">
+        <FormControl sx={{ width: '100%' }} size="small" variant="outlined">
             <InputLabel id="select-options">{label}</InputLabel>
             <Select
                 labelId="select-options"
@@ -23,9 +23,20 @@ export default function SelectOptions({ label, values, onChange, value, name }: 
                 label={label}
                 onChange={onChange}
                 name={name}
+                sx={{
+                    '& .MuiOutlinedInput-notchedOutline': {
+                        border: '1px solid var(--main-color)', // Elimina el borde
+                    },
+                    '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                        border: '1px solid var(--main-color)', // Elimina el borde al enfocar
+                    },
+                    '&:hover .MuiOutlinedInput-notchedOutline': {
+                        border: '1px solid var(--main-color)', // Elimina el borde al pasar el mouse
+                    },
+                }}
             >
                 <MenuItem value="">
-                    <em>None</em> 
+                    <em>None</em>
                 </MenuItem>
                 {values.map((val, index) => (
                     <MenuItem key={index} value={val}>

@@ -2,7 +2,7 @@ export interface IGender{
     id:number,
     name:string,
     label: string,
-    checked:string
+    checked:boolean
 }
 
 export interface IGenders{

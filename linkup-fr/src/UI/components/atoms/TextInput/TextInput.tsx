@@ -65,7 +65,7 @@ const TextInput: React.FC<TextInputProps> = ({
                     helperText={helperText} 
                     size='small' 
                     onChange={onChange} 
-                    sx={{ width: '250px','& .MuiInputBase-input': {color:'var(--white-color)'}}} 
+                    sx={{ width: '100%','& .MuiInputBase-input': {color:'var(--white-color)'}}} 
                 />
                 :<TextInputStyle 
                     id='outlined-error-helper-text' 
@@ -78,7 +78,7 @@ const TextInput: React.FC<TextInputProps> = ({
                     helperText={helperText} 
                     size='small' 
                     onChange={onChange} 
-                    sx={{ width: '250px'}} 
+                    sx={{ width: '100%'}} 
                 />
             }
             

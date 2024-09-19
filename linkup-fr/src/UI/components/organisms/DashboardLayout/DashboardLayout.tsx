@@ -27,6 +27,7 @@ export default function DashboardLayout({
     console.log("do something");
   };
 
+
   return (
     <div className={isDarkMode?'content-layout-dark-mode':"content-layout"}>
       <div className="content-dashboard">

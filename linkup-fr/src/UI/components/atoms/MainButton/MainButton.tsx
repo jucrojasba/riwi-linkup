@@ -12,6 +12,7 @@ const MainButtonStyle = styled(Button)(() => ({
   fontFamily: "var(--main-font)",
   minWidth: "fit-content",
   fontSize: "1rem",
+  cursor: "pointer"
 }));
 
 const MainButton: React.FC<ButtonProps> = ({
