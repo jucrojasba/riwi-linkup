@@ -1,10 +1,17 @@
 /* Styles for section coders----------------->*/
 section.mainGeneral-section {
   display: flex;
-  flex-direction: column;
   gap: var(--padding-medium);
-  margin-top: var(--padding-min);
-  height: 74%;
+  margin-top: var(--padding-big);
+  height: 95%;
+  position: relative;
+}
+
+section.mainGeneral-section > div.section-filters {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  height: 100%;
 }
 
 section.mainGeneral-section > div.section-content-cards {
@@ -12,6 +19,7 @@ section.mainGeneral-section > div.section-content-cards {
   flex-wrap: wrap;
   gap: var(--padding-medium);
   height: auto;
+  width: 70%;
 }
 
 section.mainGeneral-section > div.section-buttons {
@@ -20,21 +28,11 @@ section.mainGeneral-section > div.section-buttons {
   cursor: pointer;
 }
 
-section.mainGeneral-section > div.section-buttons > .button-left {
+.button-create-coder{
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap:var(--padding-min);
+  z-index: 20;
 }
-
-/*
-div.content-layout
-  > div
-  > main.main
-  > section.main-section
-  > div.section-buttons
-  > .button-left,
-div.content-layout
-  > div
-  > main.main
-  > section.main-section
-  > div.section-buttons
-  > .button-right {
-  cursor: pointer;
-}*/

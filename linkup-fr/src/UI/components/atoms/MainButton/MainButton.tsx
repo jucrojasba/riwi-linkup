@@ -1,8 +1,8 @@
 "use client";
-
 import { ButtonProps } from "@/UI/interfaces/Button";
 import Button from "@mui/material/Button";
 import { styled } from "@mui/material/styles";
+import "./mainButtonStyles.css";
 
 
 const MainButtonStyle = styled(Button)(() => ({
