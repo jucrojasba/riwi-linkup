@@ -7,7 +7,6 @@ import PasswordInput from "../../atoms/PasswordInput/PasswordInput";
 import { useEffect, useState } from "react";
 import { ICompanyRegister } from "@/UI/interfaces/Forms";
 import { CircularLoader } from "../../atoms";
-import {SelectOptions} from "../../atoms";
 import { useLanguage } from "@/global-states/language-mode";
 import { useDarkMode } from "@/global-states/dark-mode";
 import CustomIconButton from "../../atoms/IconButton/IconButton";
@@ -21,6 +20,7 @@ import { useAuthUser } from "@/global-states/authUser";
 import { emailService } from "@/services/emailService";
 import { generateTextEmailCorrect, generateTextEmailIncorrect } from "@/utilities/EmailText";
 import verifyData from "@/utilities/verifyData";
+import SelectOptions from "../../atoms/Select/Select";
 
 const CompanyInitialState={
     name: '',
@@ -68,7 +68,7 @@ const RegisterForm:React.FC=()=>{
         console.log(name,email,password,phone,sector);
 
         switch(sector){
-            case "Tecnology" || "Tecnología":
+            /*case "Tecnology" || "Tecnología":
                 setSectorState(1);
                 break;
             case "Health" || "Salud":
@@ -79,7 +79,7 @@ const RegisterForm:React.FC=()=>{
                 break;
             default:
                 console.log("Option incorrect")
-                break;
+                break;*/
         }
 
         const data = await authRegisterService({name,email,password, phone: phone.toString(), sector:sectorState});

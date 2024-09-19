@@ -1,6 +1,6 @@
-import { IUser, IUserBack } from "../interfaces/IUserInterface";
+import { IUserRegister, IUserBack } from "../interfaces/IUserInterface";
 
-export async function registerService(user: Partial<IUser>):Promise< IUserBack | {message:string}>{
+export async function registerService(user: Partial<IUserRegister>):Promise< IUserBack | {message:string}>{
     try{
         const response = await fetch("https://linkupv1-production.up.railway.app/api/v1/Account/register", {
             method: "POST",

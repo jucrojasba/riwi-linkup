@@ -19,7 +19,7 @@ div.button-more:hover{
     border-radius: var(--border-radius-min);
     height: 12px;
     position: absolute;
-    right: 0;
-    top: -5%;
+    right: 5%;
+    top: -10%;
     padding: var(--padding-medium);
 }

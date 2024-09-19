@@ -11,7 +11,7 @@ export default function AdminView(): React.ReactNode {
   const DarkMode = useDarkMode(state => state.DarkMode);
   return (
     <Route>
-      <DashboardLayout isDarkMode={DarkMode} section={<SectionCoders render={render} setRender={setRender} isDarkMode={DarkMode} language={languages}/>} titleView="Coders" subtitle="General Information" language={languages}/>
+      <DashboardLayout isDarkMode={DarkMode} section={<SectionCoders render={render} setRender={setRender} isDarkMode={DarkMode} />} titleView="Coders" subtitle="General Information" language={languages}/>
     </Route>
   );
 }

@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import { confirmDeleteAlert, inputAlert } from "../Alert/Alert";
 import { useTechSkill } from "@/global-states/techSkill";
 import { ICoder, ICoders } from "@/UI/interfaces/ICoderInterface";
+import { capitalizeSentece } from "@/utilities/CapitalizeSentence";
 
 interface ICardProps {
   id_coder?: number;
@@ -42,7 +43,10 @@ export default function Card({
   const handleClickDelete = async (id_coder:number): Promise<void> => {
     const isConfirm: boolean = await confirmDeleteAlert();
     setLoading(true);
-    if(!isConfirm) return;
+    if(!isConfirm){
+      setLoading(false);
+      return;
+    }
     if(!id_coder)return;
     await deleteCoderService(id_coder);
     setLoading(false);
@@ -82,7 +86,7 @@ export default function Card({
         </div>
         <div className="card-body">
           <div className="body-information">
-            <h3 className="body-title">{name_user}</h3>
+            <h3 className="body-title">{name_user ? capitalizeSentece(name_user) : "Loading name..."}</h3>
             <h5 className="body-subtitle" style={{ fontWeight: "400" }}>
               {age_user}
             </h5>
