@@ -47,11 +47,11 @@ const CustomButton: React.FC<CustomButtonProps> = ({
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     if (!isClicked) {
-      onClick?.(event); // Lógica inicial, pasa el evento
-      setIsClicked(true); // Cambia al estado clickeado
+      onClick?.(event); 
+      setIsClicked(true); 
     } else {
-      secondOnClick?.(event); // Segunda lógica, pasa el evento
-      setIsClicked(false); // Vuelve al estado inicial
+      secondOnClick?.(event);
+      setIsClicked(false); 
     }
   };
 

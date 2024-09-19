@@ -8,6 +8,8 @@ import RegisterForm from "./RegisterForm/RegisterForm";
 import Search from "./Search/Search";
 import Header from "./Header/Header";
 import UtilityRightButtons from "./UtilityRightButtons/UtilityRightButtons";
+import HeaderProfile from './ProfileHeader/ProfileHeader';
+import MainProfile from './ProfileMain/ProfileMain';
 
 export {
   LogInForm,
@@ -20,4 +22,6 @@ export {
   Search,
   Header,
   UtilityRightButtons,
+  HeaderProfile,
+  MainProfile
 };

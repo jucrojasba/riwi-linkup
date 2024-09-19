@@ -14,7 +14,6 @@ export default function DashboardView(){
     const language=useLanguage((state) => state.language);
     const titleView = language? "Tablero":"Dashboard";
     const subtitle= language? "Estadisticas Globales":"General Stats";
-    const AuthUser = useAuthUser((state)=> state.authUser);
 
     return (
         <Route>
