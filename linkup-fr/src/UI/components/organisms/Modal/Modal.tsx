@@ -9,6 +9,9 @@ import CheckIcon from '@mui/icons-material/Check';
 import { getGendersService } from "@/services/genderService";
 import { SelectChangeEvent } from "@mui/material";
 import SelectOptions from "../../atoms/Select/Select";
+import { IClan, IClans } from "@/UI/interfaces/clanInterface";
+import { getClansService } from "@/app/api/services/clanService";
+import { IOptionsSelect } from "@/UI/interfaces/optionSelectInterface";
 
 interface IModalProps {
     showModal: boolean;
@@ -20,17 +23,29 @@ export function Modal({ showModal, setShowModal }: IModalProps): React.ReactNode
         id: 0,
         name: ""
     };
+    const initialClanState:IClan = {
+        id: 0,
+        name: ""
+    }
     const initialGendersState: IGenders = {
         genders: [initialGenderState]
     };
 
-    const initialFormData = {
-        gender: "",
-        clan:""
+    const initialClansState: IClans = {
+        clans: [initialClanState]
     }
 
-    const [genders, setGenders] = useState<IGenders>(initialGendersState);
+    const initialFormData = {
+        gender: "",
+        clan:"",
+    }
+    const initialStateData: IOptionsSelect = {
+        genders: [],
+        clans: [],
+    }
+
     const [selectedValue, setSelectedValue] = useState(initialFormData);
+    const [dataState, setDataState] = useState<IOptionsSelect>(initialStateData)
 
     const handleChange = (e: SelectChangeEvent) => {
         const {name, value} = e.target; 
@@ -51,15 +66,17 @@ export function Modal({ showModal, setShowModal }: IModalProps): React.ReactNode
     };
 
     useEffect(() => {
-        const getGenders = async () => {
-            const data = await getGendersService();
-            if (!data) return;
-            setGenders({
-                genders: data
-            });   
+        const getData = async () => {
+            const genders = await getGendersService();
+
+            if(genders){
+                setDataState({
+                    genders,
+                })
+            }
         };
-        getGenders();
-    }, []);
+        getData();
+    }, [genders]);
 
     console.log(genders);
 
@@ -107,7 +124,7 @@ export function Modal({ showModal, setShowModal }: IModalProps): React.ReactNode
                             <SelectOptions
                                 label="genders"
                                 name="gender"
-                                onChange={handleChange} // Cambié a onChange
+                                onChange={handleChange}
                                 values={genders.genders.map(gender => gender.name)}
                                 value={selectedValue.gender}
                             />
@@ -115,7 +132,7 @@ export function Modal({ showModal, setShowModal }: IModalProps): React.ReactNode
                                 label="clans"
                                 name="clans"
                                 onChange={handleChange}
-                                values={["berness lee", "ritchie"]}
+                                values={clans.clans.map(clan =>clan.name)}
                                 value={selectedValue.clan}
                             />
                         </div>

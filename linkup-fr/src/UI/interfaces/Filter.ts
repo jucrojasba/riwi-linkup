@@ -11,3 +11,4 @@ export interface FilterState {
     softSkills: FilterOption[];
     clans: FilterOption[];
 }
+
