@@ -118,7 +118,7 @@
   }
 
   .start-button {
-    background-color: var(--main-color);
+    background-color: var(--red-color);
     color: #fff;
     border: none;
     padding: var(--padding-medium);
@@ -130,7 +130,30 @@
     position: absolute; 
     bottom: 10%;
     right: 4%;
+    animation: pulse 1.5s infinite;
+    box-shadow: 0 4px 10px var(--red-color); /* Tono morado suave */
   }
+  
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+      box-shadow: 0 0 0 var(--red-color); /* Tono morado suave */
+    }
+    50% {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px var(--red-color); /* Tono morado suave */
+    }
+    100% {
+      transform: scale(1);
+      box-shadow: 0 0 0 var(--red-color); /* Tono morado suave */
+    }
+  }
+  
+  .start-button:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px var(--red-color); /* Tono morado más intenso */
+  }
+  
   .send-icon {
     transform: rotate(-45deg);
     color: var(--white-color);

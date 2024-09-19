@@ -15,6 +15,7 @@ import TitleHome from "./TitleHome/TitleHome";
 import TitleMain from "./TitleMain/TitleMain";
 import SelectOptions from "./Select/Select";
 import CustomButton from "./CustomeButton/CustomeButton"
+import EditField from './EditField/EditField';
 
 
 export {
@@ -35,5 +36,6 @@ export {
     TextInput,
     TitleHome,
     TitleMain,
-    SelectOptions
+    SelectOptions,
+    EditField
 }

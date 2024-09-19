@@ -1,4 +1,3 @@
-import { IUserProdiver } from "@/app/api/interfaces/IUserProvider";
 import { FilterOption, FilterState } from "@/UI/interfaces/Filter";
 import { ICoder } from "@/UI/interfaces/ICoderInterface";
 import fetchApi from "@/utilities/fetchApi";
