@@ -1,6 +1,6 @@
 import {create} from 'zustand';
 
-interface IAuthUser{
+export interface IAuthUser{
     name?: string,
     email:string,
     token: string,

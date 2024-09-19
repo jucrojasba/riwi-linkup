@@ -27,7 +27,6 @@ const SectionProfile: React.FC<ISectionProfile> = ({ isDarkMode, language }) => 
                 const data = await getUserService(`${authState.email ? authState.email : "undefined"}`);
                 console.log(authState.email);
                 if (data && "message" in data) {
-                    console.log({ message: data });
                 } else {
                     setUser(data);
                 }
