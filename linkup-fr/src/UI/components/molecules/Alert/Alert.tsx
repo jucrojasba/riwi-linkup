@@ -20,7 +20,7 @@ export function inputAlert(message: string, type: 'success' | 'error') {
 // Función para mostrar un modal de confirmación personalizado
 export async function confirmDeleteAlert(textInfo:string, language:boolean): Promise<boolean> {
     const result = await MySwal.fire({
-        title: 'Are you sure?',
+        title: language?'¿Estas Seguro?':'Are you sure?',
         text: textInfo,
         icon: 'warning',
         showCancelButton: true,
