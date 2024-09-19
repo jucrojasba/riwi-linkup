@@ -1,0 +1,38 @@
+/* Styles for section coders----------------->*/
+section.mainGeneral-section {
+  display: flex;
+  gap: var(--padding-medium);
+  margin-top: var(--padding-big);
+  height: 95%;
+  position: relative;
+}
+
+section.mainGeneral-section > div.section-filters {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  height: 100%;
+}
+
+section.mainGeneral-section > div.section-content-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--padding-medium);
+  height: auto;
+  width: 70%;
+}
+
+section.mainGeneral-section > div.section-buttons {
+  color: var(--main-color);
+  display: flex;
+  cursor: pointer;
+}
+
+.button-create-coder{
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap:var(--padding-min);
+  z-index: 20;
+}

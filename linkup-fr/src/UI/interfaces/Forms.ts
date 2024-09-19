@@ -3,6 +3,7 @@ export interface ICompanyRegister{
     email:string,
     password:string,
     confirmPassword:string,
+    phone: number,
     sector:string
 }
 

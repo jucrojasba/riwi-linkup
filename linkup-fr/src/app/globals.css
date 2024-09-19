@@ -1,30 +1,40 @@
-@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
 
 :root {
-  --main-color: #6B5CFF;
-  --paragraph-color: #323131;
+  --main-color: #6b5cff;
+  --blue-color-light: #6b5cff3b;
+  --button-color-coder:#6B5CFF;
+  --background-dark-mode:#151B23;
+  --paragraph-color: #0D1117;
+  --background-color-dark-light: #131922;
   --paragraph-color-gray: #707070;
-  --secondary-color: #181E4B;
-  --white-color: #FFFFFF;
-  --gray-color: #F9FAFC;
-  --green-color: #5ACCA4;
-  --border-color-gray: #CECACA;
-  --yellow-color: #E6CA52;
-  --pink-color: #EAA2FC;
-  --red-color: #FE654F;
+  --secondary-color: #181e4b;
+  --white-color: #ffffff;
+  --gray-color: #F8F8F8;
+  --gray-strong-color: #707070;
+  --green-color: #5acca4;
+  --green-color-light: #5acca43b;
+  --border-color-gray: #cecaca;
+  --yellow-color: #e6ca52;
+  --yellow-color-light: #e6ca523b;
+  --pink-color: #eaa2fc;
+  --pink-color-light: #eaa2fc3b;
+  --red-color: #fe654f;
+  --red-color-light: #fe664f3b;
   --border-radius-min: 10px;
+  --border-radius-medium: 20px;
   --border-radius-big: 30px;
   --padding-min: 10px;
   --padding-medium: 20px;
   --padding-big: 30px;
   --padding-extra-big: 40px;
-  --padding-extra-big: 40px;
-  --font-size-min: .6rem;
-  --font-size-medium: .9rem;
+  --padding-mega-big: 45px;
+  --font-size-min: 0.6rem;
+  --font-size-medium: 0.9rem;
   --font-size-big: 1.2rem;
 
   /* Variable para la fuente */
-  --main-font: 'Ubuntu', sans-serif;
+  --main-font: "Ubuntu", sans-serif;
 }
 
 html {

@@ -1,52 +1,33 @@
+import "./headerStyles.css";
 import React from "react";
-import Image from "next/image";
-import SettingsIcon from '@mui/icons-material/Settings';
-import SpaceDashboardIcon from '@mui/icons-material/SpaceDashboard';
-import ComputerIcon from '@mui/icons-material/Computer';
-import LogoutIcon from '@mui/icons-material/Logout';
-import ChecklistRtlIcon from '@mui/icons-material/ChecklistRtl';
-import ItemNav from "@/UI/components/atoms/ItemNav/ItemNav";
+import TitleMain from "../../atoms/TitleMain/TitleMain";
+import Search from "../Search/Search";
+import Sidebar from "../Sidebar/Sidebar";
+import SwitchMode from "../../atoms/SwitchDarkMode/SwitchDarkMode";
+import SelectLanguage from "../../atoms/SwitchLanguage/SwitchLanguage";
 
-interface IHeaderProps{
-    expand:boolean
+interface IHeaderProps {
+  expand: boolean;
+  titleView: string;
+  subtitle: string;
+  path: string;
+  language:boolean;
 }
-
-export default function Header({expand}:IHeaderProps): React.ReactNode{
-    const navDataIcons = [
-        {name: "Dashboard", src: SpaceDashboardIcon, href: "#"},
-        {name: "Coders", src: ComputerIcon, href: "#"},
-        {name: "Config", src: SettingsIcon, href: "#"},
-        {name: "MyList", src: ChecklistRtlIcon, href: "#"}
-    ]
-    return(
-        <header className={expand ? "header_expand" : "header"}>
-                <div className="header-content-user">
-                <h2 className="header-title">Riwi-LinkUp</h2>
-                    <div className="content-user-image">
-                        <Image className="image" src={"/images/womanImage.avif"} alt="" width={100} height={100} style={{borderRadius: "50%", objectFit: "cover"}} />
-                    </div>
-                    <h5 className="content-user-welcome">Welcome back.</h5>
-                    <h3 className="content-user-name">Team</h3>
-                </div>
-                <nav className="header-nav">
-                    <ul className="header-nav-list">
-                        <div>
-                            {navDataIcons.map((icon)=> (
-                                <ItemNav
-                                key={icon.name}
-                                icon={icon.src}
-                                href={icon.href}
-                                name={icon.name}
-                                />
-                            ))}
-                        </div> 
-                        <ItemNav
-                        icon={LogoutIcon}
-                        href={""}
-                        name="Logout"
-                        />
-                    </ul>
-                </nav>
-        </header>
-    )
+export default function Header({ expand, titleView, subtitle, path, language }: IHeaderProps): React.ReactNode {
+  const handlerClick = () => {};
+  return (
+    <header className="header">
+      <Sidebar expand={expand} language={language}/>
+      <div className="section-content-coders">
+        <TitleMain
+          className="content-coders-title"
+          title={titleView}
+          subtitle={subtitle}
+        />
+        <SelectLanguage />
+        <Search />
+        <SwitchMode onClick={handlerClick} horizontalMode={true}/>
+      </div>
+    </header>
+  );
 }

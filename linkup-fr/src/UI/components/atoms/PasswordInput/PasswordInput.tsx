@@ -1,61 +1,71 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
-import { TextInputProps } from "@/UI/interfaces/Input";
-import TextField from "@mui/material/TextField";
-import { styled } from "@mui/material/styles";
-import Visibility from "@mui/icons-material/Visibility";
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import { IconButton, InputAdornment } from "@mui/material";
+import React, { useState } from 'react';
+import { TextInputProps } from '@/UI/interfaces/Input';
+import TextField from '@mui/material/TextField';
+import { styled } from '@mui/material/styles';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import { IconButton, InputAdornment } from '@mui/material';
+import { useDarkMode } from '@/global-states/dark-mode';
 
 const PasswordInputStyle = styled(TextField)(() => ({
-    textTransform: "none",
-    fontFamily: "var(--main-font)",
-    "& .MuiOutlinedInput-root": {
-        "& fieldset": {
-        borderColor: "var(--main-color)", // Change border color
+    textTransform: 'none',
+    fontFamily: 'var(--main-font)',
+    '& .MuiOutlinedInput-root': {
+        '& fieldset': {
+            borderColor: 'var(--main-color)', // Cambia el color del borde
         },
-        "&:hover fieldset": {
-        borderColor: "var(--main-color)", // Change border color on hover
+        '&.Mui-focused fieldset': {
+            borderColor: 'var(--main-color)', // Cambia el color del borde cuando está enfocado
         },
-        "&.Mui-focused fieldset": {
-        borderColor: "var(--main-color)", // Change border color when focused
-        },
+        // Sin efecto hover
     },
-    "& .MuiInputLabel-outlined.Mui-focused": {
-        color: "var(--main-color)", // Change label color when focused
+    '& .MuiInputLabel-outlined': {
+        color: 'var(--main-color)', // Cambia el color del label por defecto
+        backgroundColor: 'transparent', // Elimina el fondo del label
+        borderColor: 'transparent', // Quita el borde gris
+        cursor: 'default', // Evita el cursor pointer
     },
-    "& .MuiInputLabel-root.Mui-error": {
-        color: "var(--red-color)",
+    '& .MuiInputLabel-outlined.Mui-focused': {
+        color: 'var(--main-color)', // Cambia el color del label cuando está enfocado
     },
-    "& .MuiOutlinedInput-root.Mui-error .MuiOutlinedInput-notchedOutline": {
-        borderColor: "var(--main-color)",
+    '& .MuiInputLabel-root.Mui-error': {
+        color: 'var(--red-color)', // Cambia el color del label en caso de error
     },
-    "& .MuiFormHelperText-root.Mui-error": {
-        color: "var(--red-color)",
+    '& .MuiOutlinedInput-root.Mui-error .MuiOutlinedInput-notchedOutline': {
+        borderColor: 'var(--main-color)', // Cambia el borde cuando hay error
+    },
+    '& .MuiFormHelperText-root.Mui-error': {
+        color: 'var(--red-color)', // Cambia el color del texto de ayuda en caso de error
     },
 }));
 
 const PasswordInput: React.FC<TextInputProps> = ({
-    type = "text",
+    type = 'text',
     name,
-    defaultValue = "",
+    defaultValue = '',
     error = false,
     required = false,
     label,
-    helperText = "",
+    helperText = '',
     onChange,
 }) => {
-    const [showPassword,setShowPassword]=useState(false);
+
+    const [showPassword, setShowPassword] = useState(false);
+    const DarkMode = useDarkMode((state) => state.DarkMode);
+
     const handleShowPassword = () => {
         setShowPassword((prevState) => !prevState);
     };
 
     return (
-        <PasswordInputStyle
+        <>
+            {DarkMode?
+            <PasswordInputStyle
             id="outlined-error-helper-text"
             name={name}
-            type={type === "password" && !showPassword ? "password" : "text"}
+            type={type === 'password' && !showPassword ? 'password' : 'text'}
             defaultValue={defaultValue}
             label={label}
             error={error}
@@ -63,21 +73,52 @@ const PasswordInput: React.FC<TextInputProps> = ({
             helperText={helperText}
             size="small"
             onChange={onChange}
-            sx={{width:'250px'}}
+            sx={{ width: '250px', '& .MuiInputBase-input': {color:'var(--white-color)'}}}
             InputProps={{
-                endAdornment: type === "password" && (
+                endAdornment: type === 'password' && (
                     <InputAdornment position="end">
-                    <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={handleShowPassword}
-                        edge="end"
-                    >
-                        {showPassword ? <VisibilityOff /> : <Visibility />}
-                    </IconButton>
+                        <IconButton
+                            aria-label="toggle password visibility"
+                            onClick={handleShowPassword}
+                            edge="end"
+                            sx={{color:'var(--main-color)'}}
+                        >
+                            {showPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
                     </InputAdornment>
                 ),
             }}
-        ></PasswordInputStyle>
+        />
+            :<PasswordInputStyle
+            id="outlined-error-helper-text"
+            name={name}
+            type={type === 'password' && !showPassword ? 'password' : 'text'}
+            defaultValue={defaultValue}
+            label={label}
+            error={error}
+            required={required}
+            helperText={helperText}
+            size="small"
+            onChange={onChange}
+            sx={{ width: '250px' }}
+            InputProps={{
+                endAdornment: type === 'password' && (
+                    <InputAdornment position="end">
+                        <IconButton
+                            aria-label="toggle password visibility"
+                            onClick={handleShowPassword}
+                            edge="end"
+                            sx={{color:'var(--main-color)'}}
+                        >
+                            {showPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                    </InputAdornment>
+                ),
+            }}
+        />}
+        
+        </>
+        
     );
 };
 

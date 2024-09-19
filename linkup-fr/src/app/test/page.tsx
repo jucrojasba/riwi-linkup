@@ -1,21 +1,19 @@
 "use client";
-
-import ButtonMore from "@/UI/components/atoms/ButtonMore/ButtonMore";
-import CustomLink from "@/UI/components/atoms/CustomLink/CustomLink";
-import MainButton from "@/UI/components/atoms/MainButton/MainButton";
-import PasswordInput from "@/UI/components/atoms/PasswordInput/PasswordInput";
-import SecondaryButton from "@/UI/components/atoms/SecondaryButton/SecondaryButton";
-import TextInput from "@/UI/components/atoms/TextInput/TextInput";
-import { CircularLoader, LinearLoader } from "@/UI/components/atoms/loaders/Loaders";
-import LogInForm from "@/UI/components/molecules/LogInForm/LogInForm";
-import RegisterForm from "@/UI/components/molecules/RegisterForm/RegisterForm";
+import MobileNavbar from "@/UI/components/molecules/MobileNavbar/MobileNavbar";
 import { Box } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
+import { ButtonMore, CircularLoader, CustomLink, LinearLoader, MainButton, PasswordInput, SecondaryButton, TextInput } from "@/UI/components/atoms";
+import { RegisterForm } from "@/UI/components/molecules";
+import CustomIconButton from "@/UI/components/atoms/IconButton/IconButton";
+import ChatBot from "@/UI/components/atoms/ChatBot/ChatBot";
+
+
 
 export default function TestView() {
   return (
     <main>
-      <Box sx={{padding:'40px'}}>
-        <MainButton text="Ejemplo" onClick={()=>{}}></MainButton>
+       <Box sx={{padding:'40px'}}>
+        <MainButton text={<SearchIcon />} onClick={()=>{}}></MainButton>
         <SecondaryButton text="Secundario" onClick={()=>{}}></SecondaryButton>
         <ButtonMore></ButtonMore>
         <TextInput name="" label="Nombre" onChange={()=>{}}></TextInput>
@@ -27,7 +25,9 @@ export default function TestView() {
         <LinearLoader flag={true}/>
       </Box>
       <RegisterForm/>
-
+      <CustomIconButton icon="google" iconColor="#db4437" backgroundColor="var(--gray-color)" onClick={()=>{}}></CustomIconButton>
+      <CustomIconButton icon="github" iconColor="black" backgroundColor="var(--gray-color)" onClick={()=>{}}></CustomIconButton>
+      <RegisterForm/> 
     </main>
   );
 }

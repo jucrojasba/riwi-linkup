@@ -1,19 +1,49 @@
-div.filter{
-    display: flex;
-    gap: var(--padding-big);
+div.filter {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 96%;
+  gap: var(--padding-min);
+  position: relative;
 }
 
-div.filter >div.filter-languages,
-div.filter >div.filter-skills,
-div.filter >div.filter-teach{
-    display: flex;
-    flex-direction: column;
-    gap: var(--padding-medium);
+div.filter > div.filter-languages,
+div.filter > div.filter-skills,
+div.filter > div.filter-teach,
+div.filter > div.filter-clan {
+  margin-top: var(--padding-medium);
+  display: flex;
+  flex-basis: calc(30%);
+  flex-direction: column;
+  gap: var(--padding-medium);
+  height: 100%;
+  z-index: 10;
 }
 
-div.filter >div.filter-languages > div.languages-options,
-div.filter >div.filter-skills > div.skills-options,
-div.filter >div.filter-teach > div.teach-options{
-    display: flex;
-    gap: var(--padding-min);
+div.filter > div.filter-languages > div.languages-options,
+div.filter > div.filter-skills > div.skills-options,
+div.filter > div.filter-teach > div.teach-options,
+div.filter > div.filter-clan > div.clan-options {
+  display: flex;
+  flex-direction: column;
+  gap: var(--padding-big);
+}
+
+div.filter > div.filter-languages > h3,
+div.filter > div.filter-skills > h3,
+div.filter > div.filter-teach > h3,
+div.filter > div.filter-clan > h3 {
+  font-weight: 400;
+  color: var(--paragraph-color-gray);
+}
+
+div.section-buttons-filters{
+  display: flex;
+  gap: calc(var(--padding-mega-big) + var(--padding-big));
+  position: absolute;
+  left: 0%;
+  bottom: 20%;
+  
 }
