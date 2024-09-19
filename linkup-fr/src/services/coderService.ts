@@ -1,11 +1,9 @@
-import { ICoder } from "@/UI/interfaces/ICoderInterface";
+import { ICoder, ICoderBack } from "@/UI/interfaces/ICoderInterface";
 import { IUser } from "@/UI/interfaces/IUserInterface";
 import fetchApi from "@/utilities/fetchApi";
 
 export async function getCodersService(): Promise<ICoder[] | undefined> {
-  const data =
-    await fetchApi(`http://192.168.88.72:5298/api/v2/CodersControllerV2
-  `);
+  const data = await fetchApi("https://linkupv1-production.up.railway.app/api/v2/CodersControllerV2");
   if (!data) return;
   const filteredCoders = data.map((coder: Partial<ICoder>) => ({
     id: coder.id!,
@@ -18,37 +16,42 @@ export async function getCodersService(): Promise<ICoder[] | undefined> {
 
 export async function deleteCoderService(
   coder_id: number
-): Promise<IUser[] | undefined> {
-  const data = await fetchApi(`http://localhost:5000/coders/${coder_id}`, {
+): Promise<void> {
+  console.log("id", coder_id)
+  await fetchApi(`/api/coders/${coder_id}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
     },
   });
-  if (!data) return;
-  return data;
 }
 
 export async function getCodersInTraining(): Promise<number | undefined> {
-  const data = await fetchApi(
-    `http://192.168.88.72:5298/api/Dashboard/coders-in-training`
+  const codersTraining = await fetchApi(
+    `api/codersTraining`
   );
-  if (!data) return;
-  return data;
+  if (!codersTraining) return;
+  return codersTraining.data;
 }
 
 export async function getCodersFrontend(): Promise<number | undefined> {
-  const data = await fetchApi(
-    `http://192.168.88.72:5298/api/Dashboard/frontend-coders`
+  const codersFrontend = await fetchApi(
+    `api/codersFrontend`
   );
-  if (!data) return;
-  return data;
+  if (!codersFrontend) return;
+  return codersFrontend.data;
 }
 
 export async function getCodersBackend(): Promise<number | undefined> {
-  const data = await fetchApi(
-    `http://192.168.88.72:5298/api/Dashboard/backend-coders`
+  const codersBackend = await fetchApi(
+    `api/codersBackend`
   );
-  if (!data) return;
-  return data;
+  if (!codersBackend) return;
+  return codersBackend.data;
 }
+
+  export async function getCoderByIdService(id:number): Promise< ICoderBack |{message:string}>{
+    const coder = await fetchApi(`/api/coders/${id}`);
+    if(!coder)return coder;
+    return coder.data;
+  }

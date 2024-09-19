@@ -1,5 +1,5 @@
 import "./sidebarStyles.css";
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import Image from "next/image";
 import SettingsIcon from "@mui/icons-material/Settings";
 import SpaceDashboardIcon from "@mui/icons-material/SpaceDashboard";
@@ -9,6 +9,10 @@ import ChecklistRtlIcon from "@mui/icons-material/ChecklistRtl";
 import ItemNav from "@/UI/components/atoms/ItemNav/ItemNav";
 import MenuOpenIcon from "@mui/icons-material/MenuOpen";
 import { useLanguage } from "@/global-states/language-mode";
+import { signOut } from "next-auth/react";
+import { clearLocalStorage } from "@/utilities/LocalStorage";
+import { capitalizeSentece } from "@/utilities/CapitalizeSentence";
+import { useAuthUser } from "@/global-states/authUser";
 
 interface ISidebarProps {
   expand: boolean;
@@ -19,18 +23,23 @@ interface ISidebarProps {
 
 export default function Sidebar({ expand, language }: ISidebarProps): React.ReactNode {
   const [openSidebar, setOpenSidebar] = useState<boolean>(false);
+  const authState = useAuthUser((state)=>state.authUser);
 
   const navDataIcons = [
-    { name: "Dashboard", src: SpaceDashboardIcon, href: "/dashboard" },
-    { name: "Coders", src: ComputerIcon, href: "/coders" },
-    { name: "Config", src: SettingsIcon, href: "/config" },
-    { name: "MyList", src: ChecklistRtlIcon, href: "/login" },
+    { name: language? 'Tablero':"Dashboard", src: SpaceDashboardIcon, href: "/dashboard" },
+    { name: language? 'Desarrolladores':"Coders", src: ComputerIcon, href: "/coders" },
+    { name: language? 'Configuración':"Config", src: SettingsIcon, href: "/config" },
+    { name: language? 'Mi Lista':"My List", src: ChecklistRtlIcon, href: "/login" },
   ];
-  console.log(language);
 
   const handleOpenMenu = () => {
     setOpenSidebar(!openSidebar);
   };
+
+  const handleSignOut = async() =>{
+    clearLocalStorage();
+    await signOut({callbackUrl: "/login"});
+  }
   return (
     <div className={openSidebar ? "sidebarWidth" : "sidebar"}>
       <div className="sidebar-content-user">
@@ -45,7 +54,7 @@ export default function Sidebar({ expand, language }: ISidebarProps): React.Reac
         <div className="content-user-image">
           <Image
             className="image"
-            src={"/images/womanImage.avif"}
+            src={"/images/womanImage.png"}
             alt=""
             width={100}
             height={100}
@@ -55,7 +64,7 @@ export default function Sidebar({ expand, language }: ISidebarProps): React.Reac
         <h5 className="content-user-welcome">
           {language ? "Bienvenido" : "Welcome back"}
         </h5>
-        <h3 className="content-user-name">Team</h3>
+        <h3 className="content-user-name">{authState.name ? capitalizeSentece(authState.name) : "User"}</h3>
       </div>
       <nav className="navbar">
         <ul className="navbar-list">
@@ -74,7 +83,8 @@ export default function Sidebar({ expand, language }: ISidebarProps): React.Reac
             openSidebar={openSidebar}
             icon={LogoutIcon}
             href={"#"}
-            name="Logout"
+            name={language?'Salir':"Logout"}
+            onClick={handleSignOut}
           />
         </ul>
       </nav>

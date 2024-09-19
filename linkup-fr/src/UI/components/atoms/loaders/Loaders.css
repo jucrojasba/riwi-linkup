@@ -1,7 +1,7 @@
 .loader-container-display {
   position: absolute;
-  top: 40%;
-  left: 40%;
+  top: 45%;
+  left: 48%;
   z-index: 100;
 }
 .circular-loader-container {
@@ -16,19 +16,22 @@
 .circular-loader-container img {
   position: absolute;
   width: 60%;
+  z-index: 10;
 }
 
 .circular-loader-container .circular-loader {
   position: absolute;
   width: 100%;
   height: 100%;
+  background-color: white;
+  border-radius: 50%;
 }
 
 .linear-loader {
   position: absolute;
-  top: 0;
+  bottom: 2%;
   left: 0;
   z-index: 200;
-  width: 100vw;
+  width: 80vw;
   max-width: none;
 }

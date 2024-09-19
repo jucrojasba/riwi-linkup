@@ -1,8 +1,16 @@
 "use client";
-import { CircularLoader } from "@/UI/components/atoms";
-import { DashboardLayout } from "@/UI/components/organisms";
+import { useDarkMode } from "@/global-states/dark-mode";
+import { useLanguage } from "@/global-states/language-mode";
+import { DashboardLayout, SectionCoderOnly } from "@/UI/components/organisms";
+import Route from "@/routes/route";
+
 export default function CoderView(): React.ReactNode {
-  const path = window.location.pathname;
-  console.log(path)
-  return <DashboardLayout section={<div>dasd</div>} titleView="Coder" subtitle="Information" path={path} />;
+  const language = useLanguage();
+  const DarkMode = useDarkMode((state) => state.DarkMode);
+
+  return(
+    <Route>
+      <DashboardLayout section={<SectionCoderOnly />} titleView="Coder" subtitle="Information" language={language} isDarkMode={DarkMode}/>;
+    </Route>
+  )
 }

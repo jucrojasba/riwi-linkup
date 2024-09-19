@@ -12,6 +12,11 @@ footer.footer .link {
   color: var(--paragraph-color);
 }
 
+footer.footer .link.dark-link {
+  text-decoration: none;
+  color: var(--white-color);
+}
+
 footer.footer .link:hover {
   color: var(--main-color);
 }

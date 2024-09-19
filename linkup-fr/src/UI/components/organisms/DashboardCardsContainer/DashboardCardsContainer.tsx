@@ -78,7 +78,6 @@ const DashboardCardsContainer: React.FC<IDashboardCardsContainerProps>=({languag
         <div className="card-info-container">
                     {loadingCodersTraining ? (
                         <>
-                            <CircularLoader flag={true}/>
                             <LinearLoader flag={true}/> 
                         </>
                     ) : (
@@ -92,7 +91,6 @@ const DashboardCardsContainer: React.FC<IDashboardCardsContainerProps>=({languag
                     
                     {loadingCodersFrontend ? (
                         <>
-                            <CircularLoader flag={true}/>
                             <LinearLoader flag={true}/> 
                         </>
                     ) : (
@@ -106,7 +104,6 @@ const DashboardCardsContainer: React.FC<IDashboardCardsContainerProps>=({languag
                     
                     {loadingCodersBackend ? (
                         <>
-                            <CircularLoader flag={true}/>
                             <LinearLoader flag={true}/> 
                         </>
                     ) : (

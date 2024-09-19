@@ -6,10 +6,20 @@ import calculateAge from "@/utilities/calculateAge";
 import { ICoder, ICoders } from "@/UI/interfaces/ICoderInterface";
 import { useEffect, useState } from "react";
 import { getCodersService } from "@/services/coderService";
-import { Card } from "../../molecules";
+import { Card, Filter } from "../../molecules";
 import { CircularLoader } from "../../atoms/loaders/Loaders";
+import { useCodersFilter } from "@/global-states/coder";
+import { useTechSkill } from "@/global-states/techSkill";
+import { TitleMain } from "../../atoms";
+import {ButtonMore} from "../../atoms";
 
-export default function SectionCoders(): React.ReactElement {
+interface ISectionCodersProps {
+  render: boolean;
+  setRender: (render: boolean) => void;
+  isDarkMode: boolean;
+}
+
+export default function SectionCoders({render,setRender,isDarkMode}: ISectionCodersProps): React.ReactElement {
   const [loadingRequest, setLoadingRequest] = useState<boolean>(true); // Set initial state to true
   const initialCoder: ICoder = {
     id: 0,
@@ -20,10 +30,11 @@ export default function SectionCoders(): React.ReactElement {
   const initialCoders: ICoders = {
     coders: [initialCoder],
   };
-
   const [coders, setCoders] = useState<ICoders>(initialCoders); // Full list of coders
+  const codersFilter = useCodersFilter((state) => state.CodersFilter);
   const [currentPage, setCurrentPage] = useState(0);
-  const itemsPerPage = 8;
+  const limitItems = 6;
+  const {techSkill} = useTechSkill();
 
   useEffect(() => {
     const getCoders = async () => {
@@ -33,40 +44,55 @@ export default function SectionCoders(): React.ReactElement {
         setLoadingRequest(false);
         return;
       }
-      setCoders({ coders });
-      setLoadingRequest(false); // Set to false after data is fetched
+      setCoders({coders});
+      setLoadingRequest(false);
     };
     getCoders();
   }, []);
 
+  useEffect(() => {
+    if(render){ // Is rendered when a filter is applied
+        setCoders({coders:codersFilter});
+    }
+  }, [render, codersFilter]);
   // Calculate paginated coders
-  const startIndex = currentPage * itemsPerPage;
-  const paginatedCoders = coders.coders.slice(
+  const startIndex = currentPage * limitItems;
+  const paginatedCoders =  coders.coders.slice(
     startIndex,
-    startIndex + itemsPerPage
+    startIndex + limitItems
   );
 
   // Pagination handlers
   const handleNext = () => {
-    if ((currentPage + 1) * itemsPerPage < coders.coders.length) {
+    if ((currentPage + 1) * limitItems < coders.coders.length) {
       setCurrentPage(currentPage + 1);
     }
   };
 
-  const handlePrevious = () => {
+  const handleBack = () => {
     if (currentPage > 0) {
       setCurrentPage(currentPage - 1);
     }
   };
 
   return (
-    <section className="main-section">
+    <section className="mainGeneral-section">
+      <div className="section-filters">
+        <TitleMain
+              className="titleMain"
+              title={"Filters"}
+              subtitle=""
+            />
+        <Filter render={render} setRender={setRender} />
+      </div>
       <div className="section-content-cards">
         {loadingRequest ? (
           <CircularLoader flag={true} /> // Display loader when loading
         ) : (
           paginatedCoders.map((coder) => (
             <Card
+              setCoders={setCoders}
+              coders={coders}
               id_coder={coder.id}
               key={coder.id}
               url_image={coder.urlImage}
@@ -74,6 +100,8 @@ export default function SectionCoders(): React.ReactElement {
               name_user={coder.name}
               age_user={`${calculateAge(coder.birthday)} years`}
               status={true}
+              techSkill={techSkill}
+              isDarkMode={isDarkMode}
             />
           ))
         )}
@@ -81,7 +109,7 @@ export default function SectionCoders(): React.ReactElement {
       <div className="section-buttons">
         <KeyboardArrowLeftIcon
           className="button-left"
-          onClick={handlePrevious}
+          onClick={handleBack}
           style={{
             cursor: "pointer",
             visibility: currentPage === 0 ? "hidden" : "visible",
@@ -93,12 +121,16 @@ export default function SectionCoders(): React.ReactElement {
           style={{
             cursor: "pointer",
             visibility:
-              (currentPage + 1) * itemsPerPage >= coders.coders.length
+              (currentPage + 1) * limitItems >= coders.coders.length
                 ? "hidden"
                 : "visible",
           }}
         />
       </div>
+      <ButtonMore 
+      text="Create"
+      className="button-create-coder"
+      />
     </section>
   );
 }
