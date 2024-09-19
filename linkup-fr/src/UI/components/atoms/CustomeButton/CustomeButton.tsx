@@ -7,7 +7,7 @@ import { useState } from "react";
 
 interface CustomButtonProps extends ButtonProps {
   initialText: any;
-  clickedText: string;
+  clickedText: any;
   initialBgColor: string;
   clickedBgColor: string;
   secondOnClick?: (event: React.MouseEvent<HTMLButtonElement>) => void; // Segunda lógica para el nuevo estado
@@ -19,17 +19,17 @@ const CustomButtonStyle = styled(Button)<{ bgColor?: string }>(({ bgColor }) => 
   textTransform: "none",
   textAlign: "center",
   fontFamily: "var(--main-font)",
-  fontSize: "1.1rem",
-  width: "fit-content", // Ajuste automático al contenido
+  fontSize: "1rem",
+  width: "fit-content",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  padding: "0.5rem 1rem",
+  padding: "0.1rem 0.6rem",
   gap: "0.5rem",
   boxShadow: "none",
-  color:'var(--paragraph-color-gray)',
+  color:'var(--white-color)',
   "&:hover": {
-    filter: "brightness(0.90)",
+    filter: "brightness(0.95)",
     boxShadow: "none",
   },
 }));
@@ -47,11 +47,11 @@ const CustomButton: React.FC<CustomButtonProps> = ({
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     if (!isClicked) {
-      onClick?.(event); // Lógica inicial, pasa el evento
-      setIsClicked(true); // Cambia al estado clickeado
+      onClick?.(event); 
+      setIsClicked(true); 
     } else {
-      secondOnClick?.(event); // Segunda lógica, pasa el evento
-      setIsClicked(false); // Vuelve al estado inicial
+      secondOnClick?.(event);
+      setIsClicked(false); 
     }
   };
 

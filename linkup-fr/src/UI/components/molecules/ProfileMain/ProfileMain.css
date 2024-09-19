@@ -9,6 +9,7 @@
     gap:var(--padding-medium);
     min-width: 80%;
     flex-direction: column;
+    position: relative;
 }
 .main-profile-dark{
     background-color: var(--background-dark-mode);
@@ -21,8 +22,25 @@
     gap:var(--padding-medium);
     min-width: 80%;
     flex-direction: column;
+    position: relative;
 }
 
 h3{
     font-size: 1.3rem;
+}
+
+.action-buttons{
+    position: absolute;
+    top: 10%;
+    right: 1.5%;
+}
+
+.personal-information{
+    display: flex;
+    flex-direction: column;
+    gap: var(--padding-min);
+}
+
+p{
+    font-family: var(--main-font);
 }

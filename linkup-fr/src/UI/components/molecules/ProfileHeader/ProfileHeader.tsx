@@ -7,7 +7,7 @@ import { capitalizeSentece } from '@/utilities/CapitalizeSentence';
 
 interface IHeaderProfile {
     language: boolean;
-    companyName: string;
+    companyName: string | undefined;
     sector: string;
     imageProfile: string;
     isDarkMode: boolean;
