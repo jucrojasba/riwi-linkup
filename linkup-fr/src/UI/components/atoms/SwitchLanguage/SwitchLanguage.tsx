@@ -22,7 +22,6 @@ const LanguageSelector = () => {
   const handleMenuItemClick = (language: boolean) => {
     setLanguage(language);
     setAnchorEl(null);
-    console.log(language);
   };
 
   return (

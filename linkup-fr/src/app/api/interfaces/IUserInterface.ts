@@ -37,3 +37,8 @@ export interface IRole {
     name:  string;
     users: any[];
 }
+
+export interface IPatchUserBack {
+    email?: string;
+    phoneNumber?: string;
+}
