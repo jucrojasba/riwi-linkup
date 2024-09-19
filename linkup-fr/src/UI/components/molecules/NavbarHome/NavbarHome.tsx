@@ -43,6 +43,11 @@ const NavbarHome: React.FC<NavbarHomeProps> = ({ isDarkMode }) => {
       </Box>
 
       <Box component="span" sx={{ display: "flex", alignItems: "center", gap: "var(--padding-medium)" }}>
+      <CustomLink
+          text={Language?"Inicio":"Home"}
+          target="_blank"
+          onClick={()=>{navigate('/')}}
+        />
         <CustomLink
           text={Language?"Quiénes somos?":"About Us"}
           href="https://riwi.io/empleadores/"
