@@ -1,4 +1,4 @@
-import { IUserProdiverRegister, IUserProviderLogin } from "@/app/api/interfaces/IUserProvider";
+import { IUserProviderRegister, IUserProviderLogin } from "@/app/api/interfaces/IUserProvider";
 import { IUser } from "@/UI/interfaces/IUserInterface";
 import fetchApi from "@/utilities/fetchApi";
 import verifyData from "@/utilities/verifyData";
@@ -44,7 +44,7 @@ export async function authRegisterService(user:Partial<IUser>):Promise<{name:str
     return data;
 }
 
-export async function registerProviderService(user: {name:string, email:string, image:string}):Promise<IUserProdiverRegister | {message: string} >{
+export async function registerProviderService(user: {name:string, email:string, image:string}):Promise<IUserProviderRegister | {message: string} >{
     const data = await fetchApi("api/auth/registerProvider", {
         method: "POST",
         headers: {"Content-Type": "application/json"},

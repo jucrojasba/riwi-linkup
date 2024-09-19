@@ -1,4 +1,4 @@
-export function capitalizeSentece(sentence: string): string {
+export function capitalizeSentece(sentence: string | undefined): string | undefined{
     if (!sentence) return sentence;
 
     return sentence
