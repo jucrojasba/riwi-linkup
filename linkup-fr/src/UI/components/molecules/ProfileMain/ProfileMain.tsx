@@ -63,7 +63,7 @@ const MainProfile: React.FC<IMainProfile> = ({ language, isDarkMode, email, phon
         isConfirmed;
         if (!isConfirmed) return;
         await deleteUserService(authUser.email);
-        //aqui va retroalimentacion
+        inputAlert(`${language? 'Cuenta eliminada con éxito':'Account deleted successfully'}`, 'success');
         clearLocalStorage();
         await signOut({ callbackUrl: "/login" });
     }
