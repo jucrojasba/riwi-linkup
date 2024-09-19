@@ -11,6 +11,7 @@ import { CircularLoader } from "../../atoms/loaders/Loaders";
 import { useCodersFilter } from "@/global-states/coder";
 import { useTechSkill } from "@/global-states/techSkill";
 import { TitleMain } from "../../atoms";
+import {ButtonMore} from "../../atoms";
 
 interface ISectionCodersProps {
   render: boolean;
@@ -90,6 +91,8 @@ export default function SectionCoders({render,setRender,isDarkMode}: ISectionCod
         ) : (
           paginatedCoders.map((coder) => (
             <Card
+              setCoders={setCoders}
+              coders={coders}
               id_coder={coder.id}
               key={coder.id}
               url_image={coder.urlImage}
@@ -124,6 +127,10 @@ export default function SectionCoders({render,setRender,isDarkMode}: ISectionCod
           }}
         />
       </div>
+      <ButtonMore 
+      text="Create"
+      className="button-create-coder"
+      />
     </section>
   );
 }

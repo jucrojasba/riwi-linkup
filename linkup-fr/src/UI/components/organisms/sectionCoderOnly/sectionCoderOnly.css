@@ -25,6 +25,7 @@ div.content-coder > div.coder div.coder-image > img{
     display: block;
     border-radius: var(--border-radius-medium);
     border: 1px solid var(--border-color-gray);
+    margin-bottom: var(--padding-medium);
 }
 
 div.content-coder > div.coder div.content-information{
@@ -58,3 +59,4 @@ div.content-coder > div.coder div.content-information > div.information-footer{
     display: flex;
     gap: var(--padding-medium);
 }
+

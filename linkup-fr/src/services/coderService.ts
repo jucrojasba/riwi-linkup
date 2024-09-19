@@ -16,15 +16,14 @@ export async function getCodersService(): Promise<ICoder[] | undefined> {
 
 export async function deleteCoderService(
   coder_id: number
-): Promise<IUser[] | undefined> {
-  const data = await fetchApi(`http://localhost:5000/coders/${coder_id}`, {
+): Promise<void> {
+  console.log("id", coder_id)
+  await fetchApi(`/api/coders/${coder_id}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
     },
   });
-  if (!data) return;
-  return data;
 }
 
 export async function getCodersInTraining(): Promise<number | undefined> {

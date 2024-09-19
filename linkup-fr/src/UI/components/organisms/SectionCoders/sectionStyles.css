@@ -4,6 +4,7 @@ section.mainGeneral-section {
   gap: var(--padding-medium);
   margin-top: var(--padding-big);
   height: 95%;
+  position: relative;
 }
 
 section.mainGeneral-section > div.section-filters {
@@ -27,18 +28,11 @@ section.mainGeneral-section > div.section-buttons {
   cursor: pointer;
 }
 
-/*
-div.content-layout
-  > div
-  > main.main
-  > section.main-section
-  > div.section-buttons
-  > .button-left,
-div.content-layout
-  > div
-  > main.main
-  > section.main-section
-  > div.section-buttons
-  > .button-right {
-  cursor: pointer;
-}*/
+.button-create-coder{
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap:var(--padding-min);
+  z-index: 20;
+}
