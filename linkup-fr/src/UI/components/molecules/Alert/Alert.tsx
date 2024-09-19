@@ -18,14 +18,14 @@ export function inputAlert(message: string, type: 'success' | 'error') {
 }
 
 // Función para mostrar un modal de confirmación personalizado
-export async function confirmDeleteAlert(): Promise<boolean> {
+export async function confirmDeleteAlert(textInfo:string, language:boolean): Promise<boolean> {
     const result = await MySwal.fire({
         title: 'Are you sure?',
-        text: "Do you want to delete this coder?",
+        text: textInfo,
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonText: 'Yes, delete it!',
-        cancelButtonText: 'No, cancel!',
+        confirmButtonText: language?'Si, eliminar':'Yes, delete it!',
+        cancelButtonText: language? 'No, cancelar!':'No, cancel!',
         reverseButtons: true,
         customClass: {
             confirmButton: 'my-custom-confirm-button',
