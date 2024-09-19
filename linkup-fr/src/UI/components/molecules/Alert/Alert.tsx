@@ -27,6 +27,7 @@ export async function confirmDeleteAlert(textInfo:string, language:boolean): Pro
         confirmButtonText: language?'Si, eliminar':'Yes, delete it!',
         cancelButtonText: language? 'No, cancelar!':'No, cancel!',
         reverseButtons: true,
+        confirmButtonColor: 'var(--red-color)',
         customClass: {
             confirmButton: 'my-custom-confirm-button',
             cancelButton: 'my-custom-cancel-button',

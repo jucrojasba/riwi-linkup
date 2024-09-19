@@ -9,9 +9,6 @@ import { useEffect, useState } from "react";
 import { LinearLoader } from '../../atoms/loaders/Loaders';
 import { IApiResponseUser } from "@/UI/interfaces/IUserInterface";
 import { capitalizeSentece } from "@/utilities/CapitalizeSentence";
-import { clearLocalStorage } from "@/utilities/LocalStorage";
-import { signOut } from "next-auth/react";
-
 
 interface ISectionProfile {
     isDarkMode: boolean;

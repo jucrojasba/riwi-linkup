@@ -6,8 +6,8 @@ import SaveIcon from '@mui/icons-material/Save';
 import './ProfileMain.css';
 import { IAuthUser, useAuthUser } from '@/global-states/authUser';
 import { IPatchUserRequest } from '@/UI/interfaces/IUserInterface';
-import { patchUserService } from '@/services/userService';
-import { inputAlert } from '../Alert/Alert';
+import { deleteUserService, patchUserService } from '@/services/userService';
+import { confirmDeleteAlert, inputAlert } from '../Alert/Alert';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { clearLocalStorage } from '@/utilities/LocalStorage';
 import { signOut } from 'next-auth/react';
@@ -59,6 +59,11 @@ const MainProfile: React.FC<IMainProfile> = ({ language, isDarkMode, email, phon
     };
 
     const handleSignOut = async () => {
+        const isConfirmed = await confirmDeleteAlert(`${language ? '¿Estas seguro que desesas eliminar tu cuenta?':'Are you sure you want to delete your account?'}`, language);
+        isConfirmed;
+        if (!isConfirmed) return;
+        await deleteUserService(authUser.email);
+        //aqui va retroalimentacion
         clearLocalStorage();
         await signOut({ callbackUrl: "/login" });
     }
