@@ -6,12 +6,11 @@ import { useEffect, useState } from "react";
 import { IGender, IGenders } from "@/UI/interfaces/GenderInterface";
 import { MainButton } from "../../atoms";
 import CheckIcon from '@mui/icons-material/Check'; 
-import { getGendersService } from "@/services/genderService";
 import { SelectChangeEvent } from "@mui/material";
 import SelectOptions from "../../atoms/Select/Select";
-import { IClan, IClans } from "@/UI/interfaces/clanInterface";
-import { getClansService } from "@/app/api/services/clanService";
 import { IOptionsSelect } from "@/UI/interfaces/optionSelectInterface";
+import { IForm } from "@/UI/interfaces/FormInterface";
+import { useDataBackLoad } from "@/global-states/dataBack";
 
 interface IModalProps {
     showModal: boolean;
@@ -19,41 +18,28 @@ interface IModalProps {
 }
 
 export function Modal({ showModal, setShowModal }: IModalProps): React.ReactNode {
-    const initialGenderState: IGender = {
-        id: 0,
-        name: ""
-    };
-    const initialClanState:IClan = {
-        id: 0,
-        name: ""
-    }
-    const initialGendersState: IGenders = {
-        genders: [initialGenderState]
-    };
-
-    const initialClansState: IClans = {
-        clans: [initialClanState]
-    }
-
-    const initialFormData = {
+    const dataBack = useDataBackLoad((state) => state.dataBack);
+    const {genders, clans, languages, softSkills, techSkills} = dataBack;
+    const dataForm: IForm = {
+        name: "",
+        birthday: "",
+        urlImage: "",
         gender: "",
-        clan:"",
-    }
-    const initialStateData: IOptionsSelect = {
-        genders: [],
-        clans: [],
+        clan: "",
+        softSkill: "",
+        language: "",
+        techSkill: "",
     }
 
-    const [selectedValue, setSelectedValue] = useState(initialFormData);
-    const [dataState, setDataState] = useState<IOptionsSelect>(initialStateData)
+    const [selectedValue, setSelectedValue] = useState(dataForm);
 
     const handleChange = (e: SelectChangeEvent) => {
         const {name, value} = e.target; 
-        setSelectedValue((prev)=>({
-            ...prev,
+        setSelectedValue((prevState) => ({
+            ...prevState,
             [name]: value
         }))
-        console.log("Selected value:",value);
+        console.log(selectedValue);
     };
 
     const handleClickCreate = () => {
@@ -64,21 +50,6 @@ export function Modal({ showModal, setShowModal }: IModalProps): React.ReactNode
         console.log("close");
         setShowModal(false);
     };
-
-    useEffect(() => {
-        const getData = async () => {
-            const genders = await getGendersService();
-
-            if(genders){
-                setDataState({
-                    genders,
-                })
-            }
-        };
-        getData();
-    }, [genders]);
-
-    console.log(genders);
 
     if (showModal) {
         return (
@@ -125,37 +96,40 @@ export function Modal({ showModal, setShowModal }: IModalProps): React.ReactNode
                                 label="genders"
                                 name="gender"
                                 onChange={handleChange}
-                                values={genders.genders.map(gender => gender.name)}
+                                values={genders.map((gender)=>gender.name)}
                                 value={selectedValue.gender}
                             />
                             <SelectOptions
                                 label="clans"
-                                name="clans"
+                                name="clan"
                                 onChange={handleChange}
-                                values={clans.clans.map(clan =>clan.name)}
+                                values={clans.map((clan)=>clan.name)}
                                 value={selectedValue.clan}
                             />
                         </div>
 
                         <SelectOptions
-                            name="softSkills"
+                            label="softSkills"
+                            name="softSkill"
                             onChange={handleChange}
-                            values={["berness lee", "ritchie"]}
-                            value=""
+                            values={softSkills.map((softSkill)=>softSkill.name)}
+                            value={selectedValue.softSkill}
                         />
                         
                         <div className="information-languages-techSkills">
                             <SelectOptions
-                                name="languages"
+                                label="languages"
+                                name="language"
                                 onChange={handleChange}
-                                values={["berness lee", "ritchie"]}
-                                value=""
+                                values={languages.map((language)=>language.name)}
+                                value={selectedValue.language}
                             />
                             <SelectOptions
-                                name="techSkills"
+                                label="techSkills"
+                                name="techSkill"
                                 onChange={handleChange}
-                                values={["berness lee", "ritchie"]}
-                                value=""
+                                values={techSkills.map((techSkill)=>techSkill.name)}
+                                value={selectedValue.techSkill}
                             />
                         </div>
                         <MainButton

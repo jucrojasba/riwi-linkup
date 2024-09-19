@@ -1,9 +1,13 @@
 export interface IOptionSelect{
-    id:0,
-    name:string
+    id:number,
+    name:string,
 }
 
+
 export interface IOptionsSelect{
-    genders: IOptionSelect[]
-    clans: IOptionSelect[]
+    genders: IOptionSelect[],
+    clans:IOptionSelect[],
+    languages:IOptionSelect[],
+    softSkills: IOptionSelect[],
+    techSkills: IOptionSelect[]
 }

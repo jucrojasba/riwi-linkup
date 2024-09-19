@@ -1,6 +1,8 @@
 export interface IGender{
     id:number,
-    name:string
+    name:string,
+    label: string,
+    checked:string
 }
 
 export interface IGenders{
