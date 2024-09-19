@@ -3,7 +3,7 @@ import { IUser } from "@/UI/interfaces/IUserInterface";
 import fetchApi from "@/utilities/fetchApi";
 import verifyData from "@/utilities/verifyData";
 
-export async function authLoginService(user: Partial<IUser>): Promise<{name: string, email: string, token: string} | undefined>{
+export async function authLoginService(user: Partial<IUser>): Promise<{name: string, email: string, token: string, roleId:number} | undefined>{
     const {email,password} = user;
     const dataVerify = verifyData(email,password);
     if(!dataVerify){
