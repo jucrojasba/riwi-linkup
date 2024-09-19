@@ -7,7 +7,7 @@ import { useState } from "react";
 import { useDarkMode } from "@/global-states/dark-mode";
 
 export default function AdminView(): React.ReactNode {
-  const languages = useLanguage();
+  const languages = useLanguage((state)=>state.language);
   const [render,setRender] = useState<boolean>(false);
   const DarkMode = useDarkMode(state => state.DarkMode);
 
