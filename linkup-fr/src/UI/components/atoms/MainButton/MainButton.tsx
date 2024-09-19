@@ -16,6 +16,9 @@ const MainButtonStyle = styled(Button)<{ customBgColor?: string }>(({ customBgCo
   fontFamily: 'var(--main-font)',
   minWidth: 'fit-content',
   fontSize: '1rem',
+  display: 'flex', // Flexbox for alignment
+  alignItems: 'center', // Align items vertically
+  gap: '0.5rem', // Gap between icon and text
 }));
 
 const MainButton: React.FC<MainButtonProps> = ({
@@ -43,4 +46,5 @@ const MainButton: React.FC<MainButtonProps> = ({
 };
 
 export default MainButton;
+
 

@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import { CustomButton, EditField } from '../../atoms';
+import { CustomButton, EditField, MainButton } from '../../atoms';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import SaveIcon from '@mui/icons-material/Save';
 import './ProfileMain.css';
@@ -8,6 +8,9 @@ import { IAuthUser, useAuthUser } from '@/global-states/authUser';
 import { IPatchUserRequest } from '@/UI/interfaces/IUserInterface';
 import { patchUserService } from '@/services/userService';
 import { inputAlert } from '../Alert/Alert';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { clearLocalStorage } from '@/utilities/LocalStorage';
+import { signOut } from 'next-auth/react';
 
 interface IMainProfile {
     language: boolean;
@@ -44,16 +47,21 @@ const MainProfile: React.FC<IMainProfile> = ({ language, isDarkMode, email, phon
             const response = await patchUserService(authUser.email, userPatchData);
             if (response && 'status' in response) {
                 setAuthUser(userInfoEdit);
-                inputAlert(`${language? 'Datos Actualizados Correctamente':'Data Updated Successfully'}`,'success');
+                inputAlert(`${language ? 'Datos Actualizados Correctamente' : 'Data Updated Successfully'}`, 'success');
             } else {
-                inputAlert(`${language? 'Error al Actualizar los Datos':'Data Update Failed'}`,'error');
+                inputAlert(`${language ? 'Error al Actualizar los Datos' : 'Data Update Failed'}`, 'error');
             }
         } catch (error) {
-            inputAlert(`${language? 'Error al Actualizar los Datos':'Data Update Failed'}`,'error');
+            inputAlert(`${language ? 'Error al Actualizar los Datos' : 'Data Update Failed'}`, 'error');
         } finally {
             setIsSaving(false);
         }
     };
+
+    const handleSignOut = async () => {
+        clearLocalStorage();
+        await signOut({ callbackUrl: "/login" });
+    }
 
     return (
         <div className={isDarkMode ? 'main-profile-dark' : 'main-profile'}>
@@ -68,7 +76,7 @@ const MainProfile: React.FC<IMainProfile> = ({ language, isDarkMode, email, phon
                     edit={isEditing}
                     DarkMode={isDarkMode}
                     save={isSaving}
-                    onSave={() => handleSave()}
+                    onSave={handleSave}
                 />
                 <p>{language ? 'Teléfono' : 'Phone'}</p>
                 <EditField
@@ -79,7 +87,7 @@ const MainProfile: React.FC<IMainProfile> = ({ language, isDarkMode, email, phon
                     edit={isEditing}
                     DarkMode={isDarkMode}
                     save={isSaving}
-                    onSave={() => handleSave()}
+                    onSave={handleSave}
                 />
             </div>
             <div className="action-buttons">
@@ -105,6 +113,7 @@ const MainProfile: React.FC<IMainProfile> = ({ language, isDarkMode, email, phon
                     onClick={() => setIsEditing(!isEditing)}
                     secondOnClick={handleSave}
                 />
+                <MainButton text={language ? 'Eliminar Cuenta' : 'Delete Account'} bgColor='var(--red-color)' icon={<DeleteIcon sx={{ fontSize: '1.2rem' }} />} onClick={handleSignOut} className="delete-button" />
             </div>
         </div>
     );
