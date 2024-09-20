@@ -22,7 +22,7 @@ export default function HomeView() {
   return (
     <Route>
         <main>
-        <AuthLayout isDarkMode={DarkMode} />
+        <AuthLayout isDarkMode={DarkMode} language={language}/>
         <div className={`${DarkMode ? "home-no-auth-wrapper-dark-mode" : "home-no-auth-wrapper"}`}>
           <div className="home-info">
             <TitleHome
