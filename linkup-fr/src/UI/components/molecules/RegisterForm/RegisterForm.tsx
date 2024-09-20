@@ -1,10 +1,10 @@
 "use client";
-import { Box, SelectChangeEvent, Typography, } from "@mui/material";
+import { Box, SelectChangeEvent, Typography } from "@mui/material";
 import TextInput from "../../atoms/TextInput/TextInput";
 import MainButton from "../../atoms/MainButton/MainButton";
 import CustomLink from "../../atoms/CustomLink/CustomLink";
 import PasswordInput from "../../atoms/PasswordInput/PasswordInput";
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { ICompanyRegister } from "@/UI/interfaces/Forms";
 import { CircularLoader } from "../../atoms";
 import { useLanguage } from "@/global-states/language-mode";
@@ -18,204 +18,332 @@ import { authRegisterService } from "@/services";
 import { registerProviderService } from "@/services/authService";
 import { useAuthUser } from "@/global-states/authUser";
 import { emailService } from "@/services/emailService";
-import { generateTextEmailCorrect, generateTextEmailIncorrect } from "@/utilities/EmailText";
+import {
+  generateTextEmailCorrect,
+  generateTextEmailIncorrect,
+} from "@/utilities/EmailText";
 import verifyData from "@/utilities/verifyData";
 import SelectOptions from "../../atoms/Select/Select";
-import "./registerFormStyles.css";
-import { ISector, ISectors } from "@/UI/interfaces/SectorInterface";
-import getSectorsService from "@/services/sectorService";
+import { ISector } from "@/UI/interfaces/ISectorInterface";
+import { obtainIdSectors } from "@/utilities/obtainIdData";
+import { getUserServiceByEmail } from "@/services/userService";
+import { getSectorService } from "@/services/sectorService";
 
-const RegisterForm:React.FC=()=>{
-    const[passwordInputError,setPasswordInputError] =useState(false);
-    const [loading, setLoading] = useState<boolean>(false);
-    const Language = useLanguage((state) => state.language); //true español
-    const DarkMode = useDarkMode((state) => state.DarkMode);
-    const {data: session, status} = useSession();
-    const navigate = useNavigate();
-    const {setAuthUser} = useAuthUser();
+const RegisterForm: React.FC = () => {
+  const [passwordInputError, setPasswordInputError] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
+  const Language = useLanguage((state) => state.language); //true español
+  const DarkMode = useDarkMode((state) => state.DarkMode);
+  const { data: session, status } = useSession();
+  const navigate = useNavigate();
+  const { setAuthUser } = useAuthUser();
+  const [sectors, setSectors] = useState<ISector[]>([]);
 
-    const CompanyInitialState: ICompanyRegister ={
-        name: '',
-        email:'',
-        password:'',
-        confirmPassword:'',
-        phone:0,
-        sector:''
+  const CompanyInitialState: ICompanyRegister = {
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    phone: 0,
+    sector: "",
+  };
+  const [companyRegister, setCompanyRegister] =
+    useState<ICompanyRegister>(CompanyInitialState);
+
+  const hangleChangeFormData = (
+    e: ChangeEvent<HTMLInputElement> | SelectChangeEvent
+  ) => {
+    const { name, value } = e.target;
+    setCompanyRegister({
+      ...companyRegister,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = async () => {
+    // Register a new company credentials normal
+    setLoading(true);
+    const { name, email, password, phone, sector } = companyRegister;
+    const dataVerify = verifyData(name, email, password, phone, sector);
+    if (!dataVerify) {
+      setLoading(false);
+      inputAlert("Is required all params", "error");
+      return;
+    }
+    const obtainIdData = obtainIdSectors(sectors, sector);
+    if (!obtainIdData) {
+      setLoading(false);
+      inputAlert("Invalid sector selection", "error");
+      return;
+    }
+    const responseGetUser = await getUserServiceByEmail(email);
+    if (!responseGetUser) {
+      setLoading(false);
+      inputAlert("Email already exists", "error");
+      await emailService({
+        email,
+        emailLinkUp: "josesiprozmaster@gmail.com",
+        subject: "Email is already",
+        text: generateTextEmailIncorrect(
+          name,
+          "josesiprozmaster@gmail.com",
+          ""
+        ),
+      });
+      return;
+    }
+    const userRegister = await authRegisterService({
+      name,
+      email,
+      password,
+      phoneNumber: phone.toString(),
+      sectorId: obtainIdData,
+    });
+    console.log("user register", userRegister)
+    if (!userRegister || "message" in userRegister) {
+      setLoading(false);
+      inputAlert("Error to register. Users exists", "error");
+      return;
+    }
+    const responseEmail = await emailService({
+      email,
+      emailLinkUp: "josesiprozmaster@gmail.com",
+      subject: "Registration confirmation",
+      text: generateTextEmailCorrect(name, email, ""),
+    });
+    console.log(responseEmail);
+    if (
+      !responseEmail ||
+      "message" in responseEmail ||
+      "error" in responseEmail
+    ) {
+      setLoading(false);
+      inputAlert("Error to send email", "error");
+      return;
+    }
+    setLoading(false);
+    inputAlert("Registration successful. Check your email", "success");
+    navigate("/login");
+  };
+
+  const sigInProvider = (nameProvider: string, valueProvider: string) => {
+    saveLocalStorage("provider", valueProvider);
+    signIn(nameProvider);
+  };
+
+  useEffect(() => {
+    const getSectors = async () => {
+      const response = await getSectorService();
+      if (!response || "message" in response) return;
+      const sectors = response.data;
+      setSectors(sectors);
     };
-    const initialSectorState: ISector = {
-        id: 0,
-        name: ""
-    }
-    const initialSectorsState: ISectors = {
-        sectors: [initialSectorState]
-    }
-    const[companyRegister,setCompanyRegister] =useState<ICompanyRegister>(CompanyInitialState);
-    const [sectors,setSectors] = useState<ISectors>(initialSectorsState);
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement> | SelectChangeEvent) => {
-        const {name,value} = e.target;
-        setCompanyRegister({...companyRegister,[name]:value});
-        console.log(companyRegister)
-    }
+    getSectors();
+  }, []);
 
-    const handleSubmit = async()=>{
-        setLoading(true);
-        const {name,email,password, phone, sector} = companyRegister;
-        console.log(name,email,password,phone,sector);
-        const data = await authRegisterService({name,email,password, phoneNumber: phone.toString(), sectorId: 1});
-        if(!data){
-            setLoading(false);
-            inputAlert("Error to login", "error")
-            console.log({message: "Error, show modal"});
-            return;
+  useEffect(() => {
+    if (companyRegister.password !== companyRegister.confirmPassword) {
+      setPasswordInputError(true);
+    } else {
+      setPasswordInputError(false);
+    }
+  }, [companyRegister]);
+
+  useEffect(() => {
+    if (status === "authenticated") {
+      // Register user by provider
+      const registerUserProvider = async () => {
+        const { user } = session;
+        if (!user) return { message: "Errow with the session" };
+        const name = user.name!;
+        const email = user.email!;
+        const image = user.image!;
+        const data = await registerProviderService({ name, email, image });
+        if (data && "message" in data) {
+          inputAlert("Error to register. User Exists", "error");
+          const textEmailGenerate = generateTextEmailIncorrect(
+            "Access problem - RiwiLinkUp",
+            name,
+            email
+          );
+          const mail = await emailService({
+            email,
+            emailLinkUp: "riwilinkup@gmail.com",
+            subject: "Access problem - RiwiLinkUp",
+            text: textEmailGenerate,
+          });
+          console.log(mail);
+          return;
         }
-        console.log(data);
-        // const {name,email,token} = data;
-        // saveCredentials({name,email,token});
-    }
+        const token = data.token!;
+        const roleId = data.roleId!;
+        const password = data.password!;
 
-    useEffect(() => {
-        if(companyRegister.password!==companyRegister.confirmPassword){
-            setPasswordInputError(true)
-        }else{
-            setPasswordInputError(false)
-        };
-    }, [companyRegister]);
+        const provider: string = localStorage.getItem("provider")!;
+        saveLocalStorage("token", token);
+        saveLocalStorage("roleId", roleId);
 
-    useEffect(()=>{
-        const getSectors = async() =>{
-            const sectors = await getSectorsService();
-            if(sectors && "message" in sectors)return;
-            if(!sectors) return;
-            setSectors(sectors);
-        };
-        getSectors();
-    }, []);
-
-    useEffect(()=>{
-        if(status === "authenticated"){
-            const registerUserProvider = async()=>{
-                const {user} = session;
-                if(!user) return ({message: "Errow with the session"});
-                const name = user.name!;
-                const email = user.email!;
-                const image = user.image!;
-                const data = await registerProviderService({name,email,image});
-                if(data && "message" in data){
-                    inputAlert("Error to register. User Exists", "error");
-                    const textEmailGenerate = generateTextEmailIncorrect("Access problem - RiwiLinkUp", name, email);
-                    const mail = await emailService({
-                        email,
-                        emailLinkUp:"riwilinkup@gmail.com", 
-                        subject: "Access problem - RiwiLinkUp", 
-                        text: textEmailGenerate,});
-                    console.log(mail);  
-                    return;
-                }
-                const token = data.token!;
-                const roleId = data.roleId!;
-                const password = data.password!;
-                const provider:string = localStorage.getItem("provider")!;
-                saveLocalStorage("token", token);
-                saveLocalStorage("roleId", roleId);
-                setAuthUser({name,email,token, role:roleId, provider});
-                const textEmailGenerate = generateTextEmailCorrect("Successful register to RiwiLinkUp", name, email,password);
-                const mail = await emailService({
-                    email,
-                    emailLinkUp:"riwilinkup@gmail.com", 
-                    subject: "Welcome to RiwiLinkUp", 
-                    text: textEmailGenerate,
-                });
-                console.log(mail);
-                inputAlert("Registration successful. Check your email", "success");
-                navigate("/dashboard");
-            }
-            registerUserProvider();
+        const textEmailGenerate = generateTextEmailCorrect(
+          "Successful register to RiwiLinkUp",
+          name,
+          email,
+          password
+        );
+        const mail = await emailService({
+          email,
+          emailLinkUp: "riwilinkup@gmail.com",
+          subject: "Welcome to RiwiLinkUp",
+          text: textEmailGenerate,
+        });
+        if (!mail) {
+          inputAlert("Error to send email", "error");
+          return;
         }
-    },[status]);
-
-    const sigInProvider = (nameProvider: string, valueProvider: string) =>{
-        saveLocalStorage("provider",valueProvider);
-        signIn(nameProvider);
+        setAuthUser({ name, email, token, role: roleId, provider });
+        inputAlert("Registration successful. Check your email", "success");
+        navigate("/dashboard");
+      };
+      registerUserProvider();
     }
-
-    return(
-        <Box 
-        component='form' 
-        onSubmit={()=>{console.log("ok")}} 
+  }, [status]);
+  return (
+    <Box
+      component="form"
+      onSubmit={() => {
+        console.log("ok");
+      }}
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        gap: "var(--padding-big)",
+        alignItems: "center",
+        width: "fit-content",
+      }}
+    >
+      {loading ? <CircularLoader flag={loading} /> : null}
+      <Typography
+        variant="h2"
         sx={{
-            display:'flex',
-            flexDirection:'column',
-            gap:'var(--padding-big)', 
-            alignItems:'center',
-            width:'25%',
-        }}>
-            {loading?<CircularLoader flag={loading}/>:null}
-            <Typography 
-            variant="h2" 
-            sx={{
-                color:'var(--main-color)',
-                fontFamily:'var(--main-font)',
-                fontSize:'2rem', 
-                fontWeight:'500' 
-                }}>{Language?'Registrate':'Get Started'}</Typography>
-            <div className="form-input-name-email">     
-            <TextInput 
-                name="name" 
-                label={Language
-                ?"Nombre de la compañía"
-                :"Company Name"} 
-                required 
-                onChange={handleChange} 
-                />
-                <TextInput 
-                name="email" 
-                type="email" 
-                label={Language?"Correo Electrónico":"Email"} 
-                required 
-                onChange={handleChange}  />
-            </div>
-            {passwordInputError?
-            <PasswordInput 
-            name="password" 
-            label={Language?
-            "Contraseña"
-            :"Password"
-            } 
-            type="password" 
-            required error 
-            helperText={Language
-            ?"Las contraseñas no coinciden"
-            :"Passwords doesn't match"
-            } 
-            onChange={handleChange} />
-            :
-            <PasswordInput 
-            name="password" 
-            label={Language?
-            "Contraseña":
-            "Password"} 
-            type="password" 
-            required 
-            onChange={handleChange} />}
-            {passwordInputError?<PasswordInput name="confirmPassword" label={Language?"Confirmar contraseña":"Confirm password"} type="password" required error helperText={Language?"Las contraseñas no coinciden":"Passwords doesn't match"} onChange={handleChange} />:<PasswordInput name="confirmPassword" label={Language?"Confirmar contraseña":"Confirm password"} type="password" required onChange={handleChange} />}
-            <TextInput name="phone" label={Language?"Número de teléfono":"Phone Number"} onChange={handleChange} />
-            <SelectOptions
-            label={Language?"Sectores":"Sectors"}
-            values={["hola"]}
-            onChange={(e: SelectChangeEvent) =>handleChange(e)}
-            value={companyRegister.sector}
-            name={"sector"}>
-            </SelectOptions>
-            <MainButton text={Language?"Registrarme":"Register"} onClick={handleSubmit} className="mainButton" />
-            <Box component={'span'}>
-                <Typography variant="body1" sx={{color:'var(--secondary-color)',fontFamily:'var(--main-font)'}}>{Language?'Ya tienes una cuenta?':'Already have an account?'} <CustomLink text={Language?"Iniciar Sesión":"Log In"} href="/login"></CustomLink></Typography>
-            </Box>
-            <Box sx={{display:'flex', gap:'var(--padding-big)'}}>
-                <CustomIconButton icon="google" iconColor="#db4437" backgroundColor="var(--gray-color)" onClick={()=>sigInProvider("google", "google")}/>
-                <CustomIconButton icon="github" iconColor="black" backgroundColor="var(--gray-color)" onClick={()=>sigInProvider("github", "github")}/>
-            </Box>
-        </Box>
-    );
+          color: "var(--main-color)",
+          fontFamily: "var(--main-font)",
+          fontSize: "2rem",
+          fontWeight: "500",
+        }}
+      >
+        {Language ? "Registrate" : "Get Started"}
+      </Typography>
+      <TextInput
+        name="name"
+        label={Language ? "Nombre de la compañía" : "Company Name"}
+        required
+        onChange={hangleChangeFormData}
+      />
+      <TextInput
+        name="email"
+        type="email"
+        label={Language ? "Correo Electrónico" : "Email"}
+        required
+        onChange={hangleChangeFormData}
+      />
+      {passwordInputError ? (
+        <PasswordInput
+          name="password"
+          label={Language ? "Contraseña" : "Password"}
+          type="password"
+          required
+          error
+          helperText={
+            Language
+              ? "Las contraseñas no coinciden"
+              : "Passwords doesn't match"
+          }
+          onChange={hangleChangeFormData}
+        ></PasswordInput>
+      ) : (
+        <PasswordInput
+          name="password"
+          label={Language ? "Contraseña" : "Password"}
+          type="password"
+          required
+          onChange={hangleChangeFormData}
+        ></PasswordInput>
+      )}
+      {passwordInputError ? (
+        <PasswordInput
+          name="confirmPassword"
+          label={Language ? "Confirmar contraseña" : "Confirm password"}
+          type="password"
+          required
+          error
+          helperText={
+            Language
+              ? "Las contraseñas no coinciden"
+              : "Passwords doesn't match"
+          }
+          onChange={hangleChangeFormData}
+        ></PasswordInput>
+      ) : (
+        <PasswordInput
+          name="confirmPassword"
+          label={Language ? "Confirmar contraseña" : "Confirm password"}
+          type="password"
+          required
+          onChange={hangleChangeFormData}
+        ></PasswordInput>
+      )}
+      <TextInput
+        name="phone"
+        label={Language ? "Número de teléfono" : "Phone Number"}
+        onChange={hangleChangeFormData}
+      />
+      <SelectOptions
+        label={Language ? "Sectores" : "Sectors"}
+        values={
+          sectors.length > 0
+            ? sectors.map(
+                (sector) => sector.name // Aquí accedes al nombre
+              )
+            : ["There are no sectors..."]
+        }
+        onChange={(e: SelectChangeEvent) => hangleChangeFormData(e)}
+        value={companyRegister.sector}
+        name={"sector"}
+      ></SelectOptions>
+      <MainButton
+        text={Language ? "Registrarme" : "Register"}
+        onClick={handleSubmit}
+      />
+      <Box component={"span"}>
+        <Typography
+          variant="body1"
+          sx={{
+            color: "var(--secondary-color)",
+            fontFamily: "var(--main-font)",
+          }}
+        >
+          {Language ? "Ya tienes una cuenta?" : "Already have an account?"}{" "}
+          <CustomLink
+            text={Language ? "Iniciar Sesión" : "Log In"}
+            href="/login"
+          ></CustomLink>
+        </Typography>
+      </Box>
+      <Box sx={{ display: "flex", gap: "var(--padding-big)" }}>
+        <CustomIconButton
+          icon="google"
+          iconColor="#db4437"
+          backgroundColor="var(--gray-color)"
+          onClick={() => sigInProvider("google", "google")}
+        />
+        <CustomIconButton
+          icon="github"
+          iconColor="black"
+          backgroundColor="var(--gray-color)"
+          onClick={() => sigInProvider("github", "github")}
+        />
+      </Box>
+    </Box>
+  );
 };
 
 export default RegisterForm;

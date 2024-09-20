@@ -36,6 +36,13 @@
 
   /* Variable para la fuente */
   --main-font: "Ubuntu", sans-serif;
+
+  /* Breakpoints */
+  --breakpoint-xs: 0;
+  --breakpoint-sm: 576px;
+  --breakpoint-md: 794px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1200px;
 }
 
 html {

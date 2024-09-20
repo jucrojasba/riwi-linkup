@@ -11,7 +11,6 @@ export async function registerService(user: Partial<IUserRegister>):Promise< IUs
         });
         if(!response.ok)throw new Error("Error with the response");
         return await response.json();
-
     }catch(error){
         return ({message: "Error to register"})
     }

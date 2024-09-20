@@ -4,23 +4,24 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import MenuIcon from '@mui/icons-material/Menu';
 import useNavigate from "@/utilities/NavigateTo";
+import LanguageSelector from "../SwitchLanguage/SwitchLanguage";
 
+interface MobileToggleProps {
+    language: boolean;
+}
 
-
-const options = [
-    {text:'Home',href:'/'},
-    {text:'Log In',href:'/login'},
-    {text:'Register',href:'/register'},
-    {text:'Contact Us',href:'https://riwi.io/empleadores/#Contacto'},
-    {text:'About Us',href:'https://riwi.io/empleadores/'},
-];
-
-const MobileToggle:React.FC=()=>{
-
+const MobileToggle: React.FC<MobileToggleProps> = ({ language }) => {
     const navigate = useNavigate();
-
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
+
+    const options = [
+        { text: language ? 'Inicio' : 'Home', href: '/' },
+        { text: language ? 'Iniciar Sesión' : 'Log In', href: '/login' },
+        { text: language ? 'Registrarse' : 'Register', href: '/register' },
+        { text: language ? 'Contáctanos' : 'Contact Us', href: 'https://riwi.io/empleadores/#Contacto' },
+        { text: language ? 'Acerca de' : 'About Us', href: 'https://riwi.io/empleadores/' },
+    ];
 
     const handleClick = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
@@ -30,7 +31,7 @@ const MobileToggle:React.FC=()=>{
         setAnchorEl(null);
     };
 
-    return(
+    return (
         <div>
             <IconButton
                 aria-label="more"
@@ -39,37 +40,48 @@ const MobileToggle:React.FC=()=>{
                 aria-expanded={open ? 'true' : undefined}
                 aria-haspopup="true"
                 onClick={handleClick}
-                sx={{color:'var(--main-color)'}}
+                sx={{ color: 'var(--main-color)' }}
             >
                 <MenuIcon />
             </IconButton>
             <Menu
                 id="toggle-menu"
                 MenuListProps={{
-                'aria-labelledby': 'toggle-button',
+                    'aria-labelledby': 'toggle-button',
                 }}
                 anchorEl={anchorEl}
                 open={open}
                 onClose={handleClose}
-                slotProps={{
-                paper: {
-                    style: {
-                    maxHeight: 48* 4.5,
-                    width: '20ch',
-                    backgroundColor:'var(--main-color)',
-                    color:'var(--white-color)',
+                sx={{
+                    '&::-webkit-scrollbar': {
+                        width: '8px',
                     },
-                },
+                    '&::-webkit-scrollbar-thumb': {
+                        backgroundColor: 'var(--main-color)',
+                        borderRadius: '10px',
+                    },
+                    '&::-webkit-scrollbar-track': {
+                        background: 'transparent',
+                    },
+                    '& .MuiMenu-paper': {
+                        backgroundColor: 'var(--main-color)', // Color de fondo
+                        color: 'var(--white-color)', // Color del texto
+                    },
                 }}
             >
-                {options.map((option,index) => (
-                <MenuItem key={index} onClick={()=>{navigate(option.href)}}>
-                    {option.text}
-                </MenuItem>
+                {options.map((option, index) => (
+                    <MenuItem
+                        key={index}
+                        onClick={() => { navigate(option.href); }}
+                        sx={{ color: 'var(--white-color)' }} // Asegura el color del texto
+                    >
+                        {option.text}
+                    </MenuItem>
                 ))}
+                <LanguageSelector showBoxShadow={true} />
             </Menu>
-            </div>
+        </div>
     );
 };
-  
+
 export default MobileToggle;

@@ -1,7 +1,9 @@
-
-export function generateTextEmailIncorrect(subject:string, name:string, email:string):string{
-    const emailText = 
-    `
+export function generateTextEmailIncorrect(
+  subject: string,
+  name: string,
+  email: string
+): string {
+  const emailText = `
     <!DOCTYPE html>
     <html>
     <head>
@@ -18,7 +20,7 @@ export function generateTextEmailIncorrect(subject:string, name:string, email:st
     </head>
     <body>
         <div class="container">
-            <h1>Access Issue - RiwiLinkUp</h1>
+            <h1>${subject}</h1>
             <p>Dear ${name},</p>
             <p>We encountered an issue while attempting to access your account. It appears that the user already exists in our system.</p>
             <p>Your account was accessed via an external provider.</p>
@@ -50,12 +52,16 @@ export function generateTextEmailIncorrect(subject:string, name:string, email:st
  
 `;
 
-    return emailText;
+  return emailText;
 }
 
-export function generateTextEmailCorrect(subject:string, name:string, email:string, password:string):string{
-    const emailText = 
-    `
+export function generateTextEmailCorrect(
+  subject: string,
+  name: string,
+  email: string,
+  password?: string
+): string {
+  const emailText = `
     <!DOCTYPE html>
     <html>
     <head>
@@ -72,7 +78,7 @@ export function generateTextEmailCorrect(subject:string, name:string, email:stri
     </head>
     <body>
         <div class="container">
-            <h1>Successful Login to RiwiLinkUp</h1>
+            <h1>${subject}</h1>
             <p>Dear ${name},</p>
             <p>We’re pleased to inform you that your account login was successful. Below are the details of your recent login:</p>
             <p>Your account was accessed via an external provider.</p>
@@ -80,7 +86,7 @@ export function generateTextEmailCorrect(subject:string, name:string, email:stri
             <div class="section">
                 <h2>Account Details</h2>
                 <p><strong>Email:</strong> ${email}</p>
-                <p><strong>Password:</strong> ${password}</p>
+                <p><strong>Password:</strong> ${!password ? "In the momento there is not password" : password}</p>
             </div>
             
             <div class="section">
@@ -108,5 +114,5 @@ export function generateTextEmailCorrect(subject:string, name:string, email:stri
     
     `;
 
-    return emailText;
+  return emailText;
 }

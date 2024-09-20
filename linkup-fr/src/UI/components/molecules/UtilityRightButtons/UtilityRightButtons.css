@@ -6,9 +6,23 @@
     flex-direction: column;
     gap: var(--padding-min);
   }
-  
+  .media-icons-responsive {
+    position: absolute;
+    bottom: 1%;
+    right: 2.4%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--padding-min);
+  }
   .switch-mode-home{
     position: absolute;
     bottom: 50%;
     right: 5%;
+  }
+
+  .switch-mode-home-responsive{
+    position: absolute;
+    top: 15%;
+    left: 0%;
+    z-index:5;
   }

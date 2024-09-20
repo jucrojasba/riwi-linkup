@@ -11,7 +11,7 @@ interface RoundedButtonProps extends ButtonProps {
 }
 
 const RoundedButtonStyle = styled(Button)<{ bgColor?: string }>(({ bgColor }) => ({
-  backgroundColor: bgColor || "var(--main-color)", 
+  backgroundColor: bgColor || "var(--main-color)",
   borderRadius: "80px",
   textTransform: "none",
   textAlign: "start",
@@ -30,6 +30,46 @@ const RoundedButtonStyle = styled(Button)<{ bgColor?: string }>(({ bgColor }) =>
     filter: "brightness(0.90)",
     boxShadow: "none",
     textAlign: "start",
+  },
+  /* Para dispositivos extra pequeños (menos de 576px) */
+  "@media (max-width: 575px)": {
+    fontSize: "1rem",
+    width: "150px",
+    "&:hover": {
+      width: "200px",
+    },
+  },
+  /* Para dispositivos pequeños (576px a 767px) */
+  "@media (min-width: 576px) and (max-width: 767px)": {
+    fontSize: "1.2rem",
+    width: "160px",
+    "&:hover": {
+      width: "220px",
+    },
+  },
+  /* Para tablets (768px a 991px) */
+  "@media (min-width: 768px) and (max-width: 991px)": {
+    fontSize: "1.3rem",
+    width: "170px",
+    "&:hover": {
+      width: "230px",
+    },
+  },
+  /* Para laptops (992px a 1199px) */
+  "@media (min-width: 992px) and (max-width: 1199px)": {
+    fontSize: "1.4rem",
+    width: "180px",
+    "&:hover": {
+      width: "240px",
+    },
+  },
+  /* Para dispositivos extra grandes (1200px en adelante) */
+  "@media (min-width: 1200px)": {
+    fontSize: "1.5rem",
+    width: "180px",
+    "&:hover": {
+      width: "240px",
+    },
   },
 }));
 
@@ -57,4 +97,3 @@ const RoundedButton: React.FC<RoundedButtonProps> = ({
 };
 
 export default RoundedButton;
-

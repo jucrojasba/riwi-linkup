@@ -5,7 +5,7 @@ import verifyData from "@/utilities/verifyData";
 import { secondWalk } from "echarts/types/src/chart/tree/layoutHelper.js";
 
 export async function authLoginService(user: Partial<IUser>): Promise<{name: string, email: string, token: string, roleId:number} | undefined>{
-    const {email,password} = user;
+    const {email,password,} = user;
     const dataVerify = verifyData(email,password);
     if(!dataVerify){
         console.log({message: "is necesary all params"});
@@ -24,14 +24,14 @@ export async function authLoginService(user: Partial<IUser>): Promise<{name: str
     return data;
 }
 
-export async function authRegisterService(user:Partial<IUser>):Promise<{name:string,email:string,token:string} | undefined>{
+export async function authRegisterService(user:Partial<IUser>):Promise<{name:string,email:string,token:string} | {message:string} | undefined>{
     const {name,email,password, phoneNumber, sectorId} = user;
     const dataVerify = verifyData(name,email,password,phoneNumber,sectorId);
     if(!dataVerify){
         console.log({message: "is necesary all params"});
         return;
     }
-    const data = await fetchApi("api/auth/register", {
+    const data = await fetchApi("/api/auth/register", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -40,8 +40,8 @@ export async function authRegisterService(user:Partial<IUser>):Promise<{name:str
             name,
             email,
             password,
-            phoneNumber,
-            sectorId
+            phone:phoneNumber,
+            sector:sectorId
         })
     });
     return data;

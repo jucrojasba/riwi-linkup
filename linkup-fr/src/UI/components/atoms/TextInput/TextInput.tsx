@@ -54,7 +54,7 @@ const TextInput: React.FC<TextInputProps> = ({
         <>
             {DarkMode?
                 <TextInputStyle 
-                    id='outlined-error-helper-text' 
+                    id={generatedId}
                     type={type} 
                     name={name} 
                     defaultValue={defaultValue} 
@@ -64,10 +64,12 @@ const TextInput: React.FC<TextInputProps> = ({
                     helperText={helperText} 
                     size='small' 
                     onChange={onChange} 
-                    sx={{ width: '100%','& .MuiInputBase-input': {color:'var(--white-color)'}}} 
+                    sx={{ width: { xs: '100%', sm: '300px', md: '400px' }, // Tamaño según el breakpoint
+                    '& .MuiInputBase-input': { color: 'var(--white-color)' }
+                    }}
                 />
                 :<TextInputStyle 
-                    id='outlined-error-helper-text' 
+                    id={generatedId}
                     type={type} 
                     name={name} 
                     defaultValue={defaultValue} 
@@ -77,7 +79,10 @@ const TextInput: React.FC<TextInputProps> = ({
                     helperText={helperText} 
                     size='small' 
                     onChange={onChange} 
-                    sx={{ width: '100%'}} 
+                    sx={{
+                        width: { xs: '100%', sm: '300px', md: '400px' }, // Tamaño según el breakpoint
+                        
+                    }} 
                 />
             }
             

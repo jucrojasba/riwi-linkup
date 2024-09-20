@@ -1,7 +1,11 @@
-import { ISector, ISectors } from "@/UI/interfaces/SectorInterface";
+import { ISector } from "@/UI/interfaces/ISectorInterface";
 import fetchApi from "@/utilities/fetchApi";
 
-export default async function getSectorsService():Promise<ISectors>{
-    const sectors = await fetchApi("api/sectors");
-    return sectors;
+
+export async function getSectorService(): Promise<
+  { data: ISector[] } | null | undefined | { message: string }
+> {
+  const data = await fetchApi("/api/sectors");
+  return data;
 }
+ 

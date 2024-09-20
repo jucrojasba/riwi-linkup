@@ -6,8 +6,11 @@ import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import TranslateIcon from "@mui/icons-material/Translate";
 import { useLanguage } from "@/global-states/language-mode";
 
+interface LanguageSelectorProps {
+  showBoxShadow?: boolean;
+}
 
-const LanguageSelector = () => {
+const LanguageSelector: React.FC<LanguageSelectorProps> = ({ showBoxShadow = false }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const { language, setLanguage } = useLanguage();
 
@@ -38,6 +41,15 @@ const LanguageSelector = () => {
           color: "var(--white-color)",
           padding: "6px 16px",
           borderRadius: "var(--border-radius-min)",
+          boxShadow: showBoxShadow ? "0px 4px 6px rgba(0, 0, 0, 0.1)" : "none",
+          transition: "background-color 0.3s ease",
+        }}
+        sx={{
+          "&:hover": {
+            backgroundColor: "var(--main-color)", // Igualar color de fondo
+            color: "var(--white-color)", // Color del texto igual al fondo
+            boxShadow: showBoxShadow ? "none" : "none",
+          },
         }}
       >
         {language ? "Español" : "English"}

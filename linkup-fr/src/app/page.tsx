@@ -18,13 +18,12 @@ export default function HomeView() {
   const navigate = useNavigate();
   const DarkMode = useDarkMode((state) => state.DarkMode);
   const language =useLanguage((state)=>state.language);
-  console.log(DarkMode ? "home-no-auth-wrapper-dark-mode" : "home-no-auth-wrapper");
-
 
   return (
     <Route>
         <main>
-        <AuthLayout isDarkMode={DarkMode} />
+        <AuthLayout isDarkMode={DarkMode} language={language}/>
+        <UtilityRightButtons isDarkMode={DarkMode} responsive={true}/>
         <div className={`${DarkMode ? "home-no-auth-wrapper-dark-mode" : "home-no-auth-wrapper"}`}>
           <div className="home-info">
             <TitleHome

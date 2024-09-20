@@ -1,6 +1,6 @@
 interface IUserTextProps {
     title:string,
-    paragraph:string,
+    paragraph:string | undefined,
     className: string
 }
 
