@@ -10,7 +10,7 @@
   padding-right: 5%;
 }
 
-.home-no-auth-wrapper-dark-mode{
+.home-no-auth-wrapper-dark-mode {
   background-color: var(--paragraph-color);
   display: flex;
   min-width: 100vw;
@@ -28,7 +28,8 @@
   flex-direction: column;
   width: 45%;
 }
-.coder-gretting-wrapper{
+
+.coder-gretting-wrapper {
   width: 500px;
   height: 500px;
   position: relative;
@@ -36,6 +37,7 @@
   justify-content: center;
   align-items: end;
 }
+
 .coder-gretting-container {
   background-color: var(--main-color);
   border-radius: 50%;
@@ -44,7 +46,7 @@
   position: absolute;
 }
 
-.coder-gretting-container>img {
+.coder-gretting-container > img {
   position: absolute;
   bottom: -2%;
   right: -13%;
@@ -54,9 +56,10 @@
   position: relative;
   width: 300px;
   height: 300px;
+  z-index: 4;
 }
 
-.gretting-image>img {
+.gretting-image > img {
   position: absolute;
   bottom: 350px;
   left: 430px;
@@ -79,3 +82,160 @@
   }
 }
 
+/* Para dispositivos de 768px hacia abajo */
+@media (max-width: 768px) {
+  .home-no-auth-wrapper {
+    display: flex;
+    min-width: 100vw;
+    min-height: 100vh;
+    max-width: 1400px;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    transition: background-color 0.5s ease;
+    padding-right: 5%;
+  }
+  
+  .home-no-auth-wrapper-dark-mode {
+    background-color: var(--paragraph-color);
+    display: flex;
+    min-width: 100vw;
+    min-height: 100vh;
+    max-width: 1400px;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding-right: 5%;
+    transition: background-color 0.5s ease;
+  }
+  
+  .home-info {
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+    margin-top: 500px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .coder-gretting-wrapper {
+    width: 400px;
+    height: 400px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    position: absolute;
+    top:12%;
+
+  }
+  
+  .coder-gretting-container {
+    background-color: var(--main-color);
+    border-radius: 50%;
+    width: 310px;
+    height: 310px;
+    position: absolute;
+  }
+  
+  .coder-gretting-container > img {
+    position: absolute;
+    bottom: -2%;
+    right: -15%;
+    width: 390px;
+    height: 400px;
+  }
+  
+  .gretting-image {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    cursor: pointer;
+  }
+  
+  .gretting-image > img {
+    position: absolute;
+    bottom: 280px;
+    left: 160px;
+    font-size: 4rem;
+    color: var(--main-color);
+    transform: scaleX(-1);
+    animation: bounceAndVibrate 2s infinite ease-in-out;
+    cursor: pointer;
+    width: 80px;
+    height: 80px;
+  }
+}
+
+/* Para tablets (768px a 991px) */
+@media (min-width: 768px) and (max-width: 991px) {
+  .home-no-auth-wrapper {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-right: 0; /* Opcional */
+  }
+
+  .home-info {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px; /* Espacio entre el contenido y la imagen */
+  }
+
+  .coder-gretting-wrapper {
+    width: 100%;
+    height: auto; /* Permite que el contenedor ajuste su altura automáticamente */
+  }
+
+  .gretting-image > img {
+    position: relative; /* Cambia la posición para que se adapte mejor */
+    bottom: 0;
+    left: 0;
+    font-size: 5rem; /* Ajusta el tamaño si es necesario */
+  }
+}
+
+/* Para laptops (992px a 1199px) */
+@media (min-width: 992px) and (max-width: 1199px) {
+  .home-no-auth-wrapper {
+    flex-direction: row; /* Mantiene la disposición original */
+  }
+
+  .coder-gretting-wrapper {
+    width: 50%;
+    height: 500px;
+  }
+
+  .home-info {
+    width: 45%;
+  }
+
+  .gretting-image > img {
+    bottom: 350px;
+    left: 430px;
+    font-size: 10rem; /* Tamaño original */
+  }
+}
+
+/* Para dispositivos extra grandes (1200px en adelante) */
+@media (min-width: 1200px) {
+  .home-no-auth-wrapper {
+    flex-direction: row; /* Mantiene la disposición original */
+  }
+
+  .coder-gretting-wrapper {
+    width: 50%;
+    height: 500px;
+  }
+
+  .home-info {
+    width: 45%;
+  }
+
+  .gretting-image > img {
+    bottom: 350px;
+    left: 430px;
+    font-size: 10rem; /* Tamaño original */
+  }
+}

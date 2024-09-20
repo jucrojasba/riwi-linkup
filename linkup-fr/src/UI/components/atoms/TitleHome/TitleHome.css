@@ -31,3 +31,56 @@
     font-weight: 400;
     font-size: 2rem;
 }
+/* Para dispositivos extra pequeños (menos de 576px) */
+@media (max-width: 575px) {
+    .title-home, .title-home-dark-mode {
+        font-size: 2rem;
+    }
+    .home-subtitle, .home-subtitle-dark-mode {
+        font-size: 1.25rem;
+    }
+}
+
+/* Para dispositivos pequeños (576px a 767px) */
+@media (min-width: 576px) and (max-width: 767px) {
+    .title-home, .title-home-dark-mode {
+        font-size: 2.5rem;
+    }
+    .home-subtitle, .home-subtitle-dark-mode {
+        font-size: 1.5rem;
+    }
+}
+
+/* Para tablets (768px a 991px) */
+@media (min-width: 768px) and (max-width: 991px) {
+    .title-container {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    .title-home, .title-home-dark-mode {
+        font-size: 3.5rem;
+    }
+    .home-subtitle, .home-subtitle-dark-mode {
+        font-size: 1.75rem;
+    }
+}
+
+/* Para laptops (992px a 1199px) */
+@media (min-width: 992px) and (max-width: 1199px) {
+    .title-home, .title-home-dark-mode {
+        font-size: 4rem;
+    }
+    .home-subtitle, .home-subtitle-dark-mode {
+        font-size: 2rem;
+    }
+}
+
+/* Para dispositivos extra grandes (1200px en adelante) */
+@media (min-width: 1200px) {
+    .title-home, .title-home-dark-mode {
+        font-size: 4.5rem;
+    }
+    .home-subtitle, .home-subtitle-dark-mode {
+        font-size: 2.25rem;
+    }
+}
