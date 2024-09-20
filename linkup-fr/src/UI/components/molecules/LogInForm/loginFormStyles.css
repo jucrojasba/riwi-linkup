@@ -27,3 +27,21 @@
     background: var(--paragraph-color);
     padding:0 10px;
 }
+
+/* loginStyles.css */
+
+/* Oculta la imagen cuando el ancho de la pantalla es menor a 500px */
+@media (max-width: 500px) {
+    .section-image {
+        display: none; /* Oculta la sección que contiene la imagen */
+    }
+    
+    .mainLogin-section {
+        flex-direction: column; /* Asegura que el formulario se vea bien */
+        align-items: center;
+    }
+
+    .LogInForm {
+        width: 100%; /* Asegura que el formulario ocupe todo el ancho posible */
+    }
+}
