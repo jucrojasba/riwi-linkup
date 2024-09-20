@@ -11,6 +11,8 @@ import { getClansService, getLanguagesService, getSoftSkillsService, getTechnica
 import { getCodersService } from "@/services/coderService";
 import { useTechSkill } from "@/global-states/techSkill";
 import { useLanguage } from "@/global-states/language-mode";
+import { useDataBackLoad } from "@/global-states/dataBack";
+import { getGendersService } from "@/services/genderService";
 
 interface IFilterProps{
   render?: boolean;
@@ -27,6 +29,7 @@ export default function Filter({setRender, render}:IFilterProps): ReactNode {
   const {setCodersFilter} = useCodersFilter();
   const {setTechSkill} = useTechSkill();
   const {language} = useLanguage();
+  const {setDataBackLoad} = useDataBackLoad();
 
   useEffect(() => {
     const fetchFiltersData = async () => {
@@ -35,13 +38,15 @@ export default function Filter({setRender, render}:IFilterProps): ReactNode {
         const techSkills = await getTechnicalSkillsService();
         const softSkills = await getSoftSkillsService();
         const clans = await getClansService();
-        if (languages && techSkills && softSkills && clans) {
+        const genders = await getGendersService();
+        if (languages && techSkills && softSkills && clans && genders) {
           setCheckedStates({
             languages,
             techSkills,
             softSkills,
             clans,
           });
+          setDataBackLoad({genders, languages,clans, softSkills,techSkills}); // Save data in global state of the coders
         }
       } catch (error) {
         console.error("Error loading filters", error);
@@ -49,7 +54,7 @@ export default function Filter({setRender, render}:IFilterProps): ReactNode {
     };
 
     fetchFiltersData();
-  }, []);
+  }, [setCheckedStates,setDataBackLoad]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = event.target;

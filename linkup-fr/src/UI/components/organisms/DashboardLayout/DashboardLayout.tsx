@@ -1,5 +1,5 @@
 import "./dashboardLayoutStyles.css";
-import React, { ReactElement, ReactNode, useState } from "react";
+import React, { ReactElement, useState } from "react";
 import { Footer, Header } from "../../molecules";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { usePathname } from "next/navigation";
@@ -26,6 +26,7 @@ export default function DashboardLayout({
     setExpand(!expand);
     console.log("do something");
   };
+
 
   return (
     <div className={isDarkMode?'content-layout-dark-mode':"content-layout"}>

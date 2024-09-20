@@ -19,7 +19,7 @@ export default function InputFilter({
   className
 }: InputFilterProps): React.ReactNode {
   return (
-    <div>
+    <div className="content-filter">
       <label
         htmlFor={name}
         className={checked ? "checked-filter" : `unchecked_${className}`} // Cambia según el estado
