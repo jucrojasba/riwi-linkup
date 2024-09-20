@@ -23,6 +23,7 @@ export default function HomeView() {
     <Route>
         <main>
         <AuthLayout isDarkMode={DarkMode} language={language}/>
+        <UtilityRightButtons isDarkMode={DarkMode} responsive={true}/>
         <div className={`${DarkMode ? "home-no-auth-wrapper-dark-mode" : "home-no-auth-wrapper"}`}>
           <div className="home-info">
             <TitleHome
