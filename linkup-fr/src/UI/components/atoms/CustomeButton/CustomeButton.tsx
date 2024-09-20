@@ -10,10 +10,12 @@ interface CustomButtonProps extends ButtonProps {
   clickedText: any;
   initialBgColor: string;
   clickedBgColor: string;
-  secondOnClick?: (event: React.MouseEvent<HTMLButtonElement>) => void; // Segunda lógica para el nuevo estado
+  secondOnClick?: (event: React.MouseEvent<HTMLButtonElement>) => void; 
 }
 
-const CustomButtonStyle = styled(Button)<{ bgColor?: string }>(({ bgColor }) => ({
+const CustomButtonStyle = styled(Button, {
+  shouldForwardProp: (prop) => prop !== 'bgColor', // Evita que bgColor se pase al DOM
+})<{ bgColor?: string }>(({ bgColor }) => ({
   backgroundColor: bgColor || "var(--main-color)", 
   borderRadius: "80px",
   textTransform: "none",
@@ -27,7 +29,7 @@ const CustomButtonStyle = styled(Button)<{ bgColor?: string }>(({ bgColor }) => 
   padding: "0.1rem 0.6rem",
   gap: "0.5rem",
   boxShadow: "none",
-  color:'var(--white-color)',
+  color: 'var(--white-color)',
   "&:hover": {
     filter: "brightness(0.95)",
     boxShadow: "none",

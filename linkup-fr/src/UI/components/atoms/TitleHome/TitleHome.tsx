@@ -13,10 +13,10 @@ export default function TitleHome({
 }: ITitleHomeProps): React.ReactNode {
   return (
     <div className="title-container">
-      <h1 className={`title-home ${isDarkMode ? 'dark-mode' : ''}`}>
+      <h1 className={`${isDarkMode ? 'title-home-dark-mode' : 'title-home'}`}>
         {title}
       </h1>
-      <h3 className={`home-subtitle ${isDarkMode ? 'dark-mode' : ''}`}>
+      <h3 className={`${isDarkMode ? 'home-subtitle-dark-mode' : 'home-subtitle'}`}>
         {subtitle}
       </h3>
     </div>

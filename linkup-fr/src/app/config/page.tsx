@@ -18,7 +18,7 @@ export default function DashboardView(){
     return (
         <Route>
             <main>
-                <DashboardLayout section={<SectionProfile isDarkMode={DarkMode} language={language}/>} language={language} titleView={titleView} subtitle={subtitle} path="/config" isDarkMode={DarkMode}/>
+                <DashboardLayout section={<SectionProfile isDarkMode={DarkMode} language={language}/>} language={language} titleView={titleView} subtitle={subtitle} isDarkMode={DarkMode}/>
             </main>
         </Route>
     );

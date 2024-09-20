@@ -37,5 +37,7 @@ export {
     TitleHome,
     TitleMain,
     ButtonCoder,
-    EditField
+    SelectOptions,
+    EditField,
+
 }
