@@ -1,5 +1,4 @@
 'use client'
-
 import { TextInputProps } from '@/UI/interfaces/Input';
 import { useDarkMode } from '@/global-states/dark-mode';
 import TextField from '@mui/material/TextField';
@@ -52,22 +51,42 @@ const TextInput: React.FC<TextInputProps> = ({
     const generatedId = useId(); // Generar un ID único si no se pasa uno
 
     return (
-        <TextInputStyle 
-            id={generatedId} // Usar el ID pasado como prop o el generado
-            type={type} 
-            name={name} 
-            defaultValue={defaultValue} 
-            label={label} 
-            error={error} 
-            required={required} 
-            helperText={helperText} 
-            size='small' 
-            onChange={onChange} 
-            sx={{
-                width: '250px',
-                '& .MuiInputBase-input': DarkMode ? { color: 'var(--white-color)' } : undefined,
-            }} 
-        />
+        <>
+            {DarkMode?
+                <TextInputStyle 
+                    id={generatedId}
+                    type={type} 
+                    name={name} 
+                    defaultValue={defaultValue} 
+                    label={label} 
+                    error={error} 
+                    required={required} 
+                    helperText={helperText} 
+                    size='small' 
+                    onChange={onChange} 
+                    sx={{ width: { xs: '100%', sm: '300px', md: '400px' }, // Tamaño según el breakpoint
+                    '& .MuiInputBase-input': { color: 'var(--white-color)' }
+                    }}
+                />
+                :<TextInputStyle 
+                    id={generatedId}
+                    type={type} 
+                    name={name} 
+                    defaultValue={defaultValue} 
+                    label={label} 
+                    error={error} 
+                    required={required} 
+                    helperText={helperText} 
+                    size='small' 
+                    onChange={onChange} 
+                    sx={{
+                        width: { xs: '100%', sm: '300px', md: '400px' }, // Tamaño según el breakpoint
+                        
+                    }} 
+                />
+            }
+            
+        </>
     );
 };
 

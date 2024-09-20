@@ -7,9 +7,10 @@ import { deleteCoderService } from "@/services/coderService";
 import { CircularLoader } from "../../atoms/loaders/Loaders";
 import { useRouter } from "next/navigation";
 import { confirmDeleteAlert, inputAlert } from "../Alert/Alert";
-import { useTechSkill } from "@/global-states/techSkill";
 import { ICoder, ICoders } from "@/UI/interfaces/ICoderInterface";
 import { capitalizeSentece } from "@/utilities/CapitalizeSentence";
+import useNavigate from "@/utilities/NavigateTo";
+import { useLanguage } from "@/global-states/language-mode";
 
 interface ICardProps {
   id_coder?: number;
@@ -35,13 +36,11 @@ export default function Card({
   setCoders
 }: ICardProps): React.ReactNode {
   const router = useRouter();
-  const handleClickUpdate = async (e: React.MouseEvent) => {};
-  const {techSkill} = useTechSkill();
   const [loading,setLoading] = useState<boolean>(false);
-
-
+  const navigate = useNavigate();
+  const language =useLanguage((state)=>state.language)
   const handleClickDelete = async (id_coder:number): Promise<void> => {
-    const isConfirm: boolean = await confirmDeleteAlert();
+    const isConfirm: boolean = await confirmDeleteAlert(`${language?'¿Deseas eliminar al desarrollador?':'Do you want to delete the developer?'}`, language);
     setLoading(true);
     if(!isConfirm){
       setLoading(false);
@@ -56,6 +55,12 @@ export default function Card({
       coders: codersFilter,
     })
   };
+
+  
+  const handleUpdate = (coder_id:number) =>{
+    setLoading(true);
+    navigate(`admin/updateCoder?coder=${coder_id}`)
+  }
 
   const handleClickMore = (id_coder:number | undefined) => {
     console.log(id_coder)
@@ -75,7 +80,7 @@ export default function Card({
             <EditIcon
               data-id={id_coder}
               className="edit-icon"
-              onClick={(e) => handleClickUpdate(e)}
+              onClick={() => handleUpdate(id_coder!)}
             />
             <DeleteIcon
               data-id={id_coder}

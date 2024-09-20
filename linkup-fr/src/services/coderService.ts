@@ -1,3 +1,4 @@
+import { ICoderComplet } from "@/app/api/interfaces/ICoderInterface";
 import { ICoder, ICoderBack } from "@/UI/interfaces/ICoderInterface";
 import { IUser } from "@/UI/interfaces/IUserInterface";
 import fetchApi from "@/utilities/fetchApi";
@@ -52,6 +53,16 @@ export async function getCodersBackend(): Promise<number | undefined> {
 
   export async function getCoderByIdService(id:number): Promise< ICoderBack |{message:string}>{
     const coder = await fetchApi(`/api/coders/${id}`);
+    if(!coder)return coder;
+    return coder.data;
+  }
+
+  export async function createCoderService(coderCreate: ICoderComplet):Promise<ICoder | {message: string}>{
+    const coder = await fetchApi(`/api/coders/`,{
+      method: "POST",
+      headers: { "Content-Type": "application/json"},
+      body: JSON.stringify(coderCreate)
+    });
     if(!coder)return coder;
     return coder.data;
   }
