@@ -6,6 +6,7 @@ import { useDarkMode } from "@/global-states/dark-mode";
 import Image from "next/image";
 import Route from "@/routes/route";
 import { useLanguage } from "@/global-states/language-mode";
+import { RiwiLogo } from "@/UI/components/atoms";
 
 
 
@@ -17,6 +18,7 @@ export default function LoginView(): JSX.Element {
         <Route>
             <main className="mainLogin">
             <UtilityRightButtons responsive={true} isDarkMode={DarkMode} />
+            <RiwiLogo isDarkMode={DarkMode} responsive={true}/>
             <AuthLayout isDarkMode={DarkMode} language={language}/>
                 <section className={DarkMode ? "dark-mode" : "mainLogin-section"}>
                     <div className="section-image">

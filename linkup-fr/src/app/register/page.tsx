@@ -1,6 +1,7 @@
 "use client";
+import { RiwiLogo } from "@/UI/components/atoms";
 import "./registerStyles.css";
-import { NavbarHome, RegisterForm } from "@/UI/components/molecules";
+import { NavbarHome, RegisterForm, UtilityRightButtons } from "@/UI/components/molecules";
 import { AuthLayout } from "@/UI/components/organisms";
 import { useDarkMode } from "@/global-states/dark-mode";
 import { useLanguage } from "@/global-states/language-mode";
@@ -14,6 +15,8 @@ export default function RegisterView(): JSX.Element{
     return(
         <Route>
             <main className="mainRegister">
+            <UtilityRightButtons isDarkMode={DarkMode} responsive={true}/>
+            <RiwiLogo isDarkMode={DarkMode} responsive={true}/>
             <AuthLayout isDarkMode={DarkMode} language={language}/>
                 <section className={DarkMode ? "dark-mode" : "mainRegister-section"}>
                     <div className="section-image">
