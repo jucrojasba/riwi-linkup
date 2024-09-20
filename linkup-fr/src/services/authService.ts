@@ -2,6 +2,7 @@ import { IUserProviderRegister, IUserProviderLogin } from "@/app/api/interfaces/
 import { IUser } from "@/UI/interfaces/IUserInterface";
 import fetchApi from "@/utilities/fetchApi";
 import verifyData from "@/utilities/verifyData";
+import { secondWalk } from "echarts/types/src/chart/tree/layoutHelper.js";
 
 export async function authLoginService(user: Partial<IUser>): Promise<{name: string, email: string, token: string, roleId:number} | undefined>{
     const {email,password} = user;
@@ -24,21 +25,23 @@ export async function authLoginService(user: Partial<IUser>): Promise<{name: str
 }
 
 export async function authRegisterService(user:Partial<IUser>):Promise<{name:string,email:string,token:string} | undefined>{
-    const {name,email,password, phone,sector} = user;
-    const dataVerify = verifyData(name,email,password,phone,sector);
+    const {name,email,password, phoneNumber, sectorId} = user;
+    const dataVerify = verifyData(name,email,password,phoneNumber,sectorId);
     if(!dataVerify){
-        console.log("ver",name,email,password, phone,sector)
         console.log({message: "is necesary all params"});
         return;
     }
-
-    const data = await fetchApi("https://linkupv1-production.up.railway.app/api/v1/Account/register", {
+    const data = await fetchApi("api/auth/register", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            
+            name,
+            email,
+            password,
+            phoneNumber,
+            sectorId
         })
     });
     return data;
