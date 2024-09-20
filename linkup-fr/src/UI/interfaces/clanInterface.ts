@@ -8,3 +8,12 @@ export interface IClan{
 export interface IClans{
     clans:IClan[];
 }
+
+export interface IClanShort{
+    id:number,
+    name:string
+}
+
+export interface IClansShort{
+    clans: IClanShort[]
+}

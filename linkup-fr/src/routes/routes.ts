@@ -9,6 +9,6 @@ export const routes = {
         {path: "/admin"},
         {path:"/admin/coder"},
         {path: "/config"},
-        {path: "/admin/update/coder"}
+        {path: "/admin/updateCoder"}
     ]
 }

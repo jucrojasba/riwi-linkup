@@ -1,4 +1,4 @@
-    import { ICoder } from "../interfaces/ICoderInterface";
+    import { ICoder, ICoderComplet } from "../interfaces/ICoderInterface";
 
     export async function getCoderById(id:number):Promise<ICoder | {message: string}>{
         try{
@@ -19,5 +19,21 @@
             await response.json();
         }catch(error){
             console.log({message: "Error delete coder"})
+        }
+    }
+
+    export async function createCoder(coder:ICoderComplet): Promise<ICoder | {message: string}>{
+        try{
+            const response = await fetch(`https://linkupv1-production.up.railway.app/api/v2/CodersControllerV2`,{
+                method:"POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(coder)
+            });
+            if(!response.ok)throw new Error(`Error with the response`);
+            return await response.json();
+        }catch(error){
+            return ({message: `Error to createCoder ${error}`})
         }
     }

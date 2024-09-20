@@ -3,7 +3,7 @@
 import { useAuthUser } from "@/global-states/authUser";
 import HeaderProfile from "../../molecules/ProfileHeader/ProfileHeader";
 import MainProfile from "../../molecules/ProfileMain/ProfileMain";
-import { getUserService } from '@/services/userService';
+import { getUserServiceByEmail } from '@/services/userService';
 import './SectionProfile.css'
 import { useEffect, useState } from "react";
 import { LinearLoader } from '../../atoms/loaders/Loaders';
@@ -24,7 +24,7 @@ const SectionProfile: React.FC<ISectionProfile> = ({ isDarkMode, language }) => 
         const fetchUserData = async () => {
             try {
                 setLoadingInfo(true);
-                const data = await getUserService(`${authState.email ? authState.email : "undefined"}`);
+                const data = await getUserServiceByEmail(`${authState.email ? authState.email : "undefined"}`);
                 if (data && "message" in data) {
                 } else {
                     setUser(data);

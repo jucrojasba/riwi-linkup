@@ -8,6 +8,7 @@
   --paragraph-color: #0D1117;
   --background-color-dark-light: #131922;
   --paragraph-color-gray: #707070;
+  --white-color-light: #f5f5f5;
   --secondary-color: #181e4b;
   --white-color: #ffffff;
   --gray-color: #F8F8F8;
@@ -39,7 +40,7 @@
   /* Breakpoints */
   --breakpoint-xs: 0;
   --breakpoint-sm: 576px;
-  --breakpoint-md: 768px;
+  --breakpoint-md: 794px;
   --breakpoint-lg: 992px;
   --breakpoint-xl: 1200px;
 }

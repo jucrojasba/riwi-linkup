@@ -27,9 +27,9 @@ export default function Sidebar({ expand, language }: ISidebarProps): React.Reac
 
   const navDataIcons = [
     { name: language? 'Tablero':"Dashboard", src: SpaceDashboardIcon, href: "/dashboard" },
-    { name: language? 'Desarrolladores':"Coders", src: ComputerIcon, href: "/coders" },
+    { name: language? 'Desarrolladores':"Coders", src: ComputerIcon, href: "/admin" },
     { name: language? 'Configuración':"Config", src: SettingsIcon, href: "/config" },
-    { name: language? 'Mi Lista':"My List", src: ChecklistRtlIcon, href: "/login" },
+    { name: language? 'Mi Lista':"My List", src: ChecklistRtlIcon, href: "/myList" },
   ];
 
   const handleOpenMenu = () => {

@@ -9,6 +9,7 @@ interface MainButtonProps extends ButtonProps {
   bgColor?: string;
 }
 
+
 const MainButtonStyle = styled(Button)<{ customBgColor?: string }>(({ customBgColor }) => ({
   backgroundColor: customBgColor || 'var(--main-color)', 
   borderRadius: 'var(--border-radius-min)',
