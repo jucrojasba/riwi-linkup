@@ -64,19 +64,19 @@
 /* Para laptops (992px a 1199px) */
 @media (min-width: 992px) and (max-width: 1199px) {
     .title-home, .title-home-dark-mode {
-        font-size: 4rem;
+        font-size: 3rem;
     }
     .home-subtitle, .home-subtitle-dark-mode {
-        font-size: 2rem;
+        font-size: 1.5rem;
     }
 }
 
 /* Para dispositivos extra grandes (1200px en adelante) */
 @media (min-width: 1200px) {
     .title-home, .title-home-dark-mode {
-        font-size: 4.5rem;
+        font-size: 4rem;
     }
     .home-subtitle, .home-subtitle-dark-mode {
-        font-size: 2.25rem;
+        font-size: 2rem;
     }
 }

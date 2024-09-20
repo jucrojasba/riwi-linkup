@@ -24,6 +24,7 @@ const SwitchModeStyle = styled(Button, {
     alignItems: 'center',
     justifyContent: 'center',
     transition: 'all 0.5s ease',
+    zIndex:'4',
 }));
 
 const IconStyle = styled('div', {
@@ -34,6 +35,7 @@ const IconStyle = styled('div', {
     justifyContent: 'center',
     transition: 'transform 0.5s ease',
     transform: rotate ? 'rotate(90deg)' : 'rotate(0deg)',
+    zIndex:'4',
 }));
 
 const SwitchMode: React.FC<SwitchModeProps> = ({ type = 'button', horizontalMode = false }) => {
