@@ -1,6 +1,6 @@
 'use client'
 import "./loginStyles.css";
-import { LogInForm, NavbarHome } from "@/UI/components/molecules";
+import { LogInForm, NavbarHome, UtilityRightButtons } from "@/UI/components/molecules";
 import { AuthLayout } from "@/UI/components/organisms";
 import { useDarkMode } from "@/global-states/dark-mode";
 import Image from "next/image";
@@ -16,6 +16,7 @@ export default function LoginView(): JSX.Element {
     return (
         <Route>
             <main className="mainLogin">
+            <UtilityRightButtons responsive={true} isDarkMode={DarkMode} />
             <AuthLayout isDarkMode={DarkMode} language={language}/>
                 <section className={DarkMode ? "dark-mode" : "mainLogin-section"}>
                     <div className="section-image">

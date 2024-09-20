@@ -66,8 +66,7 @@ const TextInput: React.FC<TextInputProps> = ({
                     size='small' 
                     onChange={onChange} 
                     sx={{ width: { xs: '100%', sm: '300px', md: '400px' }, // Tamaño según el breakpoint
-                    '& .MuiInputBase-input': { color: 'var(--white-color)' },
-                    '@media (max-width: 480px)': { display: 'none' }, // Oculta en pantallas menores a 480px
+                    '& .MuiInputBase-input': { color: 'var(--white-color)' }
                     }}
                 />
                 :<TextInputStyle 
@@ -83,7 +82,7 @@ const TextInput: React.FC<TextInputProps> = ({
                     onChange={onChange} 
                     sx={{
                         width: { xs: '100%', sm: '300px', md: '400px' }, // Tamaño según el breakpoint
-                        '@media (max-width: 480px)': { display: 'none' }, // Oculta en pantallas menores a 480px
+                        
                     }} 
                 />
             }
