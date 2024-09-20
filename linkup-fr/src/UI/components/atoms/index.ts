@@ -36,7 +36,7 @@ export {
     TextInput,
     TitleHome,
     TitleMain,
-    ButtonCoder
+    ButtonCoder,
     SelectOptions,
     EditField
 }

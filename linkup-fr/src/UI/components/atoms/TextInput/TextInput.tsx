@@ -65,7 +65,10 @@ const TextInput: React.FC<TextInputProps> = ({
                     helperText={helperText} 
                     size='small' 
                     onChange={onChange} 
-                    sx={{ width: '250px','& .MuiInputBase-input': {color:'var(--white-color)'}}} 
+                    sx={{ width: { xs: '100%', sm: '300px', md: '400px' }, // Tamaño según el breakpoint
+                    '& .MuiInputBase-input': { color: 'var(--white-color)' },
+                    '@media (max-width: 480px)': { display: 'none' }, // Oculta en pantallas menores a 480px
+                    }}
                 />
                 :<TextInputStyle 
                     id='outlined-error-helper-text' 
@@ -78,7 +81,10 @@ const TextInput: React.FC<TextInputProps> = ({
                     helperText={helperText} 
                     size='small' 
                     onChange={onChange} 
-                    sx={{ width: '250px'}} 
+                    sx={{
+                        width: { xs: '100%', sm: '300px', md: '400px' }, // Tamaño según el breakpoint
+                        '@media (max-width: 480px)': { display: 'none' }, // Oculta en pantallas menores a 480px
+                    }} 
                 />
             }
             
