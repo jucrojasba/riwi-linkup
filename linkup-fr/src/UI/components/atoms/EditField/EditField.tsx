@@ -13,18 +13,18 @@ interface EditFieldProps extends TextInputProps {
     defaultValue: string;
 }
 
-const EditFieldStyle = styled(TextField)<{ edit: boolean | undefined }>(({ theme, edit }) => ({
+const EditFieldStyle = styled(TextField)<{ edit?: string }>(({ theme, edit }) => ({
     width: '100%',
     textTransform: 'none',
     fontFamily: 'var(--main-font)',
     '& .MuiOutlinedInput-root': {
         '& fieldset': {
-            borderColor: edit ? 'var(--main-color)' : 'transparent',
-            borderWidth: edit ? '2px' : '1px', 
+            borderColor: edit === 'true' ? 'var(--main-color)' : 'transparent',
+            borderWidth: edit === 'true' ? '2px' : '1px', 
         },
         '&.Mui-focused fieldset': {
-            borderColor: edit ? 'var(--main-color)' : 'transparent',
-            borderWidth: edit ? '2px' : '1px', 
+            borderColor: edit === 'true' ? 'var(--main-color)' : 'transparent',
+            borderWidth: edit === 'true' ? '2px' : '1px', 
         },
     },
     '& .MuiInputLabel-outlined': {
@@ -100,7 +100,7 @@ const EditField: React.FC<EditFieldProps> = ({
 
     return (
         <EditFieldStyle
-            edit={edit ? true : undefined}  // Corregido para evitar pasar booleanos al DOM
+            edit={edit ? 'true' : 'false'}  // Pasar como cadena
             id='outlined-error-helper-text'
             type={type}
             name={name}

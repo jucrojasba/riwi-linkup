@@ -1,7 +1,7 @@
 import { ChangeEvent } from "react";
 
 export interface TextInputProps {
-  type?: 'text' | 'number' | 'email' | 'password'| 'url' | 'tel';
+  type?: 'text' | 'number' | 'email' | 'password'| 'url' | 'tel' | 'date';
   name:string;
   defaultValue?: string | number;
   error?:boolean; //Propiedad de MUI

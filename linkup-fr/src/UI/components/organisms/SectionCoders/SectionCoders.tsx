@@ -6,16 +6,28 @@ import calculateAge from "@/utilities/calculateAge";
 import { ICoder, ICoders } from "@/UI/interfaces/ICoderInterface";
 import { useEffect, useState } from "react";
 import { getCodersService } from "@/services/coderService";
-import { Card } from "../../molecules";
+import { Card, Filter } from "../../molecules";
 import { CircularLoader } from "../../atoms/loaders/Loaders";
 import { useCodersFilter } from "@/global-states/coder";
+import { useTechSkill } from "@/global-states/techSkill";
+import { TitleMain } from "../../atoms";
+import {ButtonMore} from "../../atoms";
+import { Modal } from "../Modal/Modal";
 
 interface ISectionCodersProps {
   render: boolean;
+  setRender: (render: boolean) => void;
+  isDarkMode: boolean;
 }
 
-export default function SectionCoders({render}: ISectionCodersProps): React.ReactElement {
+export default function SectionCoders({render,setRender,isDarkMode}: ISectionCodersProps): React.ReactElement {
   const [loadingRequest, setLoadingRequest] = useState<boolean>(true); // Set initial state to true
+  const codersFilter = useCodersFilter((state) => state.CodersFilter);
+  const [currentPage, setCurrentPage] = useState(0);
+  const limitItems = 6;
+  const {techSkill} = useTechSkill();
+  const [showModal, setShowModal] = useState<boolean>(false);
+
   const initialCoder: ICoder = {
     id: 0,
     urlImage: "",
@@ -26,10 +38,6 @@ export default function SectionCoders({render}: ISectionCodersProps): React.Reac
     coders: [initialCoder],
   };
   const [coders, setCoders] = useState<ICoders>(initialCoders); // Full list of coders
-  const codersFilter = useCodersFilter((state) => state.CodersFilter);
-  const [currentPage, setCurrentPage] = useState(0);
-  const limitItems = 8;
-
   useEffect(() => {
     const getCoders = async () => {
       const coders = await getCodersService();
@@ -69,46 +77,71 @@ export default function SectionCoders({render}: ISectionCodersProps): React.Reac
     }
   };
 
+  const handleCreateCoder = () =>{
+    setShowModal(true)
+  }
+
   return (
-    <section className="mainGeneral-section">
-      <div className="section-content-cards">
-        {loadingRequest ? (
-          <CircularLoader flag={true} /> // Display loader when loading
-        ) : (
-          paginatedCoders.map((coder) => (
-            <Card
-              id_coder={coder.id}
-              key={coder.id}
-              url_image={coder.urlImage}
-              alt_image={`coder-${coder.name} image`}
-              name_user={coder.name}
-              age_user={`${calculateAge(coder.birthday)} years`}
-              status={true}
-            />
-          ))
-        )}
-      </div>
-      <div className="section-buttons">
-        <KeyboardArrowLeftIcon
-          className="button-left"
-          onClick={handleBack}
-          style={{
-            cursor: "pointer",
-            visibility: currentPage === 0 ? "hidden" : "visible",
-          }}
+    <>
+    {showModal ? <Modal showModal={showModal} setShowModal={setShowModal}  />: null}
+      <section className="mainGeneral-section">
+        <div className="section-filters">
+          <TitleMain
+                className="titleMain"
+                title={"Filters"}
+                subtitle=""
+              />
+          <Filter render={render} setRender={setRender} />
+        </div>
+        <div className="section-content-cards">
+          {loadingRequest ? (
+            <CircularLoader flag={true} /> // Display loader when loading
+          ) : (
+            paginatedCoders.map((coder) => (
+              <Card
+                setCoders={setCoders}
+                coders={coders}
+                id_coder={coder.id}
+                key={coder.id}
+                url_image={coder.urlImage}
+                alt_image={`coder-${coder.name} image`}
+                name_user={coder.name}
+                age_user={`${calculateAge(coder.birthday)} years`}
+                status={true}
+                techSkill={techSkill}
+                isDarkMode={isDarkMode}
+              />
+            ))
+          )}
+        </div>
+        <div className="section-buttons">
+          <KeyboardArrowLeftIcon
+            className="button-left"
+            onClick={handleBack}
+            style={{
+              cursor: "pointer",
+              visibility: currentPage === 0 ? "hidden" : "visible",
+            }}
+          />
+          <KeyboardArrowRightIcon
+            className="button-right"
+            onClick={handleNext}
+            style={{
+              cursor: "pointer",
+              visibility:
+                (currentPage + 1) * limitItems >= coders.coders.length
+                  ? "hidden"
+                  : "visible",
+            }}
+          />
+        </div>
+        <ButtonMore 
+        text="Create"
+        className="button-create-coder"
+        onClick={handleCreateCoder}
         />
-        <KeyboardArrowRightIcon
-          className="button-right"
-          onClick={handleNext}
-          style={{
-            cursor: "pointer",
-            visibility:
-              (currentPage + 1) * limitItems >= coders.coders.length
-                ? "hidden"
-                : "visible",
-          }}
-        />
-      </div>
-    </section>
+      </section>
+    </>
+    
   );
 }

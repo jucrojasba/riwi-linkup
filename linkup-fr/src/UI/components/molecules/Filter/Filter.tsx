@@ -7,10 +7,12 @@ import SearchIcon from '@mui/icons-material/Search';
 import { FilterState } from "@/UI/interfaces/Filter";
 import { filterService } from "@/services/filterService";
 import { useCodersFilter } from "@/global-states/coder";
-import { ICoder } from "@/UI/interfaces/ICoderInterface";
 import { getClansService, getLanguagesService, getSoftSkillsService, getTechnicalSkillsService } from "@/services";
 import { getCodersService } from "@/services/coderService";
-import { ILanguage } from "@/UI/interfaces/languageInterface";
+import { useTechSkill } from "@/global-states/techSkill";
+import { useLanguage } from "@/global-states/language-mode";
+import { useDataBackLoad } from "@/global-states/dataBack";
+import { getGendersService } from "@/services/genderService";
 
 interface IFilterProps{
   render?: boolean;
@@ -25,6 +27,9 @@ export default function Filter({setRender, render}:IFilterProps): ReactNode {
   };
   const [checkedStates, setCheckedStates] = useState<FilterState>(initialState);
   const {setCodersFilter} = useCodersFilter();
+  const {setTechSkill} = useTechSkill();
+  const {language} = useLanguage();
+  const {setDataBackLoad} = useDataBackLoad();
 
   useEffect(() => {
     const fetchFiltersData = async () => {
@@ -33,13 +38,15 @@ export default function Filter({setRender, render}:IFilterProps): ReactNode {
         const techSkills = await getTechnicalSkillsService();
         const softSkills = await getSoftSkillsService();
         const clans = await getClansService();
-        if (languages && techSkills && softSkills && clans) {
+        const genders = await getGendersService();
+        if (languages && techSkills && softSkills && clans && genders) {
           setCheckedStates({
             languages,
             techSkills,
             softSkills,
             clans,
           });
+          setDataBackLoad({genders, languages,clans, softSkills,techSkills}); // Save data in global state of the coders
         }
       } catch (error) {
         console.error("Error loading filters", error);
@@ -47,7 +54,7 @@ export default function Filter({setRender, render}:IFilterProps): ReactNode {
     };
 
     fetchFiltersData();
-  }, []);
+  }, [setCheckedStates,setDataBackLoad]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = event.target;
@@ -100,6 +107,33 @@ export default function Filter({setRender, render}:IFilterProps): ReactNode {
       setRender(true);
     }
   }
+
+  const conditiosClass = (label:string) =>{ // Function for change styles inputFilter
+    switch(label){
+      case "java":
+        return "java";
+      case "c#":
+        return "cSharp";
+      case "nextJs":
+        return "nextJs";
+      case "nodeJs":
+        return "nodeJs";
+      default:
+        return "";
+    }
+  }
+  const changeLanguageText = (label:string):string | null => {
+    const text = label === "resolución de problemas" ? "resolution" : label;
+    const languageMap: Record<string, string> = {
+      español: language ? "español" : "spanish",
+      francés: language ? "francés" : "french",
+      inglés: language ? "inglés" : "english",
+      comunicación: language ? "comunicación" : "communication",
+      text: language ? "resolucion de problemas" : "problem solving",
+      liderazgo: language ? "liderazgo" : "leadership",
+    }
+    return languageMap[label] || "null";
+  }
   return (
     <div className="filter">
       <div className="filter-languages">
@@ -108,8 +142,9 @@ export default function Filter({setRender, render}:IFilterProps): ReactNode {
           {checkedStates.languages.map((language) => (
             <InputFilter
               key={language.id}
-              label={language.label}
+              label={changeLanguageText(language.label)}
               name={language.name}
+              className={""}
               onChange={handleChange}
               checked={language.checked}
             />
@@ -124,7 +159,11 @@ export default function Filter({setRender, render}:IFilterProps): ReactNode {
               key={techSkill.id}
               label={techSkill.label}
               name={techSkill.name}
-              onChange={handleChange}
+              className= {conditiosClass(techSkill.label)}
+              onChange={(e)=>{
+                handleChange(e);
+                setTechSkill(techSkill.label)
+              }}
               checked={techSkill.checked}
             />
           ))}
@@ -158,21 +197,23 @@ export default function Filter({setRender, render}:IFilterProps): ReactNode {
           ))}
         </div>
       </div>
-      <div className="button-search">
-        <MainButton
-          icon={<FilterAltOffIcon />}
-          text={""}
-          type="button"
-          onClick={handleCLickButtonClear}
-        />
-      </div>
-      <div className="button-search">
-        <MainButton
-          icon={<SearchIcon />}
-          text={""}
-          type="button"
-          onClick={handleClickButtonFilter}
-        />
+      <div className="section-buttons-filters">
+        <div className="button-search top">
+            <MainButton
+              icon={<FilterAltOffIcon />}
+              text={"clear"}
+              type="button"
+              onClick={handleCLickButtonClear}
+            />
+        </div>
+          <div className="button-search">
+            <MainButton
+              icon={<SearchIcon />}
+              text={"search"}
+              type="button"
+              onClick={handleClickButtonFilter}
+            />
+        </div>
       </div>
     </div>
   );

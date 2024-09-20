@@ -27,23 +27,6 @@ export default function Route({ children }: { children: React.ReactNode }) {
             const token = localStorage.getItem("token");
             const isPrivateRoute = routes.privateRoutes.find((route) => route.path === path);
             const isPublicRoute = routes.publicRoutes.find((route) => route.path === path);
-            if(status === "authenticated"){
-                // console.log("Authenticated");
-                // setLoading(false);
-                // const {user} = session;
-                // if(!user){
-                //     console.log({message: "Error get user with google or Github"});
-                //     return;
-                // }
-                // const name = user!.name;
-                // const email = user!.email;
-                // const image = user!.image;
-                // const token = generateToken({name, email, image});
-                // console.log({token});
-                // saveLocalStorage("token", token!);
-                // navigate("/dashboard");
-                // return;
-            }
 
             // Verificar si el usuario está autenticado y redirigir si es necesario
             if ((path === "/login" || path === "/" || path === "/register") && token) {

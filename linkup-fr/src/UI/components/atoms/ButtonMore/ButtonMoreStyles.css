@@ -13,3 +13,13 @@ div.button-more:hover{
     background-color: var(--secondary-color);
     cursor: pointer;
 }
+
+.button-create-coder{
+    background-color: var(--main-color);
+    border-radius: var(--border-radius-min);
+    height: 12px;
+    position: absolute;
+    right: 5%;
+    top: -10%;
+    padding: var(--padding-medium);
+}

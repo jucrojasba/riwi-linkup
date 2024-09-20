@@ -1,4 +1,5 @@
-import { ICoder } from "@/UI/interfaces/ICoderInterface";
+import { ICoderComplet } from "@/app/api/interfaces/ICoderInterface";
+import { ICoder, ICoderBack } from "@/UI/interfaces/ICoderInterface";
 import { IUser } from "@/UI/interfaces/IUserInterface";
 import fetchApi from "@/utilities/fetchApi";
 
@@ -16,15 +17,14 @@ export async function getCodersService(): Promise<ICoder[] | undefined> {
 
 export async function deleteCoderService(
   coder_id: number
-): Promise<IUser[] | undefined> {
-  const data = await fetchApi(`http://localhost:5000/coders/${coder_id}`, {
+): Promise<void> {
+  console.log("id", coder_id)
+  await fetchApi(`/api/coders/${coder_id}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
     },
   });
-  if (!data) return;
-  return data;
 }
 
 export async function getCodersInTraining(): Promise<number | undefined> {
@@ -51,3 +51,18 @@ export async function getCodersBackend(): Promise<number | undefined> {
   return codersBackend.data;
 }
 
+  export async function getCoderByIdService(id:number): Promise< ICoderBack |{message:string}>{
+    const coder = await fetchApi(`/api/coders/${id}`);
+    if(!coder)return coder;
+    return coder.data;
+  }
+
+  export async function createCoderService(coderCreate: ICoderComplet):Promise<ICoder | {message: string}>{
+    const coder = await fetchApi(`/api/coders/`,{
+      method: "POST",
+      headers: { "Content-Type": "application/json"},
+      body: JSON.stringify(coderCreate)
+    });
+    if(!coder)return coder;
+    return coder.data;
+  }

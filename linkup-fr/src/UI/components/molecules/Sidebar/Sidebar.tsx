@@ -27,9 +27,9 @@ export default function Sidebar({ expand, language }: ISidebarProps): React.Reac
 
   const navDataIcons = [
     { name: language? 'Tablero':"Dashboard", src: SpaceDashboardIcon, href: "/dashboard" },
-    { name: language? 'Desarrolladores':"Coders", src: ComputerIcon, href: "/coders" },
+    { name: language? 'Desarrolladores':"Coders", src: ComputerIcon, href: "/admin" },
     { name: language? 'Configuración':"Config", src: SettingsIcon, href: "/config" },
-    { name: language? 'Mi Lista':"My List", src: ChecklistRtlIcon, href: "/login" },
+    { name: language? 'Mi Lista':"My List", src: ChecklistRtlIcon, href: "/myList" },
   ];
 
   const handleOpenMenu = () => {
@@ -64,9 +64,7 @@ export default function Sidebar({ expand, language }: ISidebarProps): React.Reac
         <h5 className="content-user-welcome">
           {language ? "Bienvenido" : "Welcome back"}
         </h5>
-        <h3 className="content-user-name">
-        {authState?.name ? capitalizeSentece(authState.name) : ""}
-        </h3>
+        <h3 className="content-user-name">{authState.name ? capitalizeSentece(authState.name) : "User"}</h3>
       </div>
       <nav className="navbar">
         <ul className="navbar-list">

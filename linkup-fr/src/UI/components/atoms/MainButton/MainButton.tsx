@@ -1,28 +1,45 @@
-"use client";
+'use client';
 
 import { ButtonProps } from "@/UI/interfaces/Button";
 import Button from "@mui/material/Button";
 import { styled } from "@mui/material/styles";
+import "./mainButtonStyles.css";
+
+interface MainButtonProps extends ButtonProps {
+  bgColor?: string;
+}
 
 
-const MainButtonStyle = styled(Button)(() => ({
-  backgroundColor: "var(--main-color)",
-  borderRadius: "var(--border-radius-min)",
-  textTransform: "none",
-  fontFamily: "var(--main-font)",
-  minWidth: "fit-content",
-  fontSize: "1rem",
+const MainButtonStyle = styled(Button)<{ customBgColor?: string }>(({ customBgColor }) => ({
+  backgroundColor: customBgColor || 'var(--main-color)', 
+  borderRadius: 'var(--border-radius-min)',
+  textTransform: 'none',
+  fontFamily: 'var(--main-font)',
+  minWidth: 'fit-content',
+  fontSize: '1rem',
+  display: 'flex', // Flexbox for alignment
+  alignItems: 'center', // Align items vertically
+  gap: '0.5rem', // Gap between icon and text
 }));
 
-const MainButton: React.FC<ButtonProps> = ({
+const MainButton: React.FC<MainButtonProps> = ({
   icon,
   text,
   onClick,
   type = "button",
   className,
+  bgColor,
+  ...rest 
 }) => {
   return (
-    <MainButtonStyle type={type} variant="contained" onClick={onClick} className={className}>
+    <MainButtonStyle
+      type={type}
+      variant="contained"
+      onClick={onClick}
+      className={className}
+      sx={{ backgroundColor: bgColor }} 
+      {...rest} 
+    >
       {icon}
       {text}
     </MainButtonStyle>
@@ -30,3 +47,5 @@ const MainButton: React.FC<ButtonProps> = ({
 };
 
 export default MainButton;
+
+

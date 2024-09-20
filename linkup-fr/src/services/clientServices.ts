@@ -3,14 +3,12 @@ export async function getCompaniesByMonth(): Promise<{ formattedDates: string[],
       const response = await fetch('api/companies');
       const companies = await response.json();
       const {data} = companies;
-      console.log('data bien',data);
   
       if (!data || !Array.isArray(data)) return;
   
       const monthAbbreviations = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   
       const lastFive = data.slice(-5);
-      console.log(lastFive);
   
       const formattedDates = lastFive.map((item) => monthAbbreviations[item.month-1]); 
       const counts = lastFive.map(item => item.count);
