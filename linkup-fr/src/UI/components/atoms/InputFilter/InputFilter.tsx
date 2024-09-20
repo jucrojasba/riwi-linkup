@@ -1,10 +1,14 @@
 import "./inputFilterStyles.css";
-import { useState } from "react";
+import CheckIcon from '@mui/icons-material/Check';
+import DeleteIcon from '@mui/icons-material/Delete'; // Importa el ícono de eliminar
+
+
 interface InputFilterProps {
-  label: string;
+  label: string | undefined | null ;
   name: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   checked: boolean;
+  className?: string;
 }
 
 export default function InputFilter({
@@ -12,14 +16,15 @@ export default function InputFilter({
   name,
   onChange,
   checked,
+  className
 }: InputFilterProps): React.ReactNode {
   return (
     <div>
       <label
         htmlFor={name}
-        className={checked ? "checked-filter" : "unchecked"}
+        className={checked ? "checked-filter" : `unchecked_${className}`} // Cambia según el estado
       >
-        {label}
+        {label === "español" || label === "spanish"  ? `${label} 🇪🇸`: label === "francés" || label === "french" ? `${label} 🇫🇷`: label === "inglés" || label === "english" ? `${label} 🇬🇧`: label}
         <input
           type="checkbox"
           checked={checked}
@@ -27,6 +32,7 @@ export default function InputFilter({
           name={name}
           onChange={onChange}
         />
+        {checked && <CheckIcon className="checked-icon"/>}
       </label>
     </div>
   );

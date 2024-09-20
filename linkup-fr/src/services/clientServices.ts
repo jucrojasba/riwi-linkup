@@ -10,7 +10,7 @@ export async function getCompaniesByMonth(): Promise<{ formattedDates: string[],
   
       const lastFive = data.slice(-5);
   
-      const formattedDates = lastFive.map((item) => monthAbbreviations[item.month - 1]); 
+      const formattedDates = lastFive.map((item) => monthAbbreviations[item.month-1]); 
       const counts = lastFive.map(item => item.count);
   
       return { formattedDates, counts };

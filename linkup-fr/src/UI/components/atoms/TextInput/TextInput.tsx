@@ -4,6 +4,7 @@ import { TextInputProps } from '@/UI/interfaces/Input';
 import { useDarkMode } from '@/global-states/dark-mode';
 import TextField from '@mui/material/TextField';
 import { styled } from '@mui/material/styles';
+import { useId } from 'react';
 
 const TextInputStyle = styled(TextField)(() => ({
     width: '100%',
@@ -11,30 +12,29 @@ const TextInputStyle = styled(TextField)(() => ({
     fontFamily: 'var(--main-font)',
     '& .MuiOutlinedInput-root': {
         '& fieldset': {
-            borderColor: 'var(--main-color)', // Cambia el color del borde
+            borderColor: 'var(--main-color)',
         },
         '&.Mui-focused fieldset': {
-            borderColor: 'var(--main-color)', // Cambia el color del borde al estar enfocado
+            borderColor: 'var(--main-color)',
         },
-        // No hover effect
     },
     '& .MuiInputLabel-outlined': {
-        color: 'var(--main-color)', // Cambia el color del label por defecto
-        backgroundColor: 'transparent', // Elimina cualquier fondo en el label
-        borderColor: 'transparent', // Quita cualquier borde gris
-        cursor: 'default', // Elimina el cursor pointer
+        color: 'var(--main-color)',
+        backgroundColor: 'transparent',
+        borderColor: 'transparent',
+        cursor: 'default',
     },
     '& .MuiInputLabel-outlined.Mui-focused': {
-        color: 'var(--main-color)', // Cambia el color del label al estar enfocado
+        color: 'var(--main-color)',
     },
     "& .MuiInputLabel-root.Mui-error": {
-        color: "var(--red-color)", // Cambia el color del label en caso de error
+        color: "var(--red-color)",
     },
     "& .MuiOutlinedInput-root.Mui-error .MuiOutlinedInput-notchedOutline": {
-        borderColor: "var(--main-color)", // Cambia el borde al haber error
+        borderColor: "var(--main-color)",
     },
     "& .MuiFormHelperText-root.Mui-error": {
-        color: "var(--red-color)", // Cambia el color del texto de ayuda en caso de error
+        color: "var(--red-color)",
     },
 }));
 
@@ -46,44 +46,28 @@ const TextInput: React.FC<TextInputProps> = ({
     required = false, 
     label, 
     helperText = '', 
-    onChange 
+    onChange,
 }) => {
-
     const DarkMode = useDarkMode((state) => state.DarkMode);
+    const generatedId = useId(); // Generar un ID único si no se pasa uno
 
     return (
-        <>
-            {DarkMode?
-                <TextInputStyle 
-                    id='outlined-error-helper-text' 
-                    type={type} 
-                    name={name} 
-                    defaultValue={defaultValue} 
-                    label={label} 
-                    error={error} 
-                    required={required} 
-                    helperText={helperText} 
-                    size='small' 
-                    onChange={onChange} 
-                    sx={{ width: '250px','& .MuiInputBase-input': {color:'var(--white-color)'}}} 
-                />
-                :<TextInputStyle 
-                    id='outlined-error-helper-text' 
-                    type={type} 
-                    name={name} 
-                    defaultValue={defaultValue} 
-                    label={label} 
-                    error={error} 
-                    required={required} 
-                    helperText={helperText} 
-                    size='small' 
-                    onChange={onChange} 
-                    sx={{ width: '250px'}} 
-                />
-            }
-            
-        </>
-        
+        <TextInputStyle 
+            id={generatedId} // Usar el ID pasado como prop o el generado
+            type={type} 
+            name={name} 
+            defaultValue={defaultValue} 
+            label={label} 
+            error={error} 
+            required={required} 
+            helperText={helperText} 
+            size='small' 
+            onChange={onChange} 
+            sx={{
+                width: '250px',
+                '& .MuiInputBase-input': DarkMode ? { color: 'var(--white-color)' } : undefined,
+            }} 
+        />
     );
 };
 

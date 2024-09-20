@@ -2,18 +2,27 @@
 
 :root {
   --main-color: #6b5cff;
+  --blue-color-light: #6b5cff3b;
+  --button-color-coder:#6B5CFF;
+  --background-dark-mode:#151B23;
   --paragraph-color: #0D1117;
+  --background-color-dark-light: #131922;
   --paragraph-color-gray: #707070;
   --secondary-color: #181e4b;
   --white-color: #ffffff;
-  --gray-color: #d9d7d7;
+  --gray-color: #F8F8F8;
   --gray-strong-color: #707070;
   --green-color: #5acca4;
+  --green-color-light: #5acca43b;
   --border-color-gray: #cecaca;
   --yellow-color: #e6ca52;
+  --yellow-color-light: #e6ca523b;
   --pink-color: #eaa2fc;
+  --pink-color-light: #eaa2fc3b;
   --red-color: #fe654f;
+  --red-color-light: #fe664f3b;
   --border-radius-min: 10px;
+  --border-radius-medium: 20px;
   --border-radius-big: 30px;
   --padding-min: 10px;
   --padding-medium: 20px;
@@ -26,6 +35,13 @@
 
   /* Variable para la fuente */
   --main-font: "Ubuntu", sans-serif;
+
+  /* Breakpoints */
+  --breakpoint-xs: 0;
+  --breakpoint-sm: 576px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1200px;
 }
 
 html {

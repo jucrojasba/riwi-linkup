@@ -1,10 +1,11 @@
 import {create} from 'zustand';
 
-interface IAuthUser{
-    name: string,
+export interface IAuthUser{
+    name?: string,
     email:string,
     token: string,
-    role: number
+    role: number,
+    provider?:string,
 }
 
 interface IAuthUserState{
@@ -14,10 +15,11 @@ interface IAuthUserState{
 
 export const useAuthUser = create<IAuthUserState>((set)=>({
     authUser: {
-        name: "jose barreto",
+        name: "",
         email: "",
         token: "",
-        role: 2
+        role: 0,
+        provider: ""
     },
     setAuthUser: (value:IAuthUser)=>
         set(()=>({
