@@ -11,6 +11,18 @@ export interface ICoder{
     technicalSkillLevels: ITechnicalSkillLevel[]
 }
 
+export interface ICoderComplet {
+    name: string;
+    birthday: string;
+    description: string;
+    urlImage: string;
+    genderId: number; 
+    clanId: number; 
+    softSkillIds: number[]; 
+    languages: ILanguage[];
+    technicalSkills: ITechnicalSkillLevel[];
+}
+
 interface ILanguageLevel{
     id:number,
     levelId:number,
@@ -22,4 +34,10 @@ interface ITechnicalSkillLevel{
     levelId:number,
     technicalSkillName:string,
     levelName:string
+}
+
+interface ILanguage {
+    id: number; 
+    name: string;
+    levelId: number;
 }

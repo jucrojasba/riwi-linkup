@@ -1,0 +1,13 @@
+.custom-textarea {
+    width: 100%; 
+    max-height: 300px;  
+    resize: vertical; 
+    padding: 10px; 
+    border: 1px solid var(--main-color); 
+    border-radius: 4px; 
+    font-size: 16px;
+    outline: none; 
+    font-family: var(--main-font);
+    font-size: .9rem;
+    outline: none;
+}
