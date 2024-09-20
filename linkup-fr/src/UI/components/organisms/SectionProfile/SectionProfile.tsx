@@ -3,7 +3,7 @@
 import { useAuthUser } from "@/global-states/authUser";
 import HeaderProfile from "../../molecules/ProfileHeader/ProfileHeader";
 import MainProfile from "../../molecules/ProfileMain/ProfileMain";
-import { getUserService } from '@/services/userService';
+import { getUserServiceByEmail } from '@/services/userService';
 import './SectionProfile.css'
 import { useEffect, useState } from "react";
 import { LinearLoader } from '../../atoms/loaders/Loaders';
@@ -16,7 +16,7 @@ interface ISectionProfile {
 }
 
 const SectionProfile: React.FC<ISectionProfile> = ({ isDarkMode, language }) => {
-    const AuthUser = useAuthUser((state) => state.authUser);
+    const authState = useAuthUser((state)=>state.authUser);
     const [loadingInfo, setLoadingInfo] = useState<boolean>(true);
     const [user, setUser] = useState<IApiResponseUser>();
     
@@ -24,10 +24,8 @@ const SectionProfile: React.FC<ISectionProfile> = ({ isDarkMode, language }) => 
         const fetchUserData = async () => {
             try {
                 setLoadingInfo(true);
-                const data = await getUserService('jane.smith@example.com');
-                
+                const data = await getUserServiceByEmail(`${authState.email ? authState.email : "undefined"}`);
                 if (data && "message" in data) {
-                    console.log({ message: data });
                 } else {
                     setUser(data);
                 }
@@ -38,7 +36,7 @@ const SectionProfile: React.FC<ISectionProfile> = ({ isDarkMode, language }) => 
             }
         };
         fetchUserData();
-    }, []);
+    }, [authState]);
 
     return (
         <>

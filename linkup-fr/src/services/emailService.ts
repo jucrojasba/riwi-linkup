@@ -11,3 +11,4 @@ export async function emailService(email:Partial<IEmail>):Promise<{success:{mess
     });
     return data;
 }
+

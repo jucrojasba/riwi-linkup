@@ -1,37 +1,32 @@
 import "./dashboardLayoutStyles.css";
-import React, { ReactElement, ReactNode, useState } from "react";
+import React, { ReactElement, useState } from "react";
 import { Footer, Header } from "../../molecules";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import { Filter } from "../../molecules";
-import { TitleMain } from "../../atoms";
+import { usePathname } from "next/navigation";
 
 interface IDashboardLayoutProps {
   section: ReactElement;
   titleView: string;
   subtitle: string;
-  path: string;
   language: any;
   isDarkMode?: boolean;
-  render?:boolean;
-  setRender?: (value:boolean) => void;
 }
 
 export default function DashboardLayout({
   section,
   titleView,
   subtitle,
-  path,
   language,
   isDarkMode,
-  render,
-  setRender
 }: IDashboardLayoutProps): React.ReactElement {
   const [expand, setExpand] = useState<boolean>(false);
+  const pathname = usePathname();
 
   const handleButtonExpand = () => {
     setExpand(!expand);
     console.log("do something");
   };
+
 
   return (
     <div className={isDarkMode?'content-layout-dark-mode':"content-layout"}>
@@ -43,16 +38,10 @@ export default function DashboardLayout({
           expand={expand}
           titleView={titleView}
           subtitle={subtitle}
-          path={path}
+          path={pathname}
           language={language}
         />
         <main className={"mainGeneral"}>
-          <TitleMain
-            className="titleMain"
-            title={path === "/admin/coder" || path === "/dashboard" || path === "/config" ? "" : "Filters"}
-            subtitle=""
-          />
-          {path === "/admin/coder" || path === "/dashboard" || path === "/config"  ? null : <Filter render={render} setRender={setRender} />}
           {section}
         </main>
         <Footer isDarkMode={isDarkMode}/>
