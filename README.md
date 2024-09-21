@@ -3,6 +3,7 @@
 
  ## Web Framework
 [![NextJS](https://miro.medium.com/v2/resize:fit:1000/1*KDMx1YspSrBcFJG-NDZgDg.png)](https://nextjs.org/docs)
+Next.js is the most popular React framework because it implements built-in routing, server-side rendering, and SEO optimization. This project was created with Next.js because this framework simplifies the development process and allows for the creation of a scalable and user-friendly web application.
  ## Components Library
 [![MUI](https://miro.medium.com/v2/resize:fit:1200/1*fEyeESs-HxVR7Zlr-fdlvw.png)](https://mui.com/material-ui/getting-started/)
  ## State Management Solution
