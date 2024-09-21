@@ -7,11 +7,12 @@ import SwitchMode from "@/UI/components/atoms/SwitchDarkMode/SwitchDarkMode";
 import './UtilityRightButtons.css';
 
 interface IUtilityRightButtonsProps {
-  isDarkMode: boolean;
+  isDarkMode?: boolean;
   responsive?: boolean; // Propiedad opcional
+  hideMediaIcons?: boolean; // Nueva propiedad opcional
 }
 
-const UtilityRightButtons: React.FC<IUtilityRightButtonsProps> = ({ isDarkMode, responsive }) => {
+const UtilityRightButtons: React.FC<IUtilityRightButtonsProps> = ({ isDarkMode, responsive, hideMediaIcons }) => {
   const [isBelowMediumScreen, setIsBelowMediumScreen] = useState(false);
 
   useEffect(() => {
@@ -36,22 +37,24 @@ const UtilityRightButtons: React.FC<IUtilityRightButtonsProps> = ({ isDarkMode, 
 
   return (
     <div className="utility-right-buttons">
-      <div className={responsive ? "media-icons-responsive" : "media-icons"}>
-        <IconWithHover
-          icon={<InstagramIcon fontSize="inherit" />}
-          color="var(--paragraph-color)"
-          hoverColor="#FF00FF"
-          onClick={() => { window.open('https://www.instagram.com/riwi.io/?hl=en') }}
-          isDarkMode={isDarkMode}
-        />
-        <IconWithHover
-          icon={<WhatsAppIcon fontSize="inherit" />}
-          color="var(--paragraph-color)"
-          hoverColor="#25D366"
-          onClick={() => { window.open('https://wa.link/tptm6j') }}
-          isDarkMode={isDarkMode}
-        />
-      </div>
+      {!hideMediaIcons && (
+        <div className={responsive ? "media-icons-responsive" : "media-icons"}>
+          <IconWithHover
+            icon={<InstagramIcon fontSize="inherit" />}
+            color="var(--paragraph-color)"
+            hoverColor="#FF00FF"
+            onClick={() => { window.open('https://www.instagram.com/riwi.io/?hl=en') }}
+            isDarkMode={isDarkMode}
+          />
+          <IconWithHover
+            icon={<WhatsAppIcon fontSize="inherit" />}
+            color="var(--paragraph-color)"
+            hoverColor="#25D366"
+            onClick={() => { window.open('https://wa.link/tptm6j') }}
+            isDarkMode={isDarkMode}
+          />
+        </div>
+      )}
       <div className={responsive ? "switch-mode-home-responsive" : "switch-mode-home"}>
         <SwitchMode onClick={() => { }} />
       </div>

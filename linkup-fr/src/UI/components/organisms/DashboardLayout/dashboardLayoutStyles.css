@@ -62,12 +62,14 @@ div.content-dashboard > main.mainGeneral {
   position: absolute;
   width: 80%;
   height: 85%;
-  left: 17%;
+  left: 290px;
+  transition: all 0.3s ease;
 }
 
 div.content-dashboard > main.mainGeneralCollapsed{
   position: absolute;
   width: 85%;
   height: 85%;
-  left: 11.5%;
+  left: 165px;
+  transition: all 0.4s ease;
 }
