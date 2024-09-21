@@ -2,8 +2,8 @@ export interface IUserRegister{
     name:string,
     email:string,
     password:string,
-    phoneNumber:string,
-    sectorId: number
+    phone:string,
+    sector: number
 }
 
 export interface IUserLogin{

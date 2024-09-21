@@ -3,6 +3,7 @@ import React, { ReactElement, useState } from "react";
 import { Footer, Header } from "../../molecules";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { usePathname } from "next/navigation";
+import { useExpand } from "@/global-states/expandSideBar";
 
 interface IDashboardLayoutProps {
   section: ReactElement;
@@ -19,21 +20,13 @@ export default function DashboardLayout({
   language,
   isDarkMode,
 }: IDashboardLayoutProps): React.ReactElement {
-  const [expand, setExpand] = useState<boolean>(false);
+  const expand=useExpand((state)=>state.expand);
   const pathname = usePathname();
-
-  const handleButtonExpand = () => {
-    setExpand(!expand);
-    console.log("do something");
-  };
 
 
   return (
-    <div className={isDarkMode?'content-layout-dark-mode':"content-layout"}>
+    <div className={isDarkMode ? 'content-layout-dark-mode' : "content-layout"}>
       <div className="content-dashboard">
-        <div className="open" onClick={handleButtonExpand}>
-          <KeyboardArrowDownIcon />
-        </div>
         <Header
           expand={expand}
           titleView={titleView}
@@ -41,11 +34,12 @@ export default function DashboardLayout({
           path={pathname}
           language={language}
         />
-        <main className={"mainGeneral"}>
+        <main className={expand ? "mainGeneralCollapsed" : "mainGeneral"}>
           {section}
         </main>
-        <Footer isDarkMode={isDarkMode}/>
+        <Footer isDarkMode={isDarkMode} />
       </div>
     </div>
   );
 }
+

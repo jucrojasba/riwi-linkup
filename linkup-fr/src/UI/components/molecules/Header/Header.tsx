@@ -17,7 +17,7 @@ export default function Header({ expand, titleView, subtitle, path, language }: 
   const handlerClick = () => {};
   return (
     <header className="header">
-      <Sidebar expand={expand} language={language}/>
+      <Sidebar isExpanded={expand} language={language}/>
       <div className="section-content-coders">
         <TitleMain
           className="content-coders-title"

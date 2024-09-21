@@ -1,14 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
-import { registerService } from "../../services/registerService";
+import { loginService } from "../../services/loginService";
 
 export async function POST(req: NextRequest): Promise<NextResponse> {
-  const { name, email, password, phone, sector } = await req.json();
-  const data = await registerService({
-    name,
+  const {email,password } = await req.json();
+  const data = await loginService({
     email,
     password,
-    phone,
-    sector,
   });
   if (data && "message" in data) {
     return NextResponse.json( data , { status: 400 });
