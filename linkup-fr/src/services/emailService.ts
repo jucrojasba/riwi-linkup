@@ -9,6 +9,6 @@ export async function emailService(email:Partial<IEmail>):Promise<string>{
         },
         body: JSON.stringify(email)
     });
-    return data.message;
+    return data;
 }
 

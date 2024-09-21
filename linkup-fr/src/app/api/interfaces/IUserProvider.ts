@@ -3,6 +3,7 @@ export interface IUserProviderRegister{
     email:string,
     token:string,
     password?:string,
+    name:string,
 }
 
 export interface IUserProviderLogin{

@@ -14,7 +14,8 @@ export interface IUserLogin{
 export interface IUserBack{
     roleId:number,
     email:string,
-    token:string
+    token:string,
+    name:string
 }
 
 export interface IUser {

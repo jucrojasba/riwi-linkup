@@ -47,22 +47,21 @@ export async function authRegisterService(user:Partial<IUser>):Promise<{name:str
     return data;
 }
 
-export async function registerProviderService(user: {name:string, email:string, image:string}):Promise<IUserProviderRegister | {message: string} >{
+export async function registerProviderService(name:string, email:string, image:string):Promise<IUserProviderRegister | {message:string} >{
     const data = await fetchApi("api/auth/registerProvider", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
-        body: JSON.stringify(user)
+        body: JSON.stringify({name, email,image})
     });
-    if(!data)return (data);
-    const {userProvider} = data;
-    return userProvider;
+    if(!data)return data;
+    return data;
 };
 
-export async function loginProviderService(user: {name:string,email:string, image:string}):Promise< IUserProviderLogin |{message:string}>{
+export async function loginProviderService(name:string,email:string, image:string):Promise< IUserProviderLogin |string>{
     const data = await fetchApi("api/auth/loginProvider", {
         method:"POST",
         headers: {"Content-Type": "application/json"},
-        body:JSON.stringify(user)
+        body:JSON.stringify({name,email,image})
     });
     if(!data)return(data);
     const {userProvider} = data;

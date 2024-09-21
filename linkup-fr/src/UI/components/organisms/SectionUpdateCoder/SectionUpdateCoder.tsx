@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import { CircularLoader, TextInput } from "../../atoms";
 import CheckIcon from '@mui/icons-material/Check'; 
 import CloseIcon from '@mui/icons-material/Close';
@@ -6,9 +6,13 @@ import TextArea from "../../atoms/TextArea/TextArea";
 import SelectOptions from "../../atoms/Select/Select";
 import MainButton from "../OrganismTest";
 import { IForm } from "@/UI/interfaces/FormInterface";
+import { useSearchParams } from "next/navigation";
+import { SelectChangeEvent } from "@mui/material";
 
 export default function SectionUpateCoder():React.ReactNode{
     const [loading, setLoading] = useState<boolean> (false);
+    const searchParams = useSearchParams();
+    const coder_id:string | null = searchParams.get("coder");
     const dataForm: IForm = {
         name: "",
         birthday: "",
@@ -23,13 +27,25 @@ export default function SectionUpateCoder():React.ReactNode{
 
     const [selectedValue, setSelectedValue] = useState(dataForm);
 
-    const handleChange = () =>{
-
+    const handleChange = (e:ChangeEvent<HTMLInputElement> | SelectChangeEvent | ChangeEvent<HTMLTextAreaElement>) =>{
+        const {name,value} = e.target;
+        setSelectedValue({
+            ...selectedValue,
+            [name]: value
+        });
+        console.log(selectedValue)
     }
 
     const handleUpdate = () =>{
 
     }
+
+    useEffect(()=>{
+        const getCoderById = () =>{
+
+        };
+        getCoderById();
+    },[])
     return (
         <>
         {loading ? <CircularLoader flag={loading} /> : null}

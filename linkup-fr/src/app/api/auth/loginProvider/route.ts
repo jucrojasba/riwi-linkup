@@ -9,19 +9,20 @@ export async function POST(req:NextRequest):Promise<NextResponse>{
     if(!dataVerify){
         return NextResponse.json({message: "Is required all params. name, email the Provider"})
     }
-    const passwordGenerate:string = generateRandomPassword(12);
+    const passwordGenerate:string = "riwi123"
     const newUser = {
         email,
         password: passwordGenerate
     }
     const data = await loginProvider(newUser);
+    console.log("eq---",data)
+    if(data && "message" in data){
+        return NextResponse.json(data.message, {status: 500});
+    }
     const newData = {
         ...data,
         password: passwordGenerate,
         name,
     }
-    if(!data){
-        return NextResponse.json({data}, {status: 500});
-    }
-    return NextResponse.json({userProvider: newData}, {status:201});
+    return NextResponse.json(newData, {status:201});
 }
