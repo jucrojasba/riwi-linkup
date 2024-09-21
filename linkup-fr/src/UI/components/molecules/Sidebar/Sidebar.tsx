@@ -1,5 +1,5 @@
 import "./sidebarStyles.css";
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import React from "react";
 import Image from "next/image";
 import SettingsIcon from "@mui/icons-material/Settings";
 import SpaceDashboardIcon from "@mui/icons-material/SpaceDashboard";
@@ -13,42 +13,42 @@ import { signOut } from "next-auth/react";
 import { clearLocalStorage } from "@/utilities/LocalStorage";
 import { capitalizeSentece } from "@/utilities/CapitalizeSentence";
 import { useAuthUser } from "@/global-states/authUser";
+import { useExpand } from "@/global-states/expandSideBar";
 
 interface ISidebarProps {
-  expand: boolean;
-  openSidebar?: boolean;
-  setOpenSidebar?: Dispatch<SetStateAction<boolean>>;
-  language:boolean;
+  isExpanded: boolean; // Cambiado el nombre del atributo a isExpanded
+  language: boolean;
 }
 
-export default function Sidebar({ expand, language }: ISidebarProps): React.ReactNode {
-  const [openSidebar, setOpenSidebar] = useState<boolean>(false);
-  const authState = useAuthUser((state)=>state.authUser);
+export default function Sidebar({ isExpanded, language }: ISidebarProps): React.ReactNode {
+  const authState = useAuthUser((state) => state.authUser);
+  const setExpand = useExpand((state) => state.setExpand);
 
   const navDataIcons = [
-    { name: language? 'Tablero':"Dashboard", src: SpaceDashboardIcon, href: "/dashboard" },
-    { name: language? 'Desarrolladores':"Coders", src: ComputerIcon, href: "/admin" },
-    { name: language? 'Configuración':"Config", src: SettingsIcon, href: "/config" },
-    { name: language? 'Mi Lista':"My List", src: ChecklistRtlIcon, href: "/myList" },
+    { name: language ? 'Tablero' : "Dashboard", src: SpaceDashboardIcon, href: "/dashboard" },
+    { name: language ? 'Desarrolladores' : "Coders", src: ComputerIcon, href: "/admin" },
+    { name: language ? 'Configuración' : "Config", src: SettingsIcon, href: "/config" },
+    { name: language ? 'Mi Lista' : "My List", src: ChecklistRtlIcon, href: "/myList" },
   ];
 
   const handleOpenMenu = () => {
-    setOpenSidebar(!openSidebar);
+    setExpand(!isExpanded); // Alternar el estado de expand
   };
 
-  const handleSignOut = async() =>{
+  const handleSignOut = async () => {
     clearLocalStorage();
-    await signOut({callbackUrl: "/login"});
+    await signOut({ callbackUrl: "/login" });
   }
+
   return (
-    <div className={openSidebar ? "sidebarWidth" : "sidebar"}>
+    <div className={isExpanded ? "sidebarWidth" : "sidebar"}>
       <div className="sidebar-content-user">
         <div>
           <div className="icon" onClick={handleOpenMenu}>
             <MenuOpenIcon />
           </div>
           <h2 className="sidebar-title">
-            {openSidebar ? "LinkUp" : "Riwi LinkUp"}
+            {isExpanded ? "LinkUp" : "Riwi LinkUp"}
           </h2>
         </div>
         <div className="content-user-image">
@@ -75,15 +75,15 @@ export default function Sidebar({ expand, language }: ISidebarProps): React.Reac
                 icon={icon.src}
                 href={icon.href}
                 name={icon.name}
-                openSidebar={openSidebar}
+                openSidebar={isExpanded} // Usar isExpanded para manejar la apertura
               />
             ))}
           </div>
           <ItemNav
-            openSidebar={openSidebar}
+            openSidebar={isExpanded}
             icon={LogoutIcon}
             href={"#"}
-            name={language?'Salir':"Logout"}
+            name={language ? 'Salir' : "Logout"}
             onClick={handleSignOut}
           />
         </ul>

@@ -64,3 +64,10 @@ div.content-dashboard > main.mainGeneral {
   height: 85%;
   left: 17%;
 }
+
+div.content-dashboard > main.mainGeneralCollapsed{
+  position: absolute;
+  width: 85%;
+  height: 85%;
+  left: 11.5%;
+}
