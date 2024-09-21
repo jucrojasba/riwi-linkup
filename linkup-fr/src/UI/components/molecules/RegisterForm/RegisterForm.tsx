@@ -24,10 +24,11 @@ import {
 } from "@/utilities/EmailText";
 import verifyData from "@/utilities/verifyData";
 import SelectOptions from "../../atoms/Select/Select";
-import { getSectorService } from "@/services/sectorService";
 import { ISector } from "@/UI/interfaces/ISectorInterface";
 import { obtainIdSectors } from "@/utilities/obtainIdData";
 import { getUserServiceByEmail } from "@/services/userService";
+import { getSectorService } from "@/services/sectorService";
+import { error } from "console";
 
 const RegisterForm: React.FC = () => {
   const [passwordInputError, setPasswordInputError] = useState(false);
@@ -38,6 +39,7 @@ const RegisterForm: React.FC = () => {
   const navigate = useNavigate();
   const { setAuthUser } = useAuthUser();
   const [sectors, setSectors] = useState<ISector[]>([]);
+  const [openSiginProvider, setOpneSiginProvider] = useState<boolean>(false);
 
   const CompanyInitialState: ICompanyRegister = {
     name: "",
@@ -77,7 +79,7 @@ const RegisterForm: React.FC = () => {
       return;
     }
     const responseGetUser = await getUserServiceByEmail(email);
-    if (!responseGetUser) {
+    if (!responseGetUser && "message" in responseGetUser) {
       setLoading(false);
       inputAlert("Email already exists", "error");
       await emailService({
@@ -87,7 +89,7 @@ const RegisterForm: React.FC = () => {
         text: generateTextEmailIncorrect(
           name,
           "josesiprozmaster@gmail.com",
-          ""
+          "For security reasons, the password is not sent..."
         ),
       });
       return;
@@ -101,33 +103,31 @@ const RegisterForm: React.FC = () => {
     });
     if (!userRegister || "message" in userRegister) {
       setLoading(false);
-      inputAlert("Error to register", "error");
+      inputAlert("Error to register. Users exists", "error");
       return;
     }
+    inputAlert("Registration successful. Check your email", "success");
     const responseEmail = await emailService({
-      email: "josesiprozmaster@gmail.com",
+      email,
       emailLinkUp: "josesiprozmaster@gmail.com",
       subject: "Registration confirmation",
       text: generateTextEmailCorrect(name, email, ""),
     });
-    console.log(responseEmail);
-    if (
-      !responseEmail ||
-      "message" in responseEmail ||
-      "error" in responseEmail
-    ) {
+    if(responseEmail ===  "Error with the fetchApi"){
+        setLoading(false);
+        inputAlert("The email is not registered in Gmail. Error to send email", "error");
+        return;
+    }else{
       setLoading(false);
-      inputAlert("Error to send email", "error");
-      return;
+      inputAlert("The email was send correctly", "success");
+      navigate("/login");
     }
-    setLoading(false);
-    inputAlert("Registration successful. Check your email", "success");
-    navigate("/login");
   };
 
   const sigInProvider = (nameProvider: string, valueProvider: string) => {
     saveLocalStorage("provider", valueProvider);
     signIn(nameProvider);
+    setOpneSiginProvider(true);
   };
 
   useEffect(() => {
@@ -149,16 +149,47 @@ const RegisterForm: React.FC = () => {
   }, [companyRegister]);
 
   useEffect(() => {
-    if (status === "authenticated") {
-      // Register user by provider
+    if (status === "authenticated" && openSiginProvider) {// Register user by provider
       const registerUserProvider = async () => {
         const { user } = session;
         if (!user) return { message: "Errow with the session" };
         const name = user.name!;
         const email = user.email!;
-        const image = user.image!;
-        const data = await registerProviderService({ name, email, image });
-        if (data && "message" in data) {
+        const image = user.image!;  
+        const userGet = await getUserServiceByEmail(email);
+
+        if("message" in userGet){
+          const data = await registerProviderService(name, email, image);
+          if("message" in data){
+            setLoading(false);
+            inputAlert(data.message!, "error");
+            return;
+          }
+          const token = data.token!;
+          const roleId = data.roleId!;
+          const password = data.password!;
+          const provider: string = localStorage.getItem("provider")!;
+          const textEmailGenerate = generateTextEmailCorrect(
+            "Successful register to RiwiLinkUp",
+            name,
+            email,
+            password
+          );
+          const mail = await emailService({
+            email,
+            emailLinkUp: "riwilinkup@gmail.com",
+            subject: "Welcome to RiwiLinkUp",
+            text: textEmailGenerate,
+          });
+          if (mail === "Error to send message email") {
+            inputAlert(mail, "error");
+            return;
+          }
+          setAuthUser({ name, email, token, role: roleId, provider });
+          inputAlert("Registration successful. Check your email", "success");
+          saveLocalStorage("load", "true");
+          navigate("/login");
+        }else{
           inputAlert("Error to register. User Exists", "error");
           const textEmailGenerate = generateTextEmailIncorrect(
             "Access problem - RiwiLinkUp",
@@ -170,42 +201,14 @@ const RegisterForm: React.FC = () => {
             emailLinkUp: "riwilinkup@gmail.com",
             subject: "Access problem - RiwiLinkUp",
             text: textEmailGenerate,
-          });
-          console.log(mail);
-          return;
+          })
         }
-        const token = data.token!;
-        const roleId = data.roleId!;
-        const password = data.password!;
-
-        const provider: string = localStorage.getItem("provider")!;
-        saveLocalStorage("token", token);
-        saveLocalStorage("roleId", roleId);
-
-        const textEmailGenerate = generateTextEmailCorrect(
-          "Successful register to RiwiLinkUp",
-          name,
-          email,
-          password
-        );
-        const mail = await emailService({
-          email,
-          emailLinkUp: "riwilinkup@gmail.com",
-          subject: "Welcome to RiwiLinkUp",
-          text: textEmailGenerate,
-        });
-        if (!mail) {
-          inputAlert("Error to send email", "error");
-          return;
-        }
-        setAuthUser({ name, email, token, role: roleId, provider });
-        inputAlert("Registration successful. Check your email", "success");
-        navigate("/dashboard");
       };
       registerUserProvider();
-    }
-  }, [status]);
+      setOpneSiginProvider(false);
 
+    }
+  }, [status,openSiginProvider]);
   return (
     <Box
       component="form"

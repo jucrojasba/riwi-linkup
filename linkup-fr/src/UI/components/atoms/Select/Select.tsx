@@ -8,7 +8,7 @@ interface ISelectProps {
     label?: string;
     values: string[];
     onChange?: (e: SelectChangeEvent) => void;
-    value: string;
+    value: string | string[];
     name: string;
 }
 

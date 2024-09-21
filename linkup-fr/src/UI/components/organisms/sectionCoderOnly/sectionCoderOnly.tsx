@@ -16,13 +16,14 @@ import { useRouter } from "next/navigation";
 
 export default function SectionCoderOnly(): React.ReactElement {
   const initialCoder: ICoderBack = {
-    idCoder: 0,
+    id: 0,
     name: "",
     birthday: "",
     description: "",
     urlImage: "",
     clanId: 0,
     genderName: "",
+    genderId: 0,
     softSkills: [],
     languageLevels: [],
     technicalSkillLevels: [],
@@ -97,20 +98,20 @@ export default function SectionCoderOnly(): React.ReactElement {
               <div className="information-footer">
                 <ButtonCoder 
                   content="CV"
-                  onClick={() => console.log("click")}
+                  onClick={() =>  coder.name === "jose barreto" ?  window.open("https://drive.google.com/file/d/1dSj9QbaCDSnMa4W8KPTzDh6Y_qlaX9L6/view?usp=sharing", "_blank"): null}
                 />
                 <ButtonCoder 
                   content={<PlayArrowIcon />}
                   className="play-button"
-                  onClick={() => console.log("click")}
+                  onClick={() =>  coder.name === "jose barreto" ?  window.open("https://www.youtube.com/watch?v=ot0-BgWcDuQ", "_blank"): null}
                 />
                 <ButtonCoder 
                   content="Portfolio"
-                  onClick={() => console.log("click")}
+                  onClick={() =>  coder.name === "jose barreto" ?  window.open("https://www.behance.net/gallery/207372215/PORTAFOLIO", "_blank"): null}
                 />
                 <ButtonCoder 
                   content="Repository"
-                  onClick={() => console.log("click")}
+                  onClick={() => coder.name === "jose barreto" ?  window.open("https://github.com/joseCardona12", "_blank"): null}
                 /> 
               </div>
             </div>

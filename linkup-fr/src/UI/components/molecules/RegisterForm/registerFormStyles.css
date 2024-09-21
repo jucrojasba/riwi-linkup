@@ -1,0 +1,5 @@
+div.form-input-name-email{
+    display: flex;
+    gap: var(--padding-medium);
+    width: 100%;
+}
