@@ -1,3 +1,4 @@
+import { useExpand } from "@/global-states/expandSideBar";
 import "./footerStyles.css";
 import Link from "next/link";
 
@@ -6,8 +7,10 @@ interface IFooter {
 }
 
 export default function Footer({ isDarkMode }: IFooter): React.ReactNode {
+  const expand = useExpand((state) => state.expand);
+  
   return (
-    <footer className={`footer`}>
+    <footer className={`${expand ? 'footer-colapsed' : 'footer'}`}>
       <Link href="#" className={`link ${isDarkMode ? 'dark-link' : ''}`}>
         Riwi
       </Link>
@@ -23,3 +26,4 @@ export default function Footer({ isDarkMode }: IFooter): React.ReactNode {
     </footer>
   );
 }
+

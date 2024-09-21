@@ -1,6 +1,6 @@
 import "./dashboardLayoutStyles.css";
 import React, { ReactElement, useState } from "react";
-import { Footer, Header } from "../../molecules";
+import { Footer, Header, UtilityRightButtons } from "../../molecules";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { usePathname } from "next/navigation";
 import { useExpand } from "@/global-states/expandSideBar";
@@ -39,6 +39,7 @@ export default function DashboardLayout({
         </main>
         <Footer isDarkMode={isDarkMode} />
       </div>
+      <UtilityRightButtons responsive={true} hideMediaIcons={true} isDarkMode={isDarkMode}/> 
     </div>
   );
 }
