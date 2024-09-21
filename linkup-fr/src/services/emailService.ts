@@ -1,7 +1,7 @@
 import { IEmail } from "@/UI/interfaces/emailInterface";
 import fetchApi from "@/utilities/fetchApi";
 
-export async function emailService(email:Partial<IEmail>):Promise<{success:{message:string}, status:number} | {error:{message:string}, status:number}>{
+export async function emailService(email:Partial<IEmail>):Promise<string>{
     const data = await fetchApi("api/emails", {
         method:"POST",
         headers:{
@@ -9,6 +9,6 @@ export async function emailService(email:Partial<IEmail>):Promise<{success:{mess
         },
         body: JSON.stringify(email)
     });
-    return data;
+    return data.message;
 }
 
