@@ -1,7 +1,6 @@
 import "./dashboardLayoutStyles.css";
-import React, { ReactElement, useState } from "react";
+import React, { ReactElement, useState, useEffect } from "react";
 import { Footer, Header, UtilityRightButtons } from "../../molecules";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { usePathname } from "next/navigation";
 import { useExpand } from "@/global-states/expandSideBar";
 
@@ -20,9 +19,19 @@ export default function DashboardLayout({
   language,
   isDarkMode,
 }: IDashboardLayoutProps): React.ReactElement {
-  const expand=useExpand((state)=>state.expand);
+  const expand = useExpand((state) => state.expand);
   const pathname = usePathname();
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
 
+  useEffect(() => {
+    const handleResize = () => setIsSmallScreen(window.innerWidth <= 794);
+
+    // Ejecutar al inicio
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
     <div className={isDarkMode ? 'content-layout-dark-mode' : "content-layout"}>
@@ -34,7 +43,7 @@ export default function DashboardLayout({
           path={pathname}
           language={language}
         />
-        <main className={expand ? "mainGeneralCollapsed" : "mainGeneral"}>
+        <main className={isSmallScreen ? "mainGeneralCollapsed" : expand ? "mainGeneralCollapsed" : "mainGeneral"}>
           {section}
         </main>
         <Footer isDarkMode={isDarkMode} />
@@ -43,4 +52,3 @@ export default function DashboardLayout({
     </div>
   );
 }
-

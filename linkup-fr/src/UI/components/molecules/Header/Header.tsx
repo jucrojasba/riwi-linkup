@@ -42,10 +42,10 @@ export default function Header({ expand, titleView, subtitle, path, language }: 
   const handlerClick = () => {};
 
   return (
-    <header className="header">
+    <header className={isMobile?"header-mobile":"header"}>
       {isMobile && <AuthenticatedMenuToggle language={language} />}
       {!isMobile && <Sidebar isExpanded={expand} language={language} />}
-      <div className="section-content-coders">
+      <div className={isMobile?"section-content-coders-mobile":"section-content-coders"}>
         <TitleMain
           className="content-coders-title"
           title={titleView}
