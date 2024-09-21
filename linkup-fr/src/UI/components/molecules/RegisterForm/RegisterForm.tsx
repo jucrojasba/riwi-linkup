@@ -116,6 +116,10 @@ const RegisterForm: React.FC = () => {
         setLoading(false);
         inputAlert("The email is not registered in Gmail. Error to send email", "error");
         return;
+    }else{
+      setLoading(false);
+      inputAlert("The email was send correctly", "success");
+      navigate("/login");
     }
   };
 
