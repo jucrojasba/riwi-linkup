@@ -24,7 +24,6 @@ export default function DashboardLayout({
 
   const handleButtonExpand = () => {
     setExpand(!expand);
-    console.log("do something");
   };
 
 
