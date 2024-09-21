@@ -51,9 +51,9 @@ export default function Header({ expand, titleView, subtitle, path, language }: 
           title={titleView}
           subtitle={subtitle}
         />
-        <SelectLanguage />
+        {!isMobile && <SelectLanguage />}
         <Search />
-        <SwitchMode onClick={handlerClick} horizontalMode={true} />
+        {!isMobile && <SwitchMode onClick={handlerClick} horizontalMode={true} />}
       </div>
     </header>
   );

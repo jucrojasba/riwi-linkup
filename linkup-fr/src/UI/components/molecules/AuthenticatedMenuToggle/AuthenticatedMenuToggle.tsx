@@ -64,8 +64,6 @@ const AuthenticatedMenuToggle: React.FC<AuthenticatedMenuToggleProps> = ({ langu
                 open={open}
                 onClose={handleClose}
                 sx={{
-                    height: '100%', // Ocupa el 100% de la altura
-                    minHeight: '95vh', // Altura mínima similar al Sidebar
                     '&::-webkit-scrollbar': {
                         width: '8px',
                     },
@@ -77,8 +75,6 @@ const AuthenticatedMenuToggle: React.FC<AuthenticatedMenuToggleProps> = ({ langu
                         background: 'transparent',
                     },
                     '& .MuiMenu-paper': {
-                        height: '100%', // Asegura que el papel ocupe toda la altura
-                        minHeight: '95vh', // Altura mínima del papel
                         backgroundColor: 'var(--main-color)', // Color de fondo
                         color: 'var(--white-color)', // Color del texto
                     },
