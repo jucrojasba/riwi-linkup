@@ -8,12 +8,14 @@ main.content-coder-update{
 }
 
 main.content-coder-update > div.update-image {
-    width: 26%;
+    width: 25%;
+    margin-top: var(--padding-extra-big);
 }
 
 main.content-coder-update > div.update-image > img{
     width: 100%;
     border-radius: var(--border-radius-min);
+    margin-bottom: var(--padding-min);
 }
 
 main.content-coder-update > form.update-information {

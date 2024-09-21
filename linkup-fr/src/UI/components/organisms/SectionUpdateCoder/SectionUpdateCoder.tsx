@@ -1,3 +1,4 @@
+import "./sectionUpdateCoderStyles.css";
 import React, { ChangeEvent, useEffect, useState } from "react";
 import { CircularLoader, TextInput } from "../../atoms";
 import CheckIcon from '@mui/icons-material/Check'; 
@@ -14,13 +15,15 @@ import { useDataBackLoad } from "@/global-states/dataBack";
 import { IStructureCreateCoder } from "@/UI/interfaces/structureCreateCoder";
 import { obtainIdData } from "@/utilities/obtainIdData";
 import { inputAlert } from "../../molecules/Alert/Alert";
-import "./sectionUpdateCoderStyles.css";
+import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
+import useNavigate from "@/utilities/NavigateTo";
 
 export default function SectionUpateCoder():React.ReactNode{
     const [loading, setLoading] = useState<boolean> (false);
     const searchParams = useSearchParams();
     const dataBack = useDataBackLoad((state)=>state.dataBack);
     const coderId = searchParams.get("coder");
+    const navigate = useNavigate();
     const dataForm: IForm = {
         name: "",
         birthday: "",
@@ -34,6 +37,7 @@ export default function SectionUpateCoder():React.ReactNode{
     }
 
     const [dataFormCoder, setDataFormCoder] = useState<IForm>(dataForm);
+    const [imageLoaded, setImageLoaded] = useState<boolean>(false);
 
     const handleChange = (e:ChangeEvent<HTMLInputElement> | SelectChangeEvent | ChangeEvent<HTMLTextAreaElement>) =>{
         const {name,value} = e.target;
@@ -85,6 +89,10 @@ export default function SectionUpateCoder():React.ReactNode{
         setLoading(false);
         inputAlert("Erro to update coder", "error");
     }
+    const handleBack = () =>{
+        setLoading(true);
+        navigate("/admin");
+      }
 
     useEffect(()=>{
         const getCoderById = async() =>{
@@ -113,7 +121,21 @@ export default function SectionUpateCoder():React.ReactNode{
         {loading ? <CircularLoader flag={loading} /> : null}
         <main className="content-coder-update">
             <div className="update-image">
-                <img src={dataFormCoder.urlImage ? dataFormCoder.urlImage : ""}></img>
+                <img 
+                src={dataFormCoder.urlImage ? dataFormCoder.urlImage : ""} 
+                alt={ dataFormCoder.name ? dataFormCoder.name : "There is not image"}
+                onLoad={()=>setImageLoaded(true)}
+                style={{ display: imageLoaded ? 'block' : 'none' }}
+                />
+                {imageLoaded 
+                ?
+                <MainButton
+                type="button"
+                text={<KeyboardBackspaceIcon />}
+                onClick={handleBack} />
+                : null
+                }
+                
             </div>
             <form className="update-information">
                 <div className="information-name-birthday">
