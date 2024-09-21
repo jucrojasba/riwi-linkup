@@ -23,15 +23,9 @@ import {
   generateTextEmailIncorrect,
 } from "@/utilities/EmailText";
 import { emailService } from "@/services/emailService";
-const CompanyInitialState = {
-  email: "",
-  password: "",
-};
 
 function LogInForm(): React.ReactNode {
   const [passwordInputError, setPasswordInputError] = useState(false); // This statte change if do bad request the server
-  const [companyRegister, setCompanyRegister] =
-    useState<ICompanyLogin>(CompanyInitialState); // States
   const Language = useLanguage((state) => state.language); //true español
   const DarkMode = useDarkMode((state) => state.DarkMode);
   const { data: session, status } = useSession();
@@ -39,10 +33,16 @@ function LogInForm(): React.ReactNode {
   const router = useRouter();
   const { setAuthUser } = useAuthUser();
   const navigate = useNavigate();
-
+  
+  const CompanyInitialState = {
+    email: "",
+    password: "",
+  };
+  
+  const [companyRegister, setCompanyRegister] = useState<ICompanyLogin>(CompanyInitialState); // States
   // Management change on the inputs
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCompanyRegister((prevState) => ({
+    setCompanyRegister((prevState: ICompanyLogin) => ({
       ...prevState,
       [e.target.name]: e.target.value,
     }));
@@ -50,8 +50,13 @@ function LogInForm(): React.ReactNode {
   const handleSubmit = async () => {
     // Logic for login with LinkUp
     setLoading(true);
+    if(!companyRegister.email || !companyRegister.password){
+      setLoading(false);
+      inputAlert("Is required all params", "error");
+      return;
+    }
     const data = await authLoginService(companyRegister);
-    if (!data) {
+    if (!data || data && "message" in data) {
       setLoading(false);
       inputAlert(
         "Authentication error: The credentials provided are incorrect.",
@@ -59,8 +64,8 @@ function LogInForm(): React.ReactNode {
       );
       return;
     }
-    const { name, email, token } = data;
-    setAuthUser({ name, email, token, role: 2 }); // Save user on global state
+    const { name, email, token, roleId } = data.user;
+    setAuthUser({ name, email, token, role: roleId }); // Save user on global state
     saveLocalStorage("token", token); //Save token on local storage
     setLoading(false);
     inputAlert("Login successful", "success");

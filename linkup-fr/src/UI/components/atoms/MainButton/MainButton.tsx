@@ -20,6 +20,7 @@ const MainButtonStyle = styled(Button)<{ customBgColor?: string }>(({ customBgCo
   display: 'flex', // Flexbox for alignment
   alignItems: 'center', // Align items vertically
   gap: '0.5rem', // Gap between icon and text
+  width: '100%',
 }));
 
 const MainButton: React.FC<MainButtonProps> = ({
