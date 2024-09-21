@@ -50,6 +50,11 @@ function LogInForm(): React.ReactNode {
   const handleSubmit = async () => {
     // Logic for login with LinkUp
     setLoading(true);
+    if(!companyRegister.email || !companyRegister.password){
+      setLoading(false);
+      inputAlert("Is required all params", "error");
+      return;
+    }
     const data = await authLoginService(companyRegister);
     if (!data || data && "message" in data) {
       setLoading(false);
@@ -59,7 +64,7 @@ function LogInForm(): React.ReactNode {
       );
       return;
     }
-    const { name, email, token, roleId } = data;
+    const { name, email, token, roleId } = data.user;
     setAuthUser({ name, email, token, role: roleId }); // Save user on global state
     saveLocalStorage("token", token); //Save token on local storage
     setLoading(false);

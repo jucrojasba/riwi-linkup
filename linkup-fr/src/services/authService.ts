@@ -4,7 +4,7 @@ import fetchApi from "@/utilities/fetchApi";
 import verifyData from "@/utilities/verifyData";
 import { secondWalk } from "echarts/types/src/chart/tree/layoutHelper.js";
 
-export async function authLoginService(user: Partial<IUser>): Promise<{name: string, email: string, token: string, roleId:number} | {message:string} | undefined>{
+export async function authLoginService(user: Partial<IUser>): Promise< {user: {name: string, email: string, token: string, roleId:number}} | {message:string} | undefined>{
     const {email,password,} = user;
     const dataVerify = verifyData(email,password);
     if(!dataVerify){
