@@ -5,7 +5,7 @@ div.content-search {
   justify-content: space-between;
   align-items: center;
   padding: calc(var(--padding-min) - 5px);
-  width: 500px;
+  width: 30%;
   height: 40px;
 }
 
@@ -17,4 +17,9 @@ div.content-search > input.search-input {
 input[type="search"] {
   outline: none;
   width: 100%;
+}
+@media (max-width: 794px) {
+  div.content-search {
+    width: 80%;
+  }
 }

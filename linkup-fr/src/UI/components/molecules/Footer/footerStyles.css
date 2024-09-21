@@ -4,19 +4,27 @@ footer.footer {
   gap: var(--padding-big);
   position: absolute;
   bottom: 3%;
-  left: 17%;
+  left: 290px;
+}
+.footer-colapsed {
+  display: flex;
+  align-items: end;
+  gap: var(--padding-big);
+  position: absolute;
+  bottom: 3%;
+  left: 165px;
 }
 
-footer.footer .link {
+.link {
   text-decoration: none;
   color: var(--paragraph-color);
 }
 
-footer.footer .link.dark-link {
+ .link.dark-link {
   text-decoration: none;
   color: var(--white-color);
 }
 
-footer.footer .link:hover {
+ .link:hover {
   color: var(--main-color);
 }

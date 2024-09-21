@@ -1,6 +1,6 @@
 @import url("../../../../app/globals.css");
 
-/* Styles for content layout dashbaord admin*/
+/* Styles for content layout dashboard admin */
 div.content-layout {
   display: flex;
   gap: var(--border-radius-big);
@@ -9,9 +9,12 @@ div.content-layout {
   overflow: visible;
   transition: all 0.3s ease;
   height: 100%;
+  min-height: 100vh;
+  min-width: 100vw;
   width: 100%;
 }
-.content-layout-dark-mode{
+
+.content-layout-dark-mode {
   background-color: var(--paragraph-color);
   display: flex;
   gap: var(--border-radius-big);
@@ -21,7 +24,10 @@ div.content-layout {
   transition: all 0.3s ease;
   height: 100%;
   width: 100%;
+  min-height: 100vh;
+  min-width: 100vw;
 }
+
 .open {
   display: none;
 }
@@ -45,6 +51,7 @@ h2.title-main {
   border: none;
   transition: background-color 0.4s ease-in-out;
 }
+
 ::-webkit-scrollbar-thumb:hover {
   background-color: var(--secondary-color);
   cursor: pointer;
@@ -62,12 +69,24 @@ div.content-dashboard > main.mainGeneral {
   position: absolute;
   width: 80%;
   height: 85%;
-  left: 17%;
+  left: 290px;
+  transition: all 0.3s ease;
 }
 
-div.content-dashboard > main.mainGeneralCollapsed{
+div.content-dashboard > main.mainGeneralCollapsed {
   position: absolute;
   width: 85%;
   height: 85%;
-  left: 11.5%;
+  left: 165px;
+  transition: all 0.4s ease;
+}
+
+/* Media query for small screens (<= 794px) */
+@media (max-width: 794px) {
+  div.content-dashboard > main.mainGeneral,
+  div.content-dashboard > main.mainGeneralCollapsed {
+    width: 100%;
+    left: 0;
+    padding: 10px;
+  }
 }

@@ -39,6 +39,7 @@ const RegisterForm: React.FC = () => {
   const navigate = useNavigate();
   const { setAuthUser } = useAuthUser();
   const [sectors, setSectors] = useState<ISector[]>([]);
+  const [openSiginProvider, setOpneSiginProvider] = useState<boolean>(false);
 
   const CompanyInitialState: ICompanyRegister = {
     name: "",
@@ -126,6 +127,7 @@ const RegisterForm: React.FC = () => {
   const sigInProvider = (nameProvider: string, valueProvider: string) => {
     saveLocalStorage("provider", valueProvider);
     signIn(nameProvider);
+    setOpneSiginProvider(true);
   };
 
   useEffect(() => {
@@ -147,16 +149,47 @@ const RegisterForm: React.FC = () => {
   }, [companyRegister]);
 
   useEffect(() => {
-    if (status === "authenticated") {
-      // Register user by provider
+    if (status === "authenticated" && openSiginProvider) {// Register user by provider
       const registerUserProvider = async () => {
         const { user } = session;
         if (!user) return { message: "Errow with the session" };
         const name = user.name!;
         const email = user.email!;
-        const image = user.image!;
-        const data = await registerProviderService({ name, email, image });
-        if (data && "message" in data) {
+        const image = user.image!;  
+        const userGet = await getUserServiceByEmail(email);
+
+        if("message" in userGet){
+          const data = await registerProviderService(name, email, image);
+          if("message" in data){
+            setLoading(false);
+            inputAlert(data.message!, "error");
+            return;
+          }
+          const token = data.token!;
+          const roleId = data.roleId!;
+          const password = data.password!;
+          const provider: string = localStorage.getItem("provider")!;
+          const textEmailGenerate = generateTextEmailCorrect(
+            "Successful register to RiwiLinkUp",
+            name,
+            email,
+            password
+          );
+          const mail = await emailService({
+            email,
+            emailLinkUp: "riwilinkup@gmail.com",
+            subject: "Welcome to RiwiLinkUp",
+            text: textEmailGenerate,
+          });
+          if (mail === "Error to send message email") {
+            inputAlert(mail, "error");
+            return;
+          }
+          setAuthUser({ name, email, token, role: roleId, provider });
+          inputAlert("Registration successful. Check your email", "success");
+          saveLocalStorage("load", "true");
+          navigate("/login");
+        }else{
           inputAlert("Error to register. User Exists", "error");
           const textEmailGenerate = generateTextEmailIncorrect(
             "Access problem - RiwiLinkUp",
@@ -168,41 +201,14 @@ const RegisterForm: React.FC = () => {
             emailLinkUp: "riwilinkup@gmail.com",
             subject: "Access problem - RiwiLinkUp",
             text: textEmailGenerate,
-          });
-          console.log(mail);
-          return;
+          })
         }
-        const token = data.token!;
-        const roleId = data.roleId!;
-        const password = data.password!;
-
-        const provider: string = localStorage.getItem("provider")!;
-        saveLocalStorage("token", token);
-        saveLocalStorage("roleId", roleId);
-
-        const textEmailGenerate = generateTextEmailCorrect(
-          "Successful register to RiwiLinkUp",
-          name,
-          email,
-          password
-        );
-        const mail = await emailService({
-          email,
-          emailLinkUp: "riwilinkup@gmail.com",
-          subject: "Welcome to RiwiLinkUp",
-          text: textEmailGenerate,
-        });
-        if (!mail) {
-          inputAlert("Error to send email", "error");
-          return;
-        }
-        setAuthUser({ name, email, token, role: roleId, provider });
-        inputAlert("Registration successful. Check your email", "success");
-        navigate("/dashboard");
       };
       registerUserProvider();
+      setOpneSiginProvider(false);
+
     }
-  }, [status]);
+  }, [status,openSiginProvider]);
   return (
     <Box
       component="form"

@@ -8,6 +8,7 @@ import CustomIconButton from "@/UI/components/atoms/IconButton/IconButton";
 import ChatBot from "@/UI/components/atoms/ChatBot/ChatBot";
 import { useDarkMode } from "@/global-states/dark-mode";
 import { useLanguage } from "@/global-states/language-mode";
+import AuthenticatedMenuToggle from "@/UI/components/molecules/AuthenticatedMenuToggle/AuthenticatedMenuToggle";
 
 
 export default function TestView() {
@@ -31,7 +32,8 @@ export default function TestView() {
       <CustomIconButton icon="google" iconColor="#db4437" backgroundColor="var(--gray-color)" onClick={()=>{}}></CustomIconButton>
       <CustomIconButton icon="github" iconColor="black" backgroundColor="var(--gray-color)" onClick={()=>{}}></CustomIconButton>
       <RegisterForm/>  */}
-      <MobileNavbar isDarkMode={DarkMode} language={language}/>
+      {/* <MobileNavbar isDarkMode={DarkMode} language={language}/> */}
+      <AuthenticatedMenuToggle language={language}/>
     </main>
   );
 }
