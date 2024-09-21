@@ -1,8 +1,11 @@
 ﻿# Riwi Link-up-fr - Frontend repository
  ---
- ## Framework
+ ## Web Framework
 [![NextJS](https://miro.medium.com/v2/resize:fit:1000/1*KDMx1YspSrBcFJG-NDZgDg.png)](https://nextjs.org/docs)
-[![Next JS](https://img.shields.io/badge/Deployed website-black?style=for-the-badge&logo=next.js&logoColor=white)](https://www.riwilinkup.com/)
+ ## Components Library
+[![MUI](https://miro.medium.com/v2/resize:fit:1200/1*fEyeESs-HxVR7Zlr-fdlvw.png)](https://mui.com/material-ui/getting-started/)
+ ## State Management Solution
+[![Zustand](https://raw.githubusercontent.com/pmndrs/zustand/main/docs/bear.jpg)](https://zustand.docs.pmnd.rs/getting-started/introduction)
 
 
 
