@@ -16,6 +16,7 @@ const CustomLink: React.FC<CustomLinkProps> = ({ text, href, target = '', onClic
         position: 'relative',
         display: 'inline-block',
         cursor: 'pointer',
+        textAlign: 'left',
         '&:hover::after': {
           content: '""',
           position: 'absolute',
