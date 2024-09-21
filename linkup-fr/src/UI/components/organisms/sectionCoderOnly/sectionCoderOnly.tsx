@@ -16,13 +16,14 @@ import { useRouter } from "next/navigation";
 
 export default function SectionCoderOnly(): React.ReactElement {
   const initialCoder: ICoderBack = {
-    idCoder: 0,
+    id: 0,
     name: "",
     birthday: "",
     description: "",
     urlImage: "",
     clanId: 0,
     genderName: "",
+    genderId: 0,
     softSkills: [],
     languageLevels: [],
     technicalSkillLevels: [],
