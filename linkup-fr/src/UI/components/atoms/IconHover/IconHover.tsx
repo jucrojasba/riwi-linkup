@@ -8,7 +8,7 @@ interface IconWithHoverProps {
   color: string;
   hoverColor: string;
   onClick?: () => void;
-  isDarkMode: boolean;
+  isDarkMode?: boolean;
 }
 
 const StyledIcon = styled("div")<{
