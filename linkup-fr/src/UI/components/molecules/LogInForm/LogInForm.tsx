@@ -33,6 +33,7 @@ function LogInForm(): React.ReactNode {
   const router = useRouter();
   const { setAuthUser } = useAuthUser();
   const navigate = useNavigate();
+  const load = localStorage.getItem("load");
   
   const CompanyInitialState = {
     email: "",
@@ -73,32 +74,21 @@ function LogInForm(): React.ReactNode {
   };
 
   useEffect(() => {
-    if (status === "authenticated") {
+    if (status === "authenticated" && !load) {
       //Login with the Provider
       const loginUserProvider = async () => {
-        console.log("BEFORE");
         const { user } = session;
         if (!user) return { message: "Error with tthe session" };
         const name = user.name!;
         const email = user.email!;
         const image = user.image!;
-        const data = await loginProviderService({ name, email, image });
-        if (data && "message" in data) {
+        const data = await loginProviderService(name, email, image);
+        console.log(data);
+        if (data === "Errro with the loginProvider" || typeof data === "string" || !data) {
+          setLoading(false);
           inputAlert("Error to login. User not exists", "error");
-          const textEmailGenerate = generateTextEmailIncorrect(
-            "Access problem. User not exists - RiwiLinkUp",
-            name,
-            email
-          );
-          const mail = await emailService({
-            email,
-            emailLinkUp: "riwilinkup@gmail.com",
-            subject: "Access problem. User not exists - RiwiLinkUp",
-            text: textEmailGenerate,
-          });
-          console.log(mail);
           return;
-        }
+        };
         const token = data.token!;
         const roleId = data.roleId!;
         const password = data.password!;
@@ -118,9 +108,7 @@ function LogInForm(): React.ReactNode {
           subject: "Welcome to RiwiLinkUp",
           text: textEmailGenerate,
         });
-        console.log(mail);
         inputAlert("login successful. Check your email", "success");
-        console.log("AFTER");
         navigate("/dashboard");
       };
       loginUserProvider();
@@ -128,6 +116,7 @@ function LogInForm(): React.ReactNode {
   }, [status]);
 
   const sigInProvider = (nameProvider: string, valueProvider: string) => {
+    localStorage.removeItem("load"); // Deleted load
     saveLocalStorage("provider", valueProvider);
     signIn(nameProvider);
   };

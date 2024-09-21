@@ -1,3 +1,5 @@
+
+
 export interface IForm{
     name:string,
     birthday:string,
