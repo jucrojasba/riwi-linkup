@@ -4,14 +4,14 @@ import fetchApi from "@/utilities/fetchApi";
 import verifyData from "@/utilities/verifyData";
 import { secondWalk } from "echarts/types/src/chart/tree/layoutHelper.js";
 
-export async function authLoginService(user: Partial<IUser>): Promise<{name: string, email: string, token: string, roleId:number} | undefined>{
+export async function authLoginService(user: Partial<IUser>): Promise<{name: string, email: string, token: string, roleId:number} | {message:string} | undefined>{
     const {email,password,} = user;
     const dataVerify = verifyData(email,password);
     if(!dataVerify){
         console.log({message: "is necesary all params"});
         return;
     }
-    const data = await fetchApi("https://linkupv1-production.up.railway.app/api/v1/Account/login", {
+    const data = await fetchApi("api/auth/login", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
