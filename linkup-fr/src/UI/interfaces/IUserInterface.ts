@@ -4,8 +4,8 @@ export interface IUser{
     email: string,
     isConfirmed: boolean,
     password: string,
-    phoneNumber: string,
-    sectorId: number,
+    phone: string,
+    sector: number,
 }
 
 export interface IUserState{

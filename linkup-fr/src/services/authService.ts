@@ -25,8 +25,8 @@ export async function authLoginService(user: Partial<IUser>): Promise<{name: str
 }
 
 export async function authRegisterService(user:Partial<IUser>):Promise<{name:string,email:string,token:string} | {message:string} | undefined>{
-    const {name,email,password, phoneNumber, sectorId} = user;
-    const dataVerify = verifyData(name,email,password,phoneNumber,sectorId);
+    const {name,email,password, phone, sector} = user;
+    const dataVerify = verifyData(name,email,password,phone,sector);
     if(!dataVerify){
         console.log({message: "is necesary all params"});
         return;
@@ -40,8 +40,8 @@ export async function authRegisterService(user:Partial<IUser>):Promise<{name:str
             name,
             email,
             password,
-            phone:phoneNumber,
-            sector:sectorId
+            phone,
+            sector
         })
     });
     return data;

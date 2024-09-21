@@ -28,6 +28,7 @@ import { ISector } from "@/UI/interfaces/ISectorInterface";
 import { obtainIdSectors } from "@/utilities/obtainIdData";
 import { getUserServiceByEmail } from "@/services/userService";
 import { getSectorService } from "@/services/sectorService";
+import { error } from "console";
 
 const RegisterForm: React.FC = () => {
   const [passwordInputError, setPasswordInputError] = useState(false);
@@ -77,7 +78,7 @@ const RegisterForm: React.FC = () => {
       return;
     }
     const responseGetUser = await getUserServiceByEmail(email);
-    if (!responseGetUser) {
+    if (!responseGetUser && "message" in responseGetUser) {
       setLoading(false);
       inputAlert("Email already exists", "error");
       await emailService({
@@ -87,7 +88,7 @@ const RegisterForm: React.FC = () => {
         text: generateTextEmailIncorrect(
           name,
           "josesiprozmaster@gmail.com",
-          ""
+          "For security reasons, the password is not sent..."
         ),
       });
       return;
@@ -96,34 +97,26 @@ const RegisterForm: React.FC = () => {
       name,
       email,
       password,
-      phoneNumber: phone.toString(),
-      sectorId: obtainIdData,
+      phone: phone.toString(),
+      sector: obtainIdData,
     });
-    console.log("user register", userRegister)
     if (!userRegister || "message" in userRegister) {
       setLoading(false);
       inputAlert("Error to register. Users exists", "error");
       return;
     }
+    inputAlert("Registration successful. Check your email", "success");
     const responseEmail = await emailService({
       email,
       emailLinkUp: "josesiprozmaster@gmail.com",
       subject: "Registration confirmation",
       text: generateTextEmailCorrect(name, email, ""),
     });
-    console.log(responseEmail);
-    if (
-      !responseEmail ||
-      "message" in responseEmail ||
-      "error" in responseEmail
-    ) {
-      setLoading(false);
-      inputAlert("Error to send email", "error");
-      return;
+    if(responseEmail ===  "Error with the fetchApi"){
+        setLoading(false);
+        inputAlert("The email is not registered in Gmail. Error to send email", "error");
+        return;
     }
-    setLoading(false);
-    inputAlert("Registration successful. Check your email", "success");
-    navigate("/login");
   };
 
   const sigInProvider = (nameProvider: string, valueProvider: string) => {

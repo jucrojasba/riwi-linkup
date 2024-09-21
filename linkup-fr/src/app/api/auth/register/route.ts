@@ -7,11 +7,11 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     name,
     email,
     password,
-    phoneNumber: phone,
-    sectorId: sector,
+    phone,
+    sector,
   });
-  if (!data) {
-    return NextResponse.json({ data }, { status: 500 });
+  if (data && "message" in data) {
+    return NextResponse.json( data , { status: 400 });
   }
   return NextResponse.json({ user: data }, { status: 201 });
 }
