@@ -2,7 +2,8 @@
  ---
  ## Framework
 [![NextJS](https://miro.medium.com/v2/resize:fit:1000/1*KDMx1YspSrBcFJG-NDZgDg.png)](https://nextjs.org/docs)
-![Deployed website](https://img.shields.io/badge/Custom%20Text-Next-black?style=for-the-badge&logo=next.js&logoColor=white)
+![Next JS](https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white) **Deployed website**
+
 
 
 
