@@ -2,6 +2,7 @@
 div.sidebar {
   background-color: var(--main-color);
   min-width:250px;
+  max-width: 250px;
   border-radius: var(--border-radius-min);
   padding: var(--padding-big);
   display: flex;
