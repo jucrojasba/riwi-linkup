@@ -1,8 +1,8 @@
 import "./dashboardLayoutStyles.css";
-import React, { ReactElement, useState } from "react";
-import { Footer, Header } from "../../molecules";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import React, { ReactElement, useState, useEffect } from "react";
+import { Footer, Header, UtilityRightButtons } from "../../molecules";
 import { usePathname } from "next/navigation";
+import { useExpand } from "@/global-states/expandSideBar";
 
 interface IDashboardLayoutProps {
   section: ReactElement;
@@ -19,21 +19,23 @@ export default function DashboardLayout({
   language,
   isDarkMode,
 }: IDashboardLayoutProps): React.ReactElement {
-  const [expand, setExpand] = useState<boolean>(false);
+  const expand = useExpand((state) => state.expand);
   const pathname = usePathname();
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
 
-  const handleButtonExpand = () => {
-    setExpand(!expand);
-    console.log("do something");
-  };
+  useEffect(() => {
+    const handleResize = () => setIsSmallScreen(window.innerWidth <= 794);
 
+    // Ejecutar al inicio
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
-    <div className={isDarkMode?'content-layout-dark-mode':"content-layout"}>
+    <div className={isDarkMode ? 'content-layout-dark-mode' : "content-layout"}>
       <div className="content-dashboard">
-        <div className="open" onClick={handleButtonExpand}>
-          <KeyboardArrowDownIcon />
-        </div>
         <Header
           expand={expand}
           titleView={titleView}
@@ -41,11 +43,12 @@ export default function DashboardLayout({
           path={pathname}
           language={language}
         />
-        <main className={"mainGeneral"}>
+        <main className={isSmallScreen ? "mainGeneralCollapsed" : expand ? "mainGeneralCollapsed" : "mainGeneral"}>
           {section}
         </main>
-        <Footer isDarkMode={isDarkMode}/>
+        <Footer isDarkMode={isDarkMode} />
       </div>
+      <UtilityRightButtons responsive={true} hideMediaIcons={true} isDarkMode={isDarkMode}/> 
     </div>
   );
 }

@@ -27,6 +27,31 @@ export async function deleteCoderService(
   });
 }
 
+export async function updateCoderService(coderUpate: ICoderComplet, coder_id:number):Promise<{message: string} | string>{
+  try{
+    const response = await fetch(`https://linkupv1-production.up.railway.app/api/v2/CodersControllerV2/${coder_id}`,{
+      method: "PUT",
+      headers: { "Content-Type": "application/json"},
+      body: JSON.stringify(coderUpate)
+    });
+  
+    if(!response.ok){
+      const errorText = await response.text();
+      console.error("Error response:", errorText);
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const responseText = await response.text();
+    if (!responseText) {
+      console.warn("Response empty of server");
+      return "No data received from server";
+    }
+    return responseText;
+  }catch(error){
+    console.error("Error to update the coder:", error);
+    return { message: error instanceof Error ? error.message : "Error unknow to udpate the coder" };
+  }
+}
+
 export async function getCodersInTraining(): Promise<number | undefined> {
   const codersTraining = await fetchApi(
     `api/codersTraining`

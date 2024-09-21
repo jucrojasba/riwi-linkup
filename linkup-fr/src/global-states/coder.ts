@@ -1,19 +1,27 @@
 import { ICoder } from "@/UI/interfaces/ICoderInterface";
-import {create} from "zustand";
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
-interface ICoderState{
-    CodersFilter:ICoder[];
-    setCodersFilter:(value:ICoder[])=>void;
+interface ICoderState {
+    CodersFilter: ICoder[];
+    setCodersFilter: (value: ICoder[]) => void;
 }
 
-export const useCodersFilter = create<ICoderState>((set)=>({
-    CodersFilter: [
+export const useCodersFilter = create<ICoderState>()(
+    persist(
+        (set) => ({
+            CodersFilter: [
+                {
+                    id: 0,
+                    name: "",
+                    urlImage: "",
+                    birthday: ""
+                }
+            ],
+            setCodersFilter: (value) => set(() => ({ CodersFilter: value }))
+        }),
         {
-            id:0,
-            name: "",
-            urlImage: "",
-            birthday: ""
+            name: 'coders-filter-storage',
         }
-    ],
-    setCodersFilter: (value) => set(()=>({CodersFilter:value}))
-}))
+    )
+);

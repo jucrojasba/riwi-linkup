@@ -10,25 +10,27 @@ export interface ICoders {
 }
 
 export interface ICoderBack{
-  idCoder:number
+  id:number
   name:string,
   birthday:string,
   description:string,
   urlImage:string,
   clanId:number,  
   genderName:string,
+  genderId:number,
   softSkills: string[],
   languageLevels: ILanguageLevel[],
   technicalSkillLevels: ITechnicalSkillLevel[]
 }
 
-interface ILanguageLevel{
+
+export interface ILanguageLevel{
   id:number,
   levelId:number,
   languageName:string,
   levelName:string
 }
-interface ITechnicalSkillLevel{
+export interface ITechnicalSkillLevel{
   id:number,
   levelId:number,
   technicalSkillName:string,

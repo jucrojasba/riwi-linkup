@@ -1,7 +1,8 @@
 export function generateTextEmailIncorrect(
   subject: string,
   name: string,
-  email: string
+  email: string,
+  text?:string
 ): string {
   const emailText = `
     <!DOCTYPE html>
@@ -22,7 +23,7 @@ export function generateTextEmailIncorrect(
         <div class="container">
             <h1>${subject}</h1>
             <p>Dear ${name},</p>
-            <p>We encountered an issue while attempting to access your account. It appears that the user already exists in our system.</p>
+            <p>We encountered an issue while attempting to access your account. ${text ? text: "It appears that the user already exists in our system."}</p>
             <p>Your account was accessed via an external provider.</p>
             
             <div class="section">

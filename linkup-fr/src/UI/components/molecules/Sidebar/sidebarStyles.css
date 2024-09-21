@@ -1,7 +1,7 @@
 /* Styles for header */
 div.sidebar {
   background-color: var(--main-color);
-  flex-basis: 15%;
+  min-width:250px;
   border-radius: var(--border-radius-min);
   padding: var(--padding-big);
   display: flex;
@@ -11,7 +11,7 @@ div.sidebar {
   margin: var(--padding-medium) 0;
   margin-left: var(--padding-medium);
   gap: calc(var(--padding-extra-big) * 2);
-  transition: flex-basis 0.4s ease, margin 0.4s ease, opacity 0.4s ease;
+  transition: all 0.4s ease, margin 0.4s ease, opacity 0.4s ease;
   position: relative;
 }
 /* Styles for content users*/
@@ -83,6 +83,7 @@ ul.navbar-list > div > li.nav-list-item {
   display: flex;
   flex-direction: column;
   align-items: center;
+  transition: all 0.4s ease, margin 0.4s ease, opacity 0.4s ease;
 }
 
 .sidebarWidth > div.sidebar-content-user {

@@ -23,15 +23,9 @@ import {
   generateTextEmailIncorrect,
 } from "@/utilities/EmailText";
 import { emailService } from "@/services/emailService";
-const CompanyInitialState = {
-  email: "",
-  password: "",
-};
 
 function LogInForm(): React.ReactNode {
   const [passwordInputError, setPasswordInputError] = useState(false); // This statte change if do bad request the server
-  const [companyRegister, setCompanyRegister] =
-    useState<ICompanyLogin>(CompanyInitialState); // States
   const Language = useLanguage((state) => state.language); //true español
   const DarkMode = useDarkMode((state) => state.DarkMode);
   const { data: session, status } = useSession();
@@ -39,10 +33,17 @@ function LogInForm(): React.ReactNode {
   const router = useRouter();
   const { setAuthUser } = useAuthUser();
   const navigate = useNavigate();
-
+  const load = localStorage.getItem("load");
+  
+  const CompanyInitialState = {
+    email: "",
+    password: "",
+  };
+  
+  const [companyRegister, setCompanyRegister] = useState<ICompanyLogin>(CompanyInitialState); // States
   // Management change on the inputs
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCompanyRegister((prevState) => ({
+    setCompanyRegister((prevState: ICompanyLogin) => ({
       ...prevState,
       [e.target.name]: e.target.value,
     }));
@@ -50,8 +51,13 @@ function LogInForm(): React.ReactNode {
   const handleSubmit = async () => {
     // Logic for login with LinkUp
     setLoading(true);
+    if(!companyRegister.email || !companyRegister.password){
+      setLoading(false);
+      inputAlert("Is required all params", "error");
+      return;
+    }
     const data = await authLoginService(companyRegister);
-    if (!data) {
+    if (!data || data && "message" in data) {
       setLoading(false);
       inputAlert(
         "Authentication error: The credentials provided are incorrect.",
@@ -59,8 +65,8 @@ function LogInForm(): React.ReactNode {
       );
       return;
     }
-    const { name, email, token } = data;
-    setAuthUser({ name, email, token, role: 2 }); // Save user on global state
+    const { name, email, token, roleId } = data.user;
+    setAuthUser({ name, email, token, role: roleId }); // Save user on global state
     saveLocalStorage("token", token); //Save token on local storage
     setLoading(false);
     inputAlert("Login successful", "success");
@@ -68,32 +74,21 @@ function LogInForm(): React.ReactNode {
   };
 
   useEffect(() => {
-    if (status === "authenticated") {
+    if (status === "authenticated" && !load) {
       //Login with the Provider
       const loginUserProvider = async () => {
-        console.log("BEFORE");
         const { user } = session;
         if (!user) return { message: "Error with tthe session" };
         const name = user.name!;
         const email = user.email!;
         const image = user.image!;
-        const data = await loginProviderService({ name, email, image });
-        if (data && "message" in data) {
+        const data = await loginProviderService(name, email, image);
+        console.log(data);
+        if (data === "Errro with the loginProvider" || typeof data === "string" || !data) {
+          setLoading(false);
           inputAlert("Error to login. User not exists", "error");
-          const textEmailGenerate = generateTextEmailIncorrect(
-            "Access problem. User not exists - RiwiLinkUp",
-            name,
-            email
-          );
-          const mail = await emailService({
-            email,
-            emailLinkUp: "riwilinkup@gmail.com",
-            subject: "Access problem. User not exists - RiwiLinkUp",
-            text: textEmailGenerate,
-          });
-          console.log(mail);
           return;
-        }
+        };
         const token = data.token!;
         const roleId = data.roleId!;
         const password = data.password!;
@@ -113,9 +108,7 @@ function LogInForm(): React.ReactNode {
           subject: "Welcome to RiwiLinkUp",
           text: textEmailGenerate,
         });
-        console.log(mail);
         inputAlert("login successful. Check your email", "success");
-        console.log("AFTER");
         navigate("/dashboard");
       };
       loginUserProvider();
@@ -123,6 +116,7 @@ function LogInForm(): React.ReactNode {
   }, [status]);
 
   const sigInProvider = (nameProvider: string, valueProvider: string) => {
+    localStorage.removeItem("load"); // Deleted load
     saveLocalStorage("provider", valueProvider);
     signIn(nameProvider);
   };
