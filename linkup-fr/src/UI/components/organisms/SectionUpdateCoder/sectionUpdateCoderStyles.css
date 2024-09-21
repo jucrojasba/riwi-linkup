@@ -1,0 +1,42 @@
+main.content-coder-update{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--padding-extra-big);
+    width: 100%;
+}
+
+main.content-coder-update > div.update-image {
+    width: 26%;
+}
+
+main.content-coder-update > div.update-image > img{
+    width: 100%;
+    border-radius: var(--border-radius-min);
+}
+
+main.content-coder-update > form.update-information {
+    display: inherit;
+    flex-direction: column;
+    gap: var(--padding-medium);
+    width: 40%;
+}
+
+main.content-coder-update > form.update-information > div.information-name-birthday{
+    display: flex;
+    gap: var(--padding-medium);
+    width: 100%;
+}
+
+main.content-coder-update > form.update-information >  div.information-gender-clans{
+    display: inherit;
+    gap: inherit;
+    width: 100%;
+}
+
+main.content-coder-update > form.update-information > div.information-languages-techSkills{
+    display: inherit;
+    gap: inherit;
+    width: 100%;
+}
