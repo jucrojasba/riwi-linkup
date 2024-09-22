@@ -44,7 +44,7 @@ section.mainGeneral-section > div.section-buttons {
 
 .create-coder-wraper{
   position: absolute;
-  bottom: 2%;
+  bottom: 7%;
   left: 4.5px;
   transition: all 0.4 ease;
 }
@@ -52,8 +52,8 @@ section.mainGeneral-section > div.section-buttons {
 @media (max-width: 794px) {
   .create-coder-wraper{
     position: absolute;
-    top: -40px;
-    left: 250px;
+    top: 100px;
+    left: 200px;
     transition: all 0.4 ease;    
   }
   .section-filters{

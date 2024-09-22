@@ -6,9 +6,8 @@ div.content-layout {
   gap: var(--border-radius-big);
   color: var(--white-color);
   font-family: "Ubuntu", sans-serif;
-  overflow: visible;
+  overflow: hidden; /* Cambiado a hidden para manejar overflow */
   transition: all 0.3s ease;
-  height: auto;
   min-height: 100vh;
   min-width: 100vw;
   width: 100%;
@@ -20,11 +19,10 @@ div.content-layout {
   gap: var(--border-radius-big);
   color: var(--white-color);
   font-family: "Ubuntu", sans-serif;
-  overflow: visible;
+  overflow: hidden; /* Cambiado a hidden para manejar overflow */
   transition: all 0.3s ease;
-  height: auto;
-  width: 100%;
   min-height: 100vh;
+  width: 100%;
   min-width: 100vw;
 }
 
@@ -57,28 +55,25 @@ h2.title-main {
   cursor: pointer;
 }
 
-.buttons {
-  background-color: red;
-}
-
 div.content-dashboard {
-  width: 100%;
+  flex-grow: 1;
+  width: 85%;
 }
 
-div.content-dashboard > main.mainGeneral {
+div.content-dashboard > main.mainGeneral,
+div.content-dashboard > main.mainGeneralCollapsed {
   position: absolute;
   width: 80%;
-  height: 85%;
+  top: 80px;
+  bottom: 0;
   left: 290px;
   transition: all 0.3s ease;
+  overflow-y: auto; /* Para manejar scroll si el contenido es mayor que la altura */
 }
 
 div.content-dashboard > main.mainGeneralCollapsed {
-  position: absolute;
   width: 85%;
-  height: 85%;
   left: 165px;
-  transition: all 0.4s ease;
 }
 
 /* Media query for small screens (<= 794px) */
@@ -87,7 +82,8 @@ div.content-dashboard > main.mainGeneralCollapsed {
   div.content-dashboard > main.mainGeneralCollapsed {
     width: 100%;
     left: 40px;
-    padding: 10px;
+    top: 120px;
+    bottom: 0;
   }
   .content-layout, .content-layout-dark-mode {
     flex-direction: column;
