@@ -4,7 +4,7 @@ import { IUser } from "@/UI/interfaces/IUserInterface";
 import fetchApi from "@/utilities/fetchApi";
 
 export async function getCodersService(): Promise<ICoder[] | undefined> {
-  const data = await fetchApi("https://linkupv1-production.up.railway.app/api/v2/CodersControllerV2");
+  const data = await fetchApi("api/coders");
   if (!data) return;
   const filteredCoders = data.map((coder: Partial<ICoder>) => ({
     id: coder.id!,
