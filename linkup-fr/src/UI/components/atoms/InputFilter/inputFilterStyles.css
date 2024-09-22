@@ -5,7 +5,14 @@ div.content-filter > label {
   color: var(--paragraph-color-gray);
   transition: background-color 0.3s ease;
   position: relative;
+  width: fit-content;
+  max-width: 120px; 
+  height: fit-content; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
 div.content-filter > label > input {
   display: none;
   transition: background 0.4s ease-in-out;
@@ -16,24 +23,23 @@ div.content-filter > label:hover {
   background-color: var(--gray-color);
 }
 
-
 .checked-filter {
-  background-color: var(--main-color);
+  background-color: var(--white-color);
   color: var(--white-color);
   border: 1px solid var(--main-color);
-  position: relative;;
+  position: relative;
 }
 
 .checked-filter:hover {
   color: var(--main-color);
 }
 
-
 /* styles for filters */
 .unchecked_java {
   background-color: var(--red-color-light);
   border: 1px solid var(--red-color-light);
 }
+
 .unchecked_cSharp {
   background-color: var(--blue-color-light);
   border: 1px solid var(--blue-color-light);
