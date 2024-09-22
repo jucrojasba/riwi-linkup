@@ -1,6 +1,5 @@
 import { ICoderComplet } from "@/app/api/interfaces/ICoderInterface";
 import { ICoder, ICoderBack } from "@/UI/interfaces/ICoderInterface";
-import { IUser } from "@/UI/interfaces/IUserInterface";
 import fetchApi from "@/utilities/fetchApi";
 
 export async function getCodersService(): Promise<ICoder[] | undefined> {
