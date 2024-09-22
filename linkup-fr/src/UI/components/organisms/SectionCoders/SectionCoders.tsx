@@ -13,6 +13,7 @@ import { useTechSkill } from "@/global-states/techSkill";
 import { TitleMain } from "../../atoms";
 import {ButtonMore} from "../../atoms";
 import { Modal } from "../Modal/Modal";
+import { useLanguage } from "@/global-states/language-mode";
 
 interface ISectionCodersProps {
   render: boolean;
@@ -27,6 +28,7 @@ export default function SectionCoders({render,setRender,isDarkMode}: ISectionCod
   const limitItems = 6;
   const {techSkill} = useTechSkill();
   const [showModal, setShowModal] = useState<boolean>(false);
+  const language = useLanguage((state)=>state.language);
 
   const initialCoder: ICoder = {
     id: 0,
@@ -88,7 +90,7 @@ export default function SectionCoders({render,setRender,isDarkMode}: ISectionCod
         <div className="section-filters">
           <TitleMain
                 className="titleMain"
-                title={"Filters"}
+                title={language?"Filtros":"Filters"}
                 subtitle=""
               />
           <Filter render={render} setRender={setRender} />
@@ -135,11 +137,13 @@ export default function SectionCoders({render,setRender,isDarkMode}: ISectionCod
             }}
           />
         </div>
+        <div className="create-coder-wraper">
         <ButtonMore 
         text="Create"
         className="button-create-coder"
         onClick={handleCreateCoder}
         />
+        </div>
       </section>
     </>
     
