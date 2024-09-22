@@ -56,7 +56,8 @@ section.mainGeneral-section > div.section-buttons {
     left:180px;
     width: fit-content;
     height: fit-content;
-    transition: all 0.4 ease;   
+    transition: all 0.4 ease;
+    z-index: 100;   
   }
   .section-filters{
     min-width: 90%;
