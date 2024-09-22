@@ -7,6 +7,7 @@ import { generateTextEmailCorrect, generateTextEmailForgotPassword } from "@/uti
 import { emailService } from "@/services/emailService";
 import { generateKeyService } from "@/services/generaKeyService";
 import { encryptEmailService } from "@/services/encryptEmailService";
+import './ForgotPassword.css';
 
 export default function ForgotPasswordForm():React.ReactNode{
 
@@ -49,7 +50,7 @@ export default function ForgotPasswordForm():React.ReactNode{
         inputAlert("Email send correctly.", "success");
     }
     return(
-        <form action="">
+        <form action="" className="forgot-password-form-wrapper">
             <h2>Forgot Password</h2>
             <TextInput 
             label="Email"

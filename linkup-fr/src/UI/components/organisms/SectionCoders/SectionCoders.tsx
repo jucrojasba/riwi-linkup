@@ -139,7 +139,7 @@ export default function SectionCoders({render,setRender,isDarkMode}: ISectionCod
         </div>
         <div className="create-coder-wraper">
         <ButtonMore 
-        text="Create"
+        text={language?'Crear':"Create"}
         className="button-create-coder"
         onClick={handleCreateCoder}
         />
