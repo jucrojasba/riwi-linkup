@@ -42,3 +42,31 @@ main.content-coder-update > form.update-information > div.information-languages-
     gap: inherit;
     width: 100%;
 }
+
+@media (max-width: 794px) {
+    main.content-coder-update {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--padding-medium);
+        padding: var(--padding-min);
+        justify-content: center;
+        width: 70%;
+        margin: 0 auto;
+    }
+
+    main.content-coder-update > div.update-image {
+        width: 100%;
+        margin-top: var(--padding-medium);
+    }
+
+    main.content-coder-update > form.update-information {
+        width: 100%;
+    }
+
+    main.content-coder-update > form.update-information > div.information-name-birthday,
+    main.content-coder-update > form.update-information > div.information-gender-clans,
+    main.content-coder-update > form.update-information > div.information-languages-techSkills {
+        gap: var(--padding-min);
+    }
+}
+
