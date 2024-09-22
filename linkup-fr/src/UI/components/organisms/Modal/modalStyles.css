@@ -29,3 +29,25 @@ div.content-modal > div.modal > form.modal-information > div.information-languag
     display: flex;
     gap: var(--padding-min);
 }
+@media (max-width: 794px) {
+    div.modal {
+        width: 60%;
+        height: auto;
+        padding: var(--padding-medium);
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    div.modal > form.modal-information {
+        gap: var(--padding-small);
+        margin-top: var(--padding-medium);
+    }
+
+    div.content-modal > div.modal > form.modal-information > div.information-name-birthday,
+    div.content-modal > div.modal > form.modal-information > div.information-gender-clans,
+    div.content-modal > div.modal > form.modal-information > div.information-languages-techSkills {
+        flex-direction: column;
+        gap: var(--padding-small);
+    }
+}
