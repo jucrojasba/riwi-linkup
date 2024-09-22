@@ -78,3 +78,16 @@ div.card > div.card-header > div.header-buttons > .delete-icon:hover {
   color: var(--red-color);
   cursor: pointer;
 }
+
+@media (max-width: 794px){
+  div.card {
+    border: 1px solid var(--border-color-gray);
+    border-radius: var(--border-radius-min);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-width: 200px;
+    flex-basis: none;
+    height: 320px;
+  }
+}
