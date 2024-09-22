@@ -21,7 +21,7 @@ section.mainGeneral-section > div.section-content-cards {
   flex-wrap: wrap;
   gap: var(--padding-medium);
   height: auto;
-  width:50%;
+  width:60%;
 }
 
 section.mainGeneral-section > div.section-buttons {
