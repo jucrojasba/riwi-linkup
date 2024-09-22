@@ -128,3 +128,7 @@ ul.navbar-list > div > li.nav-list-item {
   list-style: none;
   height: 100%;
 }
+
+.content-user-name{
+  text-align: center;
+}
