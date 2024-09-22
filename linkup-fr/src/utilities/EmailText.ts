@@ -45,7 +45,7 @@ export function generateTextEmailIncorrect(
             
             <div class="footer">
                 <p>Thank you for your patience and understanding.</p>
-                <p>Best regards, <br> The RiwiLinkUp Team <br> <a href="https://riwi-linkup.vercel.app/">riwi-linkup</a></p>
+                <p>Best regards, <br> The RiwiLinkUp Team <br> <a href="https://www.riwilinkup.com">riwi-linkup</a></p>
             </div>
         </div>
     </body>
@@ -107,7 +107,7 @@ export function generateTextEmailCorrect(
             
             <div class="footer">
                 <p>Thank you for using RiwiLinkUp!</p>
-                <p>Best regards, <br> The RiwiLinkUp Team <br> <a href="https://riwi-linkup.vercel.app/">riwi-linkup</a></p>
+                <p>Best regards, <br> The RiwiLinkUp Team <br> <a href="https://www.riwilinkup.com">riwi-linkup</a></p>
             </div>
         </div>
     </body>
@@ -116,4 +116,45 @@ export function generateTextEmailCorrect(
     `;
 
   return emailText;
+}
+
+export function generateTextEmailForgotPassword(name:string, link:string,key:string):string{
+    const emailText = `
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <style>
+            body { font-family: Arial, sans-serif; color: #333; margin: 0; padding: 0; }
+            .container { width: 100%; max-width: 600px; margin: auto; padding: 20px; background-color: #f9f9f9; }
+            h1 { color: #6b5cff; }
+            p { line-height: 1.6; }
+            .section { margin-bottom: 20px; padding: 10px; background-color: #fff; border-radius: 5px; }
+            .footer { margin-top: 20px; font-size: 0.9em; color: #777; }
+            a { color: #007bff; text-decoration: none; }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Password Reset Request</h1>
+            <p>Dear ${name},</p>
+            <p>It looks like you requested a password reset. Please click the link below to reset your password:</p>
+            
+            <div class="section">
+                <h2>Reset Password</h2>
+                <p><a href="${link}">Click here to reset your password</a></p>
+                <p>Key:${key}</p>
+                <p>This link will take you to a secure page where you can set a new password for your account.</p>
+            </div>
+            
+            <p>If you did not request a password reset, you can safely ignore this email. Your password will remain unchanged.</p>
+            
+            <div class="footer">
+                <p>Thank you for using our service!</p>
+                <p>Best regards,<br>The RiwiLinkUp Team <br> <a href="https://www.riwilinkup.com">riwi-linkup</a></p>
+            </div>
+        </div>
+    </body>
+    </html> 
+    `;
+    return emailText;
 }
