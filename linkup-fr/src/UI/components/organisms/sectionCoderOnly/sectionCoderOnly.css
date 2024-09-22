@@ -2,8 +2,10 @@ div.content-coder{
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 90%;
     height: 80%;
     transform: translateX(10%);
+    
 }
 
 div.content-coder div.coder{
@@ -60,3 +62,40 @@ div.content-coder > div.coder div.content-information > div.information-footer{
     gap: var(--padding-medium);
 }
 
+@media (max-width: 794px) {
+    div.content-coder {
+        flex-direction: column;
+        transform: translateX(0);
+        width: 70%;
+        height: auto;
+        margin: 0 auto;
+    }
+
+    div.content-coder div.coder {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--padding-medium);
+    }
+
+    div.content-coder > div.coder div.coder-image {
+        width: 100%;
+        height: auto;
+        margin-bottom: var(--padding-medium);
+    }
+
+    div.content-coder > div.coder div.content-information {
+        width: 100%;
+        height: auto;
+    }
+
+    div.content-coder > div.coder div.content-information > div.information-body > p {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    div.content-coder > div.coder div.content-information > div.information-header,
+    div.content-coder > div.coder div.content-information > div.information-footer {
+        gap: var(--padding-min);
+    }
+}
