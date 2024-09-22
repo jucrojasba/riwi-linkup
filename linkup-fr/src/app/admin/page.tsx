@@ -10,10 +10,11 @@ export default function AdminView(): React.ReactNode {
   const languages = useLanguage((state)=>state.language);
   const [render,setRender] = useState<boolean>(false);
   const DarkMode = useDarkMode(state => state.DarkMode);
+  const language = useLanguage((state)=>state.language);
 
   return (
     <Route>
-      <DashboardLayout isDarkMode={DarkMode} section={<SectionCoders render={render} setRender={setRender} isDarkMode={DarkMode} />} titleView="Coders" subtitle="General Information" language={languages}/>
+      <DashboardLayout isDarkMode={DarkMode} section={<SectionCoders render={render} setRender={setRender} isDarkMode={DarkMode} />} titleView={language?"Desarrolladores":"Coders"} subtitle={language?'Descubre talento':'Discover talent'} language={languages}/>
     </Route>
   );
 }
