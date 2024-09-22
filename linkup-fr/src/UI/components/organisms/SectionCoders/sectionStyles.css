@@ -56,9 +56,11 @@ section.mainGeneral-section > div.section-buttons {
     transition: all 0.4 ease;    
   }
   .section-filters{
-    min-width: 80%;
+    min-width: 90%;
   }
   div.section-content-cards{
     min-width: 80%;
   }
+  
 }
+

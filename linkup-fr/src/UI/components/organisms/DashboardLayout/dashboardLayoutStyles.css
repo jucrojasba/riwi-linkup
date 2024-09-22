@@ -27,6 +27,27 @@ div.content-layout {
   min-height: 100vh;
   min-width: 100vw;
 }
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+div.content-layout, div.content-layout-dark-mode {
+  display: flex;
+  gap: var(--border-radius-big);
+  color: var(--white-color);
+  font-family: "Ubuntu", sans-serif;
+  overflow: visible;
+  transition: all 0.3s ease;
+  height: 100%;
+  min-height: 100vh;
+  min-width: 100vw;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
 .open {
   display: none;
@@ -88,5 +109,9 @@ div.content-dashboard > main.mainGeneralCollapsed {
     width: 100%;
     left: 40px;
     padding: 10px;
+  }
+  .content-layout, .content-layout-dark-mode {
+    flex-direction: column;
+    gap: var(--border-radius-small);
   }
 }
