@@ -13,7 +13,6 @@ export interface IUserState{
 }
 export interface IApiResponseUser {
     user: IUserBack; 
-
 }
 
 export interface IUserBack {
