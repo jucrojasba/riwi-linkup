@@ -16,7 +16,7 @@
 .circular-loader-container img {
   position: absolute;
   width: 60%;
-  z-index: 10;
+  z-index: 30;
 }
 
 .circular-loader-container .circular-loader {
