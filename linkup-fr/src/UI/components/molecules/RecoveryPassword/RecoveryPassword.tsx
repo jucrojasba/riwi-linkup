@@ -1,4 +1,4 @@
-import { ChangeEvent, useState, useEffect } from "react";
+import { ChangeEvent, useState, useEffect, Suspense } from "react";
 import { TextInput } from "../../atoms";
 import { IFormRecovery } from "@/UI/interfaces/IFormRecovery";
 import { MainButton } from "../../atoms";
@@ -9,7 +9,7 @@ import { IPassword } from "@/UI/interfaces/IPasswordInterface";
 import { patchResetPasswordUser } from "@/services/userService";
 import useNavigate from "@/utilities/NavigateTo";
 
-export default function RecoveryPasswordForm() {
+function RecoveryPasswordFormContent() {
   const searchParams = useSearchParams();
   const key = searchParams.get("key");
   const encryptedEmail = searchParams.get("encryptedEmail");
@@ -22,7 +22,6 @@ export default function RecoveryPasswordForm() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // If key is missing, early return (you could handle navigation or error here)
     if (!key || !encryptedEmail || !iv) return;
   }, [key, encryptedEmail, iv]);
 
@@ -88,5 +87,13 @@ export default function RecoveryPasswordForm() {
         </>
       )}
     </form>
+  );
+}
+
+export default function RecoveryPasswordForm() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <RecoveryPasswordFormContent />
+    </Suspense>
   );
 }
