@@ -141,7 +141,7 @@ export function generateTextEmailForgotPassword(name:string, link:string,key:str
             
             <div class="section">
                 <h2>Reset Password</h2>
-                <p><a href="${link}">Click here to reset your password</a></p>
+                <p><a href:"${link}">Click here to reset your password</a></p>
                 <p>Key=${key}</p>
                 <p>This link will take you to a secure page where you can set a new password for your account.</p>
             </div>
