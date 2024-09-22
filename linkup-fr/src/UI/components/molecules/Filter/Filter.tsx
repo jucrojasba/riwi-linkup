@@ -141,6 +141,7 @@ export default function Filter({ setRender, render }: IFilterProps): ReactNode {
 
   return (
     <div className="filter">
+      <div className="filter-section-app">
       <div className="filter-languages">
         <h3 className="languages-title">{language ? 'Idiomas' : 'Languages'}</h3>
         <div className="languages-options">
@@ -201,6 +202,7 @@ export default function Filter({ setRender, render }: IFilterProps): ReactNode {
             />
           ))}
         </div>
+      </div>
       </div>
       <div className="section-buttons-filters">
         <div className="button-search top">

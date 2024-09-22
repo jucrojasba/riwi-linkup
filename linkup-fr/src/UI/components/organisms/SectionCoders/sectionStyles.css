@@ -4,7 +4,8 @@ section.mainGeneral-section {
   flex-wrap: wrap;
   gap: var(--padding-min);
   margin-top: var(--padding-big);
-  height: 95%;
+  min-height: 95%;
+  height: auto;
   position: relative;
 }
 

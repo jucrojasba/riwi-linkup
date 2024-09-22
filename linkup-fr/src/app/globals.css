@@ -48,7 +48,7 @@
 html {
   box-sizing: border-box;
   min-height: 100vh;
-  max-height: 100%;
+  height: auto;
   margin: 0;
   padding: 0;
   overflow-x: hidden;
@@ -73,21 +73,12 @@ p {
 }
 
 body {
-  max-width: none;
-  margin: 0 auto;
   overflow: hidden;
   font-family: var(--main-font);
   min-height: 100vh;
-  max-height: 100%;
+  height: auto;
   overflow-x: hidden;
   overflow-y: auto;
   margin: 0;
   padding: 0;
-}
-html, body {
-  height: 100%;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden; /* Previene el scroll horizontal no deseado */
 }
