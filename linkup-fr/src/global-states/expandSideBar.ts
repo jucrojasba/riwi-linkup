@@ -9,7 +9,7 @@ interface IExpandState {
 export const useExpand = create<IExpandState>()(
     persist(
         (set) => ({
-            expand: true,
+            expand: false,
             setExpand: (value: boolean) => set(() => ({ expand: value }))
         }),
         {
