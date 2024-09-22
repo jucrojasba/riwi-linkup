@@ -86,7 +86,7 @@ div.content-dashboard > main.mainGeneralCollapsed {
   div.content-dashboard > main.mainGeneral,
   div.content-dashboard > main.mainGeneralCollapsed {
     width: 100%;
-    left: 0;
+    left: 40px;
     padding: 10px;
   }
 }

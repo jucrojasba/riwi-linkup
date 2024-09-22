@@ -1,7 +1,8 @@
 /* Styles for section coders----------------->*/
 section.mainGeneral-section {
   display: flex;
-  gap: var(--padding-medium);
+  flex-wrap: wrap;
+  gap: var(--padding-min);
   margin-top: var(--padding-big);
   height: 95%;
   position: relative;
@@ -19,7 +20,7 @@ section.mainGeneral-section > div.section-content-cards {
   flex-wrap: wrap;
   gap: var(--padding-medium);
   height: auto;
-  width: 70%;
+  width:60%;
 }
 
 section.mainGeneral-section > div.section-buttons {
@@ -29,10 +30,35 @@ section.mainGeneral-section > div.section-buttons {
 }
 
 .button-create-coder{
-  position: absolute;
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   gap:var(--padding-min);
+  cursor: pointer;
   z-index: 20;
+  max-width: 130px;
+  min-width: 13opx;
+}
+
+.create-coder-wraper{
+  position: absolute;
+  bottom: 2%;
+  left: 4.5px;
+  transition: all 0.4 ease;
+}
+
+@media (max-width: 794px) {
+  .create-coder-wraper{
+    position: absolute;
+    top: -40px;
+    left: 250px;
+    transition: all 0.4 ease;    
+  }
+  .section-filters{
+    min-width: 80%;
+  }
+  div.section-content-cards{
+    min-width: 80%;
+  }
 }

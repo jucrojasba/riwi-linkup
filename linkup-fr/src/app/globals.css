@@ -47,6 +47,10 @@
 
 html {
   box-sizing: border-box;
+  min-height: 100vh;
+  max-height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 *,
@@ -70,10 +74,11 @@ p {
 body {
   max-width: none;
   margin: 0 auto;
-  height: 100vh;
   overflow: hidden;
   font-family: var(--main-font);
   min-height: 100vh;
-  height: 100vh;
+  max-height: 100%;
   overflow-y: auto;
+  margin: 0;
+  padding: 0;
 }
