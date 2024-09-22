@@ -52,7 +52,7 @@ section.mainGeneral-section > div.section-buttons {
 @media (max-width: 794px) {
   .create-coder-wraper{
     position: absolute;
-    top: 100px;
+    top: 110px;
     left: 200px;
     transition: all 0.4 ease;    
   }
@@ -60,7 +60,10 @@ section.mainGeneral-section > div.section-buttons {
     min-width: 90%;
   }
   div.section-content-cards{
-    min-width: 80%;
+    min-width: 60%;
+    align-items: end;
+    justify-content: end;
+
   }
   
 }
