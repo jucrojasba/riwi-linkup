@@ -8,6 +8,7 @@ import { decryptEmailService } from "@/services/encryptEmailService";
 import { IPassword } from "@/UI/interfaces/IPasswordInterface";
 import { patchResetPasswordUser } from "@/services/userService";
 import useNavigate from "@/utilities/NavigateTo";
+import './RecoveryPassword.css'
 
 function RecoveryPasswordFormContent() {
   const searchParams = useSearchParams();
@@ -68,7 +69,10 @@ function RecoveryPasswordFormContent() {
   };
 
   return (
-    <form>
+    <form className="recovery-form-wrapper">
+            <div>
+                <h1>Recovery Password</h1>
+            </div>
       {showInputs ? (
         <div className="input-code">
           <TextInput

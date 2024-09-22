@@ -19,9 +19,6 @@ export default function ForgotPasswordView() {
             <RiwiLogo isDarkMode={DarkMode} responsive={true}/>
             <AuthLayout isDarkMode={DarkMode} language={language}/>
                 <section className={DarkMode ? "dark-mode" : "forgot-password-section"}>
-                    {/* <div className="section-image">
-                        <Image className="image" src={"/images/test.png"} alt="coderLogin" width={400} height={400} />
-                    </div> */}
                     <ForgotPasswordForm />
                 </section>
             </main>
