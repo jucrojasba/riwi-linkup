@@ -34,7 +34,7 @@ export default function ForgotPasswordForm():React.ReactNode{
         const { encryptedEmail, iv } = emailServiceEncrypt;
         const encodedEmail = encodeURIComponent(encryptedEmail);
         const encodedIv = encodeURIComponent(iv);
-        const link = `http://localhost:3000/forgot-password/recovery-password?key=${key}&encryptedEmail=${encodedEmail}&iv=${encodedIv}`;
+        const link = `https://www.riwilinkup.com/forgot-password/recovery-password?key=${key}&encryptedEmail=${encodedEmail}&iv=${encodedIv}`;
         const textEmail = generateTextEmailForgotPassword(
             name,
             link,
