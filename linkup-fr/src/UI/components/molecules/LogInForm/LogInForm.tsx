@@ -158,9 +158,9 @@ function LogInForm(): React.ReactNode {
         onChange={handleChange}
       />
       {Language ? (
-        <CustomLink text="Olvidaste tu contraseña?" href="/recover-password" />
+        <CustomLink text="Olvidaste tu contraseña?" href="/forgot-password" />
       ) : (
-        <CustomLink text="Forgot Password?" href="/recover-password" />
+        <CustomLink text="Forgot Password?" href="/forgot-password" />
       )}
 
       <MainButton

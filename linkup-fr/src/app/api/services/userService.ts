@@ -69,3 +69,27 @@ export async function deleteUserBack(
     return { status: 500 };
   }
 }
+
+export async function PatchResetPasswordUser(email:string, password:string, confirmPassword:string):Promise<{ message: string }> {
+  try {
+    const response = await fetch(
+      `https://linkupv1-production.up.railway.app/api/v1/User/reset-password/${email}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          newPassword: password,
+          confirmPassword:confirmPassword
+        })
+      }
+    );
+
+    if (!response.ok) throw new Error("Error with the response");
+
+    return await response.json();
+  } catch (error) {
+    return ({message: "Errror to patch user"});
+  }
+}

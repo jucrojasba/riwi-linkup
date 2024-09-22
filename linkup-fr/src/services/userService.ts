@@ -54,3 +54,15 @@ export async function deleteUserService(
     return { message: "Error deleting user" };
   }
 }
+
+
+export async function patchResetPasswordUser(email:string, password:string, confirmPassword: string): Promise<{message:string}>{
+  const data = await fetchApi(`/api/reset-password/${email}`,{
+    method:"PATCH",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({password,confirmPassword})
+  })
+  return data;
+}
