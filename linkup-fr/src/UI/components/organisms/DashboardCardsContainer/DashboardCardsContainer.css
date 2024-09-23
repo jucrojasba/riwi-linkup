@@ -3,3 +3,12 @@
     gap:var(--padding-mega-big);
     padding-top:var(--padding-big);
 }
+
+
+@media (max-width: 768px) {
+    .card-info-container {
+        flex-direction: column; /* Apila las cartas en pantallas pequeñas */
+        align-items: center;
+        width: 79vw;
+    }
+}
