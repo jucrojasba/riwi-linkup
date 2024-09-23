@@ -1,4 +1,4 @@
-/* #bar-chart {
+#bar-chart {
     position: absolute;
     top: 35%;
     width: 50%;
@@ -44,56 +44,6 @@
     font-size: 1.5rem;
     z-index: 20;
     color:var(--white-color);
-  } */
-
-  #bar-chart {
-    position: absolute; /* Mantenemos absoluto por defecto para pantallas grandes */
-    top: 35%;
-    width: 50%;
-    height: 60%;
-    border-radius: var(--border-radius-min);
-    overflow: hidden;
-    z-index: 10;
-  }
-  
-  /* Modo oscuro */
-  .dark-mode #bar-chart {
-    background-color: var(--background-dark-mode);
-  }
-  
-  /* Modo claro */
-  .light-mode #bar-chart {
-    background-color: var(--gray-color);
-  }
-  
-  .chart-title {
-    position: absolute; /* Absoluto en pantallas grandes */
-    top: 38%;
-    left: 5%;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: left;
-    font-family: var(--main-font);
-    font-weight: 400;
-    font-size: 1.5rem;
-    z-index: 20;
-    color: var(--paragraph-color-gray);
-  }
-  
-  .chart-title-dark-mode {
-    position: absolute; /* Absoluto en pantallas grandes */
-    top: 38%;
-    left: 5%;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: left;
-    font-family: var(--main-font);
-    font-weight: 400;
-    font-size: 1.5rem;
-    z-index: 20;
-    color: var(--white-color);
   }
   
   /* Estilos responsivos para pantallas menores a 794px */
@@ -101,15 +51,15 @@
     #bar-chart {
       position: relative; /* Cambia a relativo para pantallas pequeñas */
       top: 0;
-      width: 100%; /* Ocupa todo el ancho disponible */
+      width: 81%; /* Ocupa todo el ancho disponible */
       height: auto; /* Deja que la altura se ajuste automáticamente */
       margin-bottom: 20px; /* Añade un margen para separar si hay otros elementos */
     }
   
     .chart-title, .chart-title-dark-mode {
       position: relative; /* Cambia a relativo para pantallas pequeñas */
-      top: 0;
-      left: 0;
+      top: 60px;
+      left: 20px;
       text-align: center; /* Centra el título */
       margin-bottom: 10px; /* Añade espacio debajo del título */
       font-size: 1.2rem; /* Ajusta el tamaño del texto para pantallas pequeñas */

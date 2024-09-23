@@ -21,3 +21,8 @@
 .dashboard-card-number{
     font-size: 2.6rem;
 }
+@media (max-width: 794px) {
+    .dashboard-card{
+        min-width: 100%
+    }
+}

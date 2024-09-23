@@ -201,7 +201,7 @@
     position: relative; /* Cambia a relativo en pantallas pequeñas */
     top: 0;
     right: 0;
-    width: 100%; /* Ajusta el ancho al 100% */
+    width: 80%; 
     height: auto; /* Permite que la altura se ajuste al contenido */
     margin-bottom: 20px; /* Añade un espacio entre otros elementos */
   }
