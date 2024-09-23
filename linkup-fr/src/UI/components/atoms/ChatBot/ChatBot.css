@@ -195,3 +195,38 @@
     background-color: transparent;
   }
   
+  /* Estilos para pantallas menores a 794px */
+@media (max-width: 794px) {
+  .chat-container, .chat-container-dark-mode {
+    position: relative; /* Cambia a relativo en pantallas pequeñas */
+    top: 0;
+    right: 0;
+    width: 100%; /* Ajusta el ancho al 100% */
+    height: auto; /* Permite que la altura se ajuste al contenido */
+    margin-bottom: 20px; /* Añade un espacio entre otros elementos */
+  }
+  
+  .title-chat-bot {
+    padding: var(--padding-medium);
+    text-align: center; /* Centra el texto en pantallas pequeñas */
+  }
+
+  .title-chat-bot h3 {
+    font-size: 1.2rem; /* Ajusta el tamaño del título para pantallas pequeñas */
+    text-align: center; /* Centra el texto del título */
+  }
+
+  .start-button {
+    position: relative; /* Evita que se superponga en pantallas pequeñas */
+    margin-top: 20px;
+    bottom: 0;
+    right: 0;
+    transform: none; /* Evita el desplazamiento al pasar el mouse */
+    animation: none; /* Desactiva la animación de pulsación */
+  }
+  
+  .chat-box {
+    padding: var(--padding-small);
+    overflow-y: auto;
+  }
+}
