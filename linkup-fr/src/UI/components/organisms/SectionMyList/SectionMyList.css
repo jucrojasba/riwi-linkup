@@ -1,0 +1,33 @@
+.mainGeneral-section-3d {
+  position: relative;
+  width: 80vw; 
+  height: 80vh; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.section-content-cards-3d {
+  position: relative;
+  width: 70%;
+  height: 60vh;
+}
+
+#card-0 {
+  width: 100%; 
+  height: auto;
+}
+
+.section-buttons-3d {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--main-color);
+}
+
+.button-left, .button-right {
+  cursor: pointer;
+  z-index: 20;
+}

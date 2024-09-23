@@ -91,3 +91,39 @@ div.card > div.card-header > div.header-buttons > .delete-icon:hover {
     height: 320px;
   }
 }
+
+#card-0 {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  transform: rotateY(0deg) translateZ(50px);
+}
+
+#card-1 {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  transform: rotateY(90deg) translateZ(50px);
+}
+
+#card-2 {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  transform: rotateY(180deg) translateZ(50px);
+}
+
+#card-3 {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  transform: rotateY(270deg) translateZ(50px);
+}

@@ -13,18 +13,21 @@ import useNavigate from "@/utilities/NavigateTo";
 import { useLanguage } from "@/global-states/language-mode";
 
 interface ICardProps {
+  id?: string; // Aquí se define la propiedad 'id'
   id_coder?: number;
   url_image?: string;
   alt_image?: string;
   name_user?: string;
   age_user?: string;
   status: boolean;
-  techSkill?:string;
+  techSkill?: string;
   isDarkMode: boolean;
-  setCoders: (value:ICoders) =>void
-  coders:ICoders
+  setCoders: (value: ICoders) => void;
+  coders: ICoders;
 }
+
 export default function Card({
+  id,
   id_coder,
   url_image,
   alt_image,
@@ -33,47 +36,57 @@ export default function Card({
   status,
   isDarkMode,
   coders,
-  setCoders
+  setCoders,
 }: ICardProps): React.ReactNode {
   const router = useRouter();
-  const [loading,setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const navigate = useNavigate();
-  const language =useLanguage((state)=>state.language)
-  const handleClickDelete = async (id_coder:number): Promise<void> => {
-    const isConfirm: boolean = await confirmDeleteAlert(`${language?'¿Deseas eliminar al desarrollador?':'Do you want to delete the developer?'}`, language);
+  const language = useLanguage((state) => state.language);
+
+  const handleClickDelete = async (id_coder: number): Promise<void> => {
+    const isConfirm: boolean = await confirmDeleteAlert(
+      `${
+        language
+          ? "¿Deseas eliminar al desarrollador?"
+          : "Do you want to delete the developer?"
+      }`,
+      language
+    );
     setLoading(true);
-    if(!isConfirm){
+    if (!isConfirm) {
       setLoading(false);
       return;
     }
-    if(!id_coder)return;
+    if (!id_coder) return;
     await deleteCoderService(id_coder);
     setLoading(false);
     inputAlert("coder deleted correctly", "success");
-    const codersFilter = coders.coders.filter((coder:ICoder)=>coder.id !== id_coder);
+    const codersFilter = coders.coders.filter(
+      (coder: ICoder) => coder.id !== id_coder
+    );
     setCoders({
       coders: codersFilter,
-    })
+    });
   };
 
-  
-  const handleUpdate = (coder_id:number) =>{
+  const handleUpdate = (coder_id: number) => {
     setLoading(true);
-    navigate(`admin/updateCoder?coder=${coder_id}`)
-  }
+    navigate(`admin/updateCoder?coder=${coder_id}`);
+  };
 
-  const handleClickMore = (id_coder:number | undefined) => {
-    console.log(id_coder)
+  const handleClickMore = (id_coder: number | undefined) => {
+    console.log(id_coder);
     router.push(`/admin/coder?coder=${id_coder}`);
   };
 
   if (!status) {
     return <CircularLoader flag={true} />;
   }
+
   return (
     <>
-    {loading ? <CircularLoader flag={loading} />: null}
-      <div className={isDarkMode?"card dark-mode":"card"}>
+      {loading ? <CircularLoader flag={loading} /> : null}
+      <div id={id} className={isDarkMode ? "card dark-mode" : "card"}>
         <div className="card-header">
           <img src={url_image} alt={alt_image} width={100} height={80} />
           <div className="header-buttons">
@@ -91,12 +104,14 @@ export default function Card({
         </div>
         <div className="card-body">
           <div className="body-information">
-            <h3 className="body-title">{name_user ? capitalizeSentece(name_user) : "Loading name..."}</h3>
+            <h3 className="body-title">
+              {name_user ? capitalizeSentece(name_user) : "Loading name..."}
+            </h3>
             <h5 className="body-subtitle" style={{ fontWeight: "400" }}>
               {age_user}
             </h5>
           </div>
-          <div onClick={()=>handleClickMore(id_coder)}>
+          <div onClick={() => handleClickMore(id_coder)}>
             <ButtonMore />
           </div>
         </div>
