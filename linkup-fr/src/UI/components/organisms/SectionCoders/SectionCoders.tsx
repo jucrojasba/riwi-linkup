@@ -56,7 +56,7 @@ export default function SectionCoders({render,setRender,isDarkMode}: ISectionCod
 
   useEffect(() => {
     if(render){ // Is rendered when a filter is applied
-        setCoders({coders:codersFilter});
+      setCoders({coders:codersFilter});
     }
   }, [render, codersFilter]);
   // Calculate paginated coders
@@ -96,6 +96,7 @@ export default function SectionCoders({render,setRender,isDarkMode}: ISectionCod
           <Filter render={render} setRender={setRender} />
         </div>
         <div className="section-content-cards">
+          {coders.coders.length === 0 ? <p style={isDarkMode ? { color:'var(--white-color)'}: {color:'var(--paragraph-color)'}}>There are not coders...</p> : ""}
           {loadingRequest ? (
             <CircularLoader flag={true} /> // Display loader when loading
           ) : (
@@ -108,7 +109,7 @@ export default function SectionCoders({render,setRender,isDarkMode}: ISectionCod
                 url_image={coder.urlImage}
                 alt_image={`coder-${coder.name} image`}
                 name_user={coder.name}
-                age_user={`${calculateAge(coder.birthday)} years`}
+                age_user={coder.birthday ? `${calculateAge(coder.birthday)} years` : "0"}
                 status={true}
                 techSkill={techSkill}
                 isDarkMode={isDarkMode}
