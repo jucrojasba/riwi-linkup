@@ -1,4 +1,5 @@
 import { ICoderComplet } from "@/app/api/interfaces/ICoderInterface";
+import { FilterState } from "@/UI/interfaces/Filter";
 import { ICoder, ICoderBack } from "@/UI/interfaces/ICoderInterface";
 import fetchApi from "@/utilities/fetchApi";
 

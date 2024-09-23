@@ -62,7 +62,8 @@ export default function Card({
     setLoading(false);
     inputAlert("coder deleted correctly", "success");
     const codersFilter = coders.coders.filter(
-      (coder: ICoder) => coder.id !== id_coder
+      (coder: Partial<ICoder>) =>
+        coder.id !== undefined && coder.id !== id_coder
     );
     setCoders({
       coders: codersFilter,
