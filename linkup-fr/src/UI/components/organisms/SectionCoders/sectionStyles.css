@@ -52,7 +52,7 @@ section.mainGeneral-section > div.section-buttons {
 @media (max-width: 794px) {
   .create-coder-wraper{
     position: absolute;
-    top:0px;
+    top:15px;
     left:180px;
     width: fit-content;
     height: fit-content;
