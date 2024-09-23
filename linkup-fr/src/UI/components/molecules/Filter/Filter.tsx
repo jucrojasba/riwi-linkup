@@ -7,8 +7,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import { FilterState } from "@/UI/interfaces/Filter";
 import { filterService } from "@/services/filterService";
 import { useCodersFilter } from "@/global-states/coder";
-import { getClansService, getLanguagesService, getSoftSkillsService, getTechnicalSkillsService } from "@/services";
-import { getCodersService } from "@/services/coderService";
+import { getClansService, getCodersService, getLanguagesService, getSoftSkillsService, getTechnicalSkillsService } from "@/services";
 import { useTechSkill } from "@/global-states/techSkill";
 import { useLanguage } from "@/global-states/language-mode";
 import { useDataBackLoad } from "@/global-states/dataBack";
@@ -71,8 +70,9 @@ export default function Filter({ setRender, render }: IFilterProps): ReactNode {
 
   const handleClickButtonFilter = async () => {
     const data = await filterService(checkedStates);
+    console.log("data filter", data);
     if (!data) {
-      console.log({ message: "Error to filter" });
+      console.log(  { message: "Error to filter" });
       return;
     }
     setCodersFilter(data);

@@ -3,8 +3,8 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
 interface ICoderState {
-    CodersFilter: ICoder[];
-    setCodersFilter: (value: ICoder[]) => void;
+    CodersFilter: Partial<ICoder>[];
+    setCodersFilter: (value: Partial<ICoder>[]) => void;
 }
 
 export const useCodersFilter = create<ICoderState>()(

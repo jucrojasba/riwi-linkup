@@ -3,19 +3,22 @@ import { ICoder } from "@/UI/interfaces/ICoderInterface";
 import fetchApi from "@/utilities/fetchApi";
 
 export async function filterService(filter:FilterState){
+    console.log("frontend")
+
     const clan = filter.clans.find(clan=>clan.checked);
     const softSkill = filter.softSkills.find(softSkill => softSkill.checked);
     const techSkill = filter.techSkills.find(techSkill => techSkill.checked);
     const language = filter.languages.find(language => language.checked);
-    const baseUrl:string = "https://linkupv1-production.up.railway.app/api/v3/CodersControllerV3/filter";
+    const baseUrl:string = "/api/filters";
 
     //Add queryParams if exists request for filter
     const paramsQuery = verifyExistsQueryParams(clan,softSkill,techSkill,language);
     //Verify exists values on the queryParams
     if(paramsQuery.length > 0){
         const queryFilterComplete = paramsQuery.join("&");
-        const urlComplete = `${baseUrl}?${queryFilterComplete}`;
-        const data = await fetchApi(urlComplete);
+        const data = await fetchApi("/api/coders/filter", {method:"POST", headers: {"Content-Type": "application/json"},body: JSON.stringify({
+            queryFilterComplete
+        })});
         if(!data)return;
         const filteredCoders = data.map((coder:Partial<ICoder>)=>({
             id: coder.id!,

@@ -41,3 +41,10 @@ interface ILanguage {
     name: string;
     levelId: number;
 }
+
+export interface ICoderFilter{
+    id:number,
+    name:string,
+    birthday:string,
+    urlImage:string
+}

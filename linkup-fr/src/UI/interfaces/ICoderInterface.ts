@@ -6,7 +6,7 @@ export interface ICoder {
 }
 
 export interface ICoders {
-  coders: ICoder[];
+  coders: Partial<ICoder>[];
 }
 
 export interface ICoderBack{

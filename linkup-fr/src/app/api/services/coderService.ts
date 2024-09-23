@@ -1,4 +1,8 @@
-    import { ICoder, ICoderComplet } from "../interfaces/ICoderInterface";
+    import { ICoder, ICoderComplet, ICoderFilter } from "../interfaces/ICoderInterface";
+    import fetchApi from "@/utilities/fetchApi"; // Tu utilidad para hacer fetch
+    import { FilterOption, FilterState } from "@/UI/interfaces/Filter";
+import { verifyExistsQueryParams } from "../utils/verifyExistsQueryParams";
+import { FilterQuery } from "../interfaces/IFilterQueryInterface";
 
     export async function getCoderById(id:number):Promise<ICoder | {message: string}>{
         try{
@@ -46,4 +50,16 @@
         }catch(error){
             return ({message: `Error to getCoders ${error}`})
         }
+    }
+
+    export async function filterCoders(query:string):Promise<ICoderFilter[] | {message:string}> {
+        const endPoint:string = "https://linkupv1-production.up.railway.app/api/v3/CodersControllerV3/filter"
+        const completeQuery:string = `${endPoint}?${query}`;
+        const codersFilter = await fetch(completeQuery, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+        return codersFilter.json();
     }
