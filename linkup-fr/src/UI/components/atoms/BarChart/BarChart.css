@@ -45,3 +45,23 @@
     z-index: 20;
     color:var(--white-color);
   }
+  
+  /* Estilos responsivos para pantallas menores a 794px */
+  @media (max-width: 794px) {
+    #bar-chart {
+      position: relative; /* Cambia a relativo para pantallas pequeñas */
+      top: 0;
+      width: 81%; /* Ocupa todo el ancho disponible */
+      height: auto; /* Deja que la altura se ajuste automáticamente */
+      margin-bottom: 20px; /* Añade un margen para separar si hay otros elementos */
+    }
+  
+    .chart-title, .chart-title-dark-mode {
+      position: relative; /* Cambia a relativo para pantallas pequeñas */
+      top: 60px;
+      left: 20px;
+      text-align: center; /* Centra el título */
+      margin-bottom: 10px; /* Añade espacio debajo del título */
+      font-size: 1.2rem; /* Ajusta el tamaño del texto para pantallas pequeñas */
+    }
+  }
