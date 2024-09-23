@@ -1,4 +1,4 @@
-import "./sectionMyList.css";
+import "./SectionMyList.css";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import calculateAge from "@/utilities/calculateAge";

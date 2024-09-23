@@ -3,6 +3,7 @@
   width: 80vw; 
   height: 80vh; 
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
@@ -19,9 +20,7 @@
 }
 
 .section-buttons-3d {
-  position: absolute;
-  top: 50%;
-  left: 30px;
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -30,4 +29,5 @@
 
 .button-left, .button-right {
   cursor: pointer;
+  z-index: 20;
 }
