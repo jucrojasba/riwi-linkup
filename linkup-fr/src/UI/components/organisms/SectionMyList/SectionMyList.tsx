@@ -75,45 +75,54 @@ export default function SectionMyList({ render, setRender, isDarkMode }: ISectio
   return (
     <>
       {showModal ? <Modal showModal={showModal} setShowModal={setShowModal} /> : null}
-      <section className="mainGeneral-section">
-        <div className="section-content-cards">
-          {loadingRequest ? (
-            <CircularLoader flag={true} /> // Display loader when loading
-          ) : (
-            paginatedCoders.map((coder) => (
-              <Card
-                setCoders={setCoders}
-                coders={coders}
-                id_coder={coder.id}
-                key={coder.id}
-                url_image={coder.urlImage}
-                alt_image={`coder-${coder.name} image`}
-                name_user={coder.name}
-                age_user={`${calculateAge(coder.birthday)} years`}
-                status={true}
-                isDarkMode={isDarkMode}
-              />
-            ))
-          )}
-        </div>
-        <div className="section-buttons">
+      <section className="mainGeneral-section-3d">
+      <div className="section-buttons-3d">
           <KeyboardArrowLeftIcon
             className="button-left"
             onClick={handleBack}
             style={{
               cursor: "pointer",
               visibility: currentPage === 0 ? "hidden" : "visible",
+              width: '60px',
+              height: '60px',
             }}
           />
           <KeyboardArrowRightIcon
             className="button-right"
             onClick={handleNext}
             style={{
+              width: '60px',
+              height: '60px',
               cursor: "pointer",
               visibility:
                 (currentPage + 1) * limitItems >= coders.coders.length ? "hidden" : "visible",
             }}
           />
+        </div>
+        <div className="section-content-cards-3d">
+          {!loadingRequest && (
+            <div className="section-content-cards-3d">
+              {!loadingRequest && (
+            <div className="section-content-cards-3d">
+              <>
+                <Card
+                  id="card-0"
+                  setCoders={setCoders}
+                  coders={coders}
+                  id_coder={paginatedCoders[0]?.id || 0}
+                  key="card-0"
+                  url_image={paginatedCoders[0]?.urlImage || ""}
+                  alt_image={`coder-${paginatedCoders[0]?.name || "unknown"} image`}
+                  name_user={paginatedCoders[0]?.name || ""}
+                  age_user={`${calculateAge(paginatedCoders[0]?.birthday || "")} years`}
+                  status={true}
+                  isDarkMode={isDarkMode}
+                />
+              </>
+            </div>
+          )}
+            </div>
+          )}
         </div>
       </section>
     </>
