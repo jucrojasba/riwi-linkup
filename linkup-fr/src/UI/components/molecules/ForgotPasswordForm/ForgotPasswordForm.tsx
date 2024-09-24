@@ -62,16 +62,8 @@ export default function ForgotPasswordForm(): React.ReactNode {
         });
         inputAlert("Email send correctly.", "success");
     }
-    return(
-        <form action="" className="forgot-password-form-wrapper">
-            <h2>Forgot Password</h2>
-        
-        // Show success alert
-        inputAlert("Email sent correctly.", "success");
-    };
-
     return (
-        <form action="">
+        <form action="" className="forgot-password-form-wrapper">
             <h2>Forgot Password</h2> {/* Form title */}
             {/* Text input for email */}
             <TextInput 
