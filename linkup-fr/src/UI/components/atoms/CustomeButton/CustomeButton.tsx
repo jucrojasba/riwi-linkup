@@ -3,12 +3,12 @@
 import { ButtonProps } from "@/UI/interfaces/Button"; // Import button properties
 import Button from "@mui/material/Button"; // Import Button component from Material-UI
 import { styled } from "@mui/material/styles"; // Import styled function for custom styles
-import { useState } from "react"; // Import useState hook from React
+import React, { useState } from "react"; // Import useState hook from React
 
 // Define additional properties for the custom button
 interface CustomButtonProps extends ButtonProps {
-  initialText: string; // Initial text of the button
-  clickedText: string; // Text displayed when clicked
+  initialText: string | React.ReactElement; // Initial text of the button
+  clickedText: string | React.ReactElement; // Text displayed when clicked
   initialBgColor: string; // Initial background color
   clickedBgColor: string; // Background color after being clicked
   secondOnClick?: (event: React.MouseEvent<HTMLButtonElement>) => void; // Optional function for second click
