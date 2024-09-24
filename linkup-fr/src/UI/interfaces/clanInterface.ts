@@ -1,19 +1,35 @@
-export interface IClan{
+// IClan interface defines the structure for a clan object
+export interface IClan {
+    // Unique identifier for the clan
     id: number;
-    name:string;
-    label:string;
-    checked:boolean;
+
+    // Name of the clan
+    name: string;
+
+    // Label for display purposes (could be used in UI)
+    label: string;
+
+    // Indicates whether the clan is checked (e.g., in a selection)
+    checked: boolean;
 }
 
-export interface IClans{
-    clans:IClan[];
+// IClans interface represents a collection of clans
+export interface IClans {
+    // Array of clan objects adhering to the IClan interface
+    clans: IClan[];
 }
 
-export interface IClanShort{
-    id:number,
-    name:string
+// IClanShort interface defines a simplified structure for a clan object
+export interface IClanShort {
+    // Unique identifier for the clan
+    id: number;
+
+    // Name of the clan
+    name: string;
 }
 
-export interface IClansShort{
-    clans: IClanShort[]
+// IClansShort interface represents a collection of short clan objects
+export interface IClansShort {
+    // Array of short clan objects adhering to the IClanShort interface
+    clans: IClanShort[];
 }

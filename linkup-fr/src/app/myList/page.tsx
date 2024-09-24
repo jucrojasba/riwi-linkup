@@ -1,17 +1,25 @@
-"use client";
-import { useDarkMode } from "@/global-states/dark-mode";
-import { useLanguage } from "@/global-states/language-mode";
-import Route from "@/routes/route";
-import { DashboardLayout } from "@/UI/components/organisms";
-import SectionMyList from "@/UI/components/organisms/SectionMyList/SectionMyList";
-import { useState } from "react";
-export default function MyList():React.ReactNode{
-    const language = useLanguage((state)=>state.language);
-    const [render,setRender] = useState<boolean>(false);
-    const DarkMode = useDarkMode(state => state.DarkMode);
-    return(
-        <Route>
-            <DashboardLayout section={<SectionMyList render={render} setRender={setRender} isDarkMode={DarkMode}/>} language={language} isDarkMode={DarkMode} titleView={language?'Mi Lista':"My List"} subtitle={language?'Lista de desarroladores seleccionados':"List of coders selected"} />
+"use client"; // Indicates that this is a client-side component in Next.js
+
+import { useDarkMode } from "@/global-states/dark-mode"; // Hook for managing dark mode state
+import { useLanguage } from "@/global-states/language-mode"; // Hook for managing language state
+import Route from "@/routes/route"; // Importing the Route component for navigation handling
+import { DashboardLayout } from "@/UI/components/organisms"; // Importing the Dashboard layout component
+
+// Define the MyList functional component
+export default function MyList(): React.ReactNode {
+    // Retrieve the current dark mode state and selected language
+    const isDarkMode = useDarkMode((state) => state.DarkMode);
+    const language = useLanguage((state) => state.language);
+    
+    return (
+        <Route> {/* Wrap the main content in the Route component for routing purposes */}
+            <DashboardLayout 
+                section={<div>dasd</div>} // Placeholder content; replace with actual list rendering
+                language={language} // Pass the current language to the layout
+                isDarkMode={isDarkMode} // Pass the current dark mode state to the layout
+                titleView="MyList" // Title displayed in the layout
+                subtitle="List of coders selected" // Subtitle displayed in the layout
+            />
         </Route>
-    )
+    );
 }

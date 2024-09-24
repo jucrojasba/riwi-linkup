@@ -1,15 +1,21 @@
-import { useAuthUser } from "@/global-states/authUser";
-import { useRouter } from "next/navigation";
+import { useAuthUser } from "@/global-states/authUser"; // Importing the custom hook for authentication state
+import { useRouter } from "next/navigation"; // Importing the router from Next.js for navigation
 
-export default function AccessControl({children}: {children:React.ReactNode}){
-    const {authUser} = useAuthUser();
+// Define the AccessControl component, which takes children as props
+export default function AccessControl({children}: {children: React.ReactNode}) {
+    // Retrieve the authenticated user state
+    const { authUser } = useAuthUser();
+    // Get the router object for navigation
     const router = useRouter();
-    console.log(authUser);
-    if(authUser.email === ""){
+    
+    // If the user's email is empty, redirect to the login page
+    if (authUser.email === "") {
         router.push("/login");
-        return null;
+        return null; // Return null while redirecting
     }
-    return(
+
+    // If the user is authenticated, render the children components
+    return (
         <>{children}</>
-    )
-} 
+    );
+}

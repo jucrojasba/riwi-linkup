@@ -1,31 +1,35 @@
-import "./modalStyles.css";
-import CloseIcon from '@mui/icons-material/Close';
-import { TextInput } from "../../atoms";
-import { ChangeEvent, useEffect, useState } from "react";
-import { MainButton } from "../../atoms";
-import CheckIcon from '@mui/icons-material/Check'; 
-import { SelectChangeEvent } from "@mui/material";
-import SelectOptions from "../../atoms/Select/Select";
-import { IForm } from "@/UI/interfaces/FormInterface";
-import { useDataBackLoad } from "@/global-states/dataBack";
-import TextArea from "../../atoms/TextArea/TextArea";
-import { obtainIdData } from "@/utilities/obtainIdData";
-import { IStructureCreateCoder } from "@/UI/interfaces/structureCreateCoder";
-import { createCoderService } from "@/services/coderService";
-import { inputAlert } from "../../molecules/Alert/Alert";
-import { CircularLoader } from "../../atoms";
-import { ICoders } from "@/UI/interfaces/ICoderInterface";
+import "./modalStyles.css"; // Import styles for the modal
+import CloseIcon from '@mui/icons-material/Close'; // Import close icon
+import { TextInput } from "../../atoms"; // Import TextInput component
+import { ChangeEvent, useEffect, useState } from "react"; // Import React hooks
+import { MainButton } from "../../atoms"; // Import MainButton component
+import CheckIcon from '@mui/icons-material/Check'; // Import check icon
+import { SelectChangeEvent } from "@mui/material"; // Import types for select change events
+import SelectOptions from "../../atoms/Select/Select"; // Import SelectOptions component
+import { IForm } from "@/UI/interfaces/FormInterface"; // Import IForm interface
+import { useDataBackLoad } from "@/global-states/dataBack"; // Hook to fetch data
+import TextArea from "../../atoms/TextArea/TextArea"; // Import TextArea component
+import { obtainIdData } from "@/utilities/obtainIdData"; // Utility function to obtain IDs
+import { IStructureCreateCoder } from "@/UI/interfaces/structureCreateCoder"; // Import interface for coder structure
+import { createCoderService } from "@/services/coderService"; // Service to create a coder
+import { inputAlert } from "../../molecules/Alert/Alert"; // Alert utility
+import { CircularLoader } from "../../atoms"; // Loader component
+import { ICoders } from "@/UI/interfaces/ICoderInterface"; // Import coder interface
 
+// Define the props for the Modal component
 interface IModalProps {
-    showModal: boolean;
-    setShowModal: (value: boolean) => void;
+    showModal: boolean; // State to control modal visibility
+    setShowModal: (value: boolean) => void; // Function to set modal visibility
 }
 
-
-export function Modal({ showModal, setShowModal,     }: IModalProps): React.ReactNode {
+// Main Modal component
+export function Modal({ showModal, setShowModal }: IModalProps): React.ReactNode {
+    // Fetch data from global state
     const dataBack = useDataBackLoad((state) => state.dataBack);
-    const {genders, clans, languages, softSkills, techSkills} = dataBack;
-    const [loading, setLoading] = useState<boolean>(false);
+    const { genders, clans, languages, softSkills, techSkills } = dataBack;
+
+    const [loading, setLoading] = useState<boolean>(false); // Loading state
+    // Initial form data
     const dataForm: IForm = {
         name: "",
         birthday: "",
@@ -35,31 +39,39 @@ export function Modal({ showModal, setShowModal,     }: IModalProps): React.Reac
         softSkill: "",
         language: "",
         techSkill: "",
-        description:""
-    }
-
-    const [selectedValue, setSelectedValue] = useState(dataForm);
-    const handleChange = (e: SelectChangeEvent | ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-        const {name, value} = e.target; 
-        setSelectedValue((prevState) => ({
-            ...prevState,
-            [name]: name === "birthday" ? new Date(value) : value,
-        }))
+        description: ""
     };
 
-    const handleClickCreate = async() => {
-        setLoading(true);
-        const {name,birthday,description,urlImage,gender, clan, softSkill, language,techSkill} = selectedValue;
-        const genderSelectedId:number | null  = obtainIdData(genders, gender);
-        const clanSelectedId:number | null = obtainIdData(clans, clan);
-        const softSkillId:number | null = obtainIdData(softSkills, softSkill);
-        const languageId:number | null = obtainIdData(languages, language);
-        const techSkillId:number | null = obtainIdData(techSkills, techSkill);
+    const [selectedValue, setSelectedValue] = useState(dataForm); // State to hold form values
 
-        if(!clanSelectedId || !softSkillId || !techSkillId || !languageId || !genderSelectedId ){
-            return ({message: "Error, Is required the params selected"});
+    // Handle changes in input fields
+    const handleChange = (e: SelectChangeEvent | ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+        const { name, value } = e.target; 
+        setSelectedValue((prevState) => ({
+            ...prevState,
+            [name]: name === "birthday" ? new Date(value) : value, // Convert birthday to Date object
+        }));
+    };
+
+    // Handle the creation of a new coder
+    const handleClickCreate = async () => {
+        setLoading(true); // Start loading
+        const { name, birthday, description, urlImage, gender, clan, softSkill, language, techSkill } = selectedValue;
+
+        // Obtain IDs for selected values
+        const genderSelectedId: number | null = obtainIdData(genders, gender);
+        const clanSelectedId: number | null = obtainIdData(clans, clan);
+        const softSkillId: number | null = obtainIdData(softSkills, softSkill);
+        const languageId: number | null = obtainIdData(languages, language);
+        const techSkillId: number | null = obtainIdData(techSkills, techSkill);
+
+        // Check if all required fields are selected
+        if (!clanSelectedId || !softSkillId || !techSkillId || !languageId || !genderSelectedId) {
+            return ({ message: "Error, required parameters are missing" });
         }
-        const coder:IStructureCreateCoder = {
+
+        // Prepare coder object for creation
+        const coder: IStructureCreateCoder = {
             name,
             birthday,
             description,
@@ -74,44 +86,53 @@ export function Modal({ showModal, setShowModal,     }: IModalProps): React.Reac
             }],
             technicalSkills: [{
                 id: techSkillId,
-                technicalSkillName:techSkill,
+                technicalSkillName: techSkill,
                 levelId: 1,
-                levelName: "Avanzado"
+                levelName: "Advanced"
             }]
         };
 
+        // Call service to create coder
         const coderCreated = await createCoderService(coder);
         console.log(coderCreated);
-        if(!coderCreated){
-            inputAlert("Error to create user", "error");
-            return ({message: coderCreated})
-        };
+        if (!coderCreated) {
+            inputAlert("Error creating user", "error");
+            return ({ message: coderCreated });
+        }
         inputAlert("Coder created successfully", "success");
-        setLoading(false);
-        setShowModal(false);
+        setLoading(false); // Stop loading
+        setShowModal(false); // Close modal
     };
 
-
+    // Handle modal close
     const handleClickClose = () => {
         console.log("close");
-        setShowModal(false);
+        setShowModal(false); // Close modal
     };
 
+    // Render the modal if showModal is true
     if (showModal) {
         return (
             <>
-            {loading ? <CircularLoader flag={loading} /> : null}
+                {loading ? <CircularLoader flag={loading} /> : null} {/* Show loader if loading */}
                 <div className="content-modal">
                     <div className="modal">
                         <div onClick={handleClickClose}>
-                            <CloseIcon sx={
-                                {position: "absolute", top: "15px", right: "15px", backgroundColor: "var(--red-color)", borderRadius: "5px", color: "var(--white-color)", padding: "2px", cursor: "pointer"}
-                                } />
+                            <CloseIcon sx={{
+                                position: "absolute", 
+                                top: "15px", 
+                                right: "15px", 
+                                backgroundColor: "var(--red-color)", 
+                                borderRadius: "5px", 
+                                color: "var(--white-color)", 
+                                padding: "2px", 
+                                cursor: "pointer"
+                            }} />
                         </div>
                         <form className="modal-information">
                             <div className="information-name-birthday">
                                 <TextInput 
-                                    label="name"
+                                    label="Name"
                                     name="name"
                                     onChange={handleChange}
                                     type="text"
@@ -128,64 +149,60 @@ export function Modal({ showModal, setShowModal,     }: IModalProps): React.Reac
                                 /> 
                             </div>
                             <TextArea
-                            name="description"
-                            onChange={handleChange}
-                            value={selectedValue.description}
-                            placeholder="Enter description"
+                                name="description"
+                                onChange={handleChange}
+                                value={selectedValue.description}
+                                placeholder="Enter description"
                             />
-
                             <TextInput 
-                                label="url-image"
+                                label="URL Image"
                                 name="urlImage"
                                 onChange={handleChange}
                                 type="text"
                                 error={false}
                                 required={true} 
                             />
-
                             <div className="information-gender-clans">
                                 <SelectOptions
-                                    label="genders"
+                                    label="Genders"
                                     name="gender"
                                     onChange={handleChange}
-                                    values={genders.map((gender)=>gender.name)}
+                                    values={genders.map((gender) => gender.name)}
                                     value={selectedValue.gender}
                                 />
                                 <SelectOptions
-                                    label="clans"
+                                    label="Clans"
                                     name="clan"
                                     onChange={handleChange}
-                                    values={clans.map((clan)=>clan.name)}
+                                    values={clans.map((clan) => clan.name)}
                                     value={selectedValue.clan}
                                 />
                             </div>
-
                             <SelectOptions
-                                label="softSkills"
+                                label="Soft Skills"
                                 name="softSkill"
                                 onChange={handleChange}
-                                values={softSkills.map((softSkill)=>softSkill.name)}
+                                values={softSkills.map((softSkill) => softSkill.name)}
                                 value={selectedValue.softSkill}
                             />
-                            
                             <div className="information-languages-techSkills">
                                 <SelectOptions
-                                    label="languages"
+                                    label="Languages"
                                     name="language"
                                     onChange={handleChange}
-                                    values={languages.map((language)=>language.name)}
+                                    values={languages.map((language) => language.name)}
                                     value={selectedValue.language}
                                 />
                                 <SelectOptions
-                                    label="techSkills"
+                                    label="Tech Skills"
                                     name="techSkill"
                                     onChange={handleChange}
-                                    values={techSkills.map((techSkill)=>techSkill.name)}
+                                    values={techSkills.map((techSkill) => techSkill.name)}
                                     value={selectedValue.techSkill}
                                 />
                             </div>
                             <MainButton
-                                text={"Create coder"}
+                                text={"Create Coder"}
                                 onClick={handleClickCreate}
                                 icon={<CheckIcon />}
                                 className="button-create"
@@ -196,6 +213,6 @@ export function Modal({ showModal, setShowModal,     }: IModalProps): React.Reac
             </>
         );
     } else {
-        return null;
+        return null; // If modal is not shown, return null
     }
 }

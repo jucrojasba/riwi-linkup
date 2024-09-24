@@ -1,32 +1,34 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import RiwiLogo from "../../atoms/RiwiLogo/RiwiLogo";
-import MobileNavbar from "../../molecules/MobileNavbar/MobileNavbar";
-import NavbarHome from "../../molecules/NavbarHome/NavbarHome";
-import UtilityRightButtons from "../../molecules/UtilityRightButtons/UtilityRightButtons";
+import RiwiLogo from "../../atoms/RiwiLogo/RiwiLogo"; // Importing the Riwi logo component
+import MobileNavbar from "../../molecules/MobileNavbar/MobileNavbar"; // Importing the mobile navbar component
+import NavbarHome from "../../molecules/NavbarHome/NavbarHome"; // Importing the home navbar component
+import UtilityRightButtons from "../../molecules/UtilityRightButtons/UtilityRightButtons"; // Importing utility buttons for the layout
 
+// Define props for the AuthLayout component
 interface IAuthLayoutProps {
-    isDarkMode: boolean;
-    language: boolean;
+    isDarkMode: boolean; // Indicates if dark mode is enabled
+    language: boolean; // Indicates the current language (true for Spanish, false for English)
 }
 
+// Functional component for authentication layout
 const AuthLayout: React.FC<IAuthLayoutProps> = ({ isDarkMode, language }) => {
-    const [isMediumScreen, setIsMediumScreen] = useState(false);
+    const [isMediumScreen, setIsMediumScreen] = useState(false); // State to track screen size
 
     useEffect(() => {
-        // Obtiene el valor de la variable CSS --breakpoint-md
+        // Retrieve the value of the CSS variable --breakpoint-md
         const breakpoint = getComputedStyle(document.documentElement).getPropertyValue('--breakpoint-md').trim();
-        const mediaQuery = window.matchMedia(`(max-width: ${breakpoint})`);
-        const handleResize = () => setIsMediumScreen(mediaQuery.matches);
+        const mediaQuery = window.matchMedia(`(max-width: ${breakpoint})`); // Create a media query
+        const handleResize = () => setIsMediumScreen(mediaQuery.matches); // Update state based on media query match
 
-        // Inicializa el estado
+        // Initialize the state
         handleResize();
 
-        // Agrega el listener
+        // Add event listener for changes in screen size
         mediaQuery.addEventListener('change', handleResize);
 
-        // Cleanup
+        // Cleanup function to remove the event listener on unmount
         return () => {
             mediaQuery.removeEventListener('change', handleResize);
         };
@@ -34,10 +36,13 @@ const AuthLayout: React.FC<IAuthLayoutProps> = ({ isDarkMode, language }) => {
 
     return (
         <>
+            {/* Conditional rendering based on screen size */}
             {isMediumScreen ? (
-                <MobileNavbar isDarkMode={isDarkMode} language={language}/>
+                // Render mobile navbar for medium or smaller screens
+                <MobileNavbar isDarkMode={isDarkMode} language={language} />
             ) : (
                 <>
+                    {/* Render standard navbar and utility buttons for larger screens */}
                     <NavbarHome isDarkMode={isDarkMode} />
                     <UtilityRightButtons isDarkMode={isDarkMode} />
                     <RiwiLogo isDarkMode={isDarkMode} />
