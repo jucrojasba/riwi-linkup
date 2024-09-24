@@ -8,8 +8,8 @@ import { decryptEmailService } from "@/services/encryptEmailService";
 import { IPassword } from "@/UI/interfaces/IPasswordInterface";
 import { patchResetPasswordUser } from "@/services/userService";
 import useNavigate from "@/utilities/NavigateTo";
-import './RecoveryPassword.css'
-        
+import './RecoveryPassword.css';
+
 function RecoveryPasswordFormContent() {
   // Get search parameters from the URL
   const searchParams = useSearchParams();
@@ -78,9 +78,9 @@ function RecoveryPasswordFormContent() {
 
   return (
     <form className="recovery-form-wrapper">
-            <div>
-                <h1>Recovery Password</h1>
-            </div>
+      <div>
+        <h1>Recovery Password</h1>
+      </div>
       {showInputs ? ( // Conditional rendering based on showInputs state
         <div className="input-code">
           <TextInput
@@ -90,12 +90,12 @@ function RecoveryPasswordFormContent() {
             required // Mark input as required
             type="password" // Input type for password
           />
-          <MainButton text="confirm" onClick={handleClickChangePassword} /> // Button to confirm password change
+          <MainButton text="confirm" onClick={handleClickChangePassword} /> {/* Button to confirm password change */}
         </div>
       ) : ( // If showInputs is false
         <>
-          <TextInput label="Code" name="code" onChange={handleChange} required type="text" /> // Input for recovery code
-          <MainButton text="confirm" onClick={handleClick} /> // Button to confirm recovery code
+          <TextInput label="Code" name="code" onChange={handleChange} required type="text" /> {/* Input for recovery code */}
+          <MainButton text="confirm" onClick={handleClick} /> {/* Button to confirm recovery code */}
         </>
       )}
     </form>
@@ -105,8 +105,8 @@ function RecoveryPasswordFormContent() {
 // Export the main component wrapped in Suspense for lazy loading
 export default function RecoveryPasswordForm() {
   return (
-    <Suspense fallback={<div>Loading...</div>}> // Fallback content while loading
-      <RecoveryPasswordFormContent /> // Main content of the form
+    <Suspense fallback={<div>Loading...</div>}> {/* Fallback content while loading */}
+      <RecoveryPasswordFormContent /> {/* Main content of the form */}
     </Suspense>
   );
 }

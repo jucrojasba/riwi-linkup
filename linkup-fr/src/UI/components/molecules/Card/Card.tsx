@@ -88,7 +88,7 @@ const Card: React.FC<ICardProps> = ({
   };
 
   const handleImageError = () => {
-    setCurrentImage("/images/imageDefault.jpg"); // Cargar imagen por defecto
+    setCurrentImage("/images/imageDefault.jpg"); // Load image for filter
   };
 
   // If the status is false, show a loading spinner
@@ -105,7 +105,7 @@ const Card: React.FC<ICardProps> = ({
           alt={alt_image} 
           width={100} 
           height={80}
-          onError={handleImageError} // Manejar error de carga
+          onError={handleImageError} 
         />
         <div className="header-buttons">
           <EditIcon

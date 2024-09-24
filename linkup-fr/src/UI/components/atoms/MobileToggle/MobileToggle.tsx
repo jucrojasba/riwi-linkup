@@ -43,7 +43,7 @@ const MobileToggle: React.FC<MobileToggleProps> = ({ language }) => {
                 onClick={handleClick} // Handle click to open menu
                 sx={{ color: 'var(--main-color)' }} // Custom color
             >
-                <MenuIcon /> // Menu icon
+                <MenuIcon /> {/* Menu icon */}
             </IconButton>
             <Menu
                 id="toggle-menu"
@@ -76,10 +76,10 @@ const MobileToggle: React.FC<MobileToggleProps> = ({ language }) => {
                         onClick={() => { navigate(option.href); }} // Handle navigation on item click
                         sx={{ color: 'var(--white-color)' }} // Ensure menu item text color
                     >
-                        {option.text} // Menu item text
+                        {option.text} {/* Menu item text */}
                     </MenuItem>
                 ))}
-                <LanguageSelector showBoxShadow={true} /> // Language selector
+                <LanguageSelector showBoxShadow={true} /> {/* Language selector */}
             </Menu>
         </div>
     );
