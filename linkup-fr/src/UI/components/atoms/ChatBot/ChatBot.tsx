@@ -2,42 +2,50 @@ import { useState, useEffect, ChangeEvent, MouseEvent } from 'react';
 import SendIcon from '@mui/icons-material/Send';
 import './ChatBot.css';
 
+// Interface for the props that the ChatBot component will receive
 interface ChatBotProps {
-  botImage: string;
-  userImage: string;
-  language: boolean;
-  isDarkMode: boolean;
+  botImage: string; // Image URL for the bot
+  userImage: string; // Image URL for the user
+  language: boolean; // Language flag for translation (true for Spanish, false for English)
+  isDarkMode: boolean; // Dark mode flag
 }
 
+// Interface for message structure
 interface Message {
-  text: string;
-  isBot: boolean;
+  text: string; // Message text
+  isBot: boolean; // Boolean to check if the message is from the bot
 }
 
+// ChatBot component definition
 const ChatBot: React.FC<ChatBotProps> = ({ botImage, userImage, language, isDarkMode }) => {
+  // State to manage the visibility of the message form
   const [showMessageForm, setShowMessageForm] = useState<boolean>(false);
+  // State to manage the current message input
   const [message, setMessage] = useState<string>('');
+  // State to hold the list of messages exchanged
   const [messages, setMessages] = useState<Message[]>([
     { text: `${language ? "¡Hola! ¿En qué puedo ayudarte?" : "Hello! How can I help you?"}`, isBot: true }
   ]);
+  // State to manage the conversation stage
   const [stage, setStage] = useState<'initial' | 'confirm' | 'final'>('initial');
 
-  // useEffect para actualizar mensajes cuando cambie el idioma (language)
+  // Effect to update messages when the language changes
   useEffect(() => {
     setMessages((prevMessages) =>
       prevMessages.map((msg) =>
         msg.isBot
           ? {
               ...msg,
-              text: translateMessage(msg.text, language) // Función para traducir
+              text: translateMessage(msg.text, language) // Translate the bot's messages
             }
           : msg
       )
     );
-  }, [language]);
+  }, [language]); // Dependency array: re-run effect when language changes
 
+  // Function to translate messages based on the selected language
   const translateMessage = (text: string, language: boolean): string => {
-    // Traduce los mensajes existentes según el idioma
+    // Define translations for certain messages
     const translations: { [key: string]: { es: string; en: string } } = {
       "¡Hola! ¿En qué puedo ayudarte?": {
         es: "¡Hola! ¿En qué puedo ayudarte?",
@@ -61,28 +69,33 @@ const ChatBot: React.FC<ChatBotProps> = ({ botImage, userImage, language, isDark
       },
     };
 
-    // Busca la traducción según el idioma
+    // Search for the translation of the given text
     for (const [key, value] of Object.entries(translations)) {
       if (text === value.es || text === value.en) {
-        return language ? value.es : value.en;
+        return language ? value.es : value.en; // Return the translated message
       }
     }
 
-    return text; // Si no encuentra una traducción, devuelve el texto original
+    return text; // If no translation is found, return the original text
   };
 
+  // Handle button click to show the message form
   const handleButtonClick = (e: MouseEvent<HTMLButtonElement>): void => {
     setShowMessageForm(true);
   };
 
+  // Handle changes in the input field
   const handleInputChange = (e: ChangeEvent<HTMLTextAreaElement>): void => {
-    setMessage(e.target.value);
+    setMessage(e.target.value); // Update message state with the input value
   };
 
+  // Handle sending the message
   const handleSendMessage = (e: MouseEvent<HTMLButtonElement>): void => {
-    e.preventDefault();
+    e.preventDefault(); // Prevent default button behavior
 
+    // Handling based on the current stage of conversation
     if (stage === 'initial') {
+      // Add user's message and bot's response to the message list
       setMessages([
         ...messages,
         { text: message, isBot: false },
@@ -94,8 +107,9 @@ const ChatBot: React.FC<ChatBotProps> = ({ botImage, userImage, language, isDark
           isBot: true,
         },
       ]);
-      setStage('confirm');
+      setStage('confirm'); // Move to the confirm stage
     } else if (stage === 'confirm') {
+      // Check user confirmation
       if (message.toLowerCase() === 'sí' || message.toLowerCase() === 'si' || message.toLowerCase() === 'yes') {
         setMessages([
           ...messages,
@@ -103,30 +117,30 @@ const ChatBot: React.FC<ChatBotProps> = ({ botImage, userImage, language, isDark
           {
             text: `${language
               ? "Voy a redirigirte a WhatsApp para hablar con alguien de Riwi."
-              : 'I’m going to redirect you to WhatsApp to chat with someone from Riwi.'
-              }`,
+              : 'I’m going to redirect you to WhatsApp to chat with someone from Riwi.'}`,
             isBot: true,
           },
         ]);
-        const encodedMessage = encodeURIComponent(message);
-        window.open(`https://api.whatsapp.com/send?phone=+573007446873&text=${encodedMessage}`);
+        const encodedMessage = encodeURIComponent(message); // Encode message for URL
+        window.open(`https://api.whatsapp.com/send?phone=+573007446873&text=${encodedMessage}`); // Redirect to WhatsApp
       } else {
+        // Handle case when user does not want to continue
         setMessages([
           ...messages,
           { text: message, isBot: false },
           {
             text: `${language
               ? "Lo siento, no puedo ayudarte en este momento. Por favor, intenta más tarde."
-              : "I'm sorry, I can't assist you right now. Please try again later."
-              }`,
+              : "I'm sorry, I can't assist you right now. Please try again later."}`,
             isBot: true,
           },
         ]);
-        setStage('final');
+        setStage('final'); // Move to the final stage
       }
-      setMessage('');
-      setShowMessageForm(false);
+      setMessage(''); // Reset the message input
+      setShowMessageForm(false); // Hide the message form
     } else if (stage === 'final') {
+      // Handle the final stage of the conversation
       setMessages([
         ...messages,
         { text: message, isBot: false },
@@ -135,9 +149,9 @@ const ChatBot: React.FC<ChatBotProps> = ({ botImage, userImage, language, isDark
           isBot: true,
         },
       ]);
-      setStage('initial');
-      setMessage('');
-      setShowMessageForm(true);
+      setStage('initial'); // Reset to the initial stage
+      setMessage(''); // Clear the message input
+      setShowMessageForm(true); // Show the message form again
     }
   };
 
@@ -152,11 +166,11 @@ const ChatBot: React.FC<ChatBotProps> = ({ botImage, userImage, language, isDark
             key={index}
             className={msg.isBot ? 'bot-message-container' : 'user-message-container'}
           >
-            {msg.isBot && <img src={botImage} alt="Bot" className="bot-image" />}
+            {msg.isBot && <img src={botImage} alt="Bot" className="bot-image" />} {/* Display bot image */}
             <div className={msg.isBot ? 'bot-message' : 'user-message'}>
-              {msg.text}
+              {msg.text} {/* Display the message text */}
             </div>
-            {!msg.isBot && <img src={userImage} alt="User" className="user-image" />}
+            {!msg.isBot && <img src={userImage} alt="User" className="user-image" />} {/* Display user image */}
           </div>
         ))}
       </div>
@@ -169,7 +183,7 @@ const ChatBot: React.FC<ChatBotProps> = ({ botImage, userImage, language, isDark
             className={isDarkMode ? 'textarea-dark-mode' : "textarea"}
           />
           <button onClick={handleSendMessage} className="send-button">
-            <SendIcon className="send-icon" />
+            <SendIcon className="send-icon" /> {/* Send icon */}
           </button>
         </div>
       )}
@@ -180,4 +194,4 @@ const ChatBot: React.FC<ChatBotProps> = ({ botImage, userImage, language, isDark
   );
 };
 
-export default ChatBot;
+export default ChatBot; // Export the ChatBot component for use in other parts of the application

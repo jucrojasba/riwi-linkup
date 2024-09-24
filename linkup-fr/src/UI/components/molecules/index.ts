@@ -1,16 +1,18 @@
-import LogInForm from "./LogInForm/LogInForm";
-import Card from "./Card/Card";
-import Filter from "./Filter/Filter";
-import Footer from "./Footer/Footer";
-import Sidebar from "./Sidebar/Sidebar";
-import NavbarHome from "./NavbarHome/NavbarHome";
-import RegisterForm from "./RegisterForm/RegisterForm";
-import Search from "./Search/Search";
-import Header from "./Header/Header";
-import UtilityRightButtons from "./UtilityRightButtons/UtilityRightButtons";
-import HeaderProfile from './ProfileHeader/ProfileHeader';
-import MainProfile from './ProfileMain/ProfileMain';
+// Importing various components from their respective directories
+import LogInForm from "./LogInForm/LogInForm"; // Login form component
+import Card from "./Card/Card"; // Card component for displaying content
+import Filter from "./Filter/Filter"; // Filter component for filtering items
+import Footer from "./Footer/Footer"; // Footer component
+import Sidebar from "./Sidebar/Sidebar"; // Sidebar navigation component
+import NavbarHome from "./NavbarHome/NavbarHome"; // Navigation bar for the home page
+import RegisterForm from "./RegisterForm/RegisterForm"; // Registration form component
+import Search from "./Search/Search"; // Search component for searching items
+import Header from "./Header/Header"; // Header component
+import UtilityRightButtons from "./UtilityRightButtons/UtilityRightButtons"; // Utility buttons on the right side
+import HeaderProfile from './ProfileHeader/ProfileHeader'; // Profile header component
+import MainProfile from './ProfileMain/ProfileMain'; // Main profile component
 
+// Exporting all the imported components for use in other parts of the application
 export {
   LogInForm,
   Card,

@@ -1,10 +1,12 @@
-export interface ISoftSkill{
-    id: number;
-    name:string;
-    label:string;
-    checked:boolean;
+// Interface representing a single soft skill
+export interface ISoftSkill {
+    id: number;         // Unique identifier for the soft skill
+    name: string;      // Name of the soft skill
+    label: string;     // Label for display purposes
+    checked: boolean;  // Indicates if the soft skill is selected
 }
 
-export interface ISoftSkills{
-    clans:ISoftSkill[];
+// Interface representing a collection of soft skills
+export interface ISoftSkills {
+    clans: ISoftSkill[]; // Array of ISoftSkill objects
 }
