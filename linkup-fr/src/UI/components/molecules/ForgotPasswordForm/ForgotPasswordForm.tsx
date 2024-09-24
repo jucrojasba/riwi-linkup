@@ -1,12 +1,13 @@
-import React, { ChangeEvent, useState } from "react"; // Import React and relevant hooks
-import { TextInput } from "../../atoms"; // Import TextInput component
-import { MainButton } from "../../atoms"; // Import MainButton component
-import { getUserServiceByEmail } from "@/services/userService"; // Import service to get user by email
-import { inputAlert } from "../Alert/Alert"; // Import alert function to show messages
-import { generateTextEmailForgotPassword } from "@/utilities/EmailText"; // Import utility to generate email text for forgot password
-import { emailService } from "@/services/emailService"; // Import email service to send emails
-import { generateKeyService } from "@/services/generaKeyService"; // Import service to generate a key
-import { encryptEmailService } from "@/services/encryptEmailService"; // Import service to encrypt email
+import React, { ChangeEvent, useState } from "react";
+import { TextInput } from "../../atoms";
+import {MainButton} from "../../atoms";
+import { getUserServiceByEmail } from "@/services/userService";
+import { inputAlert } from "../Alert/Alert";
+import { generateTextEmailCorrect, generateTextEmailForgotPassword } from "@/utilities/EmailText";
+import { emailService } from "@/services/emailService";
+import { generateKeyService } from "@/services/generaKeyService";
+import { encryptEmailService } from "@/services/encryptEmailService";
+import './ForgotPassword.css';
 
 // ForgotPasswordForm component
 export default function ForgotPasswordForm(): React.ReactNode {
@@ -59,6 +60,11 @@ export default function ForgotPasswordForm(): React.ReactNode {
             subject: "Forgot password", // Email subject
             text: textEmail // Email body
         });
+        inputAlert("Email send correctly.", "success");
+    }
+    return(
+        <form action="" className="forgot-password-form-wrapper">
+            <h2>Forgot Password</h2>
         
         // Show success alert
         inputAlert("Email sent correctly.", "success");

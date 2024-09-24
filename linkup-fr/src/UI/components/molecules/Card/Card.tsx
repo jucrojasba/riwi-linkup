@@ -14,6 +14,7 @@ import { useLanguage } from "@/global-states/language-mode"; // Importing langua
 
 // Interface for card props
 interface ICardProps {
+  id?: string; // Aquí se define la propiedad 'id'
   id_coder?: number; // Optional coder ID
   url_image?: string; // Optional image URL
   alt_image?: string; // Optional alt text for image
@@ -28,6 +29,7 @@ interface ICardProps {
 
 // Functional component for Card
 export default function Card({
+  id,
   id_coder,
   url_image,
   alt_image,
@@ -36,8 +38,23 @@ export default function Card({
   status,
   isDarkMode,
   coders,
-  setCoders
+  setCoders,
 }: ICardProps): React.ReactNode {
+  const router = useRouter();
+  const [loading, setLoading] = useState<boolean>(false);
+  const navigate = useNavigate();
+  const language = useLanguage((state) => state.language);
+
+  const handleClickDelete = async (id_coder: number): Promise<void> => {
+    const isConfirm: boolean = await confirmDeleteAlert(
+      `${
+        language
+          ? "¿Deseas eliminar al desarrollador?"
+          : "Do you want to delete the developer?"
+      }`,
+      language
+    );
+    setLoading(true);
   const router = useRouter(); // Initialize the router
   const [loading, setLoading] = useState<boolean>(false); // Loading state for async actions
   const navigate = useNavigate(); // Initialize custom navigation hook
@@ -77,6 +94,14 @@ export default function Card({
     });
   };
 
+  const handleUpdate = (coder_id: number) => {
+    setLoading(true);
+    navigate(`admin/updateCoder?coder=${coder_id}`);
+  };
+
+  const handleClickMore = (id_coder: number | undefined) => {
+    console.log(id_coder);
+    router.push(`/admin/coder?coder=${id_coder}`);
   // Function to handle coder update
   const handleUpdate = (coder_id: number) => {
     setLoading(true); // Set loading state
@@ -96,6 +121,8 @@ export default function Card({
 
   return (
     <>
+      {loading ? <CircularLoader flag={loading} /> : null}
+      <div id={id} className={isDarkMode ? "card dark-mode" : "card"}>
       {loading ? <CircularLoader flag={loading} /> : null} {/* Show loader if loading */}
       <div className={isDarkMode ? "card dark-mode" : "card"}> {/* Card styling based on dark mode */}
         <div className="card-header">

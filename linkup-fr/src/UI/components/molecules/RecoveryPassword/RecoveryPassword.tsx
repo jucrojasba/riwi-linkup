@@ -1,14 +1,15 @@
-import { ChangeEvent, useState, useEffect, Suspense } from "react"; // Import necessary hooks and components from React
-import { TextInput } from "../../atoms"; // Import custom TextInput component
-import { IFormRecovery } from "@/UI/interfaces/IFormRecovery"; // Import interface for recovery form
-import { MainButton } from "../../atoms"; // Import custom MainButton component
-import { useSearchParams } from "next/navigation"; // Import hook to access search parameters in URL
-import { inputAlert } from "../Alert/Alert"; // Import function to show alerts
-import { decryptEmailService } from "@/services/encryptEmailService"; // Import service to decrypt email
-import { IPassword } from "@/UI/interfaces/IPasswordInterface"; // Import interface for password form
-import { patchResetPasswordUser } from "@/services/userService"; // Import service to reset user password
-import useNavigate from "@/utilities/NavigateTo"; // Import custom navigation utility
-
+import { ChangeEvent, useState, useEffect, Suspense } from "react";
+import { TextInput } from "../../atoms";
+import { IFormRecovery } from "@/UI/interfaces/IFormRecovery";
+import { MainButton } from "../../atoms";
+import { useSearchParams } from "next/navigation";
+import { inputAlert } from "../Alert/Alert";
+import { decryptEmailService } from "@/services/encryptEmailService";
+import { IPassword } from "@/UI/interfaces/IPasswordInterface";
+import { patchResetPasswordUser } from "@/services/userService";
+import useNavigate from "@/utilities/NavigateTo";
+import './RecoveryPassword.css'
+        
 function RecoveryPasswordFormContent() {
   // Get search parameters from the URL
   const searchParams = useSearchParams();
@@ -76,7 +77,10 @@ function RecoveryPasswordFormContent() {
   };
 
   return (
-    <form>
+    <form className="recovery-form-wrapper">
+            <div>
+                <h1>Recovery Password</h1>
+            </div>
       {showInputs ? ( // Conditional rendering based on showInputs state
         <div className="input-code">
           <TextInput

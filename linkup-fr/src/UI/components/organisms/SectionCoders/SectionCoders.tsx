@@ -150,11 +150,11 @@ export default function SectionCoders({ render, setRender, isDarkMode }: ISectio
           />
         </div>
         <div className="create-coder-wraper">
-          <ButtonMore
-            text="Create" // Button text
-            className="button-create-coder"
-            onClick={handleCreateCoder} // Click handler to create coder
-          />
+        <ButtonMore 
+        text={language?'Crear':"Create"}
+        className="button-create-coder"
+        onClick={handleCreateCoder}
+        />
         </div>
       </section>
     </>

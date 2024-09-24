@@ -8,6 +8,7 @@
     align-items: center;
     gap:var(--padding-medium);
     min-width: 80%;
+    width: 100%;
 }
 .header-profile-dark{
     background-color: var(--background-dark-mode);
@@ -19,6 +20,7 @@
     align-items: center;
     gap:var(--padding-medium);
     min-width: 80%;
+    width: 100%;
 }
 
 img.profile-image-config{

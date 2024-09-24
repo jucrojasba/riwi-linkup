@@ -1,15 +1,27 @@
-"use client"; // Indicates that this is a client component in Next.js
+"use client";
+import "./recoveryPasswordStyles.css";
+import Route from "@/routes/route";
+import { AuthLayout, DashboardCardsContainer } from "@/UI/components/organisms";
+import { useLanguage } from "@/global-states/language-mode";
+import { UtilityRightButtons } from "@/UI/components/molecules";
+import { RiwiLogo } from "@/UI/components/atoms";
+import RecoveryPasswordForm from "@/UI/components/molecules/RecoveryPassword/RecoveryPassword";
+import { useDarkMode } from "@/global-states/dark-mode";
+import Image from "next/image";
 
-import RecoveryPasswordForm from "@/UI/components/molecules/RecoveryPassword/RecoveryPassword"; // Import the RecoveryPasswordForm component
-
-// Define the RecoveryPassword functional component
-export default function RecoveryPassword(): React.ReactNode {
+export default function RecoveryPasswordView() {
+    const language = useLanguage((state) => state.language);
+    const DarkMode = useDarkMode((state)=>state.DarkMode);
     return (
-        <main> {/* Main container for the recovery password view */}
-            <div>
-                <h1>Recovery Password</h1> {/* Title of the page */}
-            </div>
-            <RecoveryPasswordForm /> {/* Render the recovery password form component */}
-        </main>
-    );
+        <Route>
+            <main className="main-recovery">
+                <UtilityRightButtons responsive={true} isDarkMode={DarkMode} />
+                <RiwiLogo isDarkMode={DarkMode} responsive={true}/>
+                <AuthLayout isDarkMode={DarkMode} language={language}/>
+                <section className={DarkMode ? "dark-mode" : "recovery-password-section"}>
+                    <RecoveryPasswordForm />
+                </section>
+            </main>
+        </Route>
+    )
 }
