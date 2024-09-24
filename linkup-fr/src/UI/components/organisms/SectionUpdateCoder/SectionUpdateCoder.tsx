@@ -81,13 +81,14 @@ export default function SectionUpateCoder():React.ReactNode{
             }]
         };
         const coderUpdate = await updateCoderService(structureCoder, parseInt(coderId!));
-        if(coderUpdate === "No data received from server"){
+        if(!coderUpdate){
             setLoading(false);
-            inputAlert("updated coder successfully", "success");
+            inputAlert("Erro to update coder", "error");
             return;
         }
         setLoading(false);
-        inputAlert("Erro to update coder", "error");
+        inputAlert("updated coder successfully", "success");
+
     }
     const handleBack = () =>{
         setLoading(true);

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { deleteCoder, getCoderById } from "../../services/coderService";
+import { deleteCoder, getCoderById, updateCoder } from "../../services/coderService";
 
 export async function GET(req:NextRequest, {params}: {params: {id:string}}):Promise<NextResponse>{
     const {id} = params;
@@ -19,3 +19,18 @@ export async function DELETE(req:NextRequest, {params}: {params: {id:string}}):P
     await deleteCoder(parseInt(id));
     return NextResponse.json({message: "User deleted correctly"}, {status:200});
 }
+export async function PUT(req: NextRequest, { params }: { params: { id: string } }): Promise<NextResponse> {
+  try {
+    const { id } = params;
+    const coderUpdate = await req.json();
+    if (!id || !coderUpdate) {
+      return NextResponse.json({ message: "All params are required" }, { status: 400 });
+    }
+    const data = await updateCoder(coderUpdate, parseInt(id));
+    return NextResponse.json({message: "User updated correctly", data}, { status: 200 });
+  } catch (error) {
+    console.error("Error in PUT handler:", error); // Loguea el error para más información
+    return NextResponse.json({ message: "Error with the update-coder" }, { status: 500 });
+  }
+}
+

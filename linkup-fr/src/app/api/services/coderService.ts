@@ -63,3 +63,16 @@ import { FilterQuery } from "../interfaces/IFilterQueryInterface";
         });
         return codersFilter.json();
     }
+
+    export async function updateCoder(coderUpdate:ICoderComplet, id:number):Promise<string> {
+
+        const codersFilter = await fetch(`https://linkupv1-production.up.railway.app/api/v2/CodersControllerV2/${id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(coderUpdate)
+        });
+        console.log("code gilter", codersFilter);
+        return await codersFilter.text();
+    }
