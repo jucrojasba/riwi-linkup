@@ -14,7 +14,7 @@ import { useLanguage } from "@/global-states/language-mode"; // Importing langua
 
 // Interface for card props
 interface ICardProps {
-  id?: string; // Aquí se define la propiedad 'id'
+  id?: string; // Define the optional property 'id'
   id_coder?: number; // Optional coder ID
   url_image?: string; // Optional image URL
   alt_image?: string; // Optional alt text for image
@@ -28,7 +28,7 @@ interface ICardProps {
 }
 
 // Functional component for Card
-export default function Card({
+const Card: React.FC<ICardProps> = ({
   id,
   id_coder,
   url_image,
@@ -39,79 +39,56 @@ export default function Card({
   isDarkMode,
   coders,
   setCoders,
-}: ICardProps): React.ReactNode {
+}) => {
   const router = useRouter();
   const [loading, setLoading] = useState<boolean>(false);
   const navigate = useNavigate();
   const language = useLanguage((state) => state.language);
 
-  const handleClickDelete = async (id_coder: number): Promise<void> => {
-    const isConfirm: boolean = await confirmDeleteAlert(
-      `${
-        language
-          ? "¿Deseas eliminar al desarrollador?"
-          : "Do you want to delete the developer?"
-      }`,
-      language
-    );
-    setLoading(true);
-  const router = useRouter(); // Initialize the router
-  const [loading, setLoading] = useState<boolean>(false); // Loading state for async actions
-  const navigate = useNavigate(); // Initialize custom navigation hook
-  const language = useLanguage((state) => state.language); // Get current language from global state
+  // State for management the image
+  const [currentImage, setCurrentImage] = useState<string>(url_image || "/images/imageDefault.jpg");
 
   // Function to handle coder deletion
-  const handleClickDelete = async (id_coder: number): Promise<void> => {
-    // Confirm deletion with user
-    const isConfirm: boolean = await confirmDeleteAlert(
+  const handleClickDelete = async (coderId: number | undefined): Promise<void> => {
+    if (!coderId) return;
+
+    const isConfirm = await confirmDeleteAlert(
       `${language ? '¿Deseas eliminar al desarrollador?' : 'Do you want to delete the developer?'}`,
       language
     );
 
-    // Set loading state to true during deletion process
     setLoading(true);
-    
-    // If user cancels deletion, reset loading and exit function
+
     if (!isConfirm) {
       setLoading(false);
       return;
     }
 
-    // If no coder ID is provided, exit function
-    if (!id_coder) return;
-
-    // Call the service to delete the coder
-    await deleteCoderService(id_coder);
-    setLoading(false); // Reset loading state
-
-    // Show success alert to the user
+    await deleteCoderService(coderId);
+    setLoading(false);
     inputAlert("Coder deleted correctly", "success");
 
-    // Filter out the deleted coder from the coders list and update state
-    const codersFilter = coders.coders.filter((coder: ICoder) => coder.id !== id_coder);
-    setCoders({
-      coders: codersFilter,
-    });
+    const codersFilter = coders.coders.filter((coder: ICoder) => coder.id !== coderId);
+    setCoders({ coders: codersFilter });
   };
 
-  const handleUpdate = (coder_id: number) => {
-    setLoading(true);
-    navigate(`admin/updateCoder?coder=${coder_id}`);
-  };
-
-  const handleClickMore = (id_coder: number | undefined) => {
-    console.log(id_coder);
-    router.push(`/admin/coder?coder=${id_coder}`);
   // Function to handle coder update
-  const handleUpdate = (coder_id: number) => {
-    setLoading(true); // Set loading state
-    navigate(`admin/updateCoder?coder=${coder_id}`); // Navigate to update page
+  const handleUpdate = (coderId: number | undefined) => {
+    if (coderId) {
+      setLoading(true);
+      navigate(`admin/updateCoder?coder=${coderId}`);
+    }
   };
 
   // Function to handle navigation to coder details
-  const handleClickMore = (id_coder: number | undefined) => {
-    console.log(id_coder); // Log coder ID for debugging
-    router.push(`/admin/coder?coder=${id_coder}`); // Navigate to coder details
+  const handleClickMore = (coderId: number | undefined) => {
+    if (coderId) {
+      router.push(`/admin/coder?coder=${coderId}`);
+    }
+  };
+
+  const handleImageError = () => {
+    setCurrentImage("/images/imageDefault.jpg"); // Cargar imagen por defecto
   };
 
   // If the status is false, show a loading spinner
@@ -120,40 +97,44 @@ export default function Card({
   }
 
   return (
-    <>
-      {loading ? <CircularLoader flag={loading} /> : null}
-      <div id={id} className={isDarkMode ? "card dark-mode" : "card"}>
-      {loading ? <CircularLoader flag={loading} /> : null} {/* Show loader if loading */}
-      <div className={isDarkMode ? "card dark-mode" : "card"}> {/* Card styling based on dark mode */}
-        <div className="card-header">
-          <img src={url_image} alt={alt_image} width={100} height={80} /> {/* Coder image */}
-          <div className="header-buttons">
-            <EditIcon
-              data-id={id_coder}
-              className="edit-icon"
-              onClick={() => handleUpdate(id_coder!)} // Call update function
-            />
-            <DeleteIcon
-              data-id={id_coder}
-              className="delete-icon"
-              onClick={() => handleClickDelete(id_coder!)} // Call delete function
-            />
-          </div>
-        </div>
-        <div className="card-body">
-          <div className="body-information">
-            <h3 className="body-title">
-              {name_user ? capitalizeSentece(name_user) : "Loading name..."}
-            </h3>
-            <h5 className="body-subtitle" style={{ fontWeight: "400" }}>
-              {age_user}
-            </h5>
-          </div>
-          <div onClick={() => handleClickMore(id_coder)}>
-            <ButtonMore />
-          </div>
+    <div id={id} className={isDarkMode ? "card dark-mode" : "card"}>
+      {loading && <CircularLoader flag={loading} />}
+      <div className="card-header">
+        <img 
+          src={currentImage} 
+          alt={alt_image} 
+          width={100} 
+          height={80}
+          onError={handleImageError} // Manejar error de carga
+        />
+        <div className="header-buttons">
+          <EditIcon
+            data-id={id_coder}
+            className="edit-icon"
+            onClick={() => handleUpdate(id_coder)} // Call update function
+          />
+          <DeleteIcon
+            data-id={id_coder}
+            className="delete-icon"
+            onClick={() => handleClickDelete(id_coder)} // Call delete function
+          />
         </div>
       </div>
-    </>
+      <div className="card-body">
+        <div className="body-information">
+          <h3 className="body-title">
+            {name_user ? capitalizeSentece(name_user) : "Loading name..."}
+          </h3>
+          <h5 className="body-subtitle" style={{ fontWeight: "400" }}>
+            {age_user}
+          </h5>
+        </div>
+        <div onClick={() => handleClickMore(id_coder)}>
+          <ButtonMore />
+        </div>
+      </div>
+    </div>
   );
-}
+};
+
+export default Card;
