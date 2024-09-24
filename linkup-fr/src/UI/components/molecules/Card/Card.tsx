@@ -44,54 +44,38 @@ const Card: React.FC<ICardProps> = ({
   const [loading, setLoading] = useState<boolean>(false);
   const navigate = useNavigate();
   const language = useLanguage((state) => state.language);
-
-  // State for management the image
   const [currentImage, setCurrentImage] = useState<string>(url_image || "/images/imageDefault.jpg");
 
-  // Function to handle coder deletion
-  const handleClickDelete = async (coderId: number | undefined): Promise<void> => {
-    if (!coderId) return;
-
+  const handleClickDelete = async (coderId: number): Promise<void> => {
     const isConfirm = await confirmDeleteAlert(
       `${language ? '¿Deseas eliminar al desarrollador?' : 'Do you want to delete the developer?'}`,
       language
     );
 
+    if (!isConfirm) return;
+
     setLoading(true);
-
-    if (!isConfirm) {
-      setLoading(false);
-      return;
-    }
-
     await deleteCoderService(coderId);
     setLoading(false);
     inputAlert("Coder deleted correctly", "success");
 
-    const codersFilter = coders.coders.filter((coder: ICoder) => coder.id !== coderId);
+    // Filtra coders utilizando la propiedad id
+    const codersFilter = coders.coders.filter((coder) => coder.id !== coderId);
     setCoders({ coders: codersFilter });
   };
 
-  // Function to handle coder update
-  const handleUpdate = (coderId: number | undefined) => {
-    if (coderId) {
-      setLoading(true);
-      navigate(`admin/updateCoder?coder=${coderId}`);
-    }
+  const handleUpdate = (coderId: number) => {
+    navigate(`admin/updateCoder?coder=${coderId}`);
   };
 
-  // Function to handle navigation to coder details
-  const handleClickMore = (coderId: number | undefined) => {
-    if (coderId) {
-      router.push(`/admin/coder?coder=${coderId}`);
-    }
+  const handleClickMore = (coderId: number) => {
+    router.push(`/admin/coder?coder=${coderId}`);
   };
 
   const handleImageError = () => {
-    setCurrentImage("/images/imageDefault.jpg"); // Load image for filter
+    setCurrentImage("/images/imageDefault.jpg");
   };
 
-  // If the status is false, show a loading spinner
   if (!status) {
     return <CircularLoader flag={true} />;
   }
@@ -111,12 +95,12 @@ const Card: React.FC<ICardProps> = ({
           <EditIcon
             data-id={id_coder}
             className="edit-icon"
-            onClick={() => handleUpdate(id_coder)} // Call update function
+            onClick={() => handleUpdate(id_coder!)} // Asegúrate de que id_coder no sea undefined
           />
           <DeleteIcon
             data-id={id_coder}
             className="delete-icon"
-            onClick={() => handleClickDelete(id_coder)} // Call delete function
+            onClick={() => handleClickDelete(id_coder!)} // Asegúrate de que id_coder no sea undefined
           />
         </div>
       </div>
@@ -129,12 +113,10 @@ const Card: React.FC<ICardProps> = ({
             {age_user}
           </h5>
         </div>
-        <div onClick={() => handleClickMore(id_coder)}>
+        <div onClick={() => handleClickMore(id_coder!)}>
           <ButtonMore />
         </div>
       </div>
     </div>
   );
 };
-
-export default Card;
