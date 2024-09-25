@@ -1,3 +1,3 @@
-export interface IPassword{
-    password:string
+export interface IPassword {
+    password: string;  // The user's password
 }
