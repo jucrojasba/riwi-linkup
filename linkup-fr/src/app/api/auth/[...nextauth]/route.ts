@@ -4,6 +4,7 @@ import GoogleProvider from "next-auth/providers/google"; // Importing the Google
 
 // Configuring the NextAuth authentication handler.
 const handler = NextAuth({
+    secret: process.env.NEXTAUTH_SECRET,
     providers: [
         // Setting up the Google authentication provider with client ID and secret from environment variables.
         GoogleProvider({

@@ -1,4 +1,3 @@
-
 // This function retrieves the number of coders currently in training from the backend.
 // It returns either the number of coders, undefined (if there's no response),
 // or an error message in case of a failure.

@@ -1,3 +1,4 @@
+'use-client'
 import "./cardStyles.css"; // Importing CSS styles for the card component
 import DeleteIcon from "@mui/icons-material/Delete"; // Importing delete icon
 import EditIcon from "@mui/icons-material/Edit"; // Importing edit icon
