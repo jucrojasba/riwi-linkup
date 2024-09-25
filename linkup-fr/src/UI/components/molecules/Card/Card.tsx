@@ -120,3 +120,4 @@ const Card: React.FC<ICardProps> = ({
     </div>
   );
 };
+export default Card;
