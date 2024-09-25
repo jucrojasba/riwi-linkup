@@ -17,7 +17,7 @@ div.filter {
 div.filter  div.filter-languages,
 div.filter  div.filter-skills,
 div.filter  div.filter-teach,
-div.filter  div.filter-clan {
+div.filter  div.filter-clans {
   margin-top: var(--padding-min);
   display: flex;
   flex-direction: column;
@@ -30,7 +30,7 @@ div.filter  div.filter-clan {
 div.filter  div.filter-languages > div.languages-options,
 div.filter  div.filter-skills > div.skills-options,
 div.filter  div.filter-teach > div.teach-options,
-div.filter  div.filter-clan > div.clan-options {
+div.filter  div.filter-clans > div.clans-options {
   display: flex;
   flex-direction: column;
   gap: var(--padding-min);
@@ -39,7 +39,7 @@ div.filter  div.filter-clan > div.clan-options {
 div.filter  div.filter-languages > h3,
 div.filter  div.filter-skills > h3,
 div.filter  div.filter-teach > h3,
-div.filter  div.filter-clan > h3 {
+div.filter  div.filter-clans > h3 {
   font-weight: 400;
   color: var(--paragraph-color-gray);
 }

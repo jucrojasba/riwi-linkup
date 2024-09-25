@@ -1,4 +1,4 @@
-.home-no-auth-wrapper {
+.home-no-auth-wrapper {/* Main wrapper for the home page without authentication */
   display: flex;
   min-width: 100vw;
   min-height: 100vh;
@@ -10,7 +10,7 @@
   padding-right: 5%;
 }
 
-.home-no-auth-wrapper-dark-mode {
+.home-no-auth-wrapper-dark-mode { /* Wrapper for the home page in dark mode */
   background-color: var(--paragraph-color);
   display: flex;
   min-width: 100vw;
@@ -23,13 +23,13 @@
   transition: background-color 0.5s ease;
 }
 
-.home-info {
+.home-info {/* Container for home page information */
   display: flex;
   flex-direction: column;
   width: 45%;
 }
 
-.coder-gretting-wrapper {
+.coder-gretting-wrapper {  /* Wrapper for the greeting section of the coder */
   width: 500px;
   height: 500px;
   position: relative;
@@ -38,7 +38,7 @@
   align-items: end;
 }
 
-.coder-gretting-container {
+.coder-gretting-container { /* Circular container for the coder greeting */
   background-color: var(--main-color);
   border-radius: 50%;
   width: 410px;
@@ -46,20 +46,20 @@
   position: absolute;
 }
 
-.coder-gretting-container > img {
+.coder-gretting-container > img {/* Image inside the coder greeting container */
   position: absolute;
   bottom: -2%;
   right: -13%;
 }
 
-.gretting-image {
+.gretting-image {/* Wrapper for the greeting image */
   position: relative;
   width: 300px;
   height: 300px;
   z-index: 4;
 }
 
-.gretting-image > img {
+.gretting-image > img { /* Image inside the greeting image wrapper */
   position: absolute;
   bottom: 350px;
   left: 430px;
@@ -70,7 +70,7 @@
   cursor: pointer;
 }
 
-@keyframes bounceAndVibrate {
+@keyframes bounceAndVibrate { /* Keyframes for the bounce and vibrate animation */
   0% {
     transform: scaleX(-1) translateY(0) rotate(0deg);
   }
@@ -82,9 +82,9 @@
   }
 }
 
-/* Para dispositivos de 768px hacia abajo */
+/* Media query for devices with max-width of 768px */
 @media (max-width: 768px) {
-  .home-no-auth-wrapper {
+  .home-no-auth-wrapper { /* Styles for the home page without authentication for small devices */
     display: flex;
     min-width: 100vw;
     min-height: 100vh;
@@ -168,9 +168,9 @@
   }
 }
 
-/* Para tablets (768px a 991px) */
+/* Media query for tablets with min-width of 768px and max-width of 991px */
 @media (min-width: 768px) and (max-width: 991px) {
-  .home-no-auth-wrapper {
+  .home-no-auth-wrapper { /* Styles for the home page without authentication for tablets */
     display: flex;
     min-width: 100vw;
     min-height: 100vh;
@@ -254,9 +254,9 @@
   }
 }
 
-/* Para laptops (992px a 1199px) */
+/* Media query for laptops with min-width of 992px and max-width of 1199px */
 @media (min-width: 992px) and (max-width: 1199px) {
-  .home-no-auth-wrapper {
+  .home-no-auth-wrapper { /* Styles for the home page without authentication for laptops */
     display: flex;
     min-width: 100vw;
     min-height: 100vh;
@@ -333,8 +333,8 @@
   }
 }
 
-/* Para dispositivos extra grandes (1200px en adelante) */
-@media (min-width: 1200px) and (max-width: 1390px){
+/* Media query for extra large devices with min-width of 1200px */
+@media (min-width: 1200px) and (max-width: 1390px){  /* Styles for the home page without authentication for extra large devices */
   .home-no-auth-wrapper {
     display: flex;
     min-width: 100vw;

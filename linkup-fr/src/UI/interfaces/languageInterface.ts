@@ -1,10 +1,12 @@
-export interface ILanguage{
-    id: number;
-    name:string;
-    label:string;
-    checked:boolean;
+// Represents a programming or spoken language
+export interface ILanguage {
+    id: number;          // Unique identifier for the language
+    name: string;       // Name of the language
+    label: string;      // Label for display purposes
+    checked: boolean;   // Indicates if the language is selected
 }
 
-export interface ILanguages{
-    clans:ILanguage[];
+// Represents a collection of languages
+export interface ILanguages {
+    clans: ILanguage[]; // Array of languages
 }

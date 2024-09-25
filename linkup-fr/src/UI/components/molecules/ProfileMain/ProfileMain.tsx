@@ -12,6 +12,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { clearLocalStorage } from '@/utilities/LocalStorage';
 import { signOut } from 'next-auth/react';
 
+// Definiendo la interfaz de propiedades para el componente MainProfile
 interface IMainProfile {
     language: boolean;
     email: string;
@@ -19,6 +20,7 @@ interface IMainProfile {
     isDarkMode: boolean;
 }
 
+// Definiendo el componente MainProfile
 const MainProfile: React.FC<IMainProfile> = ({ language, isDarkMode, email, phone }) => {
     const [isEditing, setIsEditing] = useState<boolean>(false);
     const [isSaving, setIsSaving] = useState<boolean>(false);
@@ -47,32 +49,32 @@ const MainProfile: React.FC<IMainProfile> = ({ language, isDarkMode, email, phon
             const response = await patchUserService(authUser.email, userPatchData);
             if (response && 'status' in response) {
                 setAuthUser(userInfoEdit);
-                inputAlert(`${language ? 'Datos Actualizados Correctamente' : 'Data Updated Successfully'}`, 'success');
+                inputAlert(`${language ? 'Data Updated Successfully' : 'Datos Actualizados Correctamente'}`, 'success');
             } else {
-                inputAlert(`${language ? 'Error al Actualizar los Datos' : 'Data Update Failed'}`, 'error');
+                inputAlert(`${language ? 'Data Update Failed' : 'Error al Actualizar los Datos'}`, 'error');
             }
         } catch (error) {
-            inputAlert(`${language ? 'Error al Actualizar los Datos' : 'Data Update Failed'}`, 'error');
+            inputAlert(`${language ? 'Data Update Failed' : 'Error al Actualizar los Datos'}`, 'error');
         } finally {
             setIsSaving(false);
         }
     };
 
     const handleSignOut = async () => {
-        const isConfirmed = await confirmDeleteAlert(`${language ? '¿Estas seguro que desesas eliminar tu cuenta?':'Are you sure you want to delete your account?'}`, language);
-        isConfirmed;
+        const isConfirmed = await confirmDeleteAlert(`${language ? 'Are you sure you want to delete your account?' : '¿Estas seguro que desesas eliminar tu cuenta?'}`, language);
         if (!isConfirmed) return;
+
         await deleteUserService(authUser.email);
-        inputAlert(`${language? 'Cuenta eliminada con éxito':'Account deleted successfully'}`, 'success');
+        inputAlert(`${language ? 'Account deleted successfully' : 'Cuenta eliminada con éxito'}`, 'success');
         clearLocalStorage();
         await signOut({ callbackUrl: "/login" });
     }
 
     return (
         <div className={isDarkMode ? 'main-profile-dark' : 'main-profile'}>
-            <h3>{language ? 'Información Personal' : 'Personal Information'}</h3>
+            <h3>{language ? 'Personal Information' : 'Información Personal'}</h3>
             <div className='personal-information'>
-                <p>{language ? 'Correo' : 'Email'}</p>
+                <p>{language ? 'Email' : 'Correo'}</p>
                 <EditField
                     name='email'
                     label=''
@@ -83,7 +85,7 @@ const MainProfile: React.FC<IMainProfile> = ({ language, isDarkMode, email, phon
                     save={isSaving}
                     onSave={handleSave}
                 />
-                <p>{language ? 'Teléfono' : 'Phone'}</p>
+                <p>{language ? 'Phone' : 'Teléfono'}</p>
                 <EditField
                     name='number'
                     label=''
@@ -99,18 +101,18 @@ const MainProfile: React.FC<IMainProfile> = ({ language, isDarkMode, email, phon
                 <CustomButton
                     initialText={language ?
                         <>
-                            {isEditing ? 'Guardar' : 'Editar'} <ModeEditIcon sx={{ fontSize: "1rem" }} />
+                            {isEditing ? 'Save' : 'Edit'} <ModeEditIcon sx={{ fontSize: "1rem" }} />
                         </> :
                         <>
-                            {isEditing ? 'Save' : 'Edit'} <ModeEditIcon sx={{ fontSize: "1rem" }} />
+                            {isEditing ? 'Guardar' : 'Editar'} <ModeEditIcon sx={{ fontSize: "1rem" }} />
                         </>
                     }
                     clickedText={language ?
                         <>
-                            Guardar <SaveIcon sx={{ fontSize: "1rem" }} />
+                            Save <SaveIcon sx={{ fontSize: "1rem" }} />
                         </> :
                         <>
-                            Save <SaveIcon sx={{ fontSize: "1rem" }} />
+                            Guardar <SaveIcon sx={{ fontSize: "1rem" }} />
                         </>
                     }
                     initialBgColor='var(--main-color)'
@@ -118,7 +120,13 @@ const MainProfile: React.FC<IMainProfile> = ({ language, isDarkMode, email, phon
                     onClick={() => setIsEditing(!isEditing)}
                     secondOnClick={handleSave}
                 />
-                <MainButton text={language ? 'Eliminar Cuenta' : 'Delete Account'} bgColor='var(--red-color)' icon={<DeleteIcon sx={{ fontSize: '1.2rem' }} />} onClick={handleSignOut} className="delete-button" />
+                <MainButton
+                    text={language ? 'Delete Account' : 'Eliminar Cuenta'}
+                    bgColor='var(--red-color)'
+                    icon={<DeleteIcon sx={{ fontSize: '1.2rem' }} />}
+                    onClick={handleSignOut}
+                    className="delete-button"
+                />
             </div>
         </div>
     );

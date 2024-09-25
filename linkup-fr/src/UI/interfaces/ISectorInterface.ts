@@ -1,4 +1,5 @@
+// Defines the structure for a sector
 export interface ISector {
-  id: number;
-  name: string;
+  id: number;    // Unique identifier for the sector
+  name: string;  // Name of the sector
 }
